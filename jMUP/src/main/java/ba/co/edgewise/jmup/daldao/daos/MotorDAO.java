@@ -17,19 +17,18 @@ public class MotorDAO implements IGenericDAO<Motor, String> {
 	{
 		
 		boolean success = false;
-		Integer zapremina = m.get_zapreminaMotora();
+		/*Integer zapremina = m.get_zapreminaMotora();
 		Integer maxSnaga = m.get_maxSnaga();
 		String vrstaGoriva = m.get_vrstaGoriva();
 		String vrstaMotora= m.get_vrstaMotora();
-		String brojMotora = m.get_brojMotora();
+		String brojMotora = m.get_brojMotora();*/
 		
 		//primjer za test
-		/*Integer id = 2;
 		Integer zapremina = 200;
 		Integer maxSnaga = 300;
-		String vrstaGoriva = "benzin";
-		String vrstaMotora= "benzin";
-		String brojMotora = "aaaa2222";*/
+		String vrstaGoriva = "dizel";
+		String vrstaMotora= "dizel";
+		String brojMotora = "aaaa3333";
 		
 		//Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
@@ -41,14 +40,13 @@ public class MotorDAO implements IGenericDAO<Motor, String> {
 		try {
 			PreparedStatement statement = 	connection.prepareStatement(
 					"INSERT INTO `Motor`(`IDMotora`, `ZapreminaMotora`, `MaksimalnaSnaga`, `VrstaGoriva`, `BrojMotora`, `VrstaMotora`) " +
-					" VALUES (?,?,?,?,?,?) ");
+					" VALUES (?,?,?,?,?) ");
 			
-			statement.setInt(1, id);
-			statement.setInt(2, zapremina);
-			statement.setInt(3, maxSnaga);
-			statement.setString(4, vrstaGoriva);
-			statement.setString(5, brojMotora);
-			statement.setString(6, vrstaMotora);
+			statement.setInt(1, zapremina);
+			statement.setInt(2, maxSnaga);
+			statement.setString(3, vrstaGoriva);
+			statement.setString(4, brojMotora);
+			statement.setString(5, vrstaMotora);
 			
 			statement.executeUpdate();
 			success = true;
