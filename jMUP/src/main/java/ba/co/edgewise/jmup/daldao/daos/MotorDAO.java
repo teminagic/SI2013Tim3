@@ -2,7 +2,6 @@ package ba.co.edgewise.jmup.daldao.daos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
