@@ -17,29 +17,26 @@ public class MotorDAO implements IGenericDAO<Motor, String> {
 	{
 		
 		boolean success = false;
-		/*Integer zapremina = m.get_zapreminaMotora();
+		Integer zapremina = m.get_zapreminaMotora();
 		Integer maxSnaga = m.get_maxSnaga();
 		String vrstaGoriva = m.get_vrstaGoriva();
 		String vrstaMotora= m.get_vrstaMotora();
-		String brojMotora = m.get_brojMotora();*/
+		String brojMotora = m.get_brojMotora();
 		
 		//primjer za test
-		Integer zapremina = 200;
+		/*Integer zapremina = 200;
 		Integer maxSnaga = 300;
 		String vrstaGoriva = "dizel";
 		String vrstaMotora= "dizel";
-		String brojMotora = "aaaa3333";
+		String brojMotora = "aaaa3333";*/
 		
 		//Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 		
-		//Poèetak pripreme upita
-		ResultSet qResult = null;
-		
 		try {
 			PreparedStatement statement = 	connection.prepareStatement(
-					"INSERT INTO `Motor`(`IDMotora`, `ZapreminaMotora`, `MaksimalnaSnaga`, `VrstaGoriva`, `BrojMotora`, `VrstaMotora`) " +
+					"INSERT INTO `Motor`(`ZapreminaMotora`, `MaksimalnaSnaga`, `VrstaGoriva`, `BrojMotora`, `VrstaMotora`) " +
 					" VALUES (?,?,?,?,?) ");
 			
 			statement.setInt(1, zapremina);
@@ -54,7 +51,6 @@ public class MotorDAO implements IGenericDAO<Motor, String> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			ConnectionManager.closeResultSet(qResult);
 			ConnectionManager.closeConnection(connection);
 		}
 		
