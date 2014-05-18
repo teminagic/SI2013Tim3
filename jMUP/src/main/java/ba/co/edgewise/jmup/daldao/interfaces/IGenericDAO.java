@@ -7,8 +7,8 @@ import java.io.Serializable;
 
 public interface IGenericDAO<dbName, PK extends Serializable> {
 	 public boolean create(dbName name);
-	 public boolean get(PK id);
-	 public boolean getAll();
+	 public dbName get(PK id);
+	 public dbName[] getAll();
 	 public boolean update(dbName name);
 	 public boolean delete(dbName name);
 }
