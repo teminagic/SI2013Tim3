@@ -1,4 +1,5 @@
 package ba.co.edgewise.jmup.daldao.interfaces;
+import java.util.*;
 import java.io.Serializable;
 
 // generic interface za basic CRUD operacije
@@ -7,8 +8,8 @@ import java.io.Serializable;
 
 public interface IGenericDAO<dbName, PK extends Serializable> {
 	 public boolean create(dbName name);
-	 public boolean get(PK id);
-	 public boolean getAll();
+	 public dbName get(PK id);
+	 public List<dbName> getAll();
 	 public boolean update(dbName name);
-	 public boolean delete(dbName name);
+	 public boolean delete(PK id);
 }
