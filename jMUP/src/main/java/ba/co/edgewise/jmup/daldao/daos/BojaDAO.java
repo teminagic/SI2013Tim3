@@ -41,11 +41,4 @@ public class BojaDAO {
 
 		return result;
 	}
-
-	public static void main(String[] args) {
-		BojaDAO noviDAO = new BojaDAO();
-		System.out.println(noviDAO.get(1));
-
-	}
-
 }
