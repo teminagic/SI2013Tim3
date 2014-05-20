@@ -85,7 +85,7 @@ public class VoziloDAO  implements IGenericDAO<Vozilo, String> {
 	}
 	
 	@Override
-	 public Vozilo get(String Id)
+	 public Vozilo get(String brojSasije)
 	{
 		
 		Vozilo result = new Vozilo();
@@ -93,6 +93,45 @@ public class VoziloDAO  implements IGenericDAO<Vozilo, String> {
 		// Konekcija:
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
+		
+		ResultSet qResult = null;
+		
+		try {
+			PreparedStatement statement = 	connection.prepareStatement(
+					"SELECT * "+ 
+					"FROM Motor "+
+					"WHERE BrojSasije = ?"
+					);
+			
+			statement.setString(1, brojSasije);
+			qResult = statement.executeQuery();
+			
+			//Dobavljanje rezultata
+			if(qResult.next()) {
+				result.set_marka(qResult.getString("Marka"));
+				result.set_tip(qResult.getString("Tip"));
+				result.set_model(qResult.getString("Model"));
+				result.set_brojSasije(qResult.getString("BrojSasije"));
+				result.set_oblikKaroserije(qResult.getString("OblikKaroserije"));
+				result.set_godinaProizvodnje(qResult.getString("GodinaProizvodnje"));
+				result.set_motor(qResult.getInt("Motor"));
+				result.set_odnosSnageIMase(qResult.getDouble("OdnosSnageIMase"));
+				result.set_brojMjestaZaSjedenje(qResult.getInt("BrojMjestaZaSjedenje"));
+				result.set_brojMjestaZaStajanje(qResult.getInt("BrojMjestaZaStajanje"));
+				result.set_brojMjestaZaStajanje(qResult.getInt("BrojMjestaZaLezanje"));
+				result.set_ekoKarakteristike(qResult.getString("EkoKarakteristikaVozila"));
+				result.set_katalizator(qResult.getInt("Katalizator"));
+			}
+		
+		//ako je prazno baci exception
+		if(result == null)
+			throw new EmptyStackException();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
 		
 		return result;
 	}
@@ -103,12 +142,47 @@ public class VoziloDAO  implements IGenericDAO<Vozilo, String> {
 		List<Vozilo> result = new ArrayList<Vozilo>();
 		Vozilo temp = new Vozilo();
 		
-		// Konekcija:
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 		
+		//Pocetak pripreme upita
+		ResultSet qResult = null;
 		
-		boolean success = false;
+		try {
+			PreparedStatement statement = 	connection.prepareStatement(
+					"SELECT * "+ 
+					"FROM Vozilo "
+					);
+			
+			qResult = statement.executeQuery();
+			//Dobavljanje rezultata
+			while(qResult.next()) {
+				temp.set_marka(qResult.getString("Marka"));
+				temp.set_tip(qResult.getString("Tip"));
+				temp.set_model(qResult.getString("Model"));
+				temp.set_brojSasije(qResult.getString("BrojSasije"));
+				temp.set_oblikKaroserije(qResult.getString("OblikKaroserije"));
+				temp.set_godinaProizvodnje(qResult.getString("GodinaProizvodnje"));
+				temp.set_motor(qResult.getInt("Motor"));
+				temp.set_odnosSnageIMase(qResult.getDouble("OdnosSnageIMase"));
+				temp.set_brojMjestaZaSjedenje(qResult.getInt("BrojMjestaZaSjedenje"));
+				temp.set_brojMjestaZaStajanje(qResult.getInt("BrojMjestaZaStajanje"));
+				temp.set_brojMjestaZaStajanje(qResult.getInt("BrojMjestaZaLezanje"));
+				temp.set_ekoKarakteristike(qResult.getString("EkoKarakteristikaVozila"));
+				temp.set_katalizator(qResult.getInt("Katalizator"));
+				result.add(temp);
+			}
+			
+			//ako je prazno da se baci exception
+			if(result.size() == 0)
+				throw new EmptyStackException();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+		
 		return result;
 	}
 	
@@ -123,15 +197,34 @@ public class VoziloDAO  implements IGenericDAO<Vozilo, String> {
 		return false;
 	}
 	
+	// Nije provjerena!
 	@Override
-	 public boolean delete(String id)
+	 public boolean delete(String brojSasije)
 	{
 		// Konekcija:
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 		
 		boolean success = false;
-		return false;
+				
+		try {
+			PreparedStatement statement = 	connection.prepareStatement(
+					"DELETE" +
+					" FROM `Vozilo` " + 
+					" WHERE BrojSasije = ? "
+					);
+			statement.setString(1, brojSasije);
+			statement.executeUpdate();
+			
+			success = true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+		
+		return success;
 	}
 	
 	
