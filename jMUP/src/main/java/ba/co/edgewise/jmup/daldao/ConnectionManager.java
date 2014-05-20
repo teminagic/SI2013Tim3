@@ -93,7 +93,7 @@ public class ConnectionManager {
 
 	}
 	
-	/*public static void main(String[] args)
+	public static void main(String[] args)
 	{
 		ConnectionManager manager = new ConnectionManager();
 		
@@ -118,6 +118,6 @@ public class ConnectionManager {
 			closeResultSet(rs);
 			closeConnection(connection);
 		}
-	}*/
+	}
 	
 }
