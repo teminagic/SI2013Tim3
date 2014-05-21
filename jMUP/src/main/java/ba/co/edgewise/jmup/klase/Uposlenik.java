@@ -23,43 +23,52 @@ public class Uposlenik {
 		this.setPassword(password);
 		this.setStatus(status);
 	}
+	// Konstruktor bez slike - Irma dodala za probu :)
+	public Uposlenik(String ime, String prezime, String korisnickoIme, String password, Boolean status)
+	{
+		this.setIme(ime);
+		this.setPrezime(prezime);
+		this.setKorisnickoIme(korisnickoIme);
+		this.setPassword(password);
+		this.setStatus(status);
+	}
 	// Konstruktor bez parametara
 	public Uposlenik () {
 	}
-	private String getIme() {
+	public String getIme() {
 		return ime;
 	}
-	private void setIme(String ime) {
+	public void setIme(String ime) {
 		this.ime = ime;
 	}
-	private String getPrezime() {
+	public String getPrezime() {
 		return prezime;
 	}
-	private void setPrezime(String prezime) {
+	public void setPrezime(String prezime) {
 		this.prezime = prezime;
 	}
-	private BufferedImage getSlikaKorisnika() {
+	public BufferedImage getSlikaKorisnika() {
 		return slikaKorisnika;
 	}
-	private void setSlikaKorisnika(BufferedImage slikaKorisnika) {
+	public void setSlikaKorisnika(BufferedImage slikaKorisnika) {
 		this.slikaKorisnika = slikaKorisnika;
 	}
-	private String getKorisnickoIme() {
+	public String getKorisnickoIme() {
 		return korisnickoIme;
 	}
-	private void setKorisnickoIme(String korisnickoIme) {
+	public void setKorisnickoIme(String korisnickoIme) {
 		this.korisnickoIme = korisnickoIme;
 	}
-	private String getPassword() {
+	public String getPassword() {
 		return password;
 	}
-	private void setPassword(String password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
-	private Boolean getStatus() {
+	public Boolean getStatus() {
 		return status;
 	}
-	private void setStatus(Boolean status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 	
