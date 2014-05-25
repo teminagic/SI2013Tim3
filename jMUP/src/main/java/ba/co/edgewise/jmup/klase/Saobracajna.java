@@ -13,10 +13,10 @@ public class Saobracajna extends Dozvola{
 	public Saobracajna() {
 		super();
 	}
-	private String getRegOznaka() {
+	public String getRegOznaka() { // morao sam promjeniti ovdje iz private u public
 		return regOznaka;
 	}
-	private void setRegOznaka(String regOznaka) {
+	public void setRegOznaka(String regOznaka) { //isto i ovdje u public
 		this.regOznaka = regOznaka;
 	}
 
