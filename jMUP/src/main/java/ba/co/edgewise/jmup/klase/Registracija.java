@@ -12,7 +12,7 @@ public class Registracija {
 	Date odKada;
 	Date doKada; // "do" je rezervisana rijec
 	
-	public void Registracija(String regOznaka, Date odKada, Date doKada){
+	public Registracija(String regOznaka, Date odKada, Date doKada){
 		this.regOznaka = regOznaka;
 		this.odKada = odKada;
 		this.doKada = doKada;
