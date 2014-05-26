@@ -29,7 +29,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, String> {
 		Boolean status=uposlenik.getStatus();
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
-		try {
+		try {//jhhjhgj
 			//Izmedju prezime i korisnicko ime fali slika
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO `Uposlenik`(`Ime`,`Prezime`,"
 					+ "`KorisnickoIme`,`Password`,`Status`) VALUES (?,?,?,?,?)");
