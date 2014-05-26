@@ -2,6 +2,8 @@ package ba.co.edgewise.jmup.klase;
 
 import java.awt.image.*;
 
+import ba.co.edgewise.enums.TipUposlenika;
+
 public class Uposlenik {
 	
 	private String ime;
@@ -12,9 +14,10 @@ public class Uposlenik {
 	private String korisnickoIme;
 	private String password;
 	private Boolean status; // aktivan = true ili neaktivan = false
+	private TipUposlenika tip;
 	
 	// Konstruktor sa parametrima
-	public Uposlenik(String ime, String prezime, BufferedImage slikaKorisnika, String korisnickoIme, String password, Boolean status)
+	public Uposlenik(String ime, String prezime, BufferedImage slikaKorisnika, String korisnickoIme, String password, Boolean status, TipUposlenika tip)
 	{
 		this.setIme(ime);
 		this.setPrezime(prezime);
@@ -22,15 +25,17 @@ public class Uposlenik {
 		this.setKorisnickoIme(korisnickoIme);
 		this.setPassword(password);
 		this.setStatus(status);
+		this.setTip(tip);
 	}
 	// Konstruktor bez slike - Irma dodala za probu :)
-	public Uposlenik(String ime, String prezime, String korisnickoIme, String password, Boolean status)
+	public Uposlenik(String ime, String prezime, String korisnickoIme, String password, Boolean status, TipUposlenika tip)
 	{
 		this.setIme(ime);
 		this.setPrezime(prezime);
 		this.setKorisnickoIme(korisnickoIme);
 		this.setPassword(password);
 		this.setStatus(status);
+		this.setTip(tip);
 	}
 	// Konstruktor bez parametara
 	public Uposlenik () {
@@ -71,5 +76,10 @@ public class Uposlenik {
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
-	
+	public TipUposlenika getTip() {
+		return tip;
+	}
+	public void setTip(TipUposlenika tip) {
+		this.tip = tip;
+	}
 }

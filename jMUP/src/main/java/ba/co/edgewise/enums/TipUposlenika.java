@@ -21,14 +21,14 @@ public enum TipUposlenika {
 	public static TipUposlenika getTipUposlenika(String tip)
 	{
 		switch (tip) {
-		case "Administrator":
-			return TipUposlenika.ADMINISTRATOR;
-		case "Šalterski radnik":
-			return TipUposlenika.SALTERSKI_RADNIK;
-		case "Menadžer":
-			return TipUposlenika.MENADZER;
-		default:
-			return null;
+			case "Administrator":
+				return TipUposlenika.ADMINISTRATOR;
+			case "Šalterski radnik":
+				return TipUposlenika.SALTERSKI_RADNIK;
+			case "Menadžer":
+				return TipUposlenika.MENADZER;
+			default:
+				return null;
 		}
 	}
 	

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
 
+import ba.co.edgewise.enums.TipUposlenika;
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 
 import java.awt.image.BufferedImage;
@@ -27,18 +28,28 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, String> {
 		String korisnickoIme=uposlenik.getKorisnickoIme();
 		String password=uposlenik.getPassword();
 		Boolean status=uposlenik.getStatus();
+		int tip=1;
+		switch(uposlenik.getTip()) {
+			case ADMINISTRATOR:
+				tip = 1;
+			case SALTERSKI_RADNIK:
+				tip = 2;
+			case MENADZER:
+				tip = 3;
+		}
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
-		try {//jhhjhgj
+		try {
 			//Izmedju prezime i korisnicko ime fali slika
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO `Uposlenik`(`Ime`,`Prezime`,"
-					+ "`KorisnickoIme`,`Password`,`Status`) VALUES (?,?,?,?,?)");
+					+ "`KorisnickoIme`,`Sifra`,`StatusKorisnika`, `TipKorisnika`) VALUES (?,?,?,?,?,?)");
 			statement.setString(1, ime);
 			statement.setString(2, prezime);
 			//Treba dodati sliku
 			statement.setString(3, korisnickoIme);
 			statement.setString(4, password);
 			statement.setBoolean(5, status);
+			statement.setInt(6, tip);
 			statement.executeUpdate();
 			//success = true; - treba se srediti slika :)
 		} catch (SQLException e) {
@@ -63,8 +74,20 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, String> {
 				result.setPrezime(qResult.getString("Prezime"));
 				//Sliku dodati
 				result.setKorisnickoIme(qResult.getString("KorisnickoIme"));
-				result.setPassword(qResult.getString("Password"));
-				result.setStatus(qResult.getBoolean("Status"));
+				result.setPassword(qResult.getString("Sifra"));
+				result.setStatus(qResult.getBoolean("StatusKorisnika"));
+				//Tip uposlenika enum
+				String tipString="Administrator";
+				switch(qResult.getInt("TipKorisnika")) {
+					case 1:
+						tipString = "Administrator";
+					case 2:
+						tipString = "Šalterski radnik";
+					case 3:
+						tipString = "Menadžer";
+				}
+				TipUposlenika tip = TipUposlenika.getTipUposlenika(tipString);
+				result.setTip(tip);
 			}
 			if (result == null) throw new EmptyStackException();
 		} catch (SQLException e) {
@@ -90,9 +113,21 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, String> {
 				uposlenik.setPrezime(qResult.getString("Prezime"));
 				// Slika
 				uposlenik.setKorisnickoIme(qResult.getString("KorisnickoIme"));
-				uposlenik.setPassword(qResult.getString("Password"));
+				uposlenik.setPassword(qResult.getString("Sifra"));
 				//Provjeriti je li moze ovo getBoolean
-				uposlenik.setStatus(qResult.getBoolean("Status"));		
+				uposlenik.setStatus(qResult.getBoolean("StatusKorisnika"));		
+				//Tip uposlenika enum
+				String tipString="Administrator";
+				switch(qResult.getInt("TipKorisnika")) {
+					case 1:
+						tipString = "Administator";
+					case 2:
+						tipString = "Šalterski radnik";
+					case 3:
+						tipString = "Menadžer";
+				}
+				TipUposlenika tip = TipUposlenika.getTipUposlenika(tipString);
+				uposlenik.setTip(tip);
 				result.add(uposlenik);
 			}
 			if (result.size() == 0) throw new EmptyStackException();
@@ -109,25 +144,37 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, String> {
 		boolean success = false;
 		String ime=uposlenik.getIme();
 		String prezime=uposlenik.getPrezime();
-		BufferedImage slikaKorisnika=uposlenik.getSlikaKorisnika();
+		//BufferedImage slikaKorisnika=uposlenik.getSlikaKorisnika();
 		String korisnickoIme=uposlenik.getKorisnickoIme();
 		String password=uposlenik.getPassword();
 		Boolean status=uposlenik.getStatus();
+		int tip=1;
+		switch(uposlenik.getTip()) {
+			case ADMINISTRATOR:
+				tip = 1;
+			case SALTERSKI_RADNIK:
+				tip = 2;
+			case MENADZER:
+				tip = 3;
+		}
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 		try {
 			//Dodati sliku
 			PreparedStatement statement = connection.prepareStatement("UPDATE `Uposlenik`"
-							+ " SET Ime = ?, Prezime = ?, KorisnickoIme = ?, Password = ?, Status =?"
-							+ " WHERE KorisnickoIme=?");
+							+ " SET Ime = ?, Prezime = ?, KorisnickoIme = ?, Sifra = ?,StatusKorisnika = ?,TipKorisnika = ?"
+							+ " WHERE KorisnickoIme = ?");
 			statement.setString(1, ime);
 			statement.setString(2, prezime);
 			//Treba dodati sliku
 			statement.setString(3, korisnickoIme);
 			statement.setString(4, password);
 			statement.setBoolean(5, status);
+			statement.setInt(6, tip);
+			
 			statement.executeUpdate();
-			//success = true;
+			
+			success = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -152,15 +199,27 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, String> {
 		return success;
 	}
 	public static void main(String[] args) {
-		/*
-		Uposlenik u = new Uposlenik("Irma","Balic","IrmaB","pass",true);
+	//	TipUposlenika tip=TipUposlenika.getTipUposlenika("Menadžer");
+		//Uposlenik u = new Uposlenik("Azra","Balic","IrmaB","pass",true,tip);
 		UposlenikDAO udao = new UposlenikDAO();
-		udao.create(u);
-		udao.get("IrmaB");
+		//udao.update(u);
+		//udao.create(u);
+		//udao.delete("AB");
+		Uposlenik novi=udao.get("IrmaB");
+		System.out.println(novi.getIme());
+		//Uposlenik u=udao.get("IrmaB");
+
 		List<Uposlenik> uposlenici = new ArrayList<Uposlenik>();
+		//uposlenici.add(novi);
 		uposlenici = udao.getAll();
-		udao.delete("IrmaB");
-		uposlenici = udao.getAll();
-		*/
+		System.out.println(uposlenici.get(1).getKorisnickoIme());
+		//System.out.println(uposlenici.size());
+
+		// for(int i = 0; i < uposlenici.size(); i++) {
+	      //      System.out.println(uposlenici.get(i).getKorisnickoIme());
+	       // }
+	    
+		/*udao.delete("IrmaB");
+		uposlenici = udao.getAll();*/
 	}
 }
