@@ -1,61 +1,75 @@
 package ba.co.edgewise.jmup.klase;
 
 public class Osoba {
-	String _jmbg_id;
-	String _prezime;
-	String _ime;
-	String _prebivaliste;
-	boolean _pravnoLice;
+	
+	int id;
+	String jmbg_Id;
+	String prezime;
+	String ime;
+	String prebivaliste;
+	boolean pravnoLice;
 	
 	public Osoba(){}
 
-	public Osoba(String jmbg_id, String prezime, String ime,
+	public Osoba(int id, String jmbg_Id, String prezime, String ime,
 			String prebivaliste, boolean pravnoLice) {
-		this._jmbg_id = jmbg_id;
-		this._prezime = prezime;
-		this._ime = ime;
-		this._prebivaliste = prebivaliste;
-		this._pravnoLice = pravnoLice;
+		super();
+		this.id = id;
+		this.jmbg_Id = jmbg_Id;
+		this.prezime = prezime;
+		this.ime = ime;
+		this.prebivaliste = prebivaliste;
+		this.pravnoLice = pravnoLice;
 	}
 
-	public String get_jmbg_id() {
-		return _jmbg_id;
+
+	public int getId() {
+		return id;
 	}
 
-	public void set_jmbg_id(String _jmbg_id) {
-		this._jmbg_id = _jmbg_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String get_prezime() {
-		return _prezime;
+	public String getJmbg_Id() {
+		return jmbg_Id;
 	}
 
-	public void set_prezime(String _prezime) {
-		this._prezime = _prezime;
+	public void setJmbg_Id(String jmbg_Id) {
+		this.jmbg_Id = jmbg_Id;
 	}
 
-	public String get_ime() {
-		return _ime;
+	public String getPrezime() {
+		return prezime;
 	}
 
-	public void set_ime(String _ime) {
-		this._ime = _ime;
+	public void setPrezime(String prezime) {
+		this.prezime = prezime;
 	}
 
-	public String get_prebivaliste() {
-		return _prebivaliste;
+	public String getIme() {
+		return ime;
 	}
 
-	public void set_prebivaliste(String _prebivaliste) {
-		this._prebivaliste = _prebivaliste;
+	public void setIme(String ime) {
+		this.ime = ime;
 	}
 
-	public boolean is_pravnoLice() {
-		return _pravnoLice;
+	public String getPrebivaliste() {
+		return prebivaliste;
 	}
 
-	public void set_pravnoLice(boolean _pravnoLice) {
-		this._pravnoLice = _pravnoLice;
+	public void setPrebivaliste(String prebivaliste) {
+		this.prebivaliste = prebivaliste;
 	}
 
+	public boolean isPravnoLice() {
+		return pravnoLice;
+	}
+
+	public void setPravnoLice(boolean pravnoLice) {
+		this.pravnoLice = pravnoLice;
+	}
+
+	
 }

@@ -4,4 +4,5 @@ import ba.co.edgewise.enums.Boja;
 
 public interface IBojaDAO {
 	public Boja get(int id);
+	public Integer getID(String boja);
 }

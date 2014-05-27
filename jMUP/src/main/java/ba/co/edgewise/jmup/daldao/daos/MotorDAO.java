@@ -10,236 +10,225 @@ import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
 import ba.co.edgewise.jmup.klase.Motor;
 
-
-public class MotorDAO implements IGenericDAO<Motor, String> {
+public class MotorDAO implements IGenericDAO<Motor, Integer> {
 
 	@Override
-	public boolean create(Motor m)
-	{
-		
+	public boolean create(Motor m) {
+
 		boolean success = false;
-		Integer zapremina = m.get_zapreminaMotora();
-		Integer maxSnaga = m.get_maxSnaga();
-		String vrstaGoriva = m.get_vrstaGoriva();
-		String vrstaMotora= m.get_vrstaMotora();
-		String brojMotora = m.get_brojMotora();
-		
-		//primjer za test
-		/*Integer zapremina = 200;
-		Integer maxSnaga = 300;
-		String vrstaGoriva = "dizel";
-		String vrstaMotora= "dizel";
-		String brojMotora = "aaaa4444";*/
-		
-		//Dobavljanje konekcije
+		Integer zapremina = m.getZapreminaMotora();
+		Integer maxSnaga = m.getMaxSnaga();
+		String vrstaGoriva = m.getVrstaGoriva();
+		String vrstaMotora = m.getVrstaMotora();
+		String brojMotora = m.getBrojMotora();
+
+		// primjer za test
+		/*
+		 * Integer zapremina = 200; Integer maxSnaga = 300; String vrstaGoriva =
+		 * "dizel"; String vrstaMotora= "dizel"; String brojMotora = "aaaa4444";
+		 */
+
+		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
-		
+
 		try {
-			PreparedStatement statement = 	connection.prepareStatement(
-					"INSERT INTO `Motor`(`ZapreminaMotora`, `MaksimalnaSnaga`, `VrstaGoriva`, `BrojMotora`, `VrstaMotora`) " +
-					" VALUES (?,?,?,?,?) ");
-			
+			PreparedStatement statement = connection
+					.prepareStatement("INSERT INTO `Motor`(`ZapreminaMotora`, `MaksimalnaSnaga`, `VrstaGoriva`, `BrojMotora`, `VrstaMotora`) "
+							+ " VALUES (?,?,?,?,?) ");
+
 			statement.setInt(1, zapremina);
 			statement.setInt(2, maxSnaga);
 			statement.setString(3, vrstaGoriva);
 			statement.setString(4, brojMotora);
 			statement.setString(5, vrstaMotora);
-			
+
 			statement.executeUpdate();
 			success = true;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			ConnectionManager.closeConnection(connection);
 		}
-		
+
 		return success;
-		
-		
+
 	}
-	
+
 	@Override
-	 public Motor get(String Id)
-	{
-		
+	public Motor get(Integer Id) {
+
 		Motor result = new Motor();
-		
-		//Dobavljanje konekcije
+
+		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
-		
-		//Poèetak pripreme upita
+
+		// Poèetak pripreme upita
 		ResultSet qResult = null;
-		
+
 		try {
-			PreparedStatement statement = 	connection.prepareStatement(
-					"SELECT * "+ 
-					"FROM Motor "+
-					"WHERE BrojMotora = ?"
-					);
-			
-			statement.setString(1, Id);
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT * " + "FROM Motor "
+							+ "WHERE IDMotora = ?");
+
+			statement.setInt(1, Id);
 			qResult = statement.executeQuery();
-			
-			//Dobavljanje rezultata
-			if(qResult.next()) {
-				result.set_maxSnaga(qResult.getInt("MaksimalnaSnaga"));
-				result.set_vrstaGoriva(qResult.getString("VrstaGoriva"));
-				result.set_brojMotora(qResult.getString("BrojMotora"));
-				result.set_vrstaMotora(qResult.getString("VrstaMotora"));
-				result.set_zapreminaMotora(qResult.getInt("ZapreminaMotora"));
+
+			// Dobavljanje rezultata
+			if (qResult.next()) {
+				result.setId(qResult.getInt("IDMotora"));
+				result.setMaxSnaga(qResult.getInt("MaksimalnaSnaga"));
+				result.setVrstaGoriva(qResult.getString("VrstaGoriva"));
+				result.setBrojMotora(qResult.getString("BrojMotora"));
+				result.setVrstaMotora(qResult.getString("VrstaMotora"));
+				result.setZapreminaMotora(qResult.getInt("ZapreminaMotora"));
 			}
-		
-		//ako je prazno baci exception
-		if(result == null)
-			throw new EmptyStackException();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			ConnectionManager.closeConnection(connection);
 		}
-		
+
 		return result;
-		
+
 	}
-	
+
 	@Override
-	 public List<Motor> getAll()
-	{
+	public List<Motor> getAll() {
 		List<Motor> result = new ArrayList<Motor>();
-		Motor temp = new Motor();
-		
-		//Dobavljanje konekcije
+
+		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
-		
-		//Poèetak pripreme upita
+
+		// Poèetak pripreme upita
 		ResultSet qResult = null;
-		
+
 		try {
-			PreparedStatement statement = 	connection.prepareStatement(
-					"SELECT * "+ 
-					"FROM Motor "
-					);
-			
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT * " + "FROM Motor ");
+
 			qResult = statement.executeQuery();
-			//Dobavljanje rezultata
-			while(qResult.next()) {
-				temp.set_maxSnaga(qResult.getInt("MaksimalnaSnaga"));
-				temp.set_vrstaGoriva(qResult.getString("VrstaGoriva"));
-				temp.set_brojMotora(qResult.getString("BrojMotora"));
-				temp.set_vrstaMotora(qResult.getString("VrstaMotora"));
-				temp.set_zapreminaMotora(qResult.getInt("ZapreminaMotora"));
+			// Dobavljanje rezultata
+			while (qResult.next()) {
+				Motor temp = new Motor();
+				temp.setId(qResult.getInt("IDMotora"));
+				temp.setMaxSnaga(qResult.getInt("MaksimalnaSnaga"));
+				temp.setVrstaGoriva(qResult.getString("VrstaGoriva"));
+				temp.setBrojMotora(qResult.getString("BrojMotora"));
+				temp.setVrstaMotora(qResult.getString("VrstaMotora"));
+				temp.setZapreminaMotora(qResult.getInt("ZapreminaMotora"));
 				result.add(temp);
 			}
-			
-			//ako je prazno da se baci exception
-			if(result.size() == 0)
+
+			// ako je prazno da se baci exception
+			if (result.size() == 0)
 				throw new EmptyStackException();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			ConnectionManager.closeConnection(connection);
 		}
-		
+
 		return result;
 	}
-	
+
 	@Override
-	 public boolean update(Motor m)
-	{
+	public boolean update(Integer id, Motor m) {
 		boolean success = false;
-		Integer zapremina = m.get_zapreminaMotora();
-		Integer maxSnaga = m.get_maxSnaga();
-		String vrstaGoriva = m.get_vrstaGoriva();
-		String vrstaMotora= m.get_vrstaMotora();
-		String brojMotora = m.get_brojMotora();
+		Integer zapremina = m.getZapreminaMotora();
+		Integer maxSnaga = m.getMaxSnaga();
+		String vrstaGoriva = m.getVrstaGoriva();
+		String vrstaMotora = m.getVrstaMotora();
+		String brojMotora = m.getBrojMotora();
+
 		
-		//primjer za test
-		/*Integer zapremina = 400;
-		Integer maxSnaga = 300;
-		String vrstaGoriva = "dizel";
-		String vrstaMotora= "dizel";
-		String brojMotora = "aaaa4444";*/
-		
-		//Dobavljanje konekcije
+
+		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
-		
+
 		try {
-			PreparedStatement statement = 	connection.prepareStatement(
-					"UPDATE `Motor`" +
-					" SET ZapreminaMotora = ? , MaksimalnaSnaga= ?, VrstaGoriva= ?, VrstaMotora= ? " + 
-					" WHERE BrojMotora = ? "
-					);
+			PreparedStatement statement = connection
+					.prepareStatement("UPDATE `Motor`"
+							+ " SET ZapreminaMotora = ? , MaksimalnaSnaga= ?, VrstaGoriva= ?, VrstaMotora= ?, BrojMotora = ? "
+							+ " WHERE IDMotora = ? ");
 
 			statement.setInt(1, zapremina);
 			statement.setInt(2, maxSnaga);
 			statement.setString(3, vrstaGoriva);
 			statement.setString(4, vrstaMotora);
 			statement.setString(5, brojMotora);
-			
+			statement.setInt(6, id);
+
 			statement.executeUpdate();
-			
+
 			success = true;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			ConnectionManager.closeConnection(connection);
 		}
-		
+
 		return success;
-		
+
 	}
-	
+
 	@Override
-	 public boolean delete(String id)
-	{
+	public boolean delete(Integer id) {
 		boolean success = false;
-		
-		//Dobavljanje konekcije
+
+		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
-		
+
 		try {
-			PreparedStatement statement = 	connection.prepareStatement(
-					"DELETE" +
-					" FROM `Motor` " + 
-					" WHERE BrojMotora = ? "
-					);
-			
-			statement.setString(1, id);
+			PreparedStatement statement = connection.prepareStatement("DELETE"
+					+ " FROM `Motor` " + " WHERE IDMotora = ? ");
+
+			statement.setInt(1, id);
 			statement.executeUpdate();
-			
+
 			success = true;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			ConnectionManager.closeConnection(connection);
 		}
-		
+
 		return success;
-		
+
 	}
-	
-	public static void main (String[] args){
-		
+
+	public static void main(String[] args) {
+
 		Motor m = new Motor();
 		MotorDAO d = new MotorDAO();
-		//d.create(m);
-		//m = d.get("aaaa3333");
-		//System.out.println(m.get_brojMotora());
+		m = d.get(5);
+		m.setBrojMotora("haj promjeni");
+		d.update(5, m);
 		
-		//List<Motor> motori = new ArrayList<Motor>(); 
-		//motori = d.getAll();
-		//System.out.println(motori.size());
+		//novi = new Motor(0, 650, 200,
+		//		"LPG", "la", "la");
+		//d.create(novi);
 		
+		// d.create(m);
+		// m = d.get("aaaa3333");
+		// System.out.println(m.get_brojMotora());
+
+		List<Motor> motori = new ArrayList<Motor>();
+		motori = d.getAll();
+		for (Motor mot:motori){
+			System.out.println(mot.getVrstaMotora());
+		}
+		// System.out.println(motori.size());
+
 	}
 
 }
