@@ -1,15 +1,54 @@
 package ba.co.edgewise.jmup.klase;
-public class Vlasnicka extends Dozvola{
 
-	// dodati podatke koji se nalaze u vlasnickoj, a nisu vec navedeni u klasi Dozovola
+public class Vlasnicka{
 	
-	// Konstruktor sa parametrima
-	public Vlasnicka(int brojDozvole, Vozilo vozilo, Vozac vozac) {
-		super(brojDozvole, vozilo, vozac);
-	}
-	// Konstruktor bez parametara
+	String brojDozvole;
+	Vozilo vozilo;
+	Osoba vlasnik;
+	
+	
+
 	public Vlasnicka() {
 		super();
 	}
 
+
+	public Vlasnicka(String brojDozvole, Vozilo vozilo, Osoba vlasnik) {
+		super();
+		this.brojDozvole = brojDozvole;
+		this.vozilo = vozilo;
+		this.vlasnik = vlasnik;
+	}
+
+
+	public String getBrojDozvole() {
+		return brojDozvole;
+	}
+
+
+	public void setBrojDozvole(String brojDozvole) {
+		this.brojDozvole = brojDozvole;
+	}
+
+
+	public Vozilo getVozilo() {
+		return vozilo;
+	}
+
+
+	public void setVozilo(Vozilo vozilo) {
+		this.vozilo = vozilo;
+	}
+
+
+	public Osoba getVlasnik() {
+		return vlasnik;
+	}
+
+
+	public void setVlasnik(Osoba vlasnik) {
+		this.vlasnik = vlasnik;
+	}
+	
+	
 }

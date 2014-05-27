@@ -8,27 +8,27 @@ import java.sql.SQLException;
 
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
-import ba.co.edgewise.jmup.klase.Saobracajna;
+import ba.co.edgewise.jmup.klase.Vlasnicka;
 
-public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
+public class VlasnickaDAO implements IGenericDAO<Vlasnicka, String> {
 
 	@Override
-	public boolean create(Saobracajna s)
+	public boolean create(Vlasnicka vlasnicka)
 	{
 		boolean success = false;
 		
-		int vozilo = s.getVozilo().getId();
-		int korisnik = s.getKorisnik().getId();
+		int vozilo = vlasnicka.getVozilo().getId();
+		int vlasnik = vlasnicka.getVlasnik().getId();
 		
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 		
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO `Saobracajna`(`Vozilo`, 'Korisnik') VALUES (?, ?)");
+					.prepareStatement("INSERT INTO `Vlasnicka`(`Vozilo`, 'Vlasnik') VALUES (?, ?)");
 
 			statement.setInt(1, vozilo);
-			statement.setInt(2, korisnik);
+			statement.setInt(2, vlasnik);
 
 			statement.executeUpdate();
 			success = true;
@@ -44,9 +44,9 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 	}
 
 	@Override
-	public Saobracajna get(String brojDozvole){
+	public Vlasnicka get(String brojDozvole){
 		
-		Saobracajna result = new Saobracajna();
+		Vlasnicka result = new Vlasnicka();
 		
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
@@ -56,21 +56,22 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 		try {
 			PreparedStatement statement = 	connection.prepareStatement(
 					"SELECT * "+ 
-					"FROM Saobracajna "+
+					"FROM Vlasnicka "+
 					"WHERE BrojDozvole = ?"
 					);
 			
 			statement.setString(1, brojDozvole);
 			qResult = statement.executeQuery();
 			
-			if(qResult.next()){
+			if (qResult.next())
+			{
 				result.setBrojDozvole(qResult.getString("BrojDozvole"));
 				
 				VoziloDAO vDAO = new VoziloDAO();
 				result.setVozilo(vDAO.get(qResult.getInt("Vozilo")));
 				
 				OsobaDAO oDAO = new OsobaDAO();
-				result.setKorisnik(oDAO.get(qResult.getInt("Korisnik")));
+				result.setVlasnik(oDAO.get(qResult.getInt("Vlasnik")));
 			}
 			
 		} catch (SQLException e) {
@@ -84,9 +85,9 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 	} 
 
 	@Override
-	 public List<Saobracajna> getAll()
+	public List<Vlasnicka> getAll()
 	{
-		List<Saobracajna> result = new ArrayList<Saobracajna>();
+		List<Vlasnicka> result = new ArrayList<Vlasnicka>();
 		
 		//Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
@@ -105,7 +106,7 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 			//Dobavljanje rezultata
 			while(qResult.next()) {
 				
-				Saobracajna temp = new Saobracajna();
+				Vlasnicka temp = new Vlasnicka();
 				
 				temp.setBrojDozvole(qResult.getString("BrojDozvole"));
 				
@@ -113,14 +114,10 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 				temp.setVozilo(vDAO.get(qResult.getInt("Vozilo")));
 				
 				OsobaDAO oDAO = new OsobaDAO();
-				temp.setKorisnik(oDAO.get(qResult.getInt("Korisnik")));
+				temp.setVlasnik(oDAO.get(qResult.getInt("Vlasnik")));
 				
 				result.add(temp);
 			}
-			
-			//ako je prazno da se baci exception
-			if(result.size() == 0)
-				throw new EmptyStackException();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -132,7 +129,7 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 	}
 	
 	@Override
-	public boolean update(String brojDozvole, Saobracajna s)
+	public boolean update(String brojDozvole, Vlasnicka v)
 	{
 		boolean success = false;
 		
@@ -141,13 +138,13 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 	
 		try {
 			PreparedStatement statement = 	connection.prepareStatement(
-					"UPDATE `Saobracajna`" +
+					"UPDATE `Vlasnicka`" +
 					" SET Vozilo = ?, Korisnik = ? " + 
 					" WHERE BrojDozvole = ? "
 					);
 
-			statement.setInt(1, s.getVozilo().getId());
-			statement.setInt(2, s.getKorisnik().getId());
+			statement.setInt(1, v.getVozilo().getId());
+			statement.setInt(2, v.getVlasnik().getId());
 			statement.setString(3, brojDozvole);
 			
 			statement.executeUpdate();
@@ -175,7 +172,7 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 		try {
 			PreparedStatement statement = 	connection.prepareStatement(
 					"DELETE" +
-					" FROM `Saobracajna` " + 
+					" FROM `Vlasnicka` " + 
 					" WHERE BrojDozvole = ? "
 					);
 			

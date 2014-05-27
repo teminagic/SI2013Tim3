@@ -1,23 +1,46 @@
 package ba.co.edgewise.jmup.klase;
 
-public class Saobracajna extends Dozvola{
-	private String regOznaka;
-	// dodati podatke koji se nalaze u saobracajnoj, a nisu vec navedeni u klasi Dozovola
+public class Saobracajna{
 	
-	// Konstruktor sa parametrima
-	public Saobracajna(int brojDozvole, Vozilo vozilo, Vozac vozac, String regOznaka) {
-		super(brojDozvole, vozilo, vozac);
-		this.setRegOznaka(regOznaka);
-	}
-	// Konstruktor bez parametara
+	String brojDozvole;
+	Vozilo vozilo;
+	Osoba korisnik;
+	
 	public Saobracajna() {
 		super();
 	}
-	public String getRegOznaka() { // morao sam promjeniti ovdje iz private u public
-		return regOznaka;
-	}
-	public void setRegOznaka(String regOznaka) { //isto i ovdje u public
-		this.regOznaka = regOznaka;
+
+	public Saobracajna(String brojDozvole, Vozilo vozilo, Osoba korisnik) {
+		super();
+		this.brojDozvole = brojDozvole;
+		this.vozilo = vozilo;
+		this.korisnik = korisnik;
 	}
 
+	public String getBrojDozvole() {
+		return brojDozvole;
+	}
+
+	public void setBrojDozvole(String brojDozvole) {
+		this.brojDozvole = brojDozvole;
+	}
+
+	public Vozilo getVozilo() {
+		return vozilo;
+	}
+
+	public void setVozilo(Vozilo vozilo) {
+		this.vozilo = vozilo;
+	}
+
+	public Osoba getKorisnik() {
+		return korisnik;
+	}
+
+	public void setKorisnik(Osoba korisnik) {
+		this.korisnik = korisnik;
+	}
+	
+	
+	
 }
