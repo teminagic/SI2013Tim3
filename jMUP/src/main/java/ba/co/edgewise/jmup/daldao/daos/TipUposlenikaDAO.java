@@ -47,6 +47,40 @@ public class TipUposlenikaDAO implements ITipUposlenikaDAO {
 		return result;
 	}
 	
+	public Integer getID(TipUposlenika tip){
+		Integer result = null;
+		
+		//Dobavljanje konekcije
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+		
+		//Poèetak pripreme upita
+		ResultSet qResult = null;
+		
+		try {
+			PreparedStatement statement = 	connection.prepareStatement(
+					"SELECT * " +
+					"FROM TipUposlenika " + 
+					"WHERE 	Naziv = ?");
+			statement.setString(1, tip.toString());
+			
+			//Izvrsenje upita
+			qResult = statement.executeQuery();
+			
+			//Dobavljanje rezultata
+			if(qResult.next())
+				result = qResult.getInt("IDTipaKorisnika");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeResultSet(qResult);
+			ConnectionManager.closeConnection(connection);
+		}
+		
+		return result;
+	}
+	
 	public static void main (String[] args){
 		TipUposlenikaDAO noviDAO = new TipUposlenikaDAO();
 		System.out.println(noviDAO.get(1));
