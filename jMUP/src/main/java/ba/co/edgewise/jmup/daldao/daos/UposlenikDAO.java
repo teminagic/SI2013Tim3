@@ -130,7 +130,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, String> {
 	@Override
 	public List<Uposlenik> getAll() {
 		List<Uposlenik> result = new ArrayList<Uposlenik>();
-		Uposlenik uposlenik = new Uposlenik();
+		Uposlenik uposlenik;
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 		ResultSet qResult = null;
@@ -138,6 +138,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, String> {
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Uposlenik");
 			qResult = statement.executeQuery();
 			while (qResult.next()) {
+				uposlenik =  new Uposlenik();
 				uposlenik.setIme(qResult.getString("Ime"));
 				uposlenik.setPrezime(qResult.getString("Prezime"));
 				// Slika
@@ -191,7 +192,8 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, String> {
 		try {
 			//Dodati sliku
 			PreparedStatement statement = connection.prepareStatement("UPDATE `Uposlenik`"
-							+ " SET Ime = ?, Prezime = ?, KorisnickoIme = ?, Sifra = ?,StatusKorisnika = ?,TipKorisnika = ?"
+							+ " SET Ime = ?, Prezime = ?, KorisnickoIme = ?, Sifra = ?,"
+							+ " StatusKorisnika = ?, TipKorisnika = ?"
 							+ " WHERE KorisnickoIme = ?");
 			statement.setString(1, ime);
 			statement.setString(2, prezime);
@@ -200,6 +202,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, String> {
 			statement.setString(4, password);
 			statement.setBoolean(5, status);
 			statement.setInt(6, tip);
+			statement.setString(7, korisnickoIme);
 			
 			statement.executeUpdate();
 			
@@ -228,10 +231,9 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, String> {
 		return success;
 	}
 	public static void main(String[] args) {
-	//	TipUposlenika tip=TipUposlenika.getTipUposlenika("Menadžer");
-		//Uposlenik u = new Uposlenik("Azra","Balic","IrmaB","pass",true,tip);
+		Uposlenik u = new Uposlenik(1 , "Azra","Balic","IrmaB","pass", true,TipUposlenika.MENADZER);
 		UposlenikDAO udao = new UposlenikDAO();
-		//udao.update(u);
+		udao.update(u);
 		//udao.create(u);
 		//udao.delete("AB");
 		Uposlenik novi=udao.get("IrmaB");
@@ -241,12 +243,12 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, String> {
 		List<Uposlenik> uposlenici = new ArrayList<Uposlenik>();
 		//uposlenici.add(novi);
 		uposlenici = udao.getAll();
-		System.out.println(uposlenici.get(1).getKorisnickoIme());
+		//System.out.println(uposlenici.get(1).getKorisnickoIme());
 		//System.out.println(uposlenici.size());
 
-		// for(int i = 0; i < uposlenici.size(); i++) {
-	      //      System.out.println(uposlenici.get(i).getKorisnickoIme());
-	       // }
+		for(int i = 0; i < uposlenici.size(); i++) {
+	          System.out.println(uposlenici.get(i).getKorisnickoIme());
+	      }
 	    
 		/*udao.delete("IrmaB");
 		uposlenici = udao.getAll();*/
