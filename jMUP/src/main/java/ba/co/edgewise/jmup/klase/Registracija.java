@@ -1,44 +1,67 @@
 package ba.co.edgewise.jmup.klase;
 
-// mislim da samo prvi import treba,
-// ali evo i ostali ukoliko bude trebalo format usaglasiti
 import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class Registracija {
-	String regOznaka;
-	Date odKada;
-	Date doKada; // "do" je rezervisana rijec
+	int id;
+	String registarskaOznaka;
+	Date datumRegistrovanja;
+	Date datumIsteka;
+	Vozilo vozilo;
+	Osoba osoba;
+	public Registracija() {
+		super();
+	}
 	
-	public Registracija(String regOznaka, Date odKada, Date doKada){
-		this.regOznaka = regOznaka;
-		this.odKada = odKada;
-		this.doKada = doKada;
+	public Registracija(int id, String registarskaOznaka,
+			Date datumRegistrovanja, Date datumIsteka, Vozilo vozilo,
+			Osoba osoba) {
+		super();
+		this.id = id;
+		this.registarskaOznaka = registarskaOznaka;
+		this.datumRegistrovanja = datumRegistrovanja;
+		this.datumIsteka = datumIsteka;
+		this.vozilo = vozilo;
+		this.osoba = osoba;
 	}
-
-	public String getRegOznaka() {
-		return regOznaka;
+	
+	
+	public int getId() {
+		return id;
 	}
-
-	public void setRegOznaka(String regOznaka) {
-		this.regOznaka = regOznaka;
+	public void setId(int id) {
+		this.id = id;
 	}
-
-	public Date getOdKada() {
-		return odKada;
+	public String getRegistarskaOznaka() {
+		return registarskaOznaka;
 	}
-
-	public void setOdKada(Date odKada) {
-		this.odKada = odKada;
+	public void setRegistarskaOznaka(String registarskaOznaka) {
+		this.registarskaOznaka = registarskaOznaka;
 	}
-
-	public Date getDoKada() {
-		return doKada;
+	public Date getDatumRegistrovanja() {
+		return datumRegistrovanja;
 	}
-
-	public void setDoKada(Date doKada) {
-		this.doKada = doKada;
+	public void setDatumRegistrovanja(Date datumRegistrovanja) {
+		this.datumRegistrovanja = datumRegistrovanja;
 	}
+	public Date getDatumIsteka() {
+		return datumIsteka;
+	}
+	public void setDatumIsteka(Date datumIsteka) {
+		this.datumIsteka = datumIsteka;
+	}
+	public Vozilo getVozilo() {
+		return vozilo;
+	}
+	public void setVozilo(Vozilo vozilo) {
+		this.vozilo = vozilo;
+	}
+	public Osoba getOsoba() {
+		return osoba;
+	}
+	public void setOsoba(Osoba osoba) {
+		this.osoba = osoba;
+	}
+	
+	
 }

@@ -106,7 +106,6 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 	@Override
 	public List<BojaVozila> getAll() {
 		List<BojaVozila> result = new ArrayList<BojaVozila>();
-		BojaVozila temp = new BojaVozila();
 
 		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
@@ -123,6 +122,7 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 
 			// Dobavljanje rezultata
 			while (qResult.next()) {
+				BojaVozila temp = new BojaVozila();
 				
 				BojaDAO bDAO = new BojaDAO();
 				Boja boja = bDAO.get(qResult.getInt("Boja"));				

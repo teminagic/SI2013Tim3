@@ -33,7 +33,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
-		
+
 		try {
 			// Izmedju prezime i korisnicko ime fali slika
 			PreparedStatement statement = connection
@@ -47,7 +47,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 			statement.setBoolean(5, status);
 			statement.setInt(6, tip);
 			statement.executeUpdate();
-			success = true; //- treba se srediti slika :)
+			success = true; // - treba se srediti slika :)
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -74,7 +74,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 				result.setKorisnickoIme(qResult.getString("KorisnickoIme"));
 				result.setPassword(qResult.getString("Sifra"));
 				result.setStatus(qResult.getBoolean("StatusKorisnika"));
-				
+
 				// Tip uposlenika enum
 				int idTipa = qResult.getInt("TipKorisnika");
 				TipUposlenikaDAO tipDAO = new TipUposlenikaDAO();
@@ -99,6 +99,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 			statement.setString(1, korisnickoIme);
 			qResult = statement.executeQuery();
 			if (qResult.next()) {
+				result.setId(qResult.getInt("IDUposlenika"));
 				result.setIme(qResult.getString("Ime"));
 				result.setPrezime(qResult.getString("Prezime"));
 				// Sliku dodati
@@ -122,7 +123,6 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 	@Override
 	public List<Uposlenik> getAll() {
 		List<Uposlenik> result = new ArrayList<Uposlenik>();
-		Uposlenik uposlenik;
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 		ResultSet qResult = null;
@@ -131,7 +131,8 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 					.prepareStatement("SELECT * FROM Uposlenik");
 			qResult = statement.executeQuery();
 			while (qResult.next()) {
-				uposlenik = new Uposlenik();
+				Uposlenik uposlenik = new Uposlenik();
+				uposlenik.setId(qResult.getInt("IDUposlenika"));
 				uposlenik.setIme(qResult.getString("Ime"));
 				uposlenik.setPrezime(qResult.getString("Prezime"));
 				// Slika
@@ -164,10 +165,10 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 		String korisnickoIme = uposlenik.getKorisnickoIme();
 		String password = uposlenik.getPassword();
 		Boolean status = uposlenik.getStatus();
-		
+
 		TipUposlenikaDAO tuDAO = new TipUposlenikaDAO();
 		int tip = tuDAO.getID(uposlenik.getTip());
-		
+
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 		try {

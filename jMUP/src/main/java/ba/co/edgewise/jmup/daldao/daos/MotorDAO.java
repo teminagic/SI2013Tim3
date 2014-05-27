@@ -146,8 +146,6 @@ public class MotorDAO implements IGenericDAO<Motor, Integer> {
 		String vrstaMotora = m.getVrstaMotora();
 		String brojMotora = m.getBrojMotora();
 
-		
-
 		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
@@ -213,18 +211,18 @@ public class MotorDAO implements IGenericDAO<Motor, Integer> {
 		m = d.get(5);
 		m.setBrojMotora("haj promjeni");
 		d.update(5, m);
-		
-		//novi = new Motor(0, 650, 200,
-		//		"LPG", "la", "la");
-		//d.create(novi);
-		
+
+		// novi = new Motor(0, 650, 200,
+		// "LPG", "la", "la");
+		// d.create(novi);
+
 		// d.create(m);
 		// m = d.get("aaaa3333");
 		// System.out.println(m.get_brojMotora());
 
 		List<Motor> motori = new ArrayList<Motor>();
 		motori = d.getAll();
-		for (Motor mot:motori){
+		for (Motor mot : motori) {
 			System.out.println(mot.getVrstaMotora());
 		}
 		// System.out.println(motori.size());
