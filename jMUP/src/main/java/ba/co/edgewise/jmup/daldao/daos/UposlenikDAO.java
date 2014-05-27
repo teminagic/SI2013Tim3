@@ -15,7 +15,6 @@ import java.awt.image.BufferedImage;
 
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
 import ba.co.edgewise.jmup.klase.Uposlenik;
-import ba.co.edgewise.jmup.klase.Vozilo;
 
 
 public class UposlenikDAO implements IGenericDAO<Uposlenik, String> {
@@ -24,6 +23,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, String> {
 		boolean success = false;
 		String ime=uposlenik.getIme();
 		String prezime=uposlenik.getPrezime();
+		@SuppressWarnings("unused")
 		BufferedImage slikaKorisnika=uposlenik.getSlikaKorisnika();
 		String korisnickoIme=uposlenik.getKorisnickoIme();
 		String password=uposlenik.getPassword();
@@ -60,6 +60,36 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, String> {
 		return success;
 	}
 	
+	public Uposlenik get(int id)
+	{
+		Uposlenik result = new Uposlenik();
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+		ResultSet qResult = null;
+		try {
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM Uposlenik WHERE IdKorisnika = ?");
+			statement.setInt(1, id);
+			qResult = statement.executeQuery();
+			if (qResult.next()) {
+				result.setIme(qResult.getString("Ime"));
+				result.setPrezime(qResult.getString("Prezime"));
+				//Sliku dodati
+				result.setKorisnickoIme(qResult.getString("KorisnickoIme"));
+				result.setPassword(qResult.getString("Sifra"));
+				result.setStatus(qResult.getBoolean("StatusKorisnika"));
+				//Tip uposlenika enum
+				int idTipa = qResult.getInt("TipKorisnika");
+				TipUposlenikaDAO tipDAO = new TipUposlenikaDAO(); 
+				result.setTip(tipDAO.get(idTipa));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+		return result;
+	}
+	
 	public Uposlenik get(String korisnickoIme) {
 		Uposlenik result = new Uposlenik();
 		ConnectionManager manager = new ConnectionManager();
@@ -88,8 +118,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, String> {
 				}
 				TipUposlenika tip = TipUposlenika.getTipUposlenika(tipString);
 				result.setTip(tip);
-			}
-			if (result == null) throw new EmptyStackException();
+			}else throw new EmptyStackException();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
