@@ -80,9 +80,8 @@ public class SalterskiRadnikView extends JFrame {
 	}
 	public void prikaziVozacDodavanje()
 	{
-
 		contentPane.remove(sadrzaj);
-		
+
 		sadrzaj = new OpcijaSadrzaj("Unos vozača");
 		strana2VozacDodavanje = new VozacDodavanje();
 		//
@@ -92,6 +91,21 @@ public class SalterskiRadnikView extends JFrame {
 		frejm.pack();
 		frejm.setVisible(true);
 	}
+	
+	public void prikaziPocetnu()
+	{
+		contentPane.remove(sadrzaj);
+
+		sadrzaj = new OpcijaSadrzaj("Početna");
+		strana1 = new NaslovnaSalterski();
+		//
+		sadrzaj.getPanelSadrzaj().add(strana1, "Početna");
+		
+		contentPane.add(sadrzaj, gbc_naslov);
+		frejm.pack();
+		frejm.setVisible(true);
+	}
+	
 	public JPanel getContentPane() {
 		return contentPane;///
 	}

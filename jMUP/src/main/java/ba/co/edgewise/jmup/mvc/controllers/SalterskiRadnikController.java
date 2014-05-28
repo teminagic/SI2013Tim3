@@ -22,7 +22,7 @@ public class SalterskiRadnikController {
 		this.model = model;
 	}
 	public void control() {
-		//Listener za prijavu
+				// Listener za unos vozaca
 				JButton unosVozaca = this.view.getMeni().getOpcije().getBtnUnosVozaca();
 				unosVozaca.addMouseListener(new MouseAdapter() {
 					@Override
@@ -31,11 +31,25 @@ public class SalterskiRadnikController {
 						};
 					
 				});
+
+				// Listener za pocetnu
+				JButton pocetna= this.view.getMeni().getOpcije().getBtnPocetna();
+				pocetna.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						prikaziPanelPocetnu();
+						};
+					
+				});
 	}
 	///
 	void prikaziPanelUnosVozaca()
 	{
 		view.prikaziVozacDodavanje();
+	}
+	void prikaziPanelPocetnu()
+	{
+		view.prikaziPocetnu();
 	}
 	
 }
