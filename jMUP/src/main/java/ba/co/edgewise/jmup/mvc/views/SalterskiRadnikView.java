@@ -20,6 +20,7 @@ public class SalterskiRadnikView extends JFrame {
 	private MeniSalter meni;
 	private NaslovnaSalterski strana1; // bit ce ih vise zavisno od buttona
 	private OpcijaSadrzaj sadrzaj;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -64,6 +65,25 @@ public class SalterskiRadnikView extends JFrame {
 		contentPane.add(sadrzaj, gbc_naslov);
 		
 		
+	}
+	
+	public JPanel getContentPane() {
+		return contentPane;
+	}
+
+
+	public MeniSalter getMeni() {
+		return meni;
+	}
+
+
+	public NaslovnaSalterski getStrana1() {
+		return strana1;
+	}
+
+
+	public OpcijaSadrzaj getSadrzaj() {
+		return sadrzaj;
 	}
 
 }
