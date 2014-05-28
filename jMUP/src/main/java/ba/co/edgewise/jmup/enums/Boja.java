@@ -4,7 +4,7 @@ package ba.co.edgewise.jmup.enums;
 public enum Boja {
 	CRNA("crna"),
 	CRVENA("crvena"),
-	ŽUTA("žuta"),
+	ZUTA("Å½uta"),
 	PLAVA("plava"),
 	ZELENA("zelena");
 	
@@ -27,8 +27,8 @@ public enum Boja {
 			return Boja.CRNA;
 		case "crvena":
 			return Boja.CRVENA;
-		case "žuta":
-			return Boja.ŽUTA;
+		case "Å½uta":
+			return Boja.ZUTA;
 		case "plava":
 			return Boja.PLAVA;
 		case "zelena":
