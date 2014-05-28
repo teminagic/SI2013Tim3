@@ -20,7 +20,7 @@ public class OpcijaNaslov extends JPanel {
 	public void setLayout(){
 		setBorder(new MatteBorder(0, 2, 2, 2, (Color) new Color(0, 0, 0)));
 		gridBagLayoutOpcijaNaslov = new GridBagLayout();
-		gridBagLayoutOpcijaNaslov.columnWidths = new int[]{10, 0, 0, 0};
+		gridBagLayoutOpcijaNaslov.columnWidths = new int[]{15, 0, 0, 0};
 		gridBagLayoutOpcijaNaslov.rowHeights = new int[]{50, 0};
 		gridBagLayoutOpcijaNaslov.columnWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gridBagLayoutOpcijaNaslov.rowWeights = new double[]{1.0, Double.MIN_VALUE};
