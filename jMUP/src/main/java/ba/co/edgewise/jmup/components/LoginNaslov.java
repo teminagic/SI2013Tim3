@@ -10,7 +10,7 @@ public class LoginNaslov extends JPanel {
 	private JPanel panel;
 	private JLabel lblNaslov;
 	private JLabel lblPodNaslov;
-	
+	// nesto
 	public LoginNaslov() {
 		
 		setBorder(new MatteBorder(2, 0, 2, 0, (Color) new Color(0, 0, 0)));
