@@ -217,7 +217,7 @@ public class KorisnikPretraga extends JPanel {
 		
 		public void buttonSet() {
 			
-			btnPronaiKorisnika = new JButton("Prona�i korisnika");
+			btnPronaiKorisnika = new JButton("Pronađi korisnika");
 			GridBagConstraints gbc_btnPronaiKorisnika = new GridBagConstraints();
 			gbc_btnPronaiKorisnika.insets = new Insets(0, 0, 5, 0);
 			gbc_btnPronaiKorisnika.gridx = 3;

@@ -1,9 +1,13 @@
 package ba.co.edgewise.jmup.components;
 
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.border.TitledBorder;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -28,6 +32,7 @@ public class SalterskaPretraga extends JPanel {
 	private JComboBox cb_parametri;
 	private GridBagLayout gridBagLayout;
 	private JLabel lblPodaci;
+	private GridBagConstraints gbc_panel;
 
 	JPanel okvirPanel;
 	static String voziloString = "Vozilo";
@@ -105,6 +110,8 @@ public class SalterskaPretraga extends JPanel {
 		setLabel();
 		setInput();
 		setComponents();
+		setActionListeners();
+		
 	}
 
 	public void setLayout() {
@@ -120,7 +127,8 @@ public class SalterskaPretraga extends JPanel {
 		// JPanel panel = new JPanel();
 		// Default je postavljeno da bude Vozilo.
 
-		final GridBagConstraints gbc_panel = new GridBagConstraints();
+		//final GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 5, 0);
 		gbc_panel.gridwidth = 8;
 		gbc_panel.fill = GridBagConstraints.VERTICAL;
@@ -194,7 +202,7 @@ public class SalterskaPretraga extends JPanel {
 		gbc_rbVozilo.gridy = 1;
 		okvirPanel.add(rbVozilo, gbc_rbVozilo);
 
-		rbVozac = new JRadioButton("Voza\u010D");
+		rbVozac = new JRadioButton("Vozač");
 		rbVozac.setActionCommand(VozacString);
 		GridBagConstraints gbc_rbVozac = new GridBagConstraints();
 		gbc_rbVozac.insets = new Insets(0, 0, 5, 5);
@@ -202,7 +210,7 @@ public class SalterskaPretraga extends JPanel {
 		gbc_rbVozac.gridy = 1;
 		okvirPanel.add(rbVozac, gbc_rbVozac);
 
-		rbSaobracajna = new JRadioButton("Saobra\u0107ajna dozvola");
+		rbSaobracajna = new JRadioButton("Saobraćajna dozvola");
 		rbSaobracajna.setActionCommand(saobracajnaString);
 		GridBagConstraints gbc_rbSaobracajna = new GridBagConstraints();
 		gbc_rbSaobracajna.anchor = GridBagConstraints.EAST;
@@ -211,7 +219,7 @@ public class SalterskaPretraga extends JPanel {
 		gbc_rbSaobracajna.gridy = 1;
 		okvirPanel.add(rbSaobracajna, gbc_rbSaobracajna);
 
-		rbVlasnicka = new JRadioButton("Vlasni\u010Dka dozvola");
+		rbVlasnicka = new JRadioButton("Vlasnička dozvola");
 		rbVlasnicka.setActionCommand(vlasnickaString);
 		GridBagConstraints gbc_rbVlasnicka = new GridBagConstraints();
 		gbc_rbVlasnicka.insets = new Insets(0, 0, 5, 5);
@@ -241,9 +249,79 @@ public class SalterskaPretraga extends JPanel {
 		gbc_btn_modifikuj.gridx = 8;
 		gbc_btn_modifikuj.gridy = 3;
 		okvirPanel.add(btn_modifikuj, gbc_btn_modifikuj);
-
+		
+		JButton btnIzlaz = new JButton("Izlaz");
+		GridBagConstraints gbc_btnIzlaz = new GridBagConstraints();
+		gbc_btnIzlaz.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnIzlaz.gridx = 9;
+		gbc_btnIzlaz.gridy = 3;
+		okvirPanel.add(btnIzlaz, gbc_btnIzlaz);
+		
 	}
 
+	public void setActionListeners() {
+		// Action Listeneri
+		rbVozac.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(rbVozac.isSelected()) {
+					cb_parametri.removeAllItems();
+					cb_parametri.setModel(new DefaultComboBoxModel(VozacPretraga.values()));		
+					if(trenutni=="Vozilo") okvirPanel.remove(panel_vozilo);
+					else if(trenutni=="Vlasnicka") okvirPanel.remove(panel_vlasnicka);
+					else if(trenutni=="Saobracajna") okvirPanel.remove(panel_saobracajna);
+					trenutni="Vozac";
+					okvirPanel.add(panel_vozac, gbc_panel);
+					okvirPanel.revalidate();
+					okvirPanel.repaint();
+				}
+			}
+		});	
+		rbVozilo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(rbVozilo.isSelected()) {
+					cb_parametri.removeAllItems();
+					cb_parametri.setModel(new DefaultComboBoxModel(VoziloPretraga.values()));
+					if(trenutni=="Vozac") okvirPanel.remove(panel_vozac);
+					else if(trenutni=="Vlasnicka") okvirPanel.remove(panel_vlasnicka);
+					else if(trenutni=="Saobracajna") okvirPanel.remove(panel_saobracajna);
+					trenutni="Vozilo";
+					okvirPanel.add(panel_vozilo, gbc_panel);
+					okvirPanel.revalidate();
+					okvirPanel.repaint();
+				}
+			}
+		});	
+		rbSaobracajna.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(rbSaobracajna.isSelected()) {
+					cb_parametri.removeAllItems();
+					cb_parametri.setModel(new DefaultComboBoxModel(SaobracajnaPretraga.values()));
+					if(trenutni=="Vozilo") okvirPanel.remove(panel_vozilo);
+					else if(trenutni=="Vozac") okvirPanel.remove(panel_vozac);
+					else if(trenutni=="Vlasnicka") okvirPanel.remove(panel_vlasnicka);
+					trenutni="Saobracajna";
+					okvirPanel.add(panel_saobracajna, gbc_panel);
+					okvirPanel.revalidate();
+					okvirPanel.repaint();
+				}
+			}
+		});	
+		rbVlasnicka.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(rbVlasnicka.isSelected()) {
+					cb_parametri.removeAllItems();
+					cb_parametri.setModel(new DefaultComboBoxModel(VlasnickaPretraga.values()));
+					if(trenutni=="Vozilo") okvirPanel.remove(panel_vozilo);
+					else if(trenutni=="Vozac") okvirPanel.remove(panel_vozac);
+					else if(trenutni=="Saobracajna") okvirPanel.remove(panel_saobracajna);
+					trenutni="Vlasnicka";
+					okvirPanel.add(panel_vlasnicka, gbc_panel);
+					okvirPanel.revalidate();
+					okvirPanel.repaint();
+				}
+			}
+		});	
+	}
 	public JRadioButton getRbVozac() {
 		return rbVozac;
 	}
