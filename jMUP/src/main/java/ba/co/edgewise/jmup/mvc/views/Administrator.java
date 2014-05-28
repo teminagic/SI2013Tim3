@@ -57,7 +57,7 @@ public class Administrator extends JFrame {
 		gbc_naslov.fill = GridBagConstraints.HORIZONTAL;
 		
 		strana1 = new NaslovnaAdministrator();
-		
+		//
 		sadrzaj.getPanelSadrzaj().add(strana1, "Početna");
 		
 		contentPane.add(sadrzaj, gbc_naslov);

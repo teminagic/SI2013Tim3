@@ -1,6 +1,6 @@
 package ba.co.edgewise.jmup.mvc.controllers;
 
-public class AdminController {
+public class AdminController {//
 
 	public void control(){
 		getBtnDetalji1().addMouseListener(new MouseAdapter() {
