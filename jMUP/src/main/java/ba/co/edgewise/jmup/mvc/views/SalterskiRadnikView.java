@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -77,7 +78,7 @@ public class SalterskiRadnikView extends JFrame {
 		
 		// na pocetku je na null
 		strana2VozacDodavanje = null;
-		voziloDodavanje = null;
+		//voziloDodavanje = null;
 		frejm.pack();
 		frejm.setVisible(true);
 
@@ -142,6 +143,9 @@ public class SalterskiRadnikView extends JFrame {
 	public VoziloDodavanje getVoziloDodavanje() {
 		return voziloDodavanje;
 	}
+	public JButton getVoziloDodavanjePrihvatiButton() {
+		return voziloDodavanje.getBtn_prihvati();
+	} 
 	public GridBagConstraints getGbc_naslov() {
 		return gbc_naslov;
 	}

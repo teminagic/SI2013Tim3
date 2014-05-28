@@ -7,7 +7,6 @@ import javax.swing.table.AbstractTableModel;
 
 import ba.co.edgewise.jmup.klase.Uposlenik;
 import ba.co.edgewise.jmup.enums.TipPretrageUposlenika;
-import ba.co.edgewise.jmup.pages.*;
 
 import java.awt.CardLayout;
 import java.awt.GridBagLayout;
@@ -30,7 +29,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class KorisnikPretraga extends JPanel {
-
+/*
 	private static final long serialVersionUID = 5037184707341253170L;
 	private GridBagLayout gridBagLayout;
 	private JPanel panel;
@@ -310,5 +309,5 @@ public class KorisnikPretraga extends JPanel {
 
 	public void setParrent(AdminFrame parrent) {
 		this.parent = parrent;
-	}
+	}*/
 }

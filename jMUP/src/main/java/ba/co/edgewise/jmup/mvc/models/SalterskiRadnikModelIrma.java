@@ -24,20 +24,21 @@ public class SalterskiRadnikModelIrma {
 		this.vDAO = vDAO;
 	}
 	
-	public void dodajVozilo(Integer id, VrstaVozila vrsta, String marka, String tip,
+	public void dodajVozilo(VrstaVozila vrsta, String marka, String tip,
 			String model, String brojSasije, String oblikKaroserije,
 			int godinaProizvodnje, int maxTehnickaDozvoljenaMasa,
 			int masaVozila, int dopustenaNosivost,Double odnosSnageIMase, Integer brojMjestaZaSjedenje,
 			Integer brojMjestaZaStajanje, Integer brojMjestaZaLezanje,
 			EkoKarakteristike ekoKarakteristika, Boolean katalizator,
-			Date datumPregleda,Integer zapreminaMotora, Integer maxSnaga,
-			String vrstaGoriva, String brojMotora, String vrstaMotora) 
-	{
+			Date datumPregleda, Integer zapreminaMotora, Integer maxSnaga,
+			String vrstaGoriva, String brojMotora, String vrstaMotora) {
+
+	
 		Motor motor =  new Motor(0, zapreminaMotora, maxSnaga,vrstaGoriva, brojMotora, vrstaMotora);
 		MotorDAO mDAO = new MotorDAO();
 		mDAO.create(motor);
 		
-		vozilo= new Vozilo(id,vrsta,marka,tip,
+		vozilo= new Vozilo(0,vrsta,marka,tip,
 			model,brojSasije,oblikKaroserije,
 			godinaProizvodnje, maxTehnickaDozvoljenaMasa,
 			masaVozila,dopustenaNosivost,motor,

@@ -16,6 +16,8 @@ import ba.co.edgewise.jmup.klase.Vozilo;
 import ba.co.edgewise.jmup.mvc.models.*;
 import ba.co.edgewise.jmup.mvc.views.*;
 import ba.co.edgewise.jmup.components.*;
+import ba.co.edgewise.jmup.daldao.daos.MotorDAO;
+import ba.co.edgewise.jmup.daldao.daos.VoziloDAO;
 import ba.co.edgewise.jmup.enums.EkoKarakteristike;
 import ba.co.edgewise.jmup.enums.VrstaVozila;
 
@@ -52,21 +54,24 @@ public class SalterskiRadnikControllerIrma {
 					};		
 			});
 			
-			JButton dodavanje_vozila = this.view.getVoziloDodavanje().getBtn_prihvati();
+			JButton dodavanje_vozila = this.view.getVoziloDodavanjePrihvatiButton();
 			dodavanje_vozila.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(provjeriPopunjenost()){
-						try {
-							dodajVozilo();
-							JOptionPane.showConfirmDialog(view, "Uspješno ste dodali vozilo.","Dodano vozilo", JOptionPane.OK_CANCEL_OPTION);
-						} catch (ParseException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					} else{
-						JOptionPane.showMessageDialog(null, "Neispravno popunjena polja!");
-					};
+				//OVO OVDJE MI UOPSTE NE RADI IZ NEKOG RAZLOGA
+				//A KAD PREBACIM OVAJ KOD U PRIKAZI PANEL UNOS VOZILA
+				//URADI MI NORMALNO :/
+				//TJ UPISE GA U BAZU..
+				//KAKO OVO NE RADI, SVE OSTALO SAM ZAKOMENTARISALA
+				MotorDAO mDAO = new MotorDAO();
+					Motor motor = mDAO.getAll().get(1);
+					Vozilo v = new Vozilo(null, VrstaVozila.PUTNICKI_AUTOMOBIL, "Irma", "limuzina",
+							"A1", "aaa54", "oblikkaroserije", 2013, 4500,
+							3000, 1500, motor, 5.1, 5, 0, 0, EkoKarakteristike.EURO2, true, new Date());
+					
+						VoziloDAO vDAO = new VoziloDAO();
+						vDAO.create(v);
+							//dodajVozilo();*/
 				}
 			});
 			
@@ -86,9 +91,10 @@ public class SalterskiRadnikControllerIrma {
 	public boolean provjeriPopunjenost() {
 		return true;
 	}
-	public void dodajVozilo() throws ParseException {	
-	
-		VrstaVozila vrsta = VrstaVozila.getVrstaVozila((String)view.getVoziloDodavanje().getCb_vrstaVozila().getSelectedItem());
+	public void dodajVozilo() 
+	{	
+		
+	/*	VrstaVozila vrsta = VrstaVozila.getVrstaVozila((String)view.getVoziloDodavanje().getCb_vrstaVozila().getSelectedItem());
 		String tip = view.getVoziloDodavanje().getTf_tipVozila().getText(); 
 		String modelVozila = view.getVoziloDodavanje().getTf_modelVozila().getText(); 
 		String marka = view.getVoziloDodavanje().getTf_markaVozila().getText();
@@ -102,7 +108,7 @@ public class SalterskiRadnikControllerIrma {
 		EkoKarakteristike ekoKarakteristika = EkoKarakteristike.getEkoKarakteristike((String)view.getVoziloDodavanje().getCb_ekoKarakteristike().getSelectedItem());
 		boolean katalizator = view.getVoziloDodavanje().getRb_katalizator_da().isSelected();
 		String oblikKaroserije = view.getVoziloDodavanje().getTf_karoserija().getText();
-		Date datumPregleda=new SimpleDateFormat("dd-MMM-yy").parse(view.getVoziloDodavanje().getTf_datumPregleda().getText());
+		//Date datumPregleda=new SimpleDateFormat("dd-MMM-yy").parse(view.getVoziloDodavanje().getTf_datumPregleda().getText());
 		//String datumPregleda = view.getVoziloDodavanje().getTf_datumPregleda().getText();
 		String brojSasije = view.getVoziloDodavanje().getTf_brojSasije().getText();
 		int maxTehnickaDozvoljenaMasa = Integer.parseInt(view.getVoziloDodavanje().getTb_maxMasa().getText());
@@ -115,14 +121,11 @@ public class SalterskiRadnikControllerIrma {
 		String brojMotora = view.getVoziloDodavanje().getTf_brojMotora().getText();
 		String vrstaMotora = (String)view.getVoziloDodavanje().getCb_vrstaMotora().getSelectedItem();
 		// Nisu iskoristeni: getTb_bojaVozila(), getCb_nijansa() , getCb_vrstaBoje() 
-		
+		*/
 /*	model.dodajVozilo(null, vrsta, marka, tip, modelVozila, brojSasije, oblikKaroserije, godinaProizvodnje, 
 			maxTehnickaDozvoljenaMasa, masaVozila, dopustenaNosivost, odnosSnageIMase, brojMjestaZaSjedenje, 
 			brojMjestaZaStajanje, brojMjestaZaLezanje, ekoKarakteristika, katalizator, datumPregleda, 
 			zapreminaMotora, maxSnaga,vrstaGoriva, brojMotora, vrstaMotora);*/
-	// novi = new Motor(0, 650, 200,
-	// "LPG", "la", "la");
-	// d.create(novi);
-model.dodajVozilo(0, VrstaVozila.PUTNICKI_AUTOMOBIL, "BMW", "limuzina","A1", "aaa54", "oblikkaroserije", 2013, 4500,3000, 1500, 5.1, 5, 0, 0, EkoKarakteristike.EURO2, true, new Date(),0, 650, "LPG", "la", "la");	
+	
 	}
 }
