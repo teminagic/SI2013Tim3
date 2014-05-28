@@ -14,6 +14,7 @@ import ba.co.edgewise.jmup.components.MeniSalterOpcije;
 import ba.co.edgewise.jmup.components.NaslovnaSalterski;
 import ba.co.edgewise.jmup.components.OpcijaSadrzaj;
 import ba.co.edgewise.jmup.components.VozacDodavanje;
+import ba.co.edgewise.jmup.mvc.controllers.LoginController;
 
 public class SalterskiRadnikView extends JFrame {
 
@@ -26,6 +27,8 @@ public class SalterskiRadnikView extends JFrame {
 	GridBagConstraints gbc_meni;
 	
 	private VozacDodavanje strana2VozacDodavanje;
+	
+	private final SalterskiRadnikView frejm = this;
 	/**
 	 * Launch the application.
 	 */
@@ -71,10 +74,13 @@ public class SalterskiRadnikView extends JFrame {
 		
 		// na pocetku je na null
 		strana2VozacDodavanje = null;
+		frejm.pack();
+		frejm.setVisible(true);
 		
 	}
 	public void prikaziVozacDodavanje()
 	{
+
 		contentPane.remove(sadrzaj);
 		
 		sadrzaj = new OpcijaSadrzaj("Unos vozača");
@@ -83,6 +89,8 @@ public class SalterskiRadnikView extends JFrame {
 		sadrzaj.getPanelSadrzaj().add(strana2VozacDodavanje, "Unos podataka o vozaču");
 		
 		contentPane.add(sadrzaj, gbc_naslov);
+		frejm.pack();
+		frejm.setVisible(true);
 	}
 	public JPanel getContentPane() {
 		return contentPane;///
