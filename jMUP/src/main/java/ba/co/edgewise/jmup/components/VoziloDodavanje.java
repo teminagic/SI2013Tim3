@@ -1,5 +1,5 @@
 package ba.co.edgewise.jmup.components;
-//
+//alck
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
