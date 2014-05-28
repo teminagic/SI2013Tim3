@@ -5,11 +5,11 @@ public enum VrstaGoriva {
 	BENZIN("Benzin"), 
 	BENZIN_LPG("Benzin/LPG"), 
 	BENZIN_CNG("Benzin/CNG"), 
-	BENZIN_ELEKTRICNI("Benzin/elektrièni"), 
+	BENZIN_ELEKTRICNI("Benzin/elektri\u010Dni"), 
 	DIZEL("Dizel"), 
 	DIZEL_CNG("Dizel/CNG"),
-	DIZEL_ELEKTRICNI("Dizel/elektrièni"), 
-	ELEKTRICNI_POGON("Elektrièni pogon"), 
+	DIZEL_ELEKTRICNI("Dizel/elektri\u010Dni"), 
+	ELEKTRICNI_POGON("Elektri\u010Dni pogon"), 
 	BIODIZEL("Biodizel"), 
 	ETANOL("Etanol"), 
 	METANOL("Metanol"), 
@@ -37,15 +37,15 @@ public enum VrstaGoriva {
 				return VrstaGoriva.BENZIN_LPG;
 			case "Benzin/CNG":
 				return VrstaGoriva.BENZIN_CNG;
-			case "Benzin/elektrièni":
+			case "Benzin/elektri\u010Dni":
 				return VrstaGoriva.BENZIN_ELEKTRICNI;
 			case "Dizel":
 				return VrstaGoriva.DIZEL;
 			case "Dizel/CNG":
 				return VrstaGoriva.DIZEL_CNG;
-			case "Dizel/elektrièni":
+			case "Dizel/elektri\u010Dni":
 				return VrstaGoriva.DIZEL_ELEKTRICNI;
-			case "Elektrièni pogon":
+			case "Elektri\u010Dni pogon":
 				return VrstaGoriva.ELEKTRICNI_POGON;
 			case "Biodizel":
 				return VrstaGoriva.BIODIZEL;
