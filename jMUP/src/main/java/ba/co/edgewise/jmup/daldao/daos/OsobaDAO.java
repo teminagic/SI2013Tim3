@@ -5,11 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
+import ba.co.edgewise.jmup.enums.EkoKarakteristike;
+import ba.co.edgewise.jmup.enums.VrstaVozila;
+import ba.co.edgewise.jmup.klase.Motor;
 import ba.co.edgewise.jmup.klase.Osoba;
+import ba.co.edgewise.jmup.klase.Vozilo;
 
 public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 
@@ -26,7 +31,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 		Connection connection = manager.getConnection();
 
 		try {
-			String sql = "INSERT INTO Osoba (IDOsobe, JMB_ID, Prezime, Ime, Prebivalište, PravnoLice)"
+			String sql = "INSERT INTO Osoba (IDOsobe, JMB_ID, Prezime, Ime, Prebivaliste, PravnoLice)"
 					+ " VALUES (null, ?, ?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -70,7 +75,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				result.setJmbg_Id(qResult.getString("JMB_ID"));
 				result.setIme(qResult.getString("Prezime"));
 				result.setIme(qResult.getString("Ime"));
-				result.setPrebivaliste(qResult.getString("Prebivalište"));
+				result.setPrebivaliste(qResult.getString("Prebivaliste"));
 				result.setPravnoLice(qResult.getBoolean("PravnoLice"));
 			}
 		} catch (SQLException e) {
@@ -90,7 +95,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Poèetak pripreme upita
+		// Poï¿½etak pripreme upita
 		ResultSet qResult = null;
 
 		try {
@@ -105,7 +110,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				osoba.setJmbg_Id(qResult.getString("JMB_ID"));
 				osoba.setIme(qResult.getString("Prezime"));
 				osoba.setIme(qResult.getString("Ime"));
-				osoba.setPrebivaliste(qResult.getString("Prebivalište"));
+				osoba.setPrebivaliste(qResult.getString("Prebivaliste"));
 				if (qResult.getInt("PravnoLice") == 1)
 					osoba.setPravnoLice(true);
 				else
@@ -135,7 +140,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("UPDATE Osoba SET Prezime = ?, Ime= ?, Prebivalište= ?, PravnoLice= ?, JMB_ID = ? "
+					.prepareStatement("UPDATE Osoba SET Prezime = ?, Ime= ?, Prebivaliste= ?, PravnoLice= ?, JMB_ID = ? "
 							+ " WHERE IDOsobe = ? ");
 
 			statement.setString(1, prezime);
@@ -182,4 +187,9 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 
 		return success;
 	}
+	/*public static void main(String[] args) {
+		Osoba o = new Osoba(1,"b","b","b","b",true);
+		OsobaDAO oDao = new OsobaDAO();
+		oDao.create(o);
+	}*/
 }

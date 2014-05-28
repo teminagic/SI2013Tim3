@@ -39,6 +39,7 @@ public class VozacDodavanje extends JPanel {
 	private JRadioButton fizicko;
 	private JButton btnPonisti;
 
+
 	public VozacDodavanje() {
 		// methods for setting layout
 		setLayout();
@@ -229,6 +230,8 @@ public class VozacDodavanje extends JPanel {
 
 	}
 
+	
+
 	public void setComponents() {
 		tipLica = new ButtonGroup();
 
@@ -271,5 +274,48 @@ public class VozacDodavanje extends JPanel {
 
 	public JButton getBtnPrihvati() {
 		return btnPrihvati;
+	}
+
+	public JButton getBtnPonisti() {
+		return btnPonisti;
+	}
+	public JTextField getTfIme() {
+		return tfIme;
+	}
+
+	public JTextField getTfPrezime() {
+		return tfPrezime;
+	}
+
+	public JTextField getTfAdresa() {
+		return tfAdresa;
+	}
+
+	public JTextField getTfMjesto() {
+		return tfMjesto;
+	}
+
+	public JTextField getTfOpcina() {
+		return tfOpcina;
+	}
+
+	public ButtonGroup getTipLica() {
+		return tipLica;
+	}
+
+	public JTextField getTfJMBG() {
+		return tfJMBG;
+	}
+
+	public JTextField getTfIdBroj() {
+		return tfIdBroj;
+	}
+
+	public JRadioButton getPravno() {
+		return pravno;
+	}
+
+	public JRadioButton getFizicko() {
+		return fizicko;
 	}
 }
