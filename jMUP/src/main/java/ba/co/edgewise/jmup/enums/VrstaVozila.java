@@ -2,17 +2,17 @@ package ba.co.edgewise.jmup.enums;
 
 public enum VrstaVozila {
 
-	Putnicki_automobil("Putnički automobil"), 
-	Moped("Moped"), 
-	Motocikl("Motocikl"), 
-	Motorni_tricikl("Motorni tricikl"), 
-	Cetverocikl("Četverocikl"), 
-	Autobus("Autobus"), 
-	Teretno_vozilo("Teretno vozilo"), 
-	Prikljucno_vozilo("Priključno vozilo"), 
-	Traktor("Traktor"), 
-	Traktor_sa_gusjenicama("Traktor sa gusjenicama"), 
-	Radna_masina("Radna mašina");
+	PUTNICKI_AUTOMOBIL("Putnički automobil"), 
+	MOPED("Moped"), 
+	MOTOCIKL("Motocikl"), 
+	MOTORNI_TRICIKL("Motorni tricikl"), 
+	CETVEROCIKL("Četverocikl"), 
+	AUTOBUS("Autobus"), 
+	TERETNO_VOZILO("Teretno vozilo"), 
+	PRIKLJUČNO_VOZILO("Priključno vozilo"), 
+	TRAKTOR("Traktor"), 
+	TRAKTOR_SA_GUSJENICAMA("Traktor sa gusjenicama"), 
+	RADNA_MAŠINA("Radna mašina");
 	
 	private final String vrsta;
 	
@@ -28,27 +28,27 @@ public enum VrstaVozila {
 	{
 		switch (tip) {
 			case "Putnički automobil":
-				return VrstaVozila.Putnicki_automobil;
+				return VrstaVozila.PUTNICKI_AUTOMOBIL;
 			case "Moped":
-				return VrstaVozila.Moped;
+				return VrstaVozila.MOPED;
 			case "Motorni tricikl":
-				return VrstaVozila.Motorni_tricikl;
+				return VrstaVozila.MOTORNI_TRICIKL;
 			case "Motocikl":
-				return VrstaVozila.Motocikl;
+				return VrstaVozila.MOTOCIKL;
 			case "Četverocikl":
-				return VrstaVozila.Cetverocikl;
+				return VrstaVozila.CETVEROCIKL;
 			case "Autobus":
-				return VrstaVozila.Autobus;
+				return VrstaVozila.AUTOBUS;
 			case "Teretno vozilo":
-				return VrstaVozila.Teretno_vozilo;
+				return VrstaVozila.TERETNO_VOZILO;
 			case "Priključno vozilo":
-				return VrstaVozila.Prikljucno_vozilo;
+				return VrstaVozila.PRIKLJUČNO_VOZILO;
 			case "Traktor":
-				return VrstaVozila.Traktor;
+				return VrstaVozila.TRAKTOR;
 			case "Traktor sa gusjenicama":
-				return VrstaVozila.Traktor_sa_gusjenicama;
+				return VrstaVozila.TRAKTOR_SA_GUSJENICAMA;
 			case "Radna mašina":
-				return VrstaVozila.Radna_masina;
+				return VrstaVozila.RADNA_MAŠINA;
 			default:
 				return null;
 		}

@@ -2,11 +2,11 @@ package ba.co.edgewise.jmup.enums;
 
 
 public enum Boja {
-	CRNA("crna"),
-	CRVENA("crvena"),
+	CRNA("Crna"),
+	CRVENA("Crvena"),
 	ZUTA("Žuta"),
-	PLAVA("plava"),
-	ZELENA("zelena");
+	PLAVA("Plava"),
+	ZELENA("Zelena");
 	
 	private String _naziv;
 	
@@ -23,15 +23,15 @@ public enum Boja {
 	public static Boja getBoja(String boja)
 	{
 		switch (boja) {
-		case "crna":
+		case "Crna":
 			return Boja.CRNA;
-		case "crvena":
+		case "Crvena":
 			return Boja.CRVENA;
 		case "Žuta":
 			return Boja.ZUTA;
-		case "plava":
+		case "Plava":
 			return Boja.PLAVA;
-		case "zelena":
+		case "Zelena":
 			return Boja.ZELENA;
 		default:
 			return null;

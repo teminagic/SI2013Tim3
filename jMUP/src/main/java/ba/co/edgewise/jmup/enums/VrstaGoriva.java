@@ -2,18 +2,18 @@ package ba.co.edgewise.jmup.enums;
 
 public enum VrstaGoriva {
 	
-	Benzin("Benzin"), 
-	Benzin_LPG("Benzin/LPG"), 
-	Benzin_CNG("Benzin/CNG"), 
-	Benzin_elektricni("Benzin/elektriËni"), 
-	Dizel("Dizel"), 
-	Dizel_CNG("Dizel/CNG"),
-	Dizel_elektricni("Dizel/elektriËni"), 
-	Elektricni_pogon("ElektriËni pogon"), 
-	Biodizel("Biodizel"), 
-	Etanol("Etanol"), 
-	Metanol("Metanol"), 
-	Hidrogen("Hidrogen(vodonik)"), 
+	BENZIN("Benzin"), 
+	BENZIN_LPG("Benzin/LPG"), 
+	BENZIN_CNG("Benzin/CNG"), 
+	BENZIN_ELEKTRICNI("Benzin/elektriƒçni"), 
+	DIZEL("Dizel"), 
+	DIZEL_CNG("Dizel/CNG"),
+	DIZEL_ELEKTRICNI("Dizel/elektriƒçni"), 
+	ELEKTRIƒåNI_POGON("Elektriƒçni pogon"), 
+	BIODIZEL("Biodizel"), 
+	ETANOL("Etanol"), 
+	METANOL("Metanol"), 
+	HIDROGEN("Hidrogen(vodonik)"), 
 	LPG("LPG"), 
 	CNG("CNG");
 
@@ -32,29 +32,29 @@ public enum VrstaGoriva {
 	{
 		switch (tip) {
 			case "Benzin":
-				return VrstaGoriva.Benzin;
+				return VrstaGoriva.BENZIN;
 			case "Benzin/LPG":
-				return VrstaGoriva.Benzin_LPG;
+				return VrstaGoriva.BENZIN_LPG;
 			case "Benzin/CNG":
-				return VrstaGoriva.Benzin_CNG;
-			case "Benzin/elektriËni":
-				return VrstaGoriva.Benzin_elektricni;
+				return VrstaGoriva.BENZIN_CNG;
+			case "Benzin/elektriƒçni":
+				return VrstaGoriva.BENZIN_ELEKTRICNI;
 			case "Dizel":
-				return VrstaGoriva.Dizel;
+				return VrstaGoriva.DIZEL;
 			case "Dizel/CNG":
-				return VrstaGoriva.Dizel_CNG;
-			case "Dizel/elektriËni":
-				return VrstaGoriva.Dizel_elektricni;
-			case "ElektriËni pogon":
-				return VrstaGoriva.Elektricni_pogon;
+				return VrstaGoriva.DIZEL_CNG;
+			case "Dizel/elektriƒçni":
+				return VrstaGoriva.DIZEL_ELEKTRICNI;
+			case "Elektriƒçni pogon":
+				return VrstaGoriva.ELEKTRIƒåNI_POGON;
 			case "Biodizel":
-				return VrstaGoriva.Biodizel;
+				return VrstaGoriva.BIODIZEL;
 			case "Etanol":
-				return VrstaGoriva.Etanol;
+				return VrstaGoriva.ETANOL;
 			case "Metanol":
-				return VrstaGoriva.Metanol;
+				return VrstaGoriva.METANOL;
 			case "Hidrogen(vodonik)":
-				return VrstaGoriva.Hidrogen;
+				return VrstaGoriva.HIDROGEN;
 			case "LPG":
 				return VrstaGoriva.LPG;
 			case "CNG":
