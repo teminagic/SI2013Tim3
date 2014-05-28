@@ -2,10 +2,11 @@ package ba.co.edgewise.jmup.klase;
 
 import java.awt.image.*;
 
-import ba.co.edgewise.enums.TipUposlenika;
+import ba.co.edgewise.jmup.enums.TipUposlenika;
 
 public class Uposlenik {
 	
+	private int id;
 	private String ime;
 	private String prezime;
 	// evo kako treba raditi sa slikama:
@@ -17,8 +18,9 @@ public class Uposlenik {
 	private TipUposlenika tip;
 	
 	// Konstruktor sa parametrima
-	public Uposlenik(String ime, String prezime, BufferedImage slikaKorisnika, String korisnickoIme, String password, Boolean status, TipUposlenika tip)
+	public Uposlenik(int id, String ime, String prezime, BufferedImage slikaKorisnika, String korisnickoIme, String password, Boolean status, TipUposlenika tip)
 	{
+		this.setId(id);
 		this.setIme(ime);
 		this.setPrezime(prezime);
 		this.setSlikaKorisnika(slikaKorisnika);
@@ -28,8 +30,9 @@ public class Uposlenik {
 		this.setTip(tip);
 	}
 	// Konstruktor bez slike - Irma dodala za probu :)
-	public Uposlenik(String ime, String prezime, String korisnickoIme, String password, Boolean status, TipUposlenika tip)
+	public Uposlenik(int id, String ime, String prezime, String korisnickoIme, String password, Boolean status, TipUposlenika tip)
 	{
+		this.setId(id);
 		this.setIme(ime);
 		this.setPrezime(prezime);
 		this.setKorisnickoIme(korisnickoIme);
@@ -39,6 +42,15 @@ public class Uposlenik {
 	}
 	// Konstruktor bez parametara
 	public Uposlenik () {
+	}
+	
+	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getIme() {
 		return ime;

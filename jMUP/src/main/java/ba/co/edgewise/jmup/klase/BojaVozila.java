@@ -1,73 +1,70 @@
 package ba.co.edgewise.jmup.klase;
 
-import ba.co.edgewise.enums.Boja;
+import ba.co.edgewise.jmup.enums.Boja;
+import ba.co.edgewise.jmup.enums.NijansaBoje;
+import ba.co.edgewise.jmup.enums.VrstaBoje;
 import ba.co.edgewise.jmup.klase.Vozilo;
 
 public class BojaVozila {
 	
-	private Boja _boja;
-	private Vozilo _vozilo;
-	private String _nijansa;
-	private String _vrsta;
-	private String _tip;
+	private Boja boja;
+	private Vozilo vozilo;
+	private NijansaBoje nijansa;
+	private VrstaBoje vrsta;
+	private String tip;
 	
 	public BojaVozila() {}
 	
-	public BojaVozila(
-	Boja boja,
-	Vozilo vozilo,
-	String nijansa,
-	String vrsta,
-	String tip )
-	{
-		this._boja = boja;
-		this._vozilo = vozilo;
-		this._nijansa = nijansa;
-		this._vrsta = vrsta;
-		this._tip = tip;
+	public BojaVozila(Boja boja, Vozilo vozilo, NijansaBoje nijansa,
+			VrstaBoje vrsta, String tip) {
+		super();
+		this.boja = boja;
+		this.vozilo = vozilo;
+		this.nijansa = nijansa;
+		this.vrsta = vrsta;
+		this.tip = tip;
 	}
-	
+
 	//get & set
-	public Boja get_boja() {
-		return _boja;
+	public Boja getBoja() {
+		return boja;
 	}
 
-	public void set_boja(Boja _boja) {
-		this._boja = _boja;
+	public void setBoja(Boja boja) {
+		this.boja = boja;
 	}
 
-	public Vozilo get_vozilo() {
-		return _vozilo;
+	public Vozilo getVozilo() {
+		return vozilo;
 	}
 
-	public void set_vozilo(Vozilo _vozilo) {
-		this._vozilo = _vozilo;
+	public void setVozilo(Vozilo vozilo) {
+		this.vozilo = vozilo;
 	}
 
-	public String get_nijansa() {
-		return _nijansa;
+	public NijansaBoje getNijansa() {
+		return nijansa;
 	}
 
-	public void set_nijansa(String _nijansa) {
-		this._nijansa = _nijansa;
+	public void setNijansa(NijansaBoje nijansa) {
+		this.nijansa = nijansa;
 	}
 
-	public String get_vrsta() {
-		return _vrsta;
+	public VrstaBoje getVrsta() {
+		return vrsta;
 	}
 
-	public void set_vrsta(String _vrsta) {
-		this._vrsta = _vrsta;
+	public void setVrsta(VrstaBoje vrsta) {
+		this.vrsta = vrsta;
 	}
 
-	public String get_tip() {
-		return _tip;
+	public String getTip() {
+		return tip;
 	}
 
-	public void set_tip(String _tip) {
-		this._tip = _tip;
+	public void setTip(String tip) {
+		this.tip = tip;
 	}
-	
 	
 
 }

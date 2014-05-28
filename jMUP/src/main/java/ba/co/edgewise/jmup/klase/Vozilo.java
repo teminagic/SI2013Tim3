@@ -1,179 +1,218 @@
 package ba.co.edgewise.jmup.klase;
+
+import java.util.Date;
+
+import ba.co.edgewise.jmup.enums.EkoKarakteristike;
+import ba.co.edgewise.jmup.enums.VrstaVozila;
+
+
 public class Vozilo {
 
 	// dodati privatne atribute za vozilo
-	String _marka; 
-	String _tip;
-	String _model;
-	String _brojSasije;
-	String _oblikKaroserije;
-	String _godinaProizvodnje;
-	Integer _motor;
-	Double _odnosSnageIMase;
-	Integer _brojMjestaZaSjedenje;
-	Integer _brojMjestaZaStajanje;
-	Integer _brojMjestaZaLezanje;
-	String _ekoKarakteristike;
-	Integer _katalizator;
+	Integer id;
+	VrstaVozila vrsta;
+	String marka; 
+	String tip;
+	String model;
+	String brojSasije;
+	String oblikKaroserije;
+	int godinaProizvodnje;
+	int maxTehnickaDozvoljenaMasa;
+	int MasaVozila;
+	int DopustenaNosivost;
+	Motor motor;
+	Double odnosSnageIMase;
+	Integer brojMjestaZaSjedenje;
+	Integer brojMjestaZaStajanje;
+	Integer brojMjestaZaLezanje;
+	EkoKarakteristike ekoKarakteristika;
+	Boolean katalizator;
+	Date datumPregleda;
 	
+	public Vozilo(Integer id, VrstaVozila vrsta, String marka, String tip,
+			String model, String brojSasije, String oblikKaroserije,
+			int godinaProizvodnje, int maxTehnickaDozvoljenaMasa,
+			int masaVozila, int dopustenaNosivost, Motor motor,
+			Double odnosSnageIMase, Integer brojMjestaZaSjedenje,
+			Integer brojMjestaZaStajanje, Integer brojMjestaZaLezanje,
+			EkoKarakteristike ekoKarakteristika, Boolean katalizator,
+			Date datumPregleda) {
+		super();
+		this.id = id;
+		this.vrsta = vrsta;
+		this.marka = marka;
+		this.tip = tip;
+		this.model = model;
+		this.brojSasije = brojSasije;
+		this.oblikKaroserije = oblikKaroserije;
+		this.godinaProizvodnje = godinaProizvodnje;
+		this.maxTehnickaDozvoljenaMasa = maxTehnickaDozvoljenaMasa;
+		MasaVozila = masaVozila;
+		DopustenaNosivost = dopustenaNosivost;
+		this.motor = motor;
+		this.odnosSnageIMase = odnosSnageIMase;
+		this.brojMjestaZaSjedenje = brojMjestaZaSjedenje;
+		this.brojMjestaZaStajanje = brojMjestaZaStajanje;
+		this.brojMjestaZaLezanje = brojMjestaZaLezanje;
+		this.ekoKarakteristika = ekoKarakteristika;
+		this.katalizator = katalizator;
+		this.datumPregleda = datumPregleda;
+	}
+
 	public Vozilo() {}
-	public Vozilo(
-					String marka,
-					String tip,
-					String model,
-					String brojSasije,
-					String oblikKaroserije,
-					String godinaProizvodnje,
-					Integer motor,
-					Double odnosSnageIMase,
-					Integer brojMjestaZaSjedenje,
-					Integer brojMjestaZaStajanje,
-					Integer brojMjestaZaLezanje,
-					String ekoKarakteristike,
-					Integer katalizator
-			) {
-		// TODO Auto-generated constructor stub
-		this._marka = marka;
-		this._brojMjestaZaSjedenje = brojMjestaZaSjedenje;
-		this._brojMjestaZaStajanje = brojMjestaZaStajanje;
-		this._brojMjestaZaLezanje = brojMjestaZaLezanje;
-		this._brojSasije = brojSasije;
-		this._ekoKarakteristike = ekoKarakteristike;
-		this._godinaProizvodnje = godinaProizvodnje;
-		this._katalizator = katalizator;
-		this._marka = marka;
-		this._model = model;
-		this._motor = motor;
-		this._oblikKaroserije = oblikKaroserije;
-		this._odnosSnageIMase = odnosSnageIMase;
-		this._tip = tip;
+
+	public Integer getId() {
+		return id;
 	}
 
-
-	public String get_marka() {
-		return _marka;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-
-	public void set_marka(String _marka) {
-		this._marka = _marka;
+	public VrstaVozila getVrsta() {
+		return vrsta;
 	}
 
-
-	public String get_tip() {
-		return _tip;
+	public void setVrsta(VrstaVozila vrsta) {
+		this.vrsta = vrsta;
 	}
 
-
-	public void set_tip(String _tip) {
-		this._tip = _tip;
+	public String getMarka() {
+		return marka;
 	}
 
-
-	public String get_model() {
-		return _model;
+	public void setMarka(String marka) {
+		this.marka = marka;
 	}
 
-
-	public void set_model(String _model) {
-		this._model = _model;
+	public String getTip() {
+		return tip;
 	}
 
-
-	public String get_brojSasije() {
-		return _brojSasije;
+	public void setTip(String tip) {
+		this.tip = tip;
 	}
 
-
-	public void set_brojSasije(String _brojSasije) {
-		this._brojSasije = _brojSasije;
+	public String getModel() {
+		return model;
 	}
 
-
-	public String get_oblikKaroserije() {
-		return _oblikKaroserije;
+	public void setModel(String model) {
+		this.model = model;
 	}
 
-
-	public void set_oblikKaroserije(String _oblikKaroserije) {
-		this._oblikKaroserije = _oblikKaroserije;
+	public String getBrojSasije() {
+		return brojSasije;
 	}
 
-
-	public String get_godinaProizvodnje() {
-		return _godinaProizvodnje;
+	public void setBrojSasije(String brojSasije) {
+		this.brojSasije = brojSasije;
 	}
 
-
-	public void set_godinaProizvodnje(String _godinaProizvodnje) {
-		this._godinaProizvodnje = _godinaProizvodnje;
+	public String getOblikKaroserije() {
+		return oblikKaroserije;
 	}
 
-
-	public Integer get_motor() {
-		return _motor;
+	public void setOblikKaroserije(String oblikKaroserije) {
+		this.oblikKaroserije = oblikKaroserije;
 	}
 
-
-	public void set_motor(Integer _motor) {
-		this._motor = _motor;
+	public int getGodinaProizvodnje() {
+		return godinaProizvodnje;
 	}
 
-
-	public Double get_odnosSnageIMase() {
-		return _odnosSnageIMase;
+	public void setGodinaProizvodnje(int godinaProizvodnje) {
+		this.godinaProizvodnje = godinaProizvodnje;
 	}
 
-
-	public void set_odnosSnageIMase(Double _odnosSnageIMase) {
-		this._odnosSnageIMase = _odnosSnageIMase;
+	public int getMaxTehnickaDozvoljenaMasa() {
+		return maxTehnickaDozvoljenaMasa;
 	}
 
-
-	public Integer get_brojMjestaZaSjedenje() {
-		return _brojMjestaZaSjedenje;
+	public void setMaxTehnickaDozvoljenaMasa(int maxTehničkaDozvoljenaMasa) {
+		this.maxTehnickaDozvoljenaMasa = maxTehničkaDozvoljenaMasa;
 	}
 
-
-	public void set_brojMjestaZaSjedenje(Integer _brojMjestaZaSjedenje) {
-		this._brojMjestaZaSjedenje = _brojMjestaZaSjedenje;
+	public int getMasaVozila() {
+		return MasaVozila;
 	}
 
-
-	public Integer get_brojMjestaZaStajanje() {
-		return _brojMjestaZaStajanje;
+	public void setMasaVozila(int masaVozila) {
+		MasaVozila = masaVozila;
 	}
 
-
-	public void set_brojMjestaZaStajanje(Integer _brojMjestaZaStajanje) {
-		this._brojMjestaZaStajanje = _brojMjestaZaStajanje;
+	public int getDopustenaNosivost() {
+		return DopustenaNosivost;
 	}
 
-
-	public String get_ekoKarakteristike() {
-		return _ekoKarakteristike;
+	public void setDopustenaNosivost(int dopuštenaNosivost) {
+		DopustenaNosivost = dopuštenaNosivost;
 	}
 
-
-	public void set_ekoKarakteristike(String _ekoKarakteristike) {
-		this._ekoKarakteristike = _ekoKarakteristike;
+	public Motor getMotor() {
+		return motor;
 	}
 
-
-	public Integer get_katalizator() {
-		return _katalizator;
+	public void setMotor(Motor motor) {
+		this.motor = motor;
 	}
 
+	public Double getOdnosSnageIMase() {
+		return odnosSnageIMase;
+	}
 
-	public void set_katalizator(Integer _katalizator) {
-		this._katalizator = _katalizator;
+	public void setOdnosSnageIMase(Double odnosSnageIMase) {
+		this.odnosSnageIMase = odnosSnageIMase;
 	}
-	public Integer get_brojMjestaZaLezanje() {
-		return _brojMjestaZaLezanje;
+
+	public Integer getBrojMjestaZaSjedenje() {
+		return brojMjestaZaSjedenje;
 	}
-	public void set_brojMjestaZaLezanje(Integer _brojMjestaZaLezanje) {
-		this._brojMjestaZaLezanje = _brojMjestaZaLezanje;
+
+	public void setBrojMjestaZaSjedenje(Integer brojMjestaZaSjedenje) {
+		this.brojMjestaZaSjedenje = brojMjestaZaSjedenje;
 	}
+
+	public Integer getBrojMjestaZaStajanje() {
+		return brojMjestaZaStajanje;
+	}
+
+	public void setBrojMjestaZaStajanje(Integer brojMjestaZaStajanje) {
+		this.brojMjestaZaStajanje = brojMjestaZaStajanje;
+	}
+
+	public Integer getBrojMjestaZaLezanje() {
+		return brojMjestaZaLezanje;
+	}
+
+	public void setBrojMjestaZaLezanje(Integer brojMjestaZaLezanje) {
+		this.brojMjestaZaLezanje = brojMjestaZaLezanje;
+	}
+
+	public EkoKarakteristike getEkoKarakteristika() {
+		return ekoKarakteristika;
+	}
+
+	public void setEkoKarakteristika(EkoKarakteristike ekoKarakteristika) {
+		this.ekoKarakteristika = ekoKarakteristika;
+	}
+
+	public Boolean getKatalizator() {
+		return katalizator;
+	}
+
+	public void setKatalizator(Boolean katalizator) {
+		this.katalizator = katalizator;
+	}
+
+	public Date getDatumPregleda() {
+		return datumPregleda;
+	}
+
+	public void setDatumPregleda(Date datumPregleda) {
+		this.datumPregleda = datumPregleda;
+	}
+	
 }
 
 	

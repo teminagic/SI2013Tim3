@@ -1,13 +1,13 @@
-package ba.co.edgewise.enums;
+package ba.co.edgewise.jmup.enums;
 
 public enum EkoKarakteristike {
 	
-	Konvencionalno("Konvencionalno"), 
-	Euro_1("Euro 1"), 
-	Euro_2("Euro 2"), 
-	Euro_3("Euro 3"), 
-	Euro_4("Euro 4"), 
-	Euro_5("Euro 5");
+	KONVENCIONALNO("Konvencionalno"), 
+	EURO1("Euro 1"), 
+	EURO2("Euro 2"), 
+	EURO3("Euro 3"), 
+	EURO4("Euro 4"), 
+	EURO5("Euro 5");
 
 	private final String vrsta;
 	
@@ -24,17 +24,17 @@ public enum EkoKarakteristike {
 	{
 		switch (tip) {
 			case "Konvencionalno":
-				return EkoKarakteristike.Konvencionalno;
+				return EkoKarakteristike.KONVENCIONALNO;
 			case "Euro 1":
-				return EkoKarakteristike.Euro_1;
+				return EkoKarakteristike.EURO1;
 			case "Euro 2":
-				return EkoKarakteristike.Euro_2;
+				return EkoKarakteristike.EURO2;
 			case "Euro 3":
-				return EkoKarakteristike.Euro_3;
+				return EkoKarakteristike.EURO3;
 			case "Euro 4":
-				return EkoKarakteristike.Euro_4;
+				return EkoKarakteristike.EURO4;
 			case "Euro 5":
-				return EkoKarakteristike.Euro_5;
+				return EkoKarakteristike.EURO5;
 			default:
 				return null;
 		}

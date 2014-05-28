@@ -14,7 +14,7 @@ import org.apache.commons.pool.impl.GenericObjectPool;;
 
 public class ConnectionManager {
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql339553";
+	private static final String URL = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql339553?useUnicode=true&characterEncoding=utf-8";
 	private static final String USERNAME = "sql339553";
 	private static final String PASSWORD = "mJ2!wY8%";
 

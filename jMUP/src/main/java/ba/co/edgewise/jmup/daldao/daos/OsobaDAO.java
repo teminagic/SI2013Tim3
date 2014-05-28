@@ -5,22 +5,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.EmptyStackException;
 import java.util.List;
 
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
 import ba.co.edgewise.jmup.klase.Osoba;
 
-public class OsobaDAO implements IGenericDAO<Osoba, String> {
+public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 
 	public boolean create(Osoba o) {
 		boolean success = false;
-		String jmbg_id = o.get_jmbg_id();
-		String prezime = o.get_prezime();
-		String ime = o.get_ime();
-		String prebivaliste = o.get_prebivaliste();
-		boolean pravnoLice = o.is_pravnoLice();
+		String jmbg_id = o.getJmbg_Id();
+		String prezime = o.getIme();
+		String ime = o.getIme();
+		String prebivaliste = o.getPrebivaliste();
+		boolean pravnoLice = o.isPravnoLice();
 
 		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
@@ -35,12 +34,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, String> {
 			statement.setString(2, prezime);
 			statement.setString(3, ime);
 			statement.setString(4, prebivaliste);
-			if (pravnoLice == true)
-				statement.setInt(5, 1); // 1 oznaka za pravno lice u bazi
-										// podataka
-			else
-				statement.setInt(5, 0); // 0 oznaka za fizicko lice u bazi
-										// podataka
+			statement.setBoolean(5, pravnoLice);
 
 			statement.executeUpdate();
 			success = true;
@@ -54,7 +48,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, String> {
 		return success;
 	}
 
-	public Osoba get(String id) {
+	public Osoba get(Integer id) {
 		Osoba result = new Osoba();
 
 		ConnectionManager manager = new ConnectionManager();
@@ -64,26 +58,21 @@ public class OsobaDAO implements IGenericDAO<Osoba, String> {
 		try {
 			PreparedStatement statement = connection
 					.prepareStatement("SELECT * " + "FROM Osoba "
-							+ "WHERE JMB_ID = ?");
-			statement.setString(1, id);
+							+ "WHERE IDOsobe = ?");
+			statement.setInt(1, id);
 
 			// Izvrsenje upita
 			qResult = statement.executeQuery();
 
 			// Dobavljanje rezultata
-			if (qResult.next())
-				result.set_jmbg_id(qResult.getString("JMB_ID"));
-			result.set_prezime(qResult.getString("Prezime"));
-			result.set_ime(qResult.getString("Ime"));
-			result.set_prebivaliste(qResult.getString("Prebivalište"));
-			if (qResult.getInt("PravnoLice") == 1)
-				result.set_pravnoLice(true);
-			else
-				result.set_pravnoLice(false);
-
-			if (result == null)
-				throw new EmptyStackException();
-
+			if (qResult.next()) {
+				result.setId(qResult.getInt("IDOsobe"));
+				result.setJmbg_Id(qResult.getString("JMB_ID"));
+				result.setIme(qResult.getString("Prezime"));
+				result.setIme(qResult.getString("Ime"));
+				result.setPrebivaliste(qResult.getString("Prebivalište"));
+				result.setPravnoLice(qResult.getBoolean("PravnoLice"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -96,7 +85,6 @@ public class OsobaDAO implements IGenericDAO<Osoba, String> {
 
 	public List<Osoba> getAll() {
 		List<Osoba> result = new ArrayList<Osoba>();
-		Osoba osoba = new Osoba();
 
 		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
@@ -112,20 +100,18 @@ public class OsobaDAO implements IGenericDAO<Osoba, String> {
 			qResult = statement.executeQuery();
 			// Dobavljanje rezultata
 			while (qResult.next()) {
-				osoba.set_jmbg_id(qResult.getString("JMB_ID"));
-				osoba.set_prezime(qResult.getString("Prezime"));
-				osoba.set_ime(qResult.getString("Ime"));
-				osoba.set_prebivaliste(qResult.getString("Prebivalište"));
+				Osoba osoba = new Osoba();
+				osoba.setId(qResult.getInt("IDOsobe"));
+				osoba.setJmbg_Id(qResult.getString("JMB_ID"));
+				osoba.setIme(qResult.getString("Prezime"));
+				osoba.setIme(qResult.getString("Ime"));
+				osoba.setPrebivaliste(qResult.getString("Prebivalište"));
 				if (qResult.getInt("PravnoLice") == 1)
-					osoba.set_pravnoLice(true);
+					osoba.setPravnoLice(true);
 				else
-					osoba.set_pravnoLice(false);
+					osoba.setPravnoLice(false);
 				result.add(osoba);
 			}
-
-			if (result.size() == 0)
-				throw new EmptyStackException();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -135,13 +121,13 @@ public class OsobaDAO implements IGenericDAO<Osoba, String> {
 		return result;
 	}
 
-	public boolean update(Osoba o) {
+	public boolean update(Integer id, Osoba o) {
 		boolean success = false;
-		String jmbg_id = o.get_jmbg_id();
-		String prezime = o.get_prezime();
-		String ime = o.get_ime();
-		String prebivaliste = o.get_prebivaliste();
-		boolean pravnoLice = o.is_pravnoLice();
+		String jmbg_id = o.getJmbg_Id();
+		String prezime = o.getIme();
+		String ime = o.getIme();
+		String prebivaliste = o.getPrebivaliste();
+		boolean pravnoLice = o.isPravnoLice();
 
 		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
@@ -149,17 +135,15 @@ public class OsobaDAO implements IGenericDAO<Osoba, String> {
 
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("UPDATE Osoba SET Prezime = ?, Ime= ?, Prebivalište= ?, PravnoLice= ? "
-							+ " WHERE JMB_ID = ? ");
+					.prepareStatement("UPDATE Osoba SET Prezime = ?, Ime= ?, Prebivalište= ?, PravnoLice= ?, JMB_ID = ? "
+							+ " WHERE IDOsobe = ? ");
 
 			statement.setString(1, prezime);
 			statement.setString(2, ime);
 			statement.setString(3, prebivaliste);
-			if (pravnoLice == true)
-				statement.setInt(4, 1);
-			else
-				statement.setInt(4, 0);
+			statement.setBoolean(4, pravnoLice);
 			statement.setString(5, jmbg_id);
+			statement.setInt(6, id);
 
 			statement.executeUpdate();
 
@@ -174,7 +158,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, String> {
 		return success;
 	}
 
-	public boolean delete(String id) {
+	public boolean delete(Integer id) {
 		boolean success = false;
 
 		ConnectionManager manager = new ConnectionManager();
@@ -182,9 +166,9 @@ public class OsobaDAO implements IGenericDAO<Osoba, String> {
 
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("DELETE FROM Osoba WHERE JMB_ID = ?;");
+					.prepareStatement("DELETE FROM Osoba WHERE IDOsobe = ?;");
 
-			statement.setString(1, id);
+			statement.setInt(1, id);
 
 			statement.executeUpdate();
 
