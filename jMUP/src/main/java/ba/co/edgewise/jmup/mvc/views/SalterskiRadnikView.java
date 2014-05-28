@@ -13,6 +13,7 @@ import ba.co.edgewise.jmup.components.MeniSalter;
 import ba.co.edgewise.jmup.components.MeniSalterOpcije;
 import ba.co.edgewise.jmup.components.NaslovnaSalterski;
 import ba.co.edgewise.jmup.components.OpcijaSadrzaj;
+import ba.co.edgewise.jmup.components.VozacDodavanje;
 
 public class SalterskiRadnikView extends JFrame {
 
@@ -21,6 +22,10 @@ public class SalterskiRadnikView extends JFrame {
 	private NaslovnaSalterski strana1; // bit ce ih vise zavisno od buttona
 	private OpcijaSadrzaj sadrzaj;
 	
+	GridBagConstraints gbc_naslov;
+	GridBagConstraints gbc_meni;
+	
+	private VozacDodavanje strana2VozacDodavanje;
 	/**
 	 * Launch the application.
 	 */
@@ -31,7 +36,7 @@ public class SalterskiRadnikView extends JFrame {
 	 */
 	public SalterskiRadnikView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 642, 426);
+		setBounds(100, 100, 809, 590);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -48,13 +53,13 @@ public class SalterskiRadnikView extends JFrame {
 		meni =  new MeniSalter();
 		GridBagLayout gridBagLayout_1 = (GridBagLayout) meni.getLayout();
 		gridBagLayout_1.columnWidths = new int[]{176};
-		GridBagConstraints gbc_meni = new GridBagConstraints();
+		gbc_meni = new GridBagConstraints();
 		gbc_meni.anchor = GridBagConstraints.NORTH;
 		gbc_meni.fill = GridBagConstraints.HORIZONTAL;
 		contentPane.add(meni, gbc_meni);
 		
 		sadrzaj = new OpcijaSadrzaj("Početna");
-		GridBagConstraints gbc_naslov = new GridBagConstraints();
+		gbc_naslov = new GridBagConstraints();
 		gbc_naslov.anchor = GridBagConstraints.NORTH;
 		gbc_naslov.fill = GridBagConstraints.HORIZONTAL;
 		
@@ -64,9 +69,21 @@ public class SalterskiRadnikView extends JFrame {
 		
 		contentPane.add(sadrzaj, gbc_naslov);
 		
+		// na pocetku je na null
+		strana2VozacDodavanje = null;
 		
 	}
-	
+	public void prikaziVozacDodavanje()
+	{
+		contentPane.remove(sadrzaj);
+		
+		sadrzaj = new OpcijaSadrzaj("Unos vozača");
+		strana2VozacDodavanje = new VozacDodavanje();
+		//
+		sadrzaj.getPanelSadrzaj().add(strana2VozacDodavanje, "Unos podataka o vozaču");
+		
+		contentPane.add(sadrzaj, gbc_naslov);
+	}
 	public JPanel getContentPane() {
 		return contentPane;
 	}
@@ -85,5 +102,15 @@ public class SalterskiRadnikView extends JFrame {
 	public OpcijaSadrzaj getSadrzaj() {
 		return sadrzaj;
 	}
-
+	
+	public VozacDodavanje getStrana2VozacDodavanje() {
+		return strana2VozacDodavanje;
+	}
+	
+	public GridBagConstraints getGbc_naslov() {
+		return gbc_naslov;
+	}
+	public GridBagConstraints getGbc_meni() {
+		return gbc_meni;
+	}
 }

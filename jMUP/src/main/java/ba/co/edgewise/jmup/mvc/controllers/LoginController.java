@@ -91,7 +91,7 @@ public class LoginController {
 					try {
 						SalterskiRadnikView noviView = new SalterskiRadnikView();
 						SalterskiRadnikModel noviModel = new SalterskiRadnikModel();
-						SalterskiRadnikController noviController = new SalterskiRadnikController();
+						SalterskiRadnikController noviController = new SalterskiRadnikController(noviView,noviModel);
 						noviController.control();
 					} catch (Exception e) {
 						e.printStackTrace();
