@@ -11,8 +11,10 @@ import javax.swing.JOptionPane;
 
 import ba.co.edgewise.jmup.mvc.models.AdminModel;
 import ba.co.edgewise.jmup.mvc.models.LoginModel;
+import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModel;
 import ba.co.edgewise.jmup.mvc.views.Administrator;
 import ba.co.edgewise.jmup.mvc.views.Login;
+import ba.co.edgewise.jmup.mvc.views.SalterskiRadnikView;
 
 public class LoginController {
 	
@@ -84,6 +86,19 @@ public class LoginController {
 		case MENADZER:
 			break;
 		case SALTERSKI_RADNIK:
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						SalterskiRadnikView noviView = new SalterskiRadnikView();
+						SalterskiRadnikModel noviModel = new SalterskiRadnikModel();
+						SalterskiRadnikController noviController = new SalterskiRadnikController();
+						noviController.control();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			this.view.dispose();
 			break;
 		default:
 			break;
