@@ -705,4 +705,85 @@ public class VoziloDodavanje extends JPanel {
 	public JButton getBtn_ponisti() {
 		return btn_ponisti;
 	}
+	public JComboBox getCb_vrstaVozila() {
+		return cb_vrstaVozila;
+	}
+	public JTextField getTf_tipVozila() {
+		return tf_tipVozila;
+	}
+	public JTextField getTf_modelVozila() {
+		return tf_modelVozila;
+	}
+	public JTextField getTf_markaVozila() {
+		return tf_markaVozila;
+	}
+	public JTextField getTf_godProizvodnje() {
+		return tf_godProizvodnje;
+	}
+	public JTextField getTf_regOznaka() {
+		return tf_regOznaka;
+	}
+	public JTextField getTf_odnos() {
+		return tf_odnos;
+	}
+	public JTextField getTf_sjedenje() {
+		return tf_sjedenje;
+	}
+	public JTextField getTf_stajanje() {
+		return tf_stajanje;
+	}
+	public JTextField getTf_lezanje() {
+		return tf_lezanje;
+	}
+	public JComboBox getCb_ekoKarakteristike() {
+		return cb_ekoKarakteristike;
+	}
+	public JRadioButton getRb_katalizator_da() {
+		return rb_katalizator_da;
+	}
+	public JRadioButton getRb_katalizator_ne() {
+		return rb_katalizator_ne;
+	}
+	public JTextField getTf_karoserija() {
+		return tf_karoserija;
+	}
+	public JTextField getTf_datumPregleda() {
+		return tf_datumPregleda;
+	}
+	public JTextField getTf_brojSasije() {
+		return tf_brojSasije;
+	}
+	public JTextField getTf_zapremina() {
+		return tf_zapremina;
+	}
+	public JTextField getTf_maxSnaga() {
+		return tf_maxSnaga;
+	}
+	public JComboBox getCb_gorivo() {
+		return cb_gorivo;
+	}
+	public JTextField getTf_brojMotora() {
+		return tf_brojMotora;
+	}
+	public JComboBox getCb_vrstaMotora() {
+		return cb_vrstaMotora;
+	}
+	public JTextField getTb_bojaVozila() {
+		return tb_bojaVozila;
+	}
+	public JComboBox getCb_nijansa() {
+		return cb_nijansa;
+	}
+	public JComboBox getCb_vrstaBoje() {
+		return cb_vrstaBoje;
+	}
+	public JTextField getTb_maxMasa() {
+		return tb_maxMasa;
+	}
+	public JTextField getTb_masa() {
+		return tb_masa;
+	}
+	public JTextField getTb_nosivost() {
+		return tb_nosivost;
+	}
 }

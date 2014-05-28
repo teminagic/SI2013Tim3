@@ -13,17 +13,11 @@ import java.awt.Insets;
 
 public class Login extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5494623184975602741L;
 	private JPanel contentPane;
 	private LoginNaslov naslov;
 	private LoginUnos unos;
 
-	/**
-	 * Create the frame.
-	 */
 	public Login() {
 		layoutSet();
 		panelSet();
