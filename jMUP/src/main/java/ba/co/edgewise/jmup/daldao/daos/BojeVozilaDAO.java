@@ -23,7 +23,7 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 		VrstaBoje vrsta = bv.getVrsta();
 
 		BojaDAO bDAO = new BojaDAO();
-		Integer boja = bDAO.getID(bv.getBoja().toString()); 
+		Integer boja = bDAO.getID(bv.getBoja()); 
 
 		VoziloDAO vDAO = new VoziloDAO();
 		Vozilo v = vDAO.get(bv.getVozilo().getId());
@@ -160,7 +160,7 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 		VrstaBoje vrsta = bv.getVrsta();
 		
 		BojaDAO bDAO = new BojaDAO();
-		Integer boja = bDAO.getID(bv.getBoja().toString());
+		Integer boja = bDAO.getID(bv.getBoja());
 		
 		VoziloDAO vDAO = new VoziloDAO();
 		Vozilo v = vDAO.get(bv.getVozilo().getId());

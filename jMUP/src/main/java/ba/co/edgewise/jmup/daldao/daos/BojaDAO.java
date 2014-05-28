@@ -6,13 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
-import ba.co.edgewise.jmup.daldao.interfaces.IBojaDAO;
+import ba.co.edgewise.jmup.daldao.interfaces.IGenericEnumDAO;
 import ba.co.edgewise.jmup.enums.Boja;
 
-public class BojaDAO implements IBojaDAO {
+public class BojaDAO implements IGenericEnumDAO<Boja, Integer> {
 
 	@Override
-	public Boja get(int i) {
+	public Boja get(Integer i) {
 		Boja result = null;
 
 		ConnectionManager manager = new ConnectionManager();
@@ -43,7 +43,7 @@ public class BojaDAO implements IBojaDAO {
 	}
 
 	@Override
-	public Integer getID(String boja) {
+	public Integer getID(Boja boja) {
 		Integer result = null;
 
 		ConnectionManager manager = new ConnectionManager();
@@ -54,7 +54,7 @@ public class BojaDAO implements IBojaDAO {
 			PreparedStatement statement = connection
 					.prepareStatement("SELECT * " + "FROM Boja "
 							+ "WHERE Naziv = ?");
-			statement.setString(1, boja);
+			statement.setString(1, boja.toString());
 
 			// Izvrsenje upita
 			qResult = statement.executeQuery();
