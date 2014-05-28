@@ -6,11 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import ba.co.edgewise.enums.Boja;
-import ba.co.edgewise.enums.NijansaBoje;
-import ba.co.edgewise.enums.VrstaBoje;
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
+import ba.co.edgewise.jmup.enums.Boja;
+import ba.co.edgewise.jmup.enums.NijansaBoje;
+import ba.co.edgewise.jmup.enums.VrstaBoje;
 import ba.co.edgewise.jmup.klase.BojaVozila;
 import ba.co.edgewise.jmup.klase.Vozilo;
 

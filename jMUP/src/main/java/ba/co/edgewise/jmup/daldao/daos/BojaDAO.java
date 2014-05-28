@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import ba.co.edgewise.enums.Boja;
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IBojaDAO;
+import ba.co.edgewise.jmup.enums.Boja;
 
 public class BojaDAO implements IBojaDAO {
 

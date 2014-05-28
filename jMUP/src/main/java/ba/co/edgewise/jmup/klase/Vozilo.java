@@ -2,8 +2,8 @@ package ba.co.edgewise.jmup.klase;
 
 import java.util.Date;
 
-import ba.co.edgewise.enums.EkoKarakteristike;
-import ba.co.edgewise.enums.VrstaVozila;
+import ba.co.edgewise.jmup.enums.EkoKarakteristike;
+import ba.co.edgewise.jmup.enums.VrstaVozila;
 
 
 public class Vozilo {

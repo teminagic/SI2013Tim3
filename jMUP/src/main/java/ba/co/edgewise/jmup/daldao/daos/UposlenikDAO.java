@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
 
-import ba.co.edgewise.enums.TipUposlenika;
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 
 import java.awt.image.BufferedImage;
 
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
+import ba.co.edgewise.jmup.enums.TipUposlenika;
 import ba.co.edgewise.jmup.klase.Uposlenik;
 
 public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {

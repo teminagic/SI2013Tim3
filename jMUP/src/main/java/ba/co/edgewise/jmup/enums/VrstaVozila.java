@@ -1,4 +1,4 @@
-package ba.co.edgewise.enums;
+package ba.co.edgewise.jmup.enums;
 
 public enum VrstaVozila {
 

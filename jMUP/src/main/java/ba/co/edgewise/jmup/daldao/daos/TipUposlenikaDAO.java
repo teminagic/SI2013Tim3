@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import ba.co.edgewise.enums.TipUposlenika;
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.ITipUposlenikaDAO;
+import ba.co.edgewise.jmup.enums.TipUposlenika;
 
 public class TipUposlenikaDAO implements ITipUposlenikaDAO {
 

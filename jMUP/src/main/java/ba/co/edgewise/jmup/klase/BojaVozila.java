@@ -1,8 +1,8 @@
 package ba.co.edgewise.jmup.klase;
 
-import ba.co.edgewise.enums.Boja;
-import ba.co.edgewise.enums.NijansaBoje;
-import ba.co.edgewise.enums.VrstaBoje;
+import ba.co.edgewise.jmup.enums.Boja;
+import ba.co.edgewise.jmup.enums.NijansaBoje;
+import ba.co.edgewise.jmup.enums.VrstaBoje;
 import ba.co.edgewise.jmup.klase.Vozilo;
 
 public class BojaVozila {

@@ -6,10 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import ba.co.edgewise.enums.EkoKarakteristike;
-import ba.co.edgewise.enums.VrstaVozila;
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
+import ba.co.edgewise.jmup.enums.EkoKarakteristike;
+import ba.co.edgewise.jmup.enums.VrstaVozila;
 import ba.co.edgewise.jmup.klase.Motor;
 import ba.co.edgewise.jmup.klase.Vozilo;
 

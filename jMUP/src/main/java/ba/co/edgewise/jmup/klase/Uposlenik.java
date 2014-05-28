@@ -2,7 +2,7 @@ package ba.co.edgewise.jmup.klase;
 
 import java.awt.image.*;
 
-import ba.co.edgewise.enums.TipUposlenika;
+import ba.co.edgewise.jmup.enums.TipUposlenika;
 
 public class Uposlenik {
 	
