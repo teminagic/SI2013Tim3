@@ -43,9 +43,7 @@ public class Uposlenik {
 	// Konstruktor bez parametara
 	public Uposlenik () {
 	}
-	
-	
-	
+
 	public int getId() {
 		return id;
 	}

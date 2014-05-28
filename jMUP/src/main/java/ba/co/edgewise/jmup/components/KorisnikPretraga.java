@@ -1,13 +1,13 @@
-package co.ba.edgewise.components;
+package ba.co.edgewise.jmup.components;
 //
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.table.AbstractTableModel;
 
-import co.ba.edgewise.classes.Korisnik;
-import co.ba.edgewise.enums.TipPretrageKorisnika;
-import co.ba.edgewise.pages.*;
+import ba.co.edgewise.jmup.klase.Uposlenik;
+import ba.co.edgewise.jmup.enums.TipPretrageUposlenika;
+import ba.co.edgewise.jmup.pages.*;
 
 import java.awt.CardLayout;
 import java.awt.GridBagLayout;
@@ -72,24 +72,24 @@ public class KorisnikPretraga extends JPanel {
 				"Tip raÃ„ï¿½una",
 				"Status"
 		};
-		private ArrayList<Korisnik> data;
+		private ArrayList<Uposlenik> data;
 		
 		public TableModel()
 		{
 			super();
 		}
 		
-		public TableModel(ArrayList<Korisnik> data)
+		public TableModel(ArrayList<Uposlenik> data)
 		{
 			super();
 			this.data = data;
 		}
 		
-		public ArrayList<Korisnik> getData() {
+		public ArrayList<Uposlenik> getData() {
 			return data;
 		}
 
-		public void setData(ArrayList<Korisnik> data) {
+		public void setData(ArrayList<Uposlenik> data) {
 			this.data = data;
 		}
 
@@ -141,7 +141,7 @@ public class KorisnikPretraga extends JPanel {
 		public void panelSet() {
 			
 			panel = new JPanel();
-			panel.setBorder(new TitledBorder(null, "Pretraga korisnika", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel.setBorder(new TitledBorder(null, "Pretraga Uposlenika", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			GridBagConstraints gbc_panel = new GridBagConstraints();
 			gbc_panel.gridwidth = 3;
 			gbc_panel.insets = new Insets(0, 0, 5, 5);
@@ -183,7 +183,7 @@ public class KorisnikPretraga extends JPanel {
 		
 		public void uiControlSet() {
 			
-			cbPoljePretrage = new JComboBox(TipPretrageKorisnika.values());
+			cbPoljePretrage = new JComboBox(TipPretrageUposlenika.values());
 			GridBagConstraints gbc_cbPoljePretrage = new GridBagConstraints();
 			gbc_cbPoljePretrage.fill = GridBagConstraints.HORIZONTAL;
 			gbc_cbPoljePretrage.insets = new Insets(0, 0, 5, 5);
@@ -217,7 +217,7 @@ public class KorisnikPretraga extends JPanel {
 		
 		public void buttonSet() {
 			
-			btnPronaiKorisnika = new JButton("Pronaði korisnika");
+			btnPronaiKorisnika = new JButton("Pronaï¿½i korisnika");
 			GridBagConstraints gbc_btnPronaiKorisnika = new GridBagConstraints();
 			gbc_btnPronaiKorisnika.insets = new Insets(0, 0, 5, 0);
 			gbc_btnPronaiKorisnika.gridx = 3;
@@ -248,7 +248,7 @@ public class KorisnikPretraga extends JPanel {
 			btnPronaiKorisnika.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String filter = tfPodaci.getText();
-					TipPretrageKorisnika parametar = (TipPretrageKorisnika)cbPoljePretrage.getSelectedItem();
+					TipPretrageUposlenika parametar = (TipPretrageUposlenika)cbPoljePretrage.getSelectedItem();
 					model.setData(FiltriraniKorisnici(filter, parametar));
 				}
 			});
@@ -269,7 +269,7 @@ public class KorisnikPretraga extends JPanel {
 	
 	
 	//methods
-	static private ArrayList<Korisnik> FiltriraniKorisnici(String filter, TipPretrageKorisnika parametar)
+	static private ArrayList<Korisnik> FiltriraniKorisnici(String filter, TipPretrageUposlenika parametar)
 	{
 		ArrayList<Korisnik> rezultat = new ArrayList<Korisnik>();
 		switch (parametar) {

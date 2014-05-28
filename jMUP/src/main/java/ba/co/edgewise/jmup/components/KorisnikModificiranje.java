@@ -1,11 +1,11 @@
-package co.ba.edgewise.components;
-//
+package ba.co.edgewise.jmup.components;
+//Promijeniti naziv mozda? - u UposlenikModificiranje
 import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
-import co.ba.edgewise.enums.*;
-import co.ba.edgewise.classes.*;
+import ba.co.edgewise.jmup.enums.*;
+import ba.co.edgewise.jmup.klase.*;
 
 public class KorisnikModificiranje extends JPanel {
 
@@ -24,18 +24,18 @@ public class KorisnikModificiranje extends JPanel {
 	private JTextField tfPrezime;
 	private JTextField tfSifra;
 	private JButton btnPronadji;
-	private JButton btnSpasiKorisnika;
+	private JButton btnSpasiuposlenika;
 	@SuppressWarnings("rawtypes")
 	private JComboBox cbStatusKorisnickogRacuna;
 	@SuppressWarnings("rawtypes")
 	private JComboBox cbTipKorisnickogRacuna;
-	private Korisnik _korisnik;
+	private Uposlenik _uposlenik;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public KorisnikModificiranje(Korisnik korisnik) {
+	public KorisnikModificiranje(Uposlenik uposlenik) {
 		
 		setBorder(null);
-		this._korisnik = korisnik;
+		this._uposlenik = uposlenik;
 		
 		//methods for layout initialization
 		layoutSet();
@@ -62,7 +62,7 @@ public class KorisnikModificiranje extends JPanel {
 	public void panelSet() {
 		
 		panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Podaci o korisniku", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(null, "Podaci o uposleniku", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 5, 5);
 		gbc_panel.fill = GridBagConstraints.BOTH;
@@ -103,7 +103,7 @@ public class KorisnikModificiranje extends JPanel {
 		gbc_label_2.gridy = 2;
 		panel.add(label_2, gbc_label_2);
 		
-		label_3 = new JLabel("KorisniÄ�ko ime:");
+		label_3 = new JLabel("Korisničko ime:");
 		GridBagConstraints gbc_label_3 = new GridBagConstraints();
 		gbc_label_3.anchor = GridBagConstraints.EAST;
 		gbc_label_3.insets = new Insets(0, 0, 5, 5);
@@ -111,7 +111,7 @@ public class KorisnikModificiranje extends JPanel {
 		gbc_label_3.gridy = 3;
 		panel.add(label_3, gbc_label_3);
 		
-		label_4 = new JLabel("Å ifra:");
+		label_4 = new JLabel("Šifra:");
 		GridBagConstraints gbc_label_4 = new GridBagConstraints();
 		gbc_label_4.anchor = GridBagConstraints.EAST;
 		gbc_label_4.insets = new Insets(0, 0, 5, 5);
@@ -192,7 +192,7 @@ public class KorisnikModificiranje extends JPanel {
 	
 	public void comboBoxSet() {
 		
-		cbTipKorisnickogRacuna = new JComboBox(TipKorisnika.values());
+		cbTipKorisnickogRacuna = new JComboBox(TipUposlenika.values());
 		GridBagConstraints gbc_cbTipKorisnickogRacuna = new GridBagConstraints();
 		gbc_cbTipKorisnickogRacuna.gridwidth = 2;
 		gbc_cbTipKorisnickogRacuna.insets = new Insets(0, 0, 5, 0);
@@ -201,7 +201,8 @@ public class KorisnikModificiranje extends JPanel {
 		gbc_cbTipKorisnickogRacuna.gridy = 5;
 		panel.add(cbTipKorisnickogRacuna, gbc_cbTipKorisnickogRacuna);
 		
-		cbStatusKorisnickogRacuna = new JComboBox(Status.values());
+		cbStatusKorisnickogRacuna = new JComboBox();
+		cbStatusKorisnickogRacuna.setModel(new DefaultComboBoxModel(new String[] {"Aktivan", "Neaktivan"}));
 		GridBagConstraints gbc_cbStatusKorisnickogRacuna = new GridBagConstraints();
 		gbc_cbStatusKorisnickogRacuna.gridwidth = 2;
 		gbc_cbStatusKorisnickogRacuna.fill = GridBagConstraints.HORIZONTAL;
@@ -212,7 +213,7 @@ public class KorisnikModificiranje extends JPanel {
 	
 	public void buttonSet() {
 		
-		btnPronadji = new JButton("Prona�i");
+		btnPronadji = new JButton("Prona�i");
 		GridBagConstraints gbc_btnPronadji = new GridBagConstraints();
 		gbc_btnPronadji.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnPronadji.insets = new Insets(0, 0, 5, 0);
@@ -220,24 +221,24 @@ public class KorisnikModificiranje extends JPanel {
 		gbc_btnPronadji.gridy = 2;
 		panel.add(btnPronadji, gbc_btnPronadji);
 		
-		btnSpasiKorisnika = new JButton("Modifikuj korisnika");
-		GridBagConstraints gbc_btnSpasiKorisnika = new GridBagConstraints();
-		gbc_btnSpasiKorisnika.anchor = GridBagConstraints.EAST;
-		gbc_btnSpasiKorisnika.insets = new Insets(0, 0, 5, 5);
-		gbc_btnSpasiKorisnika.gridx = 1;
-		gbc_btnSpasiKorisnika.gridy = 2;
-		add(btnSpasiKorisnika, gbc_btnSpasiKorisnika);
+		btnSpasiuposlenika = new JButton("Modifikuj uposlenika");
+		GridBagConstraints gbc_btnSpasiuposlenika = new GridBagConstraints();
+		gbc_btnSpasiuposlenika.anchor = GridBagConstraints.EAST;
+		gbc_btnSpasiuposlenika.insets = new Insets(0, 0, 5, 5);
+		gbc_btnSpasiuposlenika.gridx = 1;
+		gbc_btnSpasiuposlenika.gridy = 2;
+		add(btnSpasiuposlenika, gbc_btnSpasiuposlenika);
 	}
 	
 	// methods
-	public void PopuniKorisnika () {
+	public void Popuniuposlenika () {
 		
-		this.tfIme.setText(_korisnik.getIme());
-		this.tfPrezime.setText(_korisnik.getPrezime());
-		this.tfKorisnickoIme.setText(_korisnik.getUsername());
-		this.tfSifra.setText(_korisnik.getPassword());
-		this.cbStatusKorisnickogRacuna.setSelectedItem(_korisnik.getStatus());
-		this.cbTipKorisnickogRacuna.setSelectedItem(_korisnik.getTip());
+		this.tfIme.setText(_uposlenik.getIme());
+		this.tfPrezime.setText(_uposlenik.getPrezime());
+		this.tfKorisnickoIme.setText(_uposlenik.getKorisnickoIme());
+		this.tfSifra.setText(_uposlenik.getPassword());
+		this.cbStatusKorisnickogRacuna.setSelectedItem(_uposlenik.getStatus());
+		this.cbTipKorisnickogRacuna.setSelectedItem(_uposlenik.getTip());
 	}
 	
 	//getters & setters
@@ -245,8 +246,8 @@ public class KorisnikModificiranje extends JPanel {
 		return btnPronadji;
 	}
 
-	public JButton getBtSpasiKorisnika() {
-		return btnSpasiKorisnika;
+	public JButton getBtSpasiuposlenika() {
+		return btnSpasiuposlenika;
 	}
 
 	public JTextField getTfIme() {

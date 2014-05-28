@@ -3,8 +3,8 @@ package ba.co.edgewise.jmup.enums;
 public enum TipUposlenika {
 	
 	ADMINISTRATOR("Administrator"),
-	SALTERSKI_RADNIK("≈†alterski radnik"),
-	MENADZER("Menad≈æer");
+	SALTERSKI_RADNIK("öalterski radnik"),
+	MENADZER("Menadûer");
 	
 	private final String text;
 	

@@ -1,11 +1,9 @@
 package ba.co.edgewise.jmup.components;
-//
-import java.awt.*;
 
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
-
-import ba.co.edgewise.enums.*;
+import ba.co.edgewise.jmup.enums.*;
 
 public class KorisnikKreiranje extends JPanel {
 
@@ -16,8 +14,8 @@ public class KorisnikKreiranje extends JPanel {
 	private JLabel label_2;
 	private JLabel lblKorisnikoIme;
 	private JLabel lblifra;
-	private JLabel label_5;
-	private JLabel label_6;
+	private JLabel lblStatus;
+	private JLabel lblTip;
 	private JTextField tfIme;
 	private JTextField tfKorisnickoIme;
 	private JTextField tfSlika;
@@ -50,7 +48,7 @@ public class KorisnikKreiranje extends JPanel {
 		
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] { 0, 370, 0, 0 };
-		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0 };
+		gbl_panel.rowHeights = new int[] { 0, 0, 37, 0, 0 };
 		gbl_panel.columnWeights = new double[] { 1.0, 0.0, 1.0,
 				Double.MIN_VALUE };
 		gbl_panel.rowWeights = new double[] { 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
@@ -117,21 +115,21 @@ public class KorisnikKreiranje extends JPanel {
 		gbc_lblifra.gridy = 4;
 		panel.add(lblifra, gbc_lblifra);
 		
-		label_5 = new JLabel("Tip:");
-		GridBagConstraints gbc_label_5 = new GridBagConstraints();
-		gbc_label_5.anchor = GridBagConstraints.EAST;
-		gbc_label_5.insets = new Insets(0, 0, 0, 5);
-		gbc_label_5.gridx = 0;
-		gbc_label_5.gridy = 6;
-		panel.add(label_5, gbc_label_5);
+		lblStatus = new JLabel("Status:");
+		GridBagConstraints gbc_lblStatus = new GridBagConstraints();
+		gbc_lblStatus.anchor = GridBagConstraints.EAST;
+		gbc_lblStatus.insets = new Insets(0, 0, 0, 5);
+		gbc_lblStatus.gridx = 0;
+		gbc_lblStatus.gridy = 6;
+		panel.add(lblStatus, gbc_lblStatus);
 		
-		label_6 = new JLabel("Status:");
-		GridBagConstraints gbc_label_6 = new GridBagConstraints();
-		gbc_label_6.anchor = GridBagConstraints.EAST;
-		gbc_label_6.insets = new Insets(0, 0, 5, 5);
-		gbc_label_6.gridx = 0;
-		gbc_label_6.gridy = 5;
-		panel.add(label_6, gbc_label_6);	
+		lblTip = new JLabel("Tip:");
+		GridBagConstraints gbc_lblTip = new GridBagConstraints();
+		gbc_lblTip.anchor = GridBagConstraints.EAST;
+		gbc_lblTip.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTip.gridx = 0;
+		gbc_lblTip.gridy = 5;
+		panel.add(lblTip, gbc_lblTip);	
 	}
 	
 	public void inputSet() {
@@ -190,7 +188,7 @@ public class KorisnikKreiranje extends JPanel {
 	
 	public void comboBoxSet() {
 		
-		cbTipKorisnickogRacuna = new JComboBox(TipKorisnika.values());
+		cbTipKorisnickogRacuna = new JComboBox(TipUposlenika.values());
 		GridBagConstraints gbc_cbTipKorisnickogRacuna = new GridBagConstraints();
 		gbc_cbTipKorisnickogRacuna.gridwidth = 2;
 		gbc_cbTipKorisnickogRacuna.insets = new Insets(0, 0, 5, 0);
@@ -199,7 +197,7 @@ public class KorisnikKreiranje extends JPanel {
 		gbc_cbTipKorisnickogRacuna.gridy = 5;
 		panel.add(cbTipKorisnickogRacuna, gbc_cbTipKorisnickogRacuna);
 		
-		cbStatusKorisnickogRacuna = new JComboBox(Status.values());
+		cbStatusKorisnickogRacuna = new JComboBox(new DefaultComboBoxModel(new String[] {"Aktivan", "Neaktivan"}));
 		GridBagConstraints gbc_cbStatusKorisnickogRacuna = new GridBagConstraints();
 		gbc_cbStatusKorisnickogRacuna.gridwidth = 2;
 		gbc_cbStatusKorisnickogRacuna.fill = GridBagConstraints.HORIZONTAL;

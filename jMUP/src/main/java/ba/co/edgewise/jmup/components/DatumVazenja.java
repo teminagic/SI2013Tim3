@@ -1,3 +1,5 @@
+package ba.co.edgewise.jmup.components;
+
 
 import javax.swing.JPanel;
 
