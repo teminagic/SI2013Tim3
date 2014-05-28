@@ -32,7 +32,7 @@ public class SalterskiRadnikController {
 					
 				});
 	}
-	//
+	///
 	void prikaziPanelUnosVozaca()
 	{
 		view.prikaziVozacDodavanje();
