@@ -85,12 +85,9 @@ public class SalterskiRadnikView extends JFrame {
 	public void prikaziVozacDodavanje()
 	{
 		contentPane.remove(sadrzaj);
-
 		sadrzaj = new OpcijaSadrzaj("Unos vozača");
 		strana2VozacDodavanje = new VozacDodavanje();
-		//
 		sadrzaj.getPanelSadrzaj().add(strana2VozacDodavanje, "Unos podataka o vozaču");
-		
 		contentPane.add(sadrzaj, gbc_naslov);
 		frejm.pack();
 		frejm.setVisible(true);
@@ -142,7 +139,9 @@ public class SalterskiRadnikView extends JFrame {
 	public VozacDodavanje getStrana2VozacDodavanje() {
 		return strana2VozacDodavanje;
 	}
-	
+	public VoziloDodavanje getVoziloDodavanje() {
+		return voziloDodavanje;
+	}
 	public GridBagConstraints getGbc_naslov() {
 		return gbc_naslov;
 	}
