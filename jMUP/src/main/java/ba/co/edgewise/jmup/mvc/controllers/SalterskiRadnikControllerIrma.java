@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import ba.co.edgewise.jmup.klase.Motor;
+import ba.co.edgewise.jmup.klase.Vozilo;
 import ba.co.edgewise.jmup.mvc.models.*;
 import ba.co.edgewise.jmup.mvc.views.*;
 import ba.co.edgewise.jmup.components.*;
@@ -33,7 +34,7 @@ public class SalterskiRadnikControllerIrma {
 	}
 	
 	public void control() {
-		// Listener za unos vozaca
+		// Listener za unos vozila
 			JButton unosVozila = this.view.getMeni().getOpcije().getBtnUnosVozila();
 			unosVozila.addMouseListener(new MouseAdapter() {
 				@Override
@@ -41,6 +42,7 @@ public class SalterskiRadnikControllerIrma {
 					prikaziPanelUnosVozila();
 					};			
 			});
+			
 			// Listener za pocetnu
 			JButton pocetna= this.view.getMeni().getOpcije().getBtnPocetna();
 			pocetna.addMouseListener(new MouseAdapter() {
@@ -57,6 +59,7 @@ public class SalterskiRadnikControllerIrma {
 					if(provjeriPopunjenost()){
 						try {
 							dodajVozilo();
+							JOptionPane.showConfirmDialog(view, "Uspješno ste dodali vozilo.","Dodano vozilo", JOptionPane.OK_CANCEL_OPTION);
 						} catch (ParseException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -66,6 +69,7 @@ public class SalterskiRadnikControllerIrma {
 					};
 				}
 			});
+			
 		}
 ///
 		public void prikaziPanelUnosVozila()
@@ -112,9 +116,13 @@ public class SalterskiRadnikControllerIrma {
 		String vrstaMotora = (String)view.getVoziloDodavanje().getCb_vrstaMotora().getSelectedItem();
 		// Nisu iskoristeni: getTb_bojaVozila(), getCb_nijansa() , getCb_vrstaBoje() 
 		
-	model.dodajVozilo(null, vrsta, marka, tip, modelVozila, brojSasije, oblikKaroserije, godinaProizvodnje, 
+/*	model.dodajVozilo(null, vrsta, marka, tip, modelVozila, brojSasije, oblikKaroserije, godinaProizvodnje, 
 			maxTehnickaDozvoljenaMasa, masaVozila, dopustenaNosivost, odnosSnageIMase, brojMjestaZaSjedenje, 
 			brojMjestaZaStajanje, brojMjestaZaLezanje, ekoKarakteristika, katalizator, datumPregleda, 
-			zapreminaMotora, maxSnaga,vrstaGoriva, brojMotora, vrstaMotora);
+			zapreminaMotora, maxSnaga,vrstaGoriva, brojMotora, vrstaMotora);*/
+	// novi = new Motor(0, 650, 200,
+	// "LPG", "la", "la");
+	// d.create(novi);
+model.dodajVozilo(0, VrstaVozila.PUTNICKI_AUTOMOBIL, "BMW", "limuzina","A1", "aaa54", "oblikkaroserije", 2013, 4500,3000, 1500, 5.1, 5, 0, 0, EkoKarakteristike.EURO2, true, new Date(),0, 650, "LPG", "la", "la");	
 	}
 }

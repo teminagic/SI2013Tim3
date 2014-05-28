@@ -33,7 +33,7 @@ public class SalterskiRadnikModelIrma {
 			Date datumPregleda,Integer zapreminaMotora, Integer maxSnaga,
 			String vrstaGoriva, String brojMotora, String vrstaMotora) 
 	{
-		Motor motor =  new Motor(null, zapreminaMotora, maxSnaga,vrstaGoriva, brojMotora, vrstaMotora);
+		Motor motor =  new Motor(0, zapreminaMotora, maxSnaga,vrstaGoriva, brojMotora, vrstaMotora);
 		MotorDAO mDAO = new MotorDAO();
 		mDAO.create(motor);
 		

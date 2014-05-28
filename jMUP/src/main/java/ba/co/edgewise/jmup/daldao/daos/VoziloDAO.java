@@ -298,17 +298,19 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 		// Vozilo v = new Vozilo("Audi", "limuzina", "A1", "aaa54",
 		// "oblikkaroserije", "2013",3,5.1,5,0,0,"maksimalna",1);
 		
-		//MotorDAO mDAO = new MotorDAO();
-		//Motor motor = mDAO.getAll().get(1);
-		
-		//Vozilo v = new Vozilo(null, VrstaVozila.Putnicki_automobil, "Audi", "limuzina",
-		//			"A1", "aaa54", "oblikkaroserije", 2013, 4500,
-		//			3000, 1500, motor, 5.1, 5, 0, 0, EkoKarakteristike.Euro_2, true, new Date());
+		MotorDAO mDAO = new MotorDAO();
+		Motor motor = mDAO.getAll().get(1);
+		// novi = new Motor(0, 650, 200,
+					// "LPG", "la", "la");
+					// d.create(novi);
+		Vozilo v = new Vozilo(null, VrstaVozila.PUTNICKI_AUTOMOBIL, "BMW", "limuzina",
+					"A1", "aaa54", "oblikkaroserije", 2013, 4500,
+					3000, 1500, motor, 5.1, 5, 0, 0, EkoKarakteristike.EURO2, true, new Date());
 		VoziloDAO vdao = new VoziloDAO();
 		
-		//vdao.create(v);
-		Vozilo voz = vdao.get(21);
-		System.out.println("Ovo je: " + voz.getVrsta());
+		vdao.create(v);
+		//Vozilo voz = vdao.get(21);
+		//System.out.println("Ovo je: " + voz.getVrsta());
 		//List<Vozilo> vozilice = new ArrayList<Vozilo>();
 		//vozilice = vdao.getAll();
 		//for (Vozilo tmp: vozilice)
