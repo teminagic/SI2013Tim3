@@ -1,4 +1,4 @@
-package co.ba.edgewise.components;
+package ba.co.edgewise.jmup.components;
 //
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
@@ -11,9 +11,6 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 import javax.swing.JTextField;
-
-import co.ba.edgewise.components.DatumPrveRegistracije;
-import co.ba.edgewise.components.DatumVazenja;
 
 public class PodaciRegistracija extends JPanel {
 

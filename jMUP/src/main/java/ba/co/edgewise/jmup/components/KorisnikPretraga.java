@@ -255,9 +255,9 @@ public class KorisnikPretraga extends JPanel {
 			
 			btnModifikuj.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					Korisnik k = Login.korisnici.get(table.getSelectedRow());
+					Uposlenik k = Login.korisnici.get(table.getSelectedRow());
 					KorisnikModificiranje modifikacija = new KorisnikModificiranje(k);
-					modifikacija.PopuniKorisnika();
+					modifikacija.PopuniUposlenika();
 					parent.setModifikacija(modifikacija);
 					parent.getSadrzaj().getPanelSadrzaj().add(modifikacija, "Modificiranje korisnika");
 					CardLayout cl = (CardLayout)parent.getSadrzaj().getPanelSadrzaj().getLayout(); 
@@ -269,21 +269,21 @@ public class KorisnikPretraga extends JPanel {
 	
 	
 	//methods
-	static private ArrayList<Korisnik> FiltriraniKorisnici(String filter, TipPretrageUposlenika parametar)
+	static private ArrayList<Uposlenik> FiltriraniKorisnici(String filter, TipPretrageUposlenika parametar)
 	{
-		ArrayList<Korisnik> rezultat = new ArrayList<Korisnik>();
+		ArrayList<Uposlenik> rezultat = new ArrayList<Uposlenik>();
 		switch (parametar) {
 			case IME:
-				for(Korisnik k: Login.korisnici)
+				for(Uposlenik k: Login.korisnici)
 					if (k.getIme().contains(filter)) rezultat.add(k);
 				break;
 			case PREZIME:
-				for(Korisnik k: Login.korisnici)
+				for(Uposlenik k: Login.korisnici)
 					if (k.getPrezime().contains(filter)) rezultat.add(k);
 				break;
 			case USERNAME:
-				for(Korisnik k: Login.korisnici)
-					if (k.getUsername().contains(filter)) rezultat.add(k);
+				for(Uposlenik k: Login.korisnici)
+					if (k.getPassword().contains(filter)) rezultat.add(k);
 				break;
 		}
 		return rezultat;

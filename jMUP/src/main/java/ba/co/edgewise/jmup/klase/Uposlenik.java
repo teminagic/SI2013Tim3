@@ -92,4 +92,7 @@ public class Uposlenik {
 	public void setTip(TipUposlenika tip) {
 		this.tip = tip;
 	}
+	public Object[] toObjectArray() {
+		return new Object[]{this.ime, this.prezime, this.password, this.tip, this.status};
+	}
 }

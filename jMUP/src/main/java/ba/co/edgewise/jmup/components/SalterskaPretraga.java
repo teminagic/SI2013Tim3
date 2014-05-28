@@ -1,4 +1,4 @@
-package co.ba.edgewise.components;
+package ba.co.edgewise.jmup.components;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;

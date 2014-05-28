@@ -231,7 +231,7 @@ public class KorisnikModificiranje extends JPanel {
 	}
 	
 	// methods
-	public void Popuniuposlenika () {
+	public void PopuniUposlenika () {
 		
 		this.tfIme.setText(_uposlenik.getIme());
 		this.tfPrezime.setText(_uposlenik.getPrezime());
