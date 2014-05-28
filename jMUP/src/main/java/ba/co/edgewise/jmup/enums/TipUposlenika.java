@@ -3,7 +3,7 @@ package ba.co.edgewise.jmup.enums;
 public enum TipUposlenika {
 	
 	ADMINISTRATOR("Administrator"),
-	SALTERSKI_RADNIK("öalterski radnik"),
+	SALTERSKI_RADNIK("äalterski radnik"),
 	MENADZER("Menadûer");
 	
 	private final String text;
@@ -23,9 +23,9 @@ public enum TipUposlenika {
 		switch (tip) {
 			case "Administrator":
 				return TipUposlenika.ADMINISTRATOR;
-			case "≈†alterski radnik":
+			case "äalterski radnik":
 				return TipUposlenika.SALTERSKI_RADNIK;
-			case "Menad≈æer":
+			case "Menadûer":
 				return TipUposlenika.MENADZER;
 			default:
 				return null;

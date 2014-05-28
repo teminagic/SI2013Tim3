@@ -1,7 +1,7 @@
 package ba.co.edgewise.jmup.enums;
 
 public enum VrstaBoje {
-	OBICNA("ObiÄna"),
+	OBICNA("Obièna"),
 	METALIK("Metalik");
 	
 	private final String vrsta;
@@ -19,7 +19,7 @@ public enum VrstaBoje {
 	public static VrstaBoje getVrstaBoje(String tip)
 	{
 		switch (tip) {
-		case "ObiÄna":
+		case "Obièna":
 			return VrstaBoje.OBICNA;
 		case "Metalik":
 			return VrstaBoje.METALIK;

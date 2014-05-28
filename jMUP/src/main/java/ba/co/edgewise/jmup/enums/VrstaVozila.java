@@ -2,17 +2,17 @@ package ba.co.edgewise.jmup.enums;
 
 public enum VrstaVozila {
 
-	PUTNICKI_AUTOMOBIL("Putniƒçki automobil"), 
+	PUTNICKI_AUTOMOBIL("PutniËki automobil"), 
 	MOPED("Moped"), 
 	MOTOCIKL("Motocikl"), 
 	MOTORNI_TRICIKL("Motorni tricikl"), 
-	CETVEROCIKL("ƒåetverocikl"), 
+	CETVEROCIKL("»etverocikl"), 
 	AUTOBUS("Autobus"), 
 	TERETNO_VOZILO("Teretno vozilo"), 
-	PRIKLJUƒåNO_VOZILO("Prikljuƒçno vozilo"), 
+	PRIKLJUCNO_VOZILO("PrikljuËno vozilo"), 
 	TRAKTOR("Traktor"), 
 	TRAKTOR_SA_GUSJENICAMA("Traktor sa gusjenicama"), 
-	RADNA_MA≈†INA("Radna ma≈°ina");
+	RADNA_MASINA("Radna maöina");
 	
 	private final String vrsta;
 	
@@ -27,7 +27,7 @@ public enum VrstaVozila {
 	public static VrstaVozila getVrstaVozila(String tip)
 	{
 		switch (tip) {
-			case "Putniƒçki automobil":
+			case "PutniËki automobil":
 				return VrstaVozila.PUTNICKI_AUTOMOBIL;
 			case "Moped":
 				return VrstaVozila.MOPED;
@@ -35,20 +35,20 @@ public enum VrstaVozila {
 				return VrstaVozila.MOTORNI_TRICIKL;
 			case "Motocikl":
 				return VrstaVozila.MOTOCIKL;
-			case "ƒåetverocikl":
+			case "»etverocikl":
 				return VrstaVozila.CETVEROCIKL;
 			case "Autobus":
 				return VrstaVozila.AUTOBUS;
 			case "Teretno vozilo":
 				return VrstaVozila.TERETNO_VOZILO;
-			case "Prikljuƒçno vozilo":
-				return VrstaVozila.PRIKLJUƒåNO_VOZILO;
+			case "PrikljuËno vozilo":
+				return VrstaVozila.PRIKLJUCNO_VOZILO;
 			case "Traktor":
 				return VrstaVozila.TRAKTOR;
 			case "Traktor sa gusjenicama":
 				return VrstaVozila.TRAKTOR_SA_GUSJENICAMA;
-			case "Radna ma≈°ina":
-				return VrstaVozila.RADNA_MA≈†INA;
+			case "Radna maöina":
+				return VrstaVozila.RADNA_MASINA;
 			default:
 				return null;
 		}
