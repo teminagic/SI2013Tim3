@@ -85,7 +85,7 @@ public class SalterskiRadnikView extends JFrame {
 		contentPane.add(sadrzaj, gbc_naslov);
 	}
 	public JPanel getContentPane() {
-		return contentPane;
+		return contentPane;//
 	}
 
 
