@@ -16,9 +16,9 @@ public class OpcijaSadrzaj extends JPanel {
 	public OpcijaSadrzaj(String naslov) {
 
 		// method for setting title
-		titleSet(naslov);
 		// calling methods for setting layout
 		layoutSet();
+		titleSet(naslov);
 		panelSet();
 	}
 
@@ -37,7 +37,7 @@ public class OpcijaSadrzaj extends JPanel {
 		gbc_naslov.insets = new Insets(0, 0, 5, 0);
 		gbc_naslov.gridx = 0;
 		gbc_naslov.gridy = 0;
-		gbc_naslov.fill = GridBagConstraints.HORIZONTAL;
+		gbc_naslov.fill = GridBagConstraints.BOTH;
 		add(this.naslov, gbc_naslov);
 	}
 

@@ -1,5 +1,5 @@
 package ba.co.edgewise.jmup.components;
-//alck
+import ba.co.edgewise.jmup.enums.*;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -14,8 +14,6 @@ import javax.swing.JButton;
 import javax.swing.UIManager;
 import javax.swing.JRadioButton;
 import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class VoziloDodavanje extends JPanel {
 
@@ -82,92 +80,6 @@ public class VoziloDodavanje extends JPanel {
 	private JComboBox cb_vrstaBoje;
 	private JRadioButton rb_katalizator_da;
 	private JRadioButton rb_katalizator_ne;
-
-	// enums
-	enum VrstaVozilaVrijednosti {
-		Putnicki_automobil("Putnički automobil"), Moped("Moped"), Motocikl(
-				"Motocikl"), Motorni_tricikl("Motorni tricikl"), Cetverocikl(
-				"Četverocikl"), Autobus("Autobus"), Teretno_vozilo(
-				"Teretno vozilo"), Prikljucno_vozilo("Priklju�no vozilo"), Traktor(
-				"Traktor"), Traktor_sa_gusjenicama("Traktor sa gusjenicama"), Radna_masina(
-				"Radna ma�ina");
-
-		private final String stringValue;
-
-		private VrstaVozilaVrijednosti(final String s) {
-			stringValue = s;
-		}
-
-		public String toString() {
-			return stringValue;
-		}
-	}
-
-	enum VrstaGorivaVrijednosti {
-		Benzin("Benzin"), Benzin_LPG("Benzin/LPG"), Benzin_CNG("Benzin/CPG"), Benzin_elektricni(
-				"Benzin/elektri�ni"), Dizel("Dizel"), Dizel_CNG("Dizel/CNG"), Dizel_elektricni(
-				"Dizel/elektri�ni"), Elektricni_pogon("Elektri�ni pogon"), Biodizel(
-				"Biodizel"), Etanol("Etanol"), Metanol("Metanol"), Hidrogen(
-				"Hidrogen(vodonik)"), LPG("LPG"), CNG("CNG");
-
-		private final String stringValue;
-
-		private VrstaGorivaVrijednosti(final String s) {
-			stringValue = s;
-		}
-
-		public String toString() {
-			return stringValue;
-		}
-	}
-
-	enum VrstaMotoraVrijednosti {
-		OTTO("OTTO"), DIESEL("DIESEL"), WANKEL("WANKEL"), ELEKTROMOTOR(
-				"Elektromotor"), KOMBINOVANI_POGON("Kombinovani pogon");
-
-		private final String stringValue;
-
-		private VrstaMotoraVrijednosti(final String s) {
-			stringValue = s;
-		}
-
-		public String toString() {
-			return stringValue;
-		}
-	}
-
-	enum EkoKarakteristikeVrijednosti {
-		Konvencionalno("Konvencionalno"), Euro_1("Euro 1"), Euro_2("Euro 2"), Euro_3(
-				"Euro 3"), Euro_4("Euro 4"), Euro_5("Euro 5");
-
-		private final String stringValue;
-
-		private EkoKarakteristikeVrijednosti(final String s) {
-			stringValue = s;
-		}
-
-		public String toString() {
-			return stringValue;
-		}
-	}
-
-	enum VrstaBojeVrijednosti {
-		obicna("Obična"), metalik("Metalik");
-
-		private final String stringValue;
-
-		private VrstaBojeVrijednosti(final String s) {
-			stringValue = s;
-		}
-
-		public String toString() {
-			return stringValue;
-		}
-	}
-
-	enum NijansaBojeVrijednosti {
-		Standardna, Svjetlija, Tamnija;
-	}
 
 	public VoziloDodavanje() {
 		// calling methods for seting layout
@@ -698,8 +610,7 @@ public class VoziloDodavanje extends JPanel {
 
 	public void componentSet() {
 		cb_vrstaVozila = new JComboBox();
-		cb_vrstaVozila.setModel(new DefaultComboBoxModel(VrstaVozilaVrijednosti
-				.values()));
+		cb_vrstaVozila.setModel(new DefaultComboBoxModel(VrstaVozila.values()));
 		GridBagConstraints gbc_cb_vrstaVozila = new GridBagConstraints();
 		gbc_cb_vrstaVozila.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cb_vrstaVozila.insets = new Insets(0, 0, 5, 0);
@@ -708,8 +619,7 @@ public class VoziloDodavanje extends JPanel {
 		osnovniPodaci.add(cb_vrstaVozila, gbc_cb_vrstaVozila);
 
 		cb_gorivo = new JComboBox();
-		cb_gorivo.setModel(new DefaultComboBoxModel(VrstaGorivaVrijednosti
-				.values()));
+		cb_gorivo.setModel(new DefaultComboBoxModel(VrstaGoriva.values()));
 		GridBagConstraints gbc_cb_gorivo = new GridBagConstraints();
 		gbc_cb_gorivo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cb_gorivo.insets = new Insets(0, 0, 5, 0);
@@ -718,8 +628,7 @@ public class VoziloDodavanje extends JPanel {
 		motorPodaci.add(cb_gorivo, gbc_cb_gorivo);
 
 		cb_vrstaMotora = new JComboBox();
-		cb_vrstaMotora.setModel(new DefaultComboBoxModel(VrstaMotoraVrijednosti
-				.values()));
+		cb_vrstaMotora.setModel(new DefaultComboBoxModel(Motor.values()));
 		GridBagConstraints gbc_cb_vrstaMotora = new GridBagConstraints();
 		gbc_cb_vrstaMotora.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cb_vrstaMotora.gridx = 1;
@@ -727,8 +636,7 @@ public class VoziloDodavanje extends JPanel {
 		motorPodaci.add(cb_vrstaMotora, gbc_cb_vrstaMotora);
 
 		cb_ekoKarakteristike = new JComboBox();
-		cb_ekoKarakteristike.setModel(new DefaultComboBoxModel(
-				EkoKarakteristikeVrijednosti.values()));
+		cb_ekoKarakteristike.setModel(new DefaultComboBoxModel(EkoKarakteristike.values()));
 		GridBagConstraints gbc_cb_ekoKarakteristike = new GridBagConstraints();
 		gbc_cb_ekoKarakteristike.gridwidth = 2;
 		gbc_cb_ekoKarakteristike.fill = GridBagConstraints.HORIZONTAL;
@@ -738,8 +646,7 @@ public class VoziloDodavanje extends JPanel {
 		detaljniPodaci.add(cb_ekoKarakteristike, gbc_cb_ekoKarakteristike);
 
 		cb_nijansa = new JComboBox();
-		cb_nijansa.setModel(new DefaultComboBoxModel(NijansaBojeVrijednosti
-				.values()));
+		cb_nijansa.setModel(new DefaultComboBoxModel(NijansaBoje.values()));
 		GridBagConstraints gbc_cb_nijansa = new GridBagConstraints();
 		gbc_cb_nijansa.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cb_nijansa.insets = new Insets(0, 0, 5, 0);
@@ -748,8 +655,7 @@ public class VoziloDodavanje extends JPanel {
 		bojaMasaVozila.add(cb_nijansa, gbc_cb_nijansa);
 
 		cb_vrstaBoje = new JComboBox();
-		cb_vrstaBoje.setModel(new DefaultComboBoxModel(VrstaBojeVrijednosti
-				.values()));
+		cb_vrstaBoje.setModel(new DefaultComboBoxModel(VrstaBoje.values()));
 		GridBagConstraints gbc_cb_vrstaBoje = new GridBagConstraints();
 		gbc_cb_vrstaBoje.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cb_vrstaBoje.insets = new Insets(0, 0, 5, 0);
@@ -772,7 +678,6 @@ public class VoziloDodavanje extends JPanel {
 		gbc_rb_katalizator_ne.gridy = 5;
 		detaljniPodaci.add(rb_katalizator_ne, gbc_rb_katalizator_ne);
 
-		// Grupisanje radiobuttona - da bi mogao samo jedan biti true
 		ButtonGroup radioGroup = new ButtonGroup();
 		radioGroup.add(rb_katalizator_da);
 		radioGroup.add(rb_katalizator_ne);
@@ -796,5 +701,8 @@ public class VoziloDodavanje extends JPanel {
 
 	public JButton getBtn_prihvati() {
 		return btn_prihvati;
+	}
+	public JButton getBtn_ponisti() {
+		return btn_ponisti;
 	}
 }
