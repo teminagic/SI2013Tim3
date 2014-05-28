@@ -1,4 +1,3 @@
-package ba.co.edgewise.jmup.components;
 
 import javax.swing.JPanel;
 
@@ -13,7 +12,7 @@ import javax.swing.JComboBox;
 
 import java.awt.Insets;
 import javax.swing.DefaultComboBoxModel;
-
+//
 @SuppressWarnings("rawtypes")
 public class DatumVazenja extends JPanel {
 

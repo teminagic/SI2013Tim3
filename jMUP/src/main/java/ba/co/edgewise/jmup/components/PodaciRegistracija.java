@@ -1,5 +1,5 @@
 package co.ba.edgewise.components;
-
+//
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 

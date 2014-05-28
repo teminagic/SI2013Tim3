@@ -1,5 +1,5 @@
 package co.ba.edgewise.components;
-
+//
 import java.awt.*;
 
 import javax.swing.*;
@@ -212,7 +212,7 @@ public class KorisnikModificiranje extends JPanel {
 	
 	public void buttonSet() {
 		
-		btnPronadji = new JButton("PronaÄ‘i");
+		btnPronadji = new JButton("Prona�i");
 		GridBagConstraints gbc_btnPronadji = new GridBagConstraints();
 		gbc_btnPronadji.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnPronadji.insets = new Insets(0, 0, 5, 0);
