@@ -242,7 +242,7 @@ public class SalterskiRadnikController {
 		Date doKad=new SimpleDateFormat("yyyy-MM-dd").parse("1992-2-1");
 		
 		return model.DodajRegistraciju(brojPotvrde, registracija, jmbgKorisnika, odKad, doKad);
-	}
+	}//
 	public boolean provjeriPopunjenostVozaca() {
 		return true;
 	}
