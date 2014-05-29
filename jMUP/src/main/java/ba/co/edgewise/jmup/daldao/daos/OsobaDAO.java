@@ -218,7 +218,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 			PreparedStatement statement = connection
 					.prepareStatement("SELECT * FROM Osoba Where Ime = ? AND Prezime = ? ");
 			statement.setString(1, ime);
-			statement.setString(1, prezime);
+			statement.setString(2, prezime);
 			qResult = statement.executeQuery();
 			// Dobavljanje rezultata
 			while (qResult.next()) {
@@ -243,8 +243,8 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 		return result;
 	}
 	
-	public ArrayList<Osoba> getByJMBG(String jmbg) {
-		ArrayList<Osoba> result = new ArrayList<Osoba>();
+	public Osoba getByJMBG(String jmbg) {
+		Osoba result = new Osoba();
 
 		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
@@ -259,18 +259,13 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 			statement.setString(1, jmbg);
 			qResult = statement.executeQuery();
 			// Dobavljanje rezultata
-			while (qResult.next()) {
-				Osoba osoba = new Osoba();
-				osoba.setId(qResult.getInt("IDOsobe"));
-				osoba.setJmbg_Id(qResult.getString("JMB_ID"));
-				osoba.setIme(qResult.getString("Prezime"));
-				osoba.setIme(qResult.getString("Ime"));
-				osoba.setPrebivaliste(qResult.getString("Prebivaliste"));
-				if (qResult.getInt("PravnoLice") == 1)
-					osoba.setPravnoLice(true);
-				else
-					osoba.setPravnoLice(false);
-				result.add(osoba);
+			if (qResult.next()) {
+					result.setId(qResult.getInt("IDOsobe"));
+					result.setJmbg_Id(qResult.getString("JMB_ID"));
+					result.setIme(qResult.getString("Prezime"));
+					result.setIme(qResult.getString("Ime"));
+					result.setPrebivaliste(qResult.getString("Prebivaliste"));
+					result.setPravnoLice(qResult.getBoolean("PravnoLice"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

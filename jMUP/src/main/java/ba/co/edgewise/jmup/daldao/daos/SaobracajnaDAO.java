@@ -179,9 +179,11 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 			
 			return result;
 		}
-	 public ArrayList<Saobracajna> getByName(Integer id)
+	 
+	 // korisnik ID jednistven vraca po jedan result
+	 public Saobracajna getByName(Integer id)
 		{
-			ArrayList<Saobracajna> result = new ArrayList<Saobracajna>();
+			Saobracajna result = new Saobracajna();
 			
 			//Dobavljanje konekcije
 			ConnectionManager manager = new ConnectionManager();
@@ -199,24 +201,16 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 				statement.setInt(1, id);
 				qResult = statement.executeQuery();
 				//Dobavljanje rezultata
-				while(qResult.next()) {
+				if(qResult.next()) {
 					
-					Saobracajna temp = new Saobracajna();
-					
-					temp.setBrojDozvole(qResult.getString("BrojDozvole"));
+					result.setBrojDozvole(qResult.getString("BrojDozvole"));
 					
 					VoziloDAO vDAO = new VoziloDAO();
-					temp.setVozilo(vDAO.get(qResult.getInt("Vozilo")));
+					result.setVozilo(vDAO.get(qResult.getInt("Vozilo")));
 					
 					OsobaDAO oDAO = new OsobaDAO();
-					temp.setKorisnik(oDAO.get(qResult.getInt("Korisnik")));
-					
-					result.add(temp);
+					result.setKorisnik(oDAO.get(qResult.getInt("Korisnik")));
 				}
-				
-				//ako je prazno da se baci exception
-				if(result.size() == 0)
-					throw new EmptyStackException();
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -226,6 +220,48 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 			
 			return result;
 		}
+	 
+	 // korisnik ID jednistven vraca po jedan result
+	 public Saobracajna getByReg(Integer id)
+		{
+			Saobracajna result = new Saobracajna();
+			
+			//Dobavljanje konekcije
+			ConnectionManager manager = new ConnectionManager();
+			Connection connection = manager.getConnection();
+			
+			//Pocetak pripreme upita
+			ResultSet qResult = null;
+			
+			try {
+				PreparedStatement statement = 	connection.prepareStatement(
+						"SELECT * "+ 
+						"FROM Saobracajna "+
+						"WHERE Vozilo = ?"
+						);
+				statement.setInt(1, id);
+				qResult = statement.executeQuery();
+				//Dobavljanje rezultata
+				if(qResult.next()) {
+					
+					result.setBrojDozvole(qResult.getString("BrojDozvole"));
+					
+					VoziloDAO vDAO = new VoziloDAO();
+					result.setVozilo(vDAO.get(qResult.getInt("Vozilo")));
+					
+					OsobaDAO oDAO = new OsobaDAO();
+					result.setKorisnik(oDAO.get(qResult.getInt("Korisnik")));
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				ConnectionManager.closeConnection(connection);
+			}
+			
+			return result;
+		}
+	 
 	
 	@Override
 	public boolean update(String brojDozvole, Saobracajna s)
