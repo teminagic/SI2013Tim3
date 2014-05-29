@@ -67,7 +67,7 @@ public class SalterskiRadnikController {
 									prikaziPanelUnosRegistracije();
 									prikaziPanelUnosVozila();
 								}
-								
+								//
 						} 
 						else{
 							JOptionPane.showMessageDialog(null, "Neispravno popunjena polja!");
