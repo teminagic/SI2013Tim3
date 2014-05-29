@@ -37,14 +37,14 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO `Motor`(`Nijansa`, `Vrsta`, `Boja`, `Tip`, `Vozilo`) "
-							+ " VALUES (?,?,?,?,?) ");
+					.prepareStatement("INSERT INTO `BojeVozila`(IDBojeVozila, `Nijansa`, `Vrsta`, `Boja`, `Tip`, `Vozilo`) "
+							+ " VALUES (null, ?,?,?,?,?) ");
 
 			statement.setString(1, nijansa.toString());
 			statement.setString(2, vrsta.toString());
 			statement.setInt(3, boja);
-			statement.setInt(4, vozilo);
-			statement.setString(5, tip);
+			statement.setString(4,tip );
+			statement.setInt(5,vozilo);
 
 			statement.executeUpdate();
 			success = true;
@@ -224,6 +224,14 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		VoziloDAO vdao = new VoziloDAO();
+		Vozilo vozilo=vdao.get(1);
+		
+		BojeVozilaDAO b=new BojeVozilaDAO();
+		BojaVozila bv=new BojaVozila(Boja.CRNA, vozilo, NijansaBoje.STANDARDNA, VrstaBoje.METALIK, "tip" );
+		//Boja boja, Vozilo vozilo, NijansaBoje nijansa,
+		//VrstaBoje vrsta, String tip
+		b.create(bv);
 
 	}
 

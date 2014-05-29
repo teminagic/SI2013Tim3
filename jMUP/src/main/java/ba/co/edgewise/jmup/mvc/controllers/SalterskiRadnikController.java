@@ -41,7 +41,8 @@ public class SalterskiRadnikController {
 				pocetna.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						prikaziPanelPocetnu();
+						prikaziPanelUnosRegistracije();
+						//prikaziPanelPocetnu();
 						};
 					
 				});
@@ -137,9 +138,28 @@ public class SalterskiRadnikController {
 						try {
 							if(provjeriPopunjenostRegistracije()) 
 							{
-								dodajRegistraciju();
-								setUnosDozvole(false);
+								if (dodajRegistraciju()) {
+									JOptionPane.showOptionDialog(view, "Dozvola uspje\u0161no dodana.",
+											"Unos dozvole", JOptionPane.OK_OPTION,
+											JOptionPane.INFORMATION_MESSAGE, null,
+											new String[] { "Uredu" }, "default");
+									
+									pocistiPoljaDozvola();
+									
+									setUnosDozvole(false);
+								} else {
+									JOptionPane.showOptionDialog(view,
+											"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
+													+ "Molimo vas da poku\u0161ate ponovo",
+											"Unos dozvole", JOptionPane.OK_OPTION,
+											JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+											"default");
+								};
+								
 							}
+							else{
+								JOptionPane.showMessageDialog(null, "Neispravno popunjena polja!");
+							};
 						} catch (ParseException e1) {
 							e1.printStackTrace();
 						}
@@ -197,7 +217,12 @@ public class SalterskiRadnikController {
 		if(isOdjavaSaltera() == true)
 			this.view.dispose();
 	}
-	
+	public void pocistiPoljaDozvola()
+	{
+		view.getRegistracija().getPodaci().getTxtRegistrationString().setText("");
+		view.getRegistracija().getPodaci().getTxtId().setText("");
+		view.getRegistracija().getPodaci().getTxtConfirmationNumber().setText("");
+	}
 	public void pocistiPoljaVozac()
 	{
 		view.getStrana2().getTfIme().setText("");

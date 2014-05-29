@@ -22,24 +22,23 @@ import ba.co.edgewise.jmup.klase.Vozilo;
 
 public class SalterskiRadnikModel {
 	
-	private Osoba osoba;
-	private OsobaDAO oDAO;
-	private Registracija registracija;
-	private RegistracijaDAO rDAO;
-	
 	public Boolean DodajRegistraciju(Integer idDozvole, String regOznaka, String jmbg, Date odKad, Date doKad)
 	{
-		//registracija = new Registracija(idDozvole, regOznaka, odKad, doKad);
-		registracija = new Registracija();
+		OsobaDAO oDAO = new OsobaDAO();
+		VoziloDAO vDAO = new VoziloDAO();
+		Osoba o = oDAO.getByJMBG(jmbg);
+		Vozilo vozilica = vDAO.getByReg(regOznaka);
+		Registracija registracija = new Registracija(idDozvole, regOznaka, odKad, doKad, vozilica, o);
+		RegistracijaDAO rDAO = new RegistracijaDAO();
 		return rDAO.create(registracija);
 	}
 	public Boolean DodajVozaca(String ime, String prezime, String adresa, String mjesto, String opcina, boolean pravno, String jmbg, String id)
 	{
 		String prebivaliste = adresa + " " + mjesto + " " + opcina;
 		
-		osoba = new Osoba(0, jmbg, prezime, ime, prebivaliste, pravno);
+		Osoba osoba = new Osoba(0, jmbg, prezime, ime, prebivaliste, pravno);
 		System.out.println(jmbg + " " + prezime + " " + ime + " " +prebivaliste + " " +pravno);
-		oDAO = new OsobaDAO();
+		OsobaDAO oDAO = new OsobaDAO();
 		return oDAO.create(osoba);
 	}
 	public void dodajVozilo(String registarske, VrstaVozila vrsta, String marka, String tip,
