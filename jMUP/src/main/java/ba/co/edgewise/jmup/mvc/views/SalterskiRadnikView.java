@@ -28,7 +28,7 @@ public class SalterskiRadnikView extends JFrame {
 	GridBagConstraints gbc_naslov;
 	GridBagConstraints gbc_meni;
 	
-	private VozacDodavanje strana2VozacDodavanje;
+	private VozacDodavanje strana2;
 	private VoziloDodavanje voziloDodavanje;
 
 	
@@ -70,29 +70,17 @@ public class SalterskiRadnikView extends JFrame {
 		gbc_naslov.anchor = GridBagConstraints.NORTH;
 		gbc_naslov.fill = GridBagConstraints.HORIZONTAL;
 		
+		//Ovdje dodajes sve card-ove
 		strana1 = new NaslovnaSalterski();
-		//
-		sadrzaj.getPanelSadrzaj().add(strana1, "Početna");
+		sadrzaj.getPanelSadrzaj().add(strana1, "Po\u010Detna");
+		
+		strana2 = new VozacDodavanje();
+		sadrzaj.getPanelSadrzaj().add(strana2, "Dodavanje voza\u010Da");
 		
 		contentPane.add(sadrzaj, gbc_naslov);
-		
-		// na pocetku je na null
-		strana2VozacDodavanje = null;
-		//voziloDodavanje = null;
-		frejm.pack();
-		frejm.setVisible(true);
 
 	}
-	public void prikaziVozacDodavanje()
-	{
-		contentPane.remove(sadrzaj);
-		sadrzaj = new OpcijaSadrzaj("Unos vozača");
-		strana2VozacDodavanje = new VozacDodavanje();
-		sadrzaj.getPanelSadrzaj().add(strana2VozacDodavanje, "Unos podataka o vozaču");
-		contentPane.add(sadrzaj, gbc_naslov);
-		frejm.pack();
-		frejm.setVisible(true);
-	}
+
 	
 	public void prikaziVoziloDodavanje()
 	{
@@ -104,19 +92,7 @@ public class SalterskiRadnikView extends JFrame {
 		frejm.pack();
 		frejm.setVisible(true);
 	}
-	public void prikaziPocetnu()
-	{
-		contentPane.remove(sadrzaj);
-
-		sadrzaj = new OpcijaSadrzaj("Početna");
-		strana1 = new NaslovnaSalterski();
-		//
-		sadrzaj.getPanelSadrzaj().add(strana1, "Početna");
-		
-		contentPane.add(sadrzaj, gbc_naslov);
-		frejm.pack();
-		frejm.setVisible(true);
-	}
+	
 	
 	public JPanel getContentPane() {
 		return contentPane;///
@@ -137,8 +113,8 @@ public class SalterskiRadnikView extends JFrame {
 		return sadrzaj;
 	}
 	
-	public VozacDodavanje getStrana2VozacDodavanje() {
-		return strana2VozacDodavanje;
+	public VozacDodavanje getStrana2() {
+		return strana2;
 	}
 	public VoziloDodavanje getVoziloDodavanje() {
 		return voziloDodavanje;

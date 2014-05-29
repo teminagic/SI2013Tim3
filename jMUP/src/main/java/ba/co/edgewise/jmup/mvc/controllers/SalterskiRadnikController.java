@@ -1,11 +1,13 @@
 package ba.co.edgewise.jmup.mvc.controllers;
 
+import java.awt.CardLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import ba.co.edgewise.jmup.mvc.models.LoginModel;
 import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModel;
@@ -63,7 +65,7 @@ public class SalterskiRadnikController {
 						};
 					}
 				});*/
-				JButton dodavanjeVozaca = this.view.getStrana2VozacDodavanje().getBtnPrihvati();
+				JButton dodavanjeVozaca = this.view.getStrana2().getBtnPrihvati();
 				dodavanjeVozaca.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -82,19 +84,19 @@ public class SalterskiRadnikController {
 		// Pokupimo sve iz popunjenih polja, pozovemo metodu iz modela kojoj proslijedimo podatke
 		// da ih smjesti u bazu.
 		boolean pravno;
-		String ime = view.getStrana2VozacDodavanje().getTfIme().getText();
-		String prezime = view.getStrana2VozacDodavanje().getTfPrezime().getText();
-		String adresa = view.getStrana2VozacDodavanje().getTfAdresa().getText();
-		String mjesto = view.getStrana2VozacDodavanje().getTfMjesto().getText();
-		String opcina = view.getStrana2VozacDodavanje().getTfOpcina().getText();
-		if(view.getStrana2VozacDodavanje().getPravno().isSelected())
+		String ime = view.getStrana2().getTfIme().getText();
+		String prezime = view.getStrana2().getTfPrezime().getText();
+		String adresa = view.getStrana2().getTfAdresa().getText();
+		String mjesto = view.getStrana2().getTfMjesto().getText();
+		String opcina = view.getStrana2().getTfOpcina().getText();
+		if(view.getStrana2().getPravno().isSelected())
 			pravno = true;
 		else
 			pravno = false;
 			
-		String jmbg = view.getStrana2VozacDodavanje().getTfJMBG().getText();
+		String jmbg = view.getStrana2().getTfJMBG().getText();
 		// Nek unese nizasta ne sluzi :D
-		String idBroj = view.getStrana2VozacDodavanje().getTfIdBroj().getText();
+		String idBroj = view.getStrana2().getTfIdBroj().getText();
 		
 		model.DodajVozaca(ime, prezime, adresa, mjesto, opcina, pravno, jmbg, idBroj);
 	}
@@ -105,11 +107,17 @@ public class SalterskiRadnikController {
 	// Prikazi za buttone iz menija:
 	void prikaziPanelUnosVozaca()
 	{
-		view.prikaziVozacDodavanje();
+		view.getSadrzaj().getNaslov().postaviNaslov("Dodavanje voza\u010Da");
+		JPanel cards = view.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Dodavanje voza\u010Da");
 	}
 	void prikaziPanelPocetnu()
 	{
-		view.prikaziPocetnu();
+		view.getSadrzaj().getNaslov().postaviNaslov("Po\u010Detna");
+		JPanel cards = view.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Po\u010Detna");
 	}
 	
 }
