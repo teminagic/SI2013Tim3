@@ -26,11 +26,13 @@ public class SalterskiRadnikController {
 	private SalterskiRadnikView view;
 	
 	private boolean unosDozvole;
+	private boolean odjavaSaltera;
 	public SalterskiRadnikController(SalterskiRadnikView view, SalterskiRadnikModel model) {
 		super();
 		this.view = view;
 		this.model = model;
 		unosDozvole = false;
+		odjavaSaltera = false;
 	}
 	public void control() {
 				
@@ -163,7 +165,37 @@ public class SalterskiRadnikController {
 						prikaziPanelUnosVozaca();
 						};			
 				});
+				
+				//Listener za odjavu
+				JButton odjava = this.view.getMeni().getOpcije().getBtnOdjava();
+				odjava.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						try {
+							 int reply = JOptionPane.showConfirmDialog(view, "Eventualne promjene nece biti spa\u0161ene. "
+							 		+ "\u017Delite li se odjaviti?", "Odjava", JOptionPane.YES_NO_OPTION);
+						        if (reply == JOptionPane.YES_OPTION) {
+						        	setOdjavaSaltera(true);
+									odjaviSkroz();
+									Login view = new Login();
+									LoginModel model = new LoginModel();
+									LoginController controler = new LoginController(view, model);
+									controler.control();
+						        }
+						       
+						} catch (Exception izuzetak) {
+							izuzetak.printStackTrace();//
+						}
+						};			
+				});
+				
 	}
+	public void odjaviSkroz()
+	{
+		if(isOdjavaSaltera() == true)
+			this.view.dispose();
+	}
+	
 	public void pocistiPoljaVozac()
 	{
 		view.getStrana2().getTfIme().setText("");
@@ -271,5 +303,11 @@ public class SalterskiRadnikController {
 	}
 	public void setUnosDozvole(boolean unosVlasnicke) {
 		this.unosDozvole = unosVlasnicke;
+	}
+	public boolean isOdjavaSaltera() {
+		return odjavaSaltera;
+	}
+	public void setOdjavaSaltera(boolean odjavaSaltera) {
+		this.odjavaSaltera = odjavaSaltera;
 	}
 }
