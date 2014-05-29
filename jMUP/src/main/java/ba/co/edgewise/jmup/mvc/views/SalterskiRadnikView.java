@@ -120,7 +120,7 @@ public class SalterskiRadnikView extends JFrame {
 		tmp.show(cards, "Dodavanje voza\u010Da");
 	}
 	
-	public void prikaziUnosRegistraijce(){
+	public void prikaziUnosRegistracije(){
 		frejm.getSadrzaj().getNaslov().postaviNaslov("Unos registracije");
 		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout)cards.getLayout();

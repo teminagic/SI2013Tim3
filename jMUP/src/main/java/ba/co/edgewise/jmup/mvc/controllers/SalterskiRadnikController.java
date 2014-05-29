@@ -66,10 +66,7 @@ public class SalterskiRadnikController {
 								{
 									prikaziPanelUnosVozila();
 								}
-								/*else
-								{
-									prikazi obavjest o unesenom!
-								}*/
+								
 						} 
 						else{
 							JOptionPane.showMessageDialog(null, "Neispravno popunjena polja!");
@@ -91,7 +88,14 @@ public class SalterskiRadnikController {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						try {
-							if(provjeriPopunjenostUnosVozila()) dodajVozilo();
+							if(provjeriPopunjenostUnosVozila()) 
+							{
+								dodajVozilo();
+								if(isUnosVlasnicke() == true)
+								{
+									prikaziPanelUnosRegistracije();
+								}
+							}							
 						} catch (ParseException e1) {
 							e1.printStackTrace();
 						}
@@ -110,9 +114,6 @@ public class SalterskiRadnikController {
 								dodajRegistraciju();
 								setUnosVlasnicke(false);
 							}
-							/*
-							 * else prikazi da je unio 
-							 * */
 						} catch (ParseException e1) {
 							e1.printStackTrace();
 						}
@@ -160,6 +161,10 @@ public class SalterskiRadnikController {
 	}
 	
 	// Prikazi za buttone iz menija:
+	void prikaziPanelUnosRegistracije()
+	{
+		view.prikaziUnosRegistracije();
+	}
 	void prikaziPanelUnosVozaca()
 	{
 		view.prikaziUnosVozaca();
