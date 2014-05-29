@@ -172,10 +172,12 @@ public class SalterskiRadnikController {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						try {
-							 int reply = JOptionPane.showConfirmDialog(view, "Eventualne promjene nece biti spa\u0161ene. "
-							 		+ "\u017Delite li se odjaviti?", "Odjava", JOptionPane.YES_NO_OPTION);
-						        if (reply == JOptionPane.YES_OPTION) {
-						        	setOdjavaSaltera(true);
+							if(JOptionPane.showOptionDialog(view, "Eventualne promjene nece biti spa\u0161ene. "
+							 		+ "\u017Delite li se odjaviti?",
+									"Potvrda odjave", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+									null, new String[] {"Da", "Ne"}, "default")== JOptionPane.OK_OPTION)
+								{
+							    	setOdjavaSaltera(true);
 									odjaviSkroz();
 									Login view = new Login();
 									LoginModel model = new LoginModel();
@@ -229,9 +231,18 @@ public class SalterskiRadnikController {
 		
 		return model.DodajVozaca(ime, prezime, adresa, mjesto, opcina, pravno, jmbg, idBroj);
 	}
-	public void dodajRegistraciju() throws ParseException 
+	public Boolean dodajRegistraciju() throws ParseException 
 	{
-	}
+		String registracija = view.getRegistracija().getPodaci().getTxtRegistrationString().getText();
+		String jmbgKorisnika = view.getRegistracija().getPodaci().getTxtId().getText();
+		// nek ga samo uzme
+		Integer brojPotvrde = Integer.parseInt(view.getRegistracija().getPodaci().getTxtConfirmationNumber().getText());
+		// dodati date time pickere
+		Date odKad=new SimpleDateFormat("yyyy-MM-dd").parse("1991-2-1");
+		Date doKad=new SimpleDateFormat("yyyy-MM-dd").parse("1992-2-1");
+		
+		return model.DodajRegistraciju(brojPotvrde, registracija, jmbgKorisnika, odKad, doKad);
+	}//
 	public boolean provjeriPopunjenostVozaca() {
 		return true;
 	}
