@@ -28,8 +28,9 @@ public class Vozilo {
 	EkoKarakteristike ekoKarakteristika;
 	Boolean katalizator;
 	Date datumPregleda;
+	String registarskaOznaka;
 	
-	public Vozilo(Integer id, VrstaVozila vrsta, String marka, String tip,
+	public Vozilo(Integer id, String registarskaOznaka, VrstaVozila vrsta, String marka, String tip,
 			String model, String brojSasije, String oblikKaroserije,
 			int godinaProizvodnje, int maxTehnickaDozvoljenaMasa,
 			int masaVozila, int dopustenaNosivost, Motor motor,
@@ -39,6 +40,7 @@ public class Vozilo {
 			Date datumPregleda) {
 		super();
 		this.id = id;
+		this.registarskaOznaka = registarskaOznaka;
 		this.vrsta = vrsta;
 		this.marka = marka;
 		this.tip = tip;
@@ -69,6 +71,12 @@ public class Vozilo {
 		this.id = id;
 	}
 
+	public String getRegOznaka() {
+		return registarskaOznaka;
+	}
+	public void setRegOznaka(String registarskaOznaka) {
+		this.registarskaOznaka = registarskaOznaka;
+	}
 	public VrstaVozila getVrsta() {
 		return vrsta;
 	}

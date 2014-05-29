@@ -10,22 +10,6 @@ import ba.co.edgewise.jmup.enums.VrstaVozila;
 
 public class SalterskiRadnikModelIrma {
 
-	private Vozilo vozilo;
-	private VoziloDAO vDAO;
-	
-	public Vozilo getVozilo() {
-		return vozilo;
-	}
-	public void setVozilo(Vozilo vozilo) {
-		this.vozilo = vozilo;
-	}
-	public VoziloDAO getvDAO() {
-		return vDAO;
-	}
-	public void setvDAO(VoziloDAO vDAO) {
-		this.vDAO = vDAO;
-	}
-	
 	public void dodajVozilo(VrstaVozila vrsta, String marka, String tip,
 			String model, String brojSasije, String oblikKaroserije,
 			int godinaProizvodnje, int maxTehnickaDozvoljenaMasa,
@@ -33,7 +17,8 @@ public class SalterskiRadnikModelIrma {
 			Integer brojMjestaZaStajanje, Integer brojMjestaZaLezanje,
 			EkoKarakteristike ekoKarakteristika, Boolean katalizator,
 			Date datumPregleda, Integer zapreminaMotora, Integer maxSnaga,
-			String vrstaGoriva, String brojMotora, String vrstaMotora) {
+			String vrstaGoriva, String brojMotora, String vrstaMotora) 
+	{
 		//Dodavanje motora
 		Motor motor_temp =  new Motor(0, zapreminaMotora, maxSnaga, vrstaGoriva, brojMotora, vrstaMotora);
 		MotorDAO mDAO_temp = new MotorDAO();
@@ -53,6 +38,7 @@ public class SalterskiRadnikModelIrma {
 			ekoKarakteristika, katalizator,
 			datumPregleda);
 		VoziloDAO vDAO = new VoziloDAO();
+		//Kreiraj vozilo
 		vDAO.create(vozilo);
 	}
 }
