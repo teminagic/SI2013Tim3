@@ -29,7 +29,7 @@ public class SalterskiRadnikView extends JFrame {
 	GridBagConstraints gbc_meni;
 	
 	private VozacDodavanje strana2;
-	private VoziloDodavanje voziloDodavanje;
+	private VoziloDodavanje strana3;
 
 	
 	private final SalterskiRadnikView frejm = this;
@@ -77,22 +77,14 @@ public class SalterskiRadnikView extends JFrame {
 		strana2 = new VozacDodavanje();
 		sadrzaj.getPanelSadrzaj().add(strana2, "Dodavanje voza\u010Da");
 		
+		strana3 = new VoziloDodavanje();
+		sadrzaj.getPanelSadrzaj().add(strana3, "Dodavanje vozila");
+
 		contentPane.add(sadrzaj, gbc_naslov);
 
 	}
 
-	
-	public void prikaziVoziloDodavanje()
-	{
-		contentPane.remove(sadrzaj);
-		sadrzaj = new OpcijaSadrzaj("Unos vozila");
-		voziloDodavanje = new VoziloDodavanje();
-		sadrzaj.getPanelSadrzaj().add(voziloDodavanje, "Unos podataka o vozilu");
-		contentPane.add(sadrzaj, gbc_naslov);
-		frejm.pack();
-		frejm.setVisible(true);
-	}
-	
+
 	
 	public JPanel getContentPane() {
 		return contentPane;///
@@ -117,11 +109,11 @@ public class SalterskiRadnikView extends JFrame {
 		return strana2;
 	}
 	public VoziloDodavanje getVoziloDodavanje() {
-		return voziloDodavanje;
+		return strana3;
 	}
-	public JButton getVoziloDodavanjePrihvatiButton() {
-		return voziloDodavanje.getBtn_prihvati();
-	} 
+	//public JButton getVoziloDodavanjePrihvatiButton() {
+	//	return voziloDodavanje.getBtn_prihvati();
+	//} 
 	public GridBagConstraints getGbc_naslov() {
 		return gbc_naslov;
 	}

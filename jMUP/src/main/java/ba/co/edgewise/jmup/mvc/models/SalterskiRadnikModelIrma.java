@@ -1,5 +1,7 @@
 package ba.co.edgewise.jmup.mvc.models;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import ba.co.edgewise.jmup.klase.*;
 import ba.co.edgewise.jmup.daldao.daos.*;
@@ -32,13 +34,17 @@ public class SalterskiRadnikModelIrma {
 			EkoKarakteristike ekoKarakteristika, Boolean katalizator,
 			Date datumPregleda, Integer zapreminaMotora, Integer maxSnaga,
 			String vrstaGoriva, String brojMotora, String vrstaMotora) {
-
-	
-		Motor motor =  new Motor(0, zapreminaMotora, maxSnaga,vrstaGoriva, brojMotora, vrstaMotora);
+		//Dodavanje motora
+		Motor motor_temp =  new Motor(0, zapreminaMotora, maxSnaga, vrstaGoriva, brojMotora, vrstaMotora);
+		MotorDAO mDAO_temp = new MotorDAO();
+		mDAO_temp.create(motor_temp);
+		//Izvlacenje motora iz baze
+		List<Motor> listaMotora = new ArrayList<Motor>();
 		MotorDAO mDAO = new MotorDAO();
-		mDAO.create(motor);
-		
-		vozilo= new Vozilo(0,vrsta,marka,tip,
+		listaMotora = mDAO.getAll();
+		Motor motor = listaMotora.get(listaMotora.size()-1);
+		//Dodavanje vozila
+		Vozilo vozilo= new Vozilo(0,vrsta,marka,tip,
 			model,brojSasije,oblikKaroserije,
 			godinaProizvodnje, maxTehnickaDozvoljenaMasa,
 			masaVozila,dopustenaNosivost,motor,
@@ -46,7 +52,7 @@ public class SalterskiRadnikModelIrma {
 			brojMjestaZaStajanje, brojMjestaZaLezanje,
 			ekoKarakteristika, katalizator,
 			datumPregleda);
-		vDAO = new VoziloDAO();
-		vDAO.create(vozilo);	
+		VoziloDAO vDAO = new VoziloDAO();
+		vDAO.create(vozilo);
 	}
 }

@@ -619,7 +619,7 @@ public class VoziloDodavanje extends JPanel {
 		osnovniPodaci.add(cb_vrstaVozila, gbc_cb_vrstaVozila);
 
 		cb_gorivo = new JComboBox();
-		cb_gorivo.setModel(new DefaultComboBoxModel(VrstaGoriva.values()));
+		cb_gorivo.setModel(new DefaultComboBoxModel(new String[] {"Benzin", "Benzin/LPG", "Benzin/CNG", "Benzin/elektri\\u010Dni", "Dizel", "Dizel/CNG", "Dizel/elektri\\u010Dni", "Elektri\\u010Dni pogon", "Biodizel", "Etanol", "Metanol", "Hidrogen(vodonik)", "LPG", "CNG"}));
 		GridBagConstraints gbc_cb_gorivo = new GridBagConstraints();
 		gbc_cb_gorivo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cb_gorivo.insets = new Insets(0, 0, 5, 0);
@@ -628,7 +628,7 @@ public class VoziloDodavanje extends JPanel {
 		motorPodaci.add(cb_gorivo, gbc_cb_gorivo);
 
 		cb_vrstaMotora = new JComboBox();
-		cb_vrstaMotora.setModel(new DefaultComboBoxModel(Motor.values()));
+		cb_vrstaMotora.setModel(new DefaultComboBoxModel(new String[] {"OTTO", "DIESEL", "WANKEL", "Elektromotor", "Kombinovani pogon"}));
 		GridBagConstraints gbc_cb_vrstaMotora = new GridBagConstraints();
 		gbc_cb_vrstaMotora.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cb_vrstaMotora.gridx = 1;
@@ -785,5 +785,11 @@ public class VoziloDodavanje extends JPanel {
 	}
 	public JTextField getTb_nosivost() {
 		return tb_nosivost;
+	}
+	public JPanel getOkvirPanel() {
+		return okvirPanel;
+	}
+	public JPanel getButtonPanel() {
+		return buttonPanel;
 	}
 }

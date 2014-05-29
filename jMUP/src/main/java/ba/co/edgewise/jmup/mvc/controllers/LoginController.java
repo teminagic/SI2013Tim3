@@ -90,9 +90,9 @@ public class LoginController {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						SalterskiRadnikModel noviModel = new SalterskiRadnikModel();
+						SalterskiRadnikModelIrma noviModel = new SalterskiRadnikModelIrma();
 						SalterskiRadnikView noviView = new SalterskiRadnikView();
-						SalterskiRadnikController noviController = new SalterskiRadnikController(noviView,noviModel);
+						SalterskiRadnikControllerIrma noviController = new SalterskiRadnikControllerIrma(noviView,noviModel);
 						noviController.control();
 					} catch (Exception e) {
 						e.printStackTrace();
