@@ -22,6 +22,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 		// Posto se radi o create-u, prvo je potrebno saznati podatke koje
 		// zelimo upisati u bazu
 		// Koristimo gettere :D
+		String reg = vozilo.getRegOznaka();
 		String vrsta = vozilo.getVrsta().toString();
 		String marka = vozilo.getMarka();
 		String tip = vozilo.getTip();
@@ -53,8 +54,8 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 							"`OblikKaroserije`,`GodinaProizvodnje` ,`MaxTehnickaDozvoljenaMasa` ,"+
 							"`MasaVozila` , `DopustenaNosivost` , `Motor` , `OdnosSnageIMase` ,"+
 							"`BrojMjestaZaSjedenje` ,`BrojMjestaZaStajanje` ,`BrojMjestaZaLezanje` ," +
-							"`EkoKarakteristikaVozila` ,`Katalizator` ,`DatumPregleda`)" +
-							"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+							"`EkoKarakteristikaVozila` ,`Katalizator` ,`DatumPregleda`,`RegistarskaOznaka`)" +
+							"VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
 			statement.setString(1, vrsta);
 			statement.setString(2, marka);
@@ -74,8 +75,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 			statement.setString(16, ekoKarakteristika.toString());
 			statement.setBoolean(17, katalizator);
 			statement.setDate(18, new java.sql.Date(datumPregleda.getTime()));
-			
-			
+			statement.setString(19, reg);
 
 			statement.executeUpdate();
 			success = true;
@@ -133,6 +133,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 						(qResult.getString("EkoKarakteristikaVozila")));
 				result.setKatalizator(qResult.getBoolean("Katalizator"));
 				result.setDatumPregleda(qResult.getDate("DatumPregleda"));
+				result.setRegOznaka(qResult.getString("RegistarskaOznaka"));
 			}
 
 		} catch (SQLException e) {

@@ -42,15 +42,6 @@ public class SalterskiRadnikControllerIrma {
 	}
 	
 	public void control() {
-		// Listener za unos vozila
-			JButton unosVozila = this.view.getMeni().getOpcije().getBtnUnosVozila();
-			unosVozila.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					prikaziPanelUnosVozila();
-					};			
-			});
-			
 			// Listener za pocetnu
 			JButton pocetna= this.view.getMeni().getOpcije().getBtnPocetna();
 			pocetna.addMouseListener(new MouseAdapter() {
@@ -59,38 +50,28 @@ public class SalterskiRadnikControllerIrma {
 					prikaziPanelPocetnu();
 					};		
 			});
-			
+//UNOS VOZILA
+			JButton unosVozila = this.view.getMeni().getOpcije().getBtnUnosVozila();
+			unosVozila.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					prikaziPanelUnosVozila();
+					};			
+			});
+						
 			JButton dodavanje_vozila = this.view.getVoziloDodavanje().getBtn_prihvati();
 			dodavanje_vozila.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					try {
-						dodajVozilo();
+						if(provjeriPopunjenostUnosVozila()) dodajVozilo();
 					} catch (ParseException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-
-			/*	MotorDAO mDAO = new MotorDAO();
-					Motor motor = mDAO.getAll().get(1);
-					Vozilo v = new Vozilo(null, VrstaVozila.PUTNICKI_AUTOMOBIL, "Irma", "limuzina",
-							"A1", "aaa54", "oblikkaroserije", 2013, 4500,
-							3000, 1500, motor, 5.1, 5, 0, 0, EkoKarakteristike.EURO2, true, new Date());
-					
-						VoziloDAO vDAO = new VoziloDAO();
-						vDAO.create(v);*/
 				}
 			});
 			
 		}
-///
-	void prikaziPanelUnosVozila()
-	{
-		view.getSadrzaj().getNaslov().postaviNaslov("Dodavanje vozila");
-		JPanel cards = view.getSadrzaj().getPanelSadrzaj();
-		CardLayout tmp = (CardLayout)cards.getLayout();
-		tmp.show(cards, "Dodavanje vozila");
-	}
 	void prikaziPanelPocetnu()
 	{
 		view.getSadrzaj().getNaslov().postaviNaslov("Po\u010Detna");
@@ -98,10 +79,15 @@ public class SalterskiRadnikControllerIrma {
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Po\u010Detna");
 	}
-		
-		//Dodavanje novog vozila
-			
-	public boolean provjeriPopunjenost() {
+	void prikaziPanelUnosVozila()
+	{
+		view.getSadrzaj().getNaslov().postaviNaslov("Dodavanje vozila");
+		JPanel cards = view.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Dodavanje vozila");
+	}
+
+	public boolean provjeriPopunjenostUnosVozila() {
 		return true;
 	}
 	public void dodajVozilo() throws ParseException 
