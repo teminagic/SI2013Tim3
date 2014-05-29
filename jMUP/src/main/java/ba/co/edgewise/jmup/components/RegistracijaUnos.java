@@ -73,5 +73,11 @@ public class RegistracijaUnos extends JPanel {
 	public JButton getBtnPoniti() {
 		return btnPoniti;
 	}
+	public PodaciRegistracija getPodaci() {
+		return podaci;
+	}
+	public JPanel getPanel() {
+		return panel;
+	}
 
 }
