@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ba.co.edgewise.jmup.components.KorisnikKreiranje;
+import ba.co.edgewise.jmup.components.KorisnikModificiranje;
 import ba.co.edgewise.jmup.components.KorisnikPretraga;
 import ba.co.edgewise.jmup.components.MeniAdmin;
 import ba.co.edgewise.jmup.components.NaslovnaAdministrator;
@@ -26,11 +27,8 @@ public class Administrator extends JFrame {
 	private NaslovnaAdministrator strana1;
 	private KorisnikKreiranje strana2;
 	private KorisnikPretraga strana3;
+	KorisnikModificiranje strana4;
 
-	
-	/**
-	 * Create the frame.
-	 */
 	public Administrator() {
 		initialize();
 		
@@ -57,6 +55,9 @@ public class Administrator extends JFrame {
 		
 		strana3 = new KorisnikPretraga();
 		sadrzaj.getPanelSadrzaj().add(strana3, "Pretraga korisnika");
+		
+		strana4 = new KorisnikModificiranje();
+		sadrzaj.getPanelSadrzaj().add(strana4, "Modificiranje korisnika");
 		
 		contentPane.add(sadrzaj, gbc_sadrzaj);	
 	}
@@ -91,5 +92,8 @@ public class Administrator extends JFrame {
 	}
 	public KorisnikPretraga getStrana3() {
 		return strana3;
+	}
+	public KorisnikModificiranje getStrana4() {
+		return strana4;
 	}
 }

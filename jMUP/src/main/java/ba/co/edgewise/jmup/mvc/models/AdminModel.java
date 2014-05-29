@@ -13,6 +13,10 @@ public class AdminModel {
 	public Boolean kreiranjeKorisnika(){
 		return uDAO.create(uposlenik);
 	}
+	
+	public Boolean modifikovanjeKorisnika(){
+		return uDAO.update(uposlenik.getId(), uposlenik);
+	}
 	public ArrayList<Uposlenik> dohvatiSveUsere() {
 		return uDAO.getAll();
 	}

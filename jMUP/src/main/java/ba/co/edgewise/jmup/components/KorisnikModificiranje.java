@@ -4,8 +4,9 @@ import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
+
 import ba.co.edgewise.jmup.enums.*;
-import ba.co.edgewise.jmup.klase.*;
+import ba.co.edgewise.jmup.klase.Uposlenik;
 
 public class KorisnikModificiranje extends JPanel {
 
@@ -29,13 +30,11 @@ public class KorisnikModificiranje extends JPanel {
 	private JComboBox cbStatusKorisnickogRacuna;
 	@SuppressWarnings("rawtypes")
 	private JComboBox cbTipKorisnickogRacuna;
-	private Uposlenik _uposlenik;
+	private Uposlenik uposlenik;
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public KorisnikModificiranje(Uposlenik uposlenik) {
+	public KorisnikModificiranje() {
 		
-		setBorder(null);
-		this._uposlenik = uposlenik;
+		this.setUposlenik(new Uposlenik());
 		
 		//methods for layout initialization
 		layoutSet();
@@ -190,6 +189,7 @@ public class KorisnikModificiranje extends JPanel {
 		
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void comboBoxSet() {
 		
 		cbTipKorisnickogRacuna = new JComboBox(TipUposlenika.values());
@@ -201,8 +201,7 @@ public class KorisnikModificiranje extends JPanel {
 		gbc_cbTipKorisnickogRacuna.gridy = 5;
 		panel.add(cbTipKorisnickogRacuna, gbc_cbTipKorisnickogRacuna);
 		
-		cbStatusKorisnickogRacuna = new JComboBox();
-		cbStatusKorisnickogRacuna.setModel(new DefaultComboBoxModel(new String[] {"Aktivan", "Neaktivan"}));
+		cbStatusKorisnickogRacuna = new JComboBox(Status.values());
 		GridBagConstraints gbc_cbStatusKorisnickogRacuna = new GridBagConstraints();
 		gbc_cbStatusKorisnickogRacuna.gridwidth = 2;
 		gbc_cbStatusKorisnickogRacuna.fill = GridBagConstraints.HORIZONTAL;
@@ -213,7 +212,7 @@ public class KorisnikModificiranje extends JPanel {
 	
 	public void buttonSet() {
 		
-		btnPronadji = new JButton("Prona�i");
+		btnPronadji = new JButton("Prona\u0111i");
 		GridBagConstraints gbc_btnPronadji = new GridBagConstraints();
 		gbc_btnPronadji.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnPronadji.insets = new Insets(0, 0, 5, 0);
@@ -231,15 +230,25 @@ public class KorisnikModificiranje extends JPanel {
 	}
 	
 	// methods
-	public void PopuniUposlenika () {
-		
-		this.tfIme.setText(_uposlenik.getIme());
-		this.tfPrezime.setText(_uposlenik.getPrezime());
-		this.tfKorisnickoIme.setText(_uposlenik.getKorisnickoIme());
-		this.tfSifra.setText(_uposlenik.getPassword());
-		this.cbStatusKorisnickogRacuna.setSelectedItem(_uposlenik.getStatus());
-		this.cbTipKorisnickogRacuna.setSelectedItem(_uposlenik.getTip());
+	public void postaviVrijednosti()
+	{
+		this.tfIme.setText(this.getUposlenik().getIme());
+		this.tfPrezime.setText(this.getUposlenik().getPrezime());
+		this.tfKorisnickoIme.setText(this.getUposlenik().getKorisnickoIme());
+		this.tfSifra.setText(this.getUposlenik().getPassword());
+		this.cbTipKorisnickogRacuna.setSelectedItem(this.getUposlenik().getTip());
+		this.cbStatusKorisnickogRacuna.setSelectedItem(this.getUposlenik().getStatus());
 	}
+	
+	public void postaviKorisnika () {
+		this.getUposlenik().setIme(this.tfIme.getText());
+		this.getUposlenik().setPrezime(this.tfPrezime.getText());
+		this.getUposlenik().setKorisnickoIme(this.tfKorisnickoIme.getText());
+		this.getUposlenik().setPassword(this.tfSifra.getText());
+		this.getUposlenik().setStatus((Status)this.cbStatusKorisnickogRacuna.getSelectedItem());
+		this.getUposlenik().setTip((TipUposlenika)this.cbTipKorisnickogRacuna.getSelectedItem());
+	}
+
 	
 	//getters & setters
 	public JButton getBtPronadji() {
@@ -276,5 +285,13 @@ public class KorisnikModificiranje extends JPanel {
 	@SuppressWarnings("rawtypes")
 	public JComboBox getCbStatusKorisnickogRacuna() {
 		return cbStatusKorisnickogRacuna;
+	}
+
+	public Uposlenik getUposlenik() {
+		return uposlenik;
+	}
+
+	public void setUposlenik(Uposlenik uposlenik) {
+		this.uposlenik = uposlenik;
 	}
 }

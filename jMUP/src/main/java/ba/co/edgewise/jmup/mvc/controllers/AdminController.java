@@ -49,7 +49,21 @@ public class AdminController {
 			}
 		});
 		
-		//JButton modifikuj = view.getStrana3().getBtnModifikuj();
+		JButton modifikuj = view.getStrana3().getBtnModifikuj();
+		modifikuj.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				nextModificiranje();
+			}
+		});
+		
+		JButton spasiModifikacije = view.getStrana4().getBtSpasiuposlenika();
+		spasiModifikacije.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				spasiModifikacije();
+			}
+		});
 		//JButton izbrisi = view.getStrana3().getBtnIzbrisiKorisnika();
 		
 		JTable table = view.getStrana3().getTable();
@@ -92,6 +106,17 @@ public class AdminController {
 		});
 	}
 
+	private void nextModificiranje() {
+		int rowSelected = view.getStrana3().getTable().getSelectedRow();
+		Uposlenik temp = view.getStrana3().getModel().getData().get(rowSelected);
+		view.getStrana4().setUposlenik(temp);
+		view.getStrana4().postaviVrijednosti();
+		view.getSadrzaj().getNaslov().postaviNaslov("Modificiranje korisnika");
+		JPanel cards = view.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout) cards.getLayout();
+		tmp.show(cards, "Modificiranje korisnika");
+	}
+	
 	private void nextPocetna() {
 		view.getSadrzaj().getNaslov().postaviNaslov("Po\u010Detna");
 		JPanel cards = view.getSadrzaj().getPanelSadrzaj();
@@ -134,14 +159,21 @@ public class AdminController {
 					new String[] { "Uredu" }, "default");
 		} else {
 			JOptionPane.showOptionDialog(view,
-					"Do\u0161lo je do gre\u0161ke u upisivanju u bazu. "
-							+ "Molimo vas da poku�ate ponovo",
+					"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
+							+ "Molimo vas da poku\u0161ate ponovo",
 					"Kreiranje korisnika", JOptionPane.OK_OPTION,
 					JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
 					"default");
 		};
 	}
-	//////
+	
+	private void spasiModifikacije(){
+		view.getStrana4().postaviKorisnika();
+		model.setUposlenik(view.getStrana4().getUposlenik());
+		model.modifikovanjeKorisnika();
+		nextPretraga();
+	}
+	
 	private void pretraziKorisnike() {
 		view.getStrana3().getModel().clearAll();
 		String kriterij = view.getStrana3().getTfPodaci().getText();
