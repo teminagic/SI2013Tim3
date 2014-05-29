@@ -74,7 +74,7 @@ public class SalterskiRadnikView extends JFrame {
 		gbc_naslov.anchor = GridBagConstraints.NORTH;
 		gbc_naslov.fill = GridBagConstraints.HORIZONTAL;
 		
-		//Ovdje dodajes sve card-ove
+		//Ovdje dodajmo sve card-ove
 		strana1 = new NaslovnaSalterski();
 		sadrzaj.getPanelSadrzaj().add(strana1, "Po\u010Detna");
 		
@@ -88,7 +88,7 @@ public class SalterskiRadnikView extends JFrame {
 		sadrzaj.getPanelSadrzaj().add(strana6, "Pretraga");
 		
 		strana4Registracija = new RegistracijaUnos();
-		sadrzaj.getPanelSadrzaj().add(strana4Registracija,"Upis registracije");
+		sadrzaj.getPanelSadrzaj().add(strana4Registracija,"Unos registracije");
 		
 		strana6 = new SalterskaPretraga();
 		sadrzaj.getPanelSadrzaj().add(strana6, "Pretraga");
@@ -110,7 +110,7 @@ public class SalterskiRadnikView extends JFrame {
 	}
 	public void prikaziUnosVozila()
 	{
-		this.getSadrzaj().getNaslov().postaviNaslov("Dodavanje vozila");
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Dodavanje vozila");
 		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Dodavanje vozila");
@@ -164,8 +164,6 @@ public class SalterskiRadnikView extends JFrame {
 	public GridBagConstraints getGbc_meni() {
 		return gbc_meni;
 	}
-
-
 	public RegistracijaUnos getRegistracija() {
 		return strana4Registracija;
 	}

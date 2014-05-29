@@ -61,9 +61,10 @@ public class SalterskiRadnikController {
 						if(provjeriPopunjenostVozaca()){							
 								dodajVozaca();
 								
-								// logika za: unos vlasnice posto se ovaj panel pojavljuje :D
+								// logika za: unos vlasnicke posto se ovaj panel pojavljuje :D
 								if(isUnosVlasnicke() == true)
 								{
+									prikaziPanelUnosRegistracije();
 									prikaziPanelUnosVozila();
 								}
 								
@@ -91,6 +92,7 @@ public class SalterskiRadnikController {
 							if(provjeriPopunjenostUnosVozila()) 
 							{
 								dodajVozilo();
+								
 								if(isUnosVlasnicke() == true)
 								{
 									prikaziPanelUnosRegistracije();
@@ -108,15 +110,13 @@ public class SalterskiRadnikController {
 				dodavanjeRegistracije.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						try {
+
 							if(provjeriPopunjenostRegistracije()) 
 							{
-								dodajRegistraciju();
+								//dodajRegistraciju();
 								setUnosVlasnicke(false);
 							}
-						} catch (ParseException e1) {
-							e1.printStackTrace();
-						}
+						
 					}
 				});
 				
@@ -152,10 +152,9 @@ public class SalterskiRadnikController {
 		
 		model.DodajVozaca(ime, prezime, adresa, mjesto, opcina, pravno, jmbg, idBroj);
 	}
-	public void dodajRegistraciju() throws ParseException 
+	/*public void dodajRegistraciju() throws ParseException 
 	{
-		
-	}
+	}*/
 	public boolean provjeriPopunjenostVozaca() {
 		return true;
 	}
