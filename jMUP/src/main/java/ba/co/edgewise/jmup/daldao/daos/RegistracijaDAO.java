@@ -4,13 +4,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
+import ba.co.edgewise.jmup.klase.Osoba;
 import ba.co.edgewise.jmup.klase.Registracija;
+import ba.co.edgewise.jmup.klase.Vozilo;
 
 public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 
@@ -31,7 +35,6 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 			PreparedStatement statement = connection
 					.prepareStatement("INSERT INTO `Registracija`(`RegistarskaOznaka`, 'Od',"
 							+ "'Do', 'Vozilo', 'Osoba') VALUES (?, ?, ?, ?, ?)");
-
 			statement.setString(1, regOznaka);
 			statement.setDate(2, new java.sql.Date(datumRegist.getTime()));
 			statement.setDate(3, new java.sql.Date(datumIsteka.getTime()));
@@ -199,5 +202,17 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 		
 		return success;
 	}
-
+	/*
+	public static void main(String[] args) throws ParseException {
+		RegistracijaDAO rDAO = new RegistracijaDAO();
+		VoziloDAO vDAO = new VoziloDAO();
+		OsobaDAO oDAO = new OsobaDAO();
+		Vozilo v = vDAO.getByReg("87");
+		Osoba o = oDAO.getByJMBG("11111");
+		Date odKad=new SimpleDateFormat("yyyy-MM-dd").parse("1991-2-1");
+		Date doKad=new SimpleDateFormat("yyyy-MM-dd").parse("1992-2-1");
+		Registracija r = new Registracija(5, "a-a",odKad, doKad, v,o);
+		System.out.print(rDAO.create(r));
+	}
+	*/
 }
