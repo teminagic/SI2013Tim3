@@ -519,7 +519,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 		} finally {
 			ConnectionManager.closeConnection(connection);
 		}
-
+//
 		return success;
 	}
 
