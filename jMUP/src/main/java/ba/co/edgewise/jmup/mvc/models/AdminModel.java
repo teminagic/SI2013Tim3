@@ -17,6 +17,11 @@ public class AdminModel {
 	public Boolean modifikovanjeKorisnika(){
 		return uDAO.update(uposlenik.getId(), uposlenik);
 	}
+	
+	public Boolean brisanjeKorisnika(){
+		return uDAO.delete(uposlenik.getId());
+	}
+	
 	public ArrayList<Uposlenik> dohvatiSveUsere() {
 		return uDAO.getAll();
 	}
