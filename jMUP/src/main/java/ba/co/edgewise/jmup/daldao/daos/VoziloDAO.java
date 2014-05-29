@@ -159,7 +159,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 		try {
 			PreparedStatement statement = connection
 					.prepareStatement("SELECT * " + "FROM Vozilo "
-							+ "RegOznaka  = ?");
+							+ "WHERE RegOznaka  = ?");
 
 			statement.setString(1, reg);
 			qResult = statement.executeQuery();
