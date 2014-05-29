@@ -54,7 +54,7 @@ public class NaslovnaAdministrator extends JPanel {
 	}
 	public void panelSet(){
 		
-		lblDobrodoslice = new JLabel("Dobrodošao/la!");
+		lblDobrodoslice = new JLabel("Dobrodo\u0161ao/la!");
 		lblDobrodoslice.setFont(new Font("Tahoma", Font.BOLD, 32));
 		GridBagConstraints gbc_lblDobrodoslice = new GridBagConstraints();
 		gbc_lblDobrodoslice.gridwidth = 6;
@@ -180,7 +180,7 @@ public class NaslovnaAdministrator extends JPanel {
 		gbc_btnPrethodna.gridy = 6;
 		add(btnPrethodna, gbc_btnPrethodna);
 		
-		btnSljedeca = new JButton("Sljedeća  >>");
+		btnSljedeca = new JButton("Sljede\u0107a  >>");
 		GridBagConstraints gbc_btnSljedeca = new GridBagConstraints();
 		gbc_btnSljedeca.anchor = GridBagConstraints.SOUTH;
 		gbc_btnSljedeca.insets = new Insets(0, 0, 5, 5);

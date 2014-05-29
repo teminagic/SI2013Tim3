@@ -13,6 +13,7 @@ import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import java.awt.image.BufferedImage;
 
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
+import ba.co.edgewise.jmup.enums.Status;
 import ba.co.edgewise.jmup.enums.TipUposlenika;
 import ba.co.edgewise.jmup.klase.Uposlenik;
 
@@ -26,7 +27,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 		BufferedImage slikaKorisnika = uposlenik.getSlikaKorisnika();
 		String korisnickoIme = uposlenik.getKorisnickoIme();
 		String password = uposlenik.getPassword();
-		Boolean status = uposlenik.getStatus();
+		Status status = uposlenik.getStatus();
 
 		TipUposlenikaDAO tuDAO = new TipUposlenikaDAO();
 		int tip = tuDAO.getID(uposlenik.getTip());
@@ -44,7 +45,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 			// Treba dodati sliku
 			statement.setString(3, korisnickoIme);
 			statement.setString(4, password);
-			statement.setBoolean(5, status);
+			statement.setString(5, status.toString());
 			statement.setInt(6, tip);
 			statement.executeUpdate();
 			success = true; // - treba se srediti slika :)
@@ -64,7 +65,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 		ResultSet qResult = null;
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("SELECT * FROM Uposlenik WHERE IdKorisnika = ?");
+					.prepareStatement("SELECT * FROM Uposlenik WHERE IdUposlenika = ?");
 			statement.setInt(1, id);
 			qResult = statement.executeQuery();
 			if (qResult.next()) {
@@ -73,7 +74,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 				// Sliku dodati
 				result.setKorisnickoIme(qResult.getString("KorisnickoIme"));
 				result.setPassword(qResult.getString("Sifra"));
-				result.setStatus(qResult.getBoolean("StatusKorisnika"));
+				result.setStatus(Status.getStatus(qResult.getString("StatusKorisnika")));
 
 				// Tip uposlenika enum
 				int idTipa = qResult.getInt("TipKorisnika");
@@ -105,7 +106,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 				// Sliku dodati
 				result.setKorisnickoIme(qResult.getString("KorisnickoIme"));
 				result.setPassword(qResult.getString("Sifra"));
-				result.setStatus(qResult.getBoolean("StatusKorisnika"));
+				result.setStatus(Status.getStatus(qResult.getString("StatusKorisnika")));
 				// Tip uposlenika enum
 				int idTipa = qResult.getInt("TipKorisnika");
 				TipUposlenikaDAO tipDAO = new TipUposlenikaDAO();
@@ -139,7 +140,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 				uposlenik.setKorisnickoIme(qResult.getString("KorisnickoIme"));
 				uposlenik.setPassword(qResult.getString("Sifra"));
 				// Provjeriti je li moze ovo getBoolean
-				uposlenik.setStatus(qResult.getBoolean("StatusKorisnika"));
+				uposlenik.setStatus(Status.getStatus(qResult.getString("StatusKorisnika")));
 				// Tip uposlenika enum
 				int idTipa = qResult.getInt("TipKorisnika");
 				TipUposlenikaDAO tipDAO = new TipUposlenikaDAO();
@@ -164,7 +165,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 		// BufferedImage slikaKorisnika=uposlenik.getSlikaKorisnika();
 		String korisnickoIme = uposlenik.getKorisnickoIme();
 		String password = uposlenik.getPassword();
-		Boolean status = uposlenik.getStatus();
+		Status status = uposlenik.getStatus();
 
 		TipUposlenikaDAO tuDAO = new TipUposlenikaDAO();
 		int tip = tuDAO.getID(uposlenik.getTip());
@@ -177,13 +178,13 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 					.prepareStatement("UPDATE `Uposlenik`"
 							+ " SET Ime = ?, Prezime = ?, KorisnickoIme = ?, Sifra = ?,"
 							+ " StatusKorisnika = ?, TipKorisnika = ?"
-							+ " WHERE IDKorisnika = ?");
+							+ " WHERE IDUposlenika = ?");
 			statement.setString(1, ime);
 			statement.setString(2, prezime);
 			// Treba dodati sliku
 			statement.setString(3, korisnickoIme);
 			statement.setString(4, password);
-			statement.setBoolean(5, status);
+			statement.setString(5, status.toString());
 			statement.setInt(6, tip);
 			statement.setInt(7, id);
 
@@ -204,7 +205,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 		Connection connection = manager.getConnection();
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("DELETE FROM Uposlenik WHERE IDKorisnika = ?;");
+					.prepareStatement("DELETE FROM Uposlenik WHERE IDUposlenika = ?;");
 			statement.setInt(1, id);
 			statement.executeUpdate();
 			success = true;
@@ -217,7 +218,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 	}
 
 	public static void main(String[] args) {
-		Uposlenik u = new Uposlenik(1, "Irma", "Balic", "IrmaB", "pass", true,
+		Uposlenik u = new Uposlenik(1, "Irma", "Balic", "IrmaB", "pass", Status.AKTIVAN,
 				TipUposlenika.MENADZER);
 		UposlenikDAO udao = new UposlenikDAO();
 		udao.update(3, u);

@@ -1,13 +1,16 @@
 package ba.co.edgewise.jmup.components;
 
 import java.awt.*;
+
 import javax.swing.*;
 import javax.swing.border.*;
+
 import ba.co.edgewise.jmup.enums.*;
 
 public class KorisnikKreiranje extends JPanel {
 
 	private static final long serialVersionUID = 6759069118421147031L;
+	
 	private JPanel panel;
 	private JLabel label;
 	private JLabel label_1;
@@ -20,14 +23,13 @@ public class KorisnikKreiranje extends JPanel {
 	private JTextField tfKorisnickoIme;
 	private JTextField tfSlika;
 	private JTextField tfPrezime;
-	private JTextField tfSifra;
+	private JPasswordField pwdSifra;
 	private JButton btnPronadji;
 	private JButton btnSpasiKorisnika;
 	@SuppressWarnings("rawtypes")
 	private JComboBox cbStatusKorisnickogRacuna;
 	@SuppressWarnings("rawtypes")
 	private JComboBox cbTipKorisnickogRacuna;
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	
 	
 	public KorisnikKreiranje() {
@@ -174,18 +176,19 @@ public class KorisnikKreiranje extends JPanel {
 		gbc_tfKorisnickoIme.gridy = 3;
 		panel.add(tfKorisnickoIme, gbc_tfKorisnickoIme);
 		
-		tfSifra = new JTextField();
-		tfSifra.setColumns(10);
-		GridBagConstraints gbc_tfSifra = new GridBagConstraints();
-		gbc_tfSifra.gridwidth = 2;
-		gbc_tfSifra.insets = new Insets(0, 0, 5, 0);
-		gbc_tfSifra.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tfSifra.gridx = 1;
-		gbc_tfSifra.gridy = 4;
-		panel.add(tfSifra, gbc_tfSifra);
+		pwdSifra = new JPasswordField();
+		pwdSifra.setColumns(10);
+		GridBagConstraints gbc_pwdSifra = new GridBagConstraints();
+		gbc_pwdSifra.gridwidth = 2;
+		gbc_pwdSifra.insets = new Insets(0, 0, 5, 0);
+		gbc_pwdSifra.fill = GridBagConstraints.HORIZONTAL;
+		gbc_pwdSifra.gridx = 1;
+		gbc_pwdSifra.gridy = 4;
+		panel.add(pwdSifra, gbc_pwdSifra);
 		
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void comboBoxSet() {
 		
 		cbTipKorisnickogRacuna = new JComboBox(TipUposlenika.values());
@@ -197,7 +200,7 @@ public class KorisnikKreiranje extends JPanel {
 		gbc_cbTipKorisnickogRacuna.gridy = 5;
 		panel.add(cbTipKorisnickogRacuna, gbc_cbTipKorisnickogRacuna);
 		
-		cbStatusKorisnickogRacuna = new JComboBox(new DefaultComboBoxModel(new String[] {"Aktivan", "Neaktivan"}));
+		cbStatusKorisnickogRacuna = new JComboBox(Status.values());
 		GridBagConstraints gbc_cbStatusKorisnickogRacuna = new GridBagConstraints();
 		gbc_cbStatusKorisnickogRacuna.gridwidth = 2;
 		gbc_cbStatusKorisnickogRacuna.fill = GridBagConstraints.HORIZONTAL;
@@ -249,10 +252,7 @@ public class KorisnikKreiranje extends JPanel {
 	public JTextField getTfKorisnickoIme() {
 		return tfKorisnickoIme;
 	}
-
-	public JTextField getTfSifra() {
-		return tfSifra;
-	}
+	
 	@SuppressWarnings("rawtypes")
 	public JComboBox getCbTipKorisnickogRacuna() {
 		return cbTipKorisnickogRacuna;
@@ -260,5 +260,8 @@ public class KorisnikKreiranje extends JPanel {
 	@SuppressWarnings("rawtypes")
 	public JComboBox getCbStatusKorisnickogRacuna() {
 		return cbStatusKorisnickogRacuna;
+	}
+	public JPasswordField getPwdSifra() {
+		return pwdSifra;
 	}
 }

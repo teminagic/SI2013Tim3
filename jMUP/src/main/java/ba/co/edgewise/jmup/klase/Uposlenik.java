@@ -2,6 +2,7 @@ package ba.co.edgewise.jmup.klase;
 
 import java.awt.image.*;
 
+import ba.co.edgewise.jmup.enums.Status;
 import ba.co.edgewise.jmup.enums.TipUposlenika;
 
 public class Uposlenik {
@@ -14,11 +15,11 @@ public class Uposlenik {
 	private BufferedImage slikaKorisnika;
 	private String korisnickoIme;
 	private String password;
-	private Boolean status; // aktivan = true ili neaktivan = false
+	private Status status; // aktivan = true ili neaktivan = false
 	private TipUposlenika tip;
 	
 	// Konstruktor sa parametrima
-	public Uposlenik(int id, String ime, String prezime, BufferedImage slikaKorisnika, String korisnickoIme, String password, Boolean status, TipUposlenika tip)
+	public Uposlenik(int id, String ime, String prezime, BufferedImage slikaKorisnika, String korisnickoIme, String password, Status status, TipUposlenika tip)
 	{
 		this.setId(id);
 		this.setIme(ime);
@@ -30,7 +31,7 @@ public class Uposlenik {
 		this.setTip(tip);
 	}
 	// Konstruktor bez slike - Irma dodala za probu :)
-	public Uposlenik(int id, String ime, String prezime, String korisnickoIme, String password, Boolean status, TipUposlenika tip)
+	public Uposlenik(int id, String ime, String prezime, String korisnickoIme, String password, Status status, TipUposlenika tip)
 	{
 		this.setId(id);
 		this.setIme(ime);
@@ -80,10 +81,10 @@ public class Uposlenik {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Boolean getStatus() {
+	public Status getStatus() {
 		return status;
 	}
-	public void setStatus(Boolean status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 	public TipUposlenika getTip() {

@@ -35,7 +35,7 @@ public class LoginController {
 		windowControler = new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				if(JOptionPane.showOptionDialog(view, "Da li želite izaći iz aplikacije?",
+				if(JOptionPane.showOptionDialog(view, "Da li \u017Eelite iza\u0107i iz aplikacije?",
 						"Potvrda izlaza", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
 						null, new String[] {"Da", "Ne"}, "default") 
 						== JOptionPane.OK_OPTION){
@@ -75,7 +75,7 @@ public class LoginController {
 					try {
 						Administrator noviView = new Administrator();
 						AdminModel noviModel = new AdminModel();
-						AdminController noviController = new AdminController();
+						AdminController noviController = new AdminController(noviView,noviModel);
 						noviController.control();
 					} catch (Exception e) {
 						e.printStackTrace();
