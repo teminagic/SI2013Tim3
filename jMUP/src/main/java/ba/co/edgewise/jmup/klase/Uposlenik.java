@@ -95,6 +95,6 @@ public class Uposlenik {
 	}
 	
 	public Object[] toObjectArray() {
-		return new Object[]{this.ime, this.prezime, this.password, this.tip, this.status};
+		return new Object[]{this.ime, this.prezime, this.korisnickoIme, this.tip, this.status};
 	}
 }

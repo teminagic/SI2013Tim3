@@ -64,7 +64,14 @@ public class AdminController {
 				spasiModifikacije();
 			}
 		});
-		//JButton izbrisi = view.getStrana3().getBtnIzbrisiKorisnika();
+		
+		JButton izbrisi = view.getStrana3().getBtnIzbrisiKorisnika();
+		izbrisi.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				izbrisiKorisnika();
+			}
+		});
 		
 		JTable table = view.getStrana3().getTable();
 		
@@ -170,7 +177,41 @@ public class AdminController {
 	private void spasiModifikacije(){
 		view.getStrana4().postaviKorisnika();
 		model.setUposlenik(view.getStrana4().getUposlenik());
-		model.modifikovanjeKorisnika();
+		if (model.modifikovanjeKorisnika()) {
+			if(JOptionPane.showOptionDialog(view, "Korisnik uspje\u0161no modificiran.",
+					"Kreiranje korisnika", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default")==JOptionPane.OK_OPTION)
+				nextPretraga();
+		} else {
+			JOptionPane.showOptionDialog(view,
+					"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
+							+ "Molimo vas da poku\u0161ate ponovo",
+					"Kreiranje korisnika", JOptionPane.OK_OPTION,
+					JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+					"default");
+		};
+		
+	}
+	
+	private void izbrisiKorisnika(){
+		int rowSelected = view.getStrana3().getTable().getSelectedRow();
+		Uposlenik temp = view.getStrana3().getModel().getData().get(rowSelected);
+		model.setUposlenik(temp);
+		if (model.brisanjeKorisnika()) {
+			if(JOptionPane.showOptionDialog(view, "Korisnik uspje\u0161no izbrisan.",
+					"Kreiranje korisnika", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default") == JOptionPane.OK_OPTION)
+				nextPretraga();
+		} else {
+			JOptionPane.showOptionDialog(view,
+					"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
+							+ "Molimo vas da poku\u0161ate ponovo",
+					"Kreiranje korisnika", JOptionPane.OK_OPTION,
+					JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+					"default");
+		};
 		nextPretraga();
 	}
 	
