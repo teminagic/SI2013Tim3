@@ -43,6 +43,14 @@ public class AdminController {
 				nextKreiranje();
 			}
 		});
+		
+		JButton spasiKorisnika = view.getStrana2().getBtSpasiKorisnika();
+		spasiKorisnika.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				postaviIKreirajKorisnika();
+			}
+		});
 	}
 	
 	private void nextPocetna(){
