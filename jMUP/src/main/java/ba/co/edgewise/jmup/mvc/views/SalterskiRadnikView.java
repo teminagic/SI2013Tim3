@@ -1,6 +1,7 @@
 package ba.co.edgewise.jmup.mvc.views;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -84,7 +85,27 @@ public class SalterskiRadnikView extends JFrame {
 
 	}
 
-
+	public void prikaziPocetnu(){
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Po\u010Detna");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Po\u010Detna");
+	}
+	public void prikaziUnosVozila()
+	{
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Dodavanje vozila");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Dodavanje vozila");
+	}
+	public void prikaziUnosVozaca()
+	{
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Dodavanje voza\u010Da");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Dodavanje voza\u010Da");
+	}
+	
 	
 	public JPanel getContentPane() {
 		return contentPane;///

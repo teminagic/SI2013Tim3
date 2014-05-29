@@ -134,25 +134,16 @@ public class SalterskiRadnikController {
 	// Prikazi za buttone iz menija:
 	void prikaziPanelUnosVozaca()
 	{
-		view.getSadrzaj().getNaslov().postaviNaslov("Dodavanje voza\u010Da");
-		JPanel cards = view.getSadrzaj().getPanelSadrzaj();
-		CardLayout tmp = (CardLayout)cards.getLayout();
-		tmp.show(cards, "Dodavanje voza\u010Da");
+		view.prikaziUnosVozaca();
 	}
 	void prikaziPanelPocetnu()
 	{
-		view.getSadrzaj().getNaslov().postaviNaslov("Po\u010Detna");
-		JPanel cards = view.getSadrzaj().getPanelSadrzaj();
-		CardLayout tmp = (CardLayout)cards.getLayout();
-		tmp.show(cards, "Po\u010Detna");
+		view.prikaziPocetnu();
 	}
 	//VOZILO
 	void prikaziPanelUnosVozila()
 	{
-		view.getSadrzaj().getNaslov().postaviNaslov("Dodavanje vozila");
-		JPanel cards = view.getSadrzaj().getPanelSadrzaj();
-		CardLayout tmp = (CardLayout)cards.getLayout();
-		tmp.show(cards, "Dodavanje vozila");
+		view.prikaziUnosVozila();
 	}
 
 	public boolean provjeriPopunjenostUnosVozila() {
