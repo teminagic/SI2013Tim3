@@ -8,6 +8,7 @@ public class AdminModel {
 	private UposlenikDAO uDAO;
 	
 	public Boolean kreiranjeKorisnika(){
+		uDAO = new UposlenikDAO();
 		return uDAO.create(uposlenik);
 	}
 	
