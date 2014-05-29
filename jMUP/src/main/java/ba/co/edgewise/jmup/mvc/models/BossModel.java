@@ -6,6 +6,9 @@ import java.util.List;
 
 import ba.co.edgewise.jmup.klase.*;
 import ba.co.edgewise.jmup.daldao.daos.*;
+import java.io.FileOutputStream;
+
+import javax.swing.text.Document;
 
 public class BossModel {
 	
@@ -13,6 +16,7 @@ public class BossModel {
 	private SaobracajnaDAO _saobracajnaDAO;
 	private VoziloDAO _voziloDAO;
 	private OsobaDAO _osobaDAO;
+	private MotorDAO _motorDAO;
 	
 	
 	public BossModel() {
@@ -20,6 +24,9 @@ public class BossModel {
 		_saobracajnaDAO = new SaobracajnaDAO();
 		_voziloDAO = new VoziloDAO();
 		_osobaDAO = new OsobaDAO();
+		_motorDAO = new MotorDAO();
+		PdfWriter.
+		Document document = new Document();
 	}
 	
 	public ArrayList<Vozilo> pretragaVozilo( String parametar, String kriterij ) {
@@ -131,6 +138,17 @@ public class BossModel {
 		}
 				
 		return null;
+	}
+	
+	public Motor getMotorByVozilo(Integer id)
+	{
+		Vozilo temp = _voziloDAO.get(id);
+		return (temp == null) ? null : temp.getMotor();
+	}
+	
+	public void ekstraktToPDF()
+	{
+		
 	}
 	
 

@@ -33,8 +33,8 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 		
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO `Registracija`(`RegistarskaOznaka`, 'Od',"
-							+ "'Do', 'Vozilo', 'Osoba') VALUES (?, ?, ?, ?, ?)");
+					.prepareStatement("INSERT INTO Registracija(RegistarskaOznaka, Od, Do, Vozilo, Osoba) VALUES (?, ?, ?, ?, ?)");
+			//statement.setInt(1, 1);
 			statement.setString(1, regOznaka);
 			statement.setDate(2, new java.sql.Date(datumRegist.getTime()));
 			statement.setDate(3, new java.sql.Date(datumIsteka.getTime()));
@@ -202,8 +202,8 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 		
 		return success;//
 	}
-	/*
-	public static void main(String[] args) throws ParseException {
+	
+	/*public static void main(String[] args) throws ParseException {
 		RegistracijaDAO rDAO = new RegistracijaDAO();
 		VoziloDAO vDAO = new VoziloDAO();
 		OsobaDAO oDAO = new OsobaDAO();
@@ -211,8 +211,8 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 		Osoba o = oDAO.getByJMBG("11111");
 		Date odKad=new SimpleDateFormat("yyyy-MM-dd").parse("1991-2-1");
 		Date doKad=new SimpleDateFormat("yyyy-MM-dd").parse("1992-2-1");
-		Registracija r = new Registracija(5, "a-a",odKad, doKad, v,o);
+		Registracija r = new Registracija(5, "b-b",odKad, doKad, v,o);
 		System.out.print(rDAO.create(r));
-	}
-	*/
+	}*/
+	
 }
