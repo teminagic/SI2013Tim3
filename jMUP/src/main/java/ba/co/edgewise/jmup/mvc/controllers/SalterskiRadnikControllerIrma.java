@@ -121,7 +121,7 @@ public class SalterskiRadnikControllerIrma {
 			
 		// Nisu iskoristeni: getTb_bojaVozila(), getCb_nijansa() , getCb_vrstaBoje() 
 				
-	model.dodajVozilo( vrsta, marka, tip, modelVozila, brojSasije, oblikKaroserije, godinaProizvodnje, 
+	model.dodajVozilo(registarske, vrsta, marka, tip, modelVozila, brojSasije, oblikKaroserije, godinaProizvodnje, 
 			maxTehnickaDozvoljenaMasa, masaVozila, dopustenaNosivost, odnosSnageIMase, brojMjestaZaSjedenje, 
 			brojMjestaZaStajanje, brojMjestaZaLezanje, ekoKarakteristika, katalizator, datumPregleda, 
 			zapreminaMotora, maxSnaga,gorivo, brojMotora, vrstaMotora);

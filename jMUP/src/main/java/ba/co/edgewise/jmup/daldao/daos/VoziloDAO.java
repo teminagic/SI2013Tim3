@@ -54,7 +54,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 							"`OblikKaroserije`,`GodinaProizvodnje` ,`MaxTehnickaDozvoljenaMasa` ,"+
 							"`MasaVozila` , `DopustenaNosivost` , `Motor` , `OdnosSnageIMase` ,"+
 							"`BrojMjestaZaSjedenje` ,`BrojMjestaZaStajanje` ,`BrojMjestaZaLezanje` ," +
-							"`EkoKarakteristikaVozila` ,`Katalizator` ,`DatumPregleda`,`RegistarskaOznaka`)" +
+							"`EkoKarakteristikaVozila` ,`Katalizator` ,`DatumPregleda`,`RegOznaka`)" +
 							"VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
 			statement.setString(1, vrsta);
@@ -133,7 +133,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 						(qResult.getString("EkoKarakteristikaVozila")));
 				result.setKatalizator(qResult.getBoolean("Katalizator"));
 				result.setDatumPregleda(qResult.getDate("DatumPregleda"));
-				result.setRegOznaka(qResult.getString("RegistarskaOznaka"));
+				result.setRegOznaka(qResult.getString("RegOznaka"));
 			}
 
 		} catch (SQLException e) {
@@ -188,6 +188,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 						(qResult.getString("EkoKarakteristikaVozila")));
 				temp.setKatalizator(qResult.getBoolean("Katalizator"));
 				temp.setDatumPregleda(qResult.getDate("DatumPregleda"));
+				temp.setRegOznaka(qResult.getString("RegOznaka"));
 				result.add(temp);
 			}
 
@@ -222,6 +223,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 		EkoKarakteristike ekoKarakteristika = vozilo.getEkoKarakteristika();
 		Boolean katalizator = vozilo.getKatalizator();
 		Date datumPregleda = vozilo.getDatumPregleda();
+		String reg = vozilo.getRegOznaka();
 
 		// Konekcija:
 		ConnectionManager manager = new ConnectionManager();
@@ -235,7 +237,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 							+ "MasaVozila=?, DopustenaNosivost = ?, Motor = ?, "
 							+ "OdnosSnageIMase = ?, BrojMjestaZaSjedenje = ?, BrojMjestaZaStajanje =?, "
 							+ "BrojMjestaZaLezanje = ?, EkoKarakteristikaVozila = ?,"
-							+ " Katalizator = ?, DatumPregleda = ?" 
+							+ " Katalizator = ?, DatumPregleda = ?, RegOznaka = ?" 
 							+ " WHERE IDVozila=?");
 
 			statement.setString(1, vrsta);
@@ -256,6 +258,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 			statement.setString(16, ekoKarakteristika.toString());
 			statement.setBoolean(17, katalizator);
 			statement.setDate(18, new java.sql.Date(datumPregleda.getTime()));
+			statement.setString(19, reg);
 
 			statement.executeUpdate();
 			success = true;
@@ -304,7 +307,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 		// novi = new Motor(0, 650, 200,
 					// "LPG", "la", "la");
 					// d.create(novi);
-		Vozilo v = new Vozilo(null, VrstaVozila.PUTNICKI_AUTOMOBIL, "BMW", "limuzina",
+		Vozilo v = new Vozilo(null,"registracija" ,VrstaVozila.PUTNICKI_AUTOMOBIL, "BMW", "limuzina",
 					"A1", "aaa54", "oblikkaroserije", 2013, 4500,
 					3000, 1500, motor, 5.1, 5, 0, 0, EkoKarakteristike.EURO2, true, new Date());
 		VoziloDAO vdao = new VoziloDAO();

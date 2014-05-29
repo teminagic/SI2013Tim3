@@ -10,7 +10,7 @@ import ba.co.edgewise.jmup.enums.VrstaVozila;
 
 public class SalterskiRadnikModelIrma {
 
-	public void dodajVozilo(VrstaVozila vrsta, String marka, String tip,
+	public void dodajVozilo(String registarske, VrstaVozila vrsta, String marka, String tip,
 			String model, String brojSasije, String oblikKaroserije,
 			int godinaProizvodnje, int maxTehnickaDozvoljenaMasa,
 			int masaVozila, int dopustenaNosivost,Double odnosSnageIMase, Integer brojMjestaZaSjedenje,
@@ -29,7 +29,7 @@ public class SalterskiRadnikModelIrma {
 		listaMotora = mDAO.getAll();
 		Motor motor = listaMotora.get(listaMotora.size()-1);
 		//Dodavanje vozila
-		Vozilo vozilo= new Vozilo(0,vrsta,marka,tip,
+		Vozilo vozilo= new Vozilo(0,registarske,vrsta,marka,tip,
 			model,brojSasije,oblikKaroserije,
 			godinaProizvodnje, maxTehnickaDozvoljenaMasa,
 			masaVozila,dopustenaNosivost,motor,
