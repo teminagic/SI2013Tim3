@@ -23,14 +23,14 @@ public class SalterskiRadnikModel {
 	private Osoba osoba;
 	private OsobaDAO oDAO;
 	
-	public void DodajVozaca(String ime, String prezime, String adresa, String mjesto, String opcina, boolean pravno, String jmbg, String id)
+	public Boolean DodajVozaca(String ime, String prezime, String adresa, String mjesto, String opcina, boolean pravno, String jmbg, String id)
 	{
 		String prebivaliste = adresa + " " + mjesto + " " + opcina;
 		
 		osoba = new Osoba(0, jmbg, prezime, ime, prebivaliste, pravno);
 		System.out.println(jmbg + " " + prezime + " " + ime + " " +prebivaliste + " " +pravno);
 		oDAO = new OsobaDAO();
-		oDAO.create(osoba);
+		return oDAO.create(osoba);
 	}
 	public void dodajVozilo(String registarske, VrstaVozila vrsta, String marka, String tip,
 			String model, String brojSasije, String oblikKaroserije,

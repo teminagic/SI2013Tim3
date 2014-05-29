@@ -59,18 +59,43 @@ public class SalterskiRadnikController {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						if(provjeriPopunjenostVozaca()){							
-								dodajVozaca();
 								
-								// logika za: unos vlasnicke posto se ovaj panel pojavljuje :D
-								if(isUnosDozvole() == true)
-								{
-									prikaziPanelUnosVozila();
-								}
+								if (dodajVozaca()) {
+									JOptionPane.showOptionDialog(view, "Voza\u010D uspje\u0161no dodan.",
+											"Unos voza\u010Da", JOptionPane.OK_OPTION,
+											JOptionPane.INFORMATION_MESSAGE, null,
+											new String[] { "Uredu" }, "default");
+									pocistiPoljaVozac();
+									// logika za: unos vlasnicke posto se ovaj panel pojavljuje :D
+									if(isUnosDozvole() == true)
+									{
+										prikaziPanelUnosVozila();
+									}
+								} else {
+									JOptionPane.showOptionDialog(view,
+											"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
+													+ "Molimo vas da poku\u0161ate ponovo",
+											"Unos voza\u010Da", JOptionPane.OK_OPTION,
+											JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+											"default");
+								};
 								
 						} 
 						else{
 							JOptionPane.showMessageDialog(null, "Neispravno popunjena polja!");
 						};
+					}
+				});
+				
+				JButton ponistiDodavanjeVozaca = this.view.getStrana2().getBtnPonisti();
+				ponistiDodavanjeVozaca.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+							pocistiPoljaVozac();
+							JOptionPane.showOptionDialog(view, "Unos poni\u0161ten.",
+									"Unos voza\u010Da", JOptionPane.OK_OPTION,
+									JOptionPane.INFORMATION_MESSAGE, null,
+									new String[] { "Uredu" }, "default");															
 					}
 				});
 				
@@ -139,8 +164,19 @@ public class SalterskiRadnikController {
 						};			
 				});
 	}
-	
-	public void dodajVozaca()
+	public void pocistiPoljaVozac()
+	{
+		view.getStrana2().getTfIme().setText("");
+		view.getStrana2().getTfPrezime().setText("");
+		view.getStrana2().getTfAdresa().setText("");
+		view.getStrana2().getTfMjesto().setText("");
+		view.getStrana2().getTfOpcina().setText("");
+		view.getStrana2().getTfJMBG().setText("");
+		view.getStrana2().getTfIdBroj().setText("");
+		view.getStrana2().getPravno().setSelected(false);
+		view.getStrana2().getFizicko().setSelected(false);
+	}
+	public Boolean dodajVozaca()
 	{
 		// Pokupimo sve iz popunjenih polja, pozovemo metodu iz modela kojoj proslijedimo podatke
 		// da ih smjesti u bazu.
@@ -159,7 +195,7 @@ public class SalterskiRadnikController {
 		// Nek unese nizasta ne sluzi :D
 		String idBroj = view.getStrana2().getTfIdBroj().getText();
 		
-		model.DodajVozaca(ime, prezime, adresa, mjesto, opcina, pravno, jmbg, idBroj);
+		return model.DodajVozaca(ime, prezime, adresa, mjesto, opcina, pravno, jmbg, idBroj);
 	}
 	public void dodajRegistraciju() throws ParseException 
 	{
