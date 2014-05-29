@@ -1,22 +1,13 @@
 package ba.co.edgewise.jmup.components;
-//
-import java.util.ArrayList;
-
 import javax.swing.JPanel;
-import javax.swing.table.AbstractTableModel;
-
-import ba.co.edgewise.jmup.klase.Uposlenik;
+import ba.co.edgewise.components.helpers.TableModelKorisnik;
 import ba.co.edgewise.jmup.enums.TipPretrageUposlenika;
 
-import java.awt.CardLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TableModelEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -25,11 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class KorisnikPretraga extends JPanel {
-/*
 	private static final long serialVersionUID = 5037184707341253170L;
 	private GridBagLayout gridBagLayout;
 	private JPanel panel;
@@ -40,13 +27,10 @@ public class KorisnikPretraga extends JPanel {
 	private JScrollPane tablePane;
 	@SuppressWarnings("rawtypes")
 	private JComboBox cbPoljePretrage;
-	TableModel model;
-	KorisnikPretraga self = this;
+	private TableModelKorisnik model;
 	private JButton btnModifikuj;
 	private JButton btnIzbrisiKorisnika;
-	private AdminFrame parent;
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public KorisnikPretraga() {
 		
 		//methods for layout initialization
@@ -59,78 +43,12 @@ public class KorisnikPretraga extends JPanel {
 	
 	}
 	
-	//Abstract Table class
-	class TableModel extends AbstractTableModel {
-		
-		private static final long serialVersionUID = -263608234994707920L;
-		
-		private String[] columnNames = {
-				"Ime",
-				"Prezime",
-				"KorisniÄ�ko ime",
-				"Tip raÄ�una",
-				"Status"
-		};
-		private ArrayList<Uposlenik> data;
-		
-		public TableModel()
-		{
-			super();
-		}
-		
-		public TableModel(ArrayList<Uposlenik> data)
-		{
-			super();
-			this.data = data;
-		}
-		
-		public ArrayList<Uposlenik> getData() {
-			return data;
-		}
-
-		public void setData(ArrayList<Uposlenik> data) {
-			this.data = data;
-		}
-
-		@Override
-		public void fireTableChanged(TableModelEvent e) {
-			// TODO Auto-generated method stub
-			super.fireTableChanged(e);
-		}
-
-		@Override
-		public int getRowCount() {
-			return data.size();
-		}
-
-		@Override
-		public String getColumnName(int column) {
-			return columnNames[column];
-		}
-
-		@Override
-		public int getColumnCount() {
-			return columnNames.length;
-		}
-
-		@Override
-		public Object getValueAt(int rowIndex, int columnIndex) {
-			return (Object)(data.get(rowIndex).toObjectArray())[columnIndex];
-		}
-
-		@Override
-		public Class<?> getColumnClass(int columnIndex) {
-			return getValueAt(0, columnIndex).getClass();
-		}
-		
-	}
-	
 	//methods for layout & control initialization
 		public void layoutSet() {
 			
 			gridBagLayout = new GridBagLayout();
 			gridBagLayout.columnWidths = new int[]{0, 300, 100, 100, 0, 0};
-			gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0};
+			gridBagLayout.rowHeights = new int[]{0, 0, 0, 5, 0};
 			gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 			gridBagLayout.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 			setLayout(gridBagLayout);
@@ -180,6 +98,7 @@ public class KorisnikPretraga extends JPanel {
 			
 		}
 		
+		@SuppressWarnings({ "unchecked", "rawtypes" })
 		public void uiControlSet() {
 			
 			cbPoljePretrage = new JComboBox(TipPretrageUposlenika.values());
@@ -199,30 +118,24 @@ public class KorisnikPretraga extends JPanel {
 			gbc_tablePane.gridy = 1;
 			panel.add(tablePane, gbc_tablePane);
 			
-			model = new TableModel(Login.korisnici);
-			table = new JTable(model);
-			table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-				@Override
-				public void valueChanged(ListSelectionEvent e) {
-					ListSelectionModel lsm = (ListSelectionModel)e.getSource();
-					self.getBtnModifikuj().setEnabled(!lsm.isSelectionEmpty());
-					self.getBtnIzbrisiKorisnika().setEnabled(!lsm.isSelectionEmpty());
-				}
-			});
-			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			tablePane.setViewportView(table);
+			setModel(new TableModelKorisnik());
+			setTable(new JTable(getModel()));
+			getModel().addTableModelListener(getTable());
+			getTable().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			tablePane.setViewportView(getTable());
 
 		}
 		
 		public void buttonSet() {
 			
-			btnPronaiKorisnika = new JButton("Pronađi korisnika");
+			btnPronaiKorisnika = new JButton("Prona\u0111i korisnika");
 			GridBagConstraints gbc_btnPronaiKorisnika = new GridBagConstraints();
 			gbc_btnPronaiKorisnika.insets = new Insets(0, 0, 5, 0);
 			gbc_btnPronaiKorisnika.gridx = 3;
 			gbc_btnPronaiKorisnika.gridy = 0;
 			panel.add(btnPronaiKorisnika, gbc_btnPronaiKorisnika);
 			
+			btnModifikuj = new JButton("Modifikuj");
 			btnModifikuj.setEnabled(false);
 			GridBagConstraints gbc_btnModifikuj = new GridBagConstraints();
 			gbc_btnModifikuj.fill = GridBagConstraints.HORIZONTAL;
@@ -231,7 +144,7 @@ public class KorisnikPretraga extends JPanel {
 			gbc_btnModifikuj.gridy = 2;
 			add(btnModifikuj, gbc_btnModifikuj);
 			
-			btnIzbrisiKorisnika = new JButton("IzbriÅ¡i");
+			btnIzbrisiKorisnika = new JButton("Izbri\u0161i");
 			btnIzbrisiKorisnika.setEnabled(false);
 			GridBagConstraints gbc_btnIzbrisiKorisnika = new GridBagConstraints();
 			gbc_btnIzbrisiKorisnika.fill = GridBagConstraints.HORIZONTAL;
@@ -240,11 +153,9 @@ public class KorisnikPretraga extends JPanel {
 			gbc_btnIzbrisiKorisnika.gridy = 2;
 			add(btnIzbrisiKorisnika, gbc_btnIzbrisiKorisnika);
 			
-			btnModifikuj = new JButton("Modifikuj");
-			
 			
 			//action listener
-			btnPronaiKorisnika.addActionListener(new ActionListener() {
+			/*btnPronaiKorisnika.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String filter = tfPodaci.getText();
 					TipPretrageUposlenika parametar = (TipPretrageUposlenika)cbPoljePretrage.getSelectedItem();
@@ -263,12 +174,12 @@ public class KorisnikPretraga extends JPanel {
 					cl.show(parent.getSadrzaj().getPanelSadrzaj(), "Modificiranje korisnika");
 					parent.getSadrzaj().getNaslov().postaviNaslov("Modificiranje korisnika");
 				}
-			});
+			});*/
 		}
 	
 	
 	//methods
-	static private ArrayList<Uposlenik> FiltriraniKorisnici(String filter, TipPretrageUposlenika parametar)
+	/*static private ArrayList<Uposlenik> FiltriraniKorisnici(String filter, TipPretrageUposlenika parametar)
 	{
 		ArrayList<Uposlenik> rezultat = new ArrayList<Uposlenik>();
 		switch (parametar) {
@@ -286,7 +197,7 @@ public class KorisnikPretraga extends JPanel {
 				break;
 		}
 		return rezultat;
-	}
+	}*/
 	
 	//getters & setters
 	@SuppressWarnings("rawtypes")
@@ -303,11 +214,23 @@ public class KorisnikPretraga extends JPanel {
 		return btnIzbrisiKorisnika;
 	}
 
-	public AdminFrame getParrent() {
-		return parent;
+	public TableModelKorisnik getModel() {
+		return model;
 	}
 
-	public void setParrent(AdminFrame parrent) {
-		this.parent = parrent;
-	}*/
+	private void setModel(TableModelKorisnik model) {
+		this.model = model;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	private void setTable(JTable table) {
+		this.table = table;
+	}
+	
+	public JButton getBtnPronaiKorisnika() {
+		return btnPronaiKorisnika;
+	}
 }

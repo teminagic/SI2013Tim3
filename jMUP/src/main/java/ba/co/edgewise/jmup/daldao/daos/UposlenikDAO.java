@@ -5,16 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.EmptyStackException;
-import java.util.List;
-
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 
 import java.awt.image.BufferedImage;
 
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
 import ba.co.edgewise.jmup.enums.Status;
-import ba.co.edgewise.jmup.enums.TipUposlenika;
 import ba.co.edgewise.jmup.klase.Uposlenik;
 
 public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
@@ -84,6 +80,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			ConnectionManager.closeResultSet(qResult);
 			ConnectionManager.closeConnection(connection);
 		}
 		return result;
@@ -111,19 +108,19 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 				int idTipa = qResult.getInt("TipKorisnika");
 				TipUposlenikaDAO tipDAO = new TipUposlenikaDAO();
 				result.setTip(tipDAO.get(idTipa));
-			} else
-				throw new EmptyStackException();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			ConnectionManager.closeResultSet(qResult);
 			ConnectionManager.closeConnection(connection);
 		}
 		return result;
 	}
 
 	@Override
-	public List<Uposlenik> getAll() {
-		List<Uposlenik> result = new ArrayList<Uposlenik>();
+	public ArrayList<Uposlenik> getAll() {
+		ArrayList<Uposlenik> result = new ArrayList<Uposlenik>();
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 		ResultSet qResult = null;
@@ -147,11 +144,80 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 				uposlenik.setTip(tipDAO.get(idTipa));
 				result.add(uposlenik);
 			}
-			if (result.size() == 0)
-				throw new EmptyStackException();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			ConnectionManager.closeResultSet(qResult);
+			ConnectionManager.closeConnection(connection);
+		}
+		return result;
+	}
+	
+	public ArrayList<Uposlenik> getAllByIme(String ime) {
+		ArrayList<Uposlenik> result = new ArrayList<Uposlenik>();
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+		ResultSet qResult = null;
+		try {
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT * FROM Uposlenik WHERE Ime = ?");
+			statement.setString(1, ime);
+			qResult = statement.executeQuery();
+			while (qResult.next()) {
+				Uposlenik uposlenik = new Uposlenik();
+				uposlenik.setId(qResult.getInt("IDUposlenika"));
+				uposlenik.setIme(qResult.getString("Ime"));
+				uposlenik.setPrezime(qResult.getString("Prezime"));
+				// Slika
+				uposlenik.setKorisnickoIme(qResult.getString("KorisnickoIme"));
+				uposlenik.setPassword(qResult.getString("Sifra"));
+				// Provjeriti je li moze ovo getBoolean
+				uposlenik.setStatus(Status.getStatus(qResult.getString("StatusKorisnika")));
+				// Tip uposlenika enum
+				int idTipa = qResult.getInt("TipKorisnika");
+				TipUposlenikaDAO tipDAO = new TipUposlenikaDAO();
+				uposlenik.setTip(tipDAO.get(idTipa));
+				result.add(uposlenik);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeResultSet(qResult);
+			ConnectionManager.closeConnection(connection);
+		}
+		return result;
+	}
+	
+	public ArrayList<Uposlenik> getAllByPrezime(String prezime) {
+		ArrayList<Uposlenik> result = new ArrayList<Uposlenik>();
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+		ResultSet qResult = null;
+		try {
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT * FROM Uposlenik WHERE Prezime = ?");
+			statement.setString(1, prezime);
+			qResult = statement.executeQuery();
+			while (qResult.next()) {
+				Uposlenik uposlenik = new Uposlenik();
+				uposlenik.setId(qResult.getInt("IDUposlenika"));
+				uposlenik.setIme(qResult.getString("Ime"));
+				uposlenik.setPrezime(qResult.getString("Prezime"));
+				// Slika
+				uposlenik.setKorisnickoIme(qResult.getString("KorisnickoIme"));
+				uposlenik.setPassword(qResult.getString("Sifra"));
+				// Provjeriti je li moze ovo getBoolean
+				uposlenik.setStatus(Status.getStatus(qResult.getString("StatusKorisnika")));
+				// Tip uposlenika enum
+				int idTipa = qResult.getInt("TipKorisnika");
+				TipUposlenikaDAO tipDAO = new TipUposlenikaDAO();
+				uposlenik.setTip(tipDAO.get(idTipa));
+				result.add(uposlenik);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeResultSet(qResult);
 			ConnectionManager.closeConnection(connection);
 		}
 		return result;
@@ -215,31 +281,5 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 			ConnectionManager.closeConnection(connection);
 		}
 		return success;
-	}
-
-	public static void main(String[] args) {
-		Uposlenik u = new Uposlenik(1, "Irma", "Balic", "IrmaB", "pass", Status.AKTIVAN,
-				TipUposlenika.MENADZER);
-		UposlenikDAO udao = new UposlenikDAO();
-		udao.update(3, u);
-		// udao.create(u);
-		// udao.delete("AB");
-		Uposlenik novi = udao.get("IrmaB");
-		System.out.println(novi.getIme());
-		// Uposlenik u=udao.get("IrmaB");
-
-		List<Uposlenik> uposlenici = new ArrayList<Uposlenik>();
-		// uposlenici.add(novi);
-		uposlenici = udao.getAll();
-		// System.out.println(uposlenici.get(1).getKorisnickoIme());
-		// System.out.println(uposlenici.size());
-
-		for (int i = 0; i < uposlenici.size(); i++) {
-			System.out.println(uposlenici.get(i).getKorisnickoIme());
-		}
-
-		/*
-		 * udao.delete("IrmaB"); uposlenici = udao.getAll();
-		 */
 	}
 }

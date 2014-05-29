@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ba.co.edgewise.jmup.components.KorisnikKreiranje;
+import ba.co.edgewise.jmup.components.KorisnikPretraga;
 import ba.co.edgewise.jmup.components.MeniAdmin;
 import ba.co.edgewise.jmup.components.NaslovnaAdministrator;
 import ba.co.edgewise.jmup.components.OpcijaSadrzaj;
@@ -24,6 +25,7 @@ public class Administrator extends JFrame {
 	private OpcijaSadrzaj sadrzaj;
 	private NaslovnaAdministrator strana1;
 	private KorisnikKreiranje strana2;
+	private KorisnikPretraga strana3;
 
 	
 	/**
@@ -52,6 +54,9 @@ public class Administrator extends JFrame {
 		
 		strana2 = new KorisnikKreiranje();
 		sadrzaj.getPanelSadrzaj().add(strana2, "Dodavanje korisnika");
+		
+		strana3 = new KorisnikPretraga();
+		sadrzaj.getPanelSadrzaj().add(strana3, "Pretraga korisnika");
 		
 		contentPane.add(sadrzaj, gbc_sadrzaj);	
 	}
@@ -83,5 +88,8 @@ public class Administrator extends JFrame {
 	}
 	public OpcijaSadrzaj getSadrzaj() {
 		return sadrzaj;
+	}
+	public KorisnikPretraga getStrana3() {
+		return strana3;
 	}
 }
