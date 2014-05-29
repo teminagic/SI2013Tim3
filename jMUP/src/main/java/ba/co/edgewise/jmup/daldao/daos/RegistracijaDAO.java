@@ -200,7 +200,7 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 			ConnectionManager.closeConnection(connection);
 		}
 		
-		return success;
+		return success;//
 	}
 	/*
 	public static void main(String[] args) throws ParseException {
