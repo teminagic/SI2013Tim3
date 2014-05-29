@@ -97,18 +97,55 @@ public class BossModel {
 		return null;
 	}
 	
+	public ArrayList<Vlasnicka> pretragaVlasnicka ( String parametar, String kriterij ) {
+		
+		switch(kriterij){
+		//fejlat ce ako se ukuca prezime pa ime ali nemam vremena da to optimizujem
+		//logika je lose uradena ali nemma vremena za pametnije
+		case "Ime i prezime":
+		String [] ip = parametar.split(" ");
+		ArrayList<Osoba> temp = _osobaDAO.getByImeiPrezime(ip[0], ip[1]);
+		ArrayList<Vlasnicka> vl1 = new ArrayList<>();
+		for (Osoba osoba : temp) {
+			vl1.add(_vlasnickaDAO.getByVlasnik(osoba.getId()));
+		}
+		return (vl1 == null) ? null : vl1;
+
+		//vraca Array i ako ima samo 1 result zbog povratnog tipa metode
+		case "Registarska oznaka":
+		Vozilo vt = _voziloDAO.getByReg(parametar);
+		ArrayList<Vlasnicka> vl2 = new ArrayList<>();
+		vl2.add(_vlasnickaDAO.getByVozilo(vt.getId()));
+		return (vl2 == null) ? null : vl2;
+		
+		case "JMBG":
+		Osoba o = _osobaDAO.getByJMBG(parametar);
+		ArrayList<Vlasnicka> vl3 = new ArrayList<>();
+		vl3.add(_vlasnickaDAO.getByVlasnik(o.getId()));	
+		return (vl3 == null) ? null : vl3;
+		
+		case "Broj potvrde":
+		ArrayList<Vlasnicka> vl4 = new ArrayList<>();
+		vl4.add(_vlasnickaDAO.get(parametar));
+		return (vl4 == null) ? null : vl4;
+		}
+				
+		return null;
+	}
 	
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		BossModel b = new BossModel();
 		ArrayList<Vozilo> v = new ArrayList<>();
 		ArrayList<Osoba> o = new ArrayList<>();
 		ArrayList<Saobracajna> s = new ArrayList<>();
-
+		ArrayList<Vlasnicka> vl = new ArrayList();
+		
+		vl = b.pretragaVlasnicka("77", "Registarska oznaka");
 		//v = b.pretragaVozilo("BMW","Marka vozila");
 		//o = b.pretragaVozac("Dervic", "Prezime");
-		s = b.pretragaSaobracajna( "b" , "JMBG");
+		//s = b.pretragaSaobracajna( "b" , "JMBG");
 		
-	}
+	}*/
 
 }

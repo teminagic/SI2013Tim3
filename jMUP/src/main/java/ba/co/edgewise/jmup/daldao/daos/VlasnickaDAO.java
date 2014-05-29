@@ -83,6 +83,86 @@ public class VlasnickaDAO implements IGenericDAO<Vlasnicka, String> {
 		return result;
 		
 	} 
+	
+	public Vlasnicka getByVlasnik(Integer id){
+		
+		Vlasnicka result = new Vlasnicka();
+		
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+
+		ResultSet qResult = null;
+		
+		try {
+			PreparedStatement statement = 	connection.prepareStatement(
+					"SELECT * "+ 
+					"FROM Vlasnicka "+
+					"WHERE Vlasnik = ?"
+					);
+			
+			statement.setInt(1, id);
+			qResult = statement.executeQuery();
+			
+			if (qResult.next())
+			{
+				result.setBrojDozvole(qResult.getString("BrojDozvole"));
+				
+				VoziloDAO vDAO = new VoziloDAO();
+				result.setVozilo(vDAO.get(qResult.getInt("Vozilo")));
+				
+				OsobaDAO oDAO = new OsobaDAO();
+				result.setVlasnik(oDAO.get(qResult.getInt("Vlasnik")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+		
+		return result;
+		
+	} 
+	
+public Vlasnicka getByVozilo(Integer id){
+		
+		Vlasnicka result = new Vlasnicka();
+		
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+
+		ResultSet qResult = null;
+		
+		try {
+			PreparedStatement statement = 	connection.prepareStatement(
+					"SELECT * "+ 
+					"FROM Vlasnicka "+
+					"WHERE Vozilo = ?"
+					);
+			
+			statement.setInt(1, id);
+			qResult = statement.executeQuery();
+			
+			if (qResult.next())
+			{
+				result.setBrojDozvole(qResult.getString("BrojDozvole"));
+				
+				VoziloDAO vDAO = new VoziloDAO();
+				result.setVozilo(vDAO.get(qResult.getInt("Vozilo")));
+				
+				OsobaDAO oDAO = new OsobaDAO();
+				result.setVlasnik(oDAO.get(qResult.getInt("Vlasnik")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+		
+		return result;
+		
+	} 
 
 	@Override
 	public List<Vlasnicka> getAll()
