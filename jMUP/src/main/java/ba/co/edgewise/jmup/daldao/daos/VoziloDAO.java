@@ -11,6 +11,7 @@ import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
 import ba.co.edgewise.jmup.enums.EkoKarakteristike;
 import ba.co.edgewise.jmup.enums.VrstaVozila;
 import ba.co.edgewise.jmup.klase.Motor;
+import ba.co.edgewise.jmup.klase.Uposlenik;
 import ba.co.edgewise.jmup.klase.Vozilo;
 
 public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
@@ -134,6 +135,230 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 				result.setKatalizator(qResult.getBoolean("Katalizator"));
 				result.setDatumPregleda(qResult.getDate("DatumPregleda"));
 				result.setRegOznaka(qResult.getString("RegOznaka"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+
+		return result;
+	}
+	
+	public Vozilo getByReg(String reg) {
+
+		Vozilo result = new Vozilo();
+
+		// Konekcija:
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+
+		ResultSet qResult = null;
+
+		try {
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT * " + "FROM Vozilo "
+							+ "RegOznaka  = ?");
+
+			statement.setString(1, reg);
+			qResult = statement.executeQuery();
+
+			// Dobavljanje rezultata
+			if (qResult.next()) {
+				result.setId(qResult.getInt("IDVozila"));
+				result.setVrsta(VrstaVozila.getVrstaVozila(qResult.getString("Vrsta")));
+				result.setMarka(qResult.getString("Marka"));
+				result.setTip(qResult.getString("Tip"));
+				result.setModel(qResult.getString("Model"));
+				result.setBrojSasije(qResult.getString("BrojSasije"));
+				result.setOblikKaroserije(qResult.getString("OblikKaroserije"));
+				result.setGodinaProizvodnje(qResult.getInt("GodinaProizvodnje"));
+				result.setMaxTehnickaDozvoljenaMasa(qResult.getInt("MaxTehnickaDozvoljenaMasa"));
+				result.setMasaVozila(qResult.getInt("MasaVozila"));
+				result.setDopustenaNosivost(qResult.getInt("DopustenaNosivost"));
+				
+				MotorDAO motorDAO = new MotorDAO();
+				result.setMotor(motorDAO.get(qResult.getInt("Motor")));
+				
+				result.setOdnosSnageIMase(qResult.getDouble("OdnosSnageIMase"));
+				result.setBrojMjestaZaSjedenje(qResult.getInt("BrojMjestaZaSjedenje"));
+				result.setBrojMjestaZaStajanje(qResult.getInt("BrojMjestaZaStajanje"));
+				result.setBrojMjestaZaLezanje(qResult.getInt("BrojMjestaZaLezanje"));
+				result.setEkoKarakteristika(EkoKarakteristike.getEkoKarakteristike
+						(qResult.getString("EkoKarakteristikaVozila")));
+				result.setKatalizator(qResult.getBoolean("Katalizator"));
+				result.setDatumPregleda(qResult.getDate("DatumPregleda"));
+				result.setRegOznaka(qResult.getString("RegOznaka"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+
+		return result;
+	}
+	
+	public ArrayList<Vozilo> getByDate(Integer date) {
+
+		ArrayList<Vozilo> result = new ArrayList<Vozilo>();
+
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+
+		// Pocetak pripreme upita
+		ResultSet qResult = null;
+
+		try {
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT * " + "FROM Vozilo " + "WHERE GodinaProizvodnje = ?");
+			statement.setInt(1, date);
+			qResult = statement.executeQuery();
+			// Dobavljanje rezultata
+			while (qResult.next()) {
+				
+				Vozilo temp = new Vozilo();
+				
+				temp.setId(qResult.getInt("IDVozila"));
+				temp.setVrsta(VrstaVozila.getVrstaVozila(qResult.getString("Vrsta")));
+				temp.setMarka(qResult.getString("Marka"));
+				temp.setTip(qResult.getString("Tip"));
+				temp.setModel(qResult.getString("Model"));
+				temp.setBrojSasije(qResult.getString("BrojSasije"));
+				temp.setOblikKaroserije(qResult.getString("OblikKaroserije"));
+				temp.setGodinaProizvodnje(qResult.getInt("GodinaProizvodnje"));
+				temp.setMaxTehnickaDozvoljenaMasa(qResult.getInt("MaxTehnickaDozvoljenaMasa"));
+				temp.setMasaVozila(qResult.getInt("MasaVozila"));
+				temp.setDopustenaNosivost(qResult.getInt("DopustenaNosivost"));
+				
+				MotorDAO motorDAO = new MotorDAO();
+				temp.setMotor(motorDAO.get(qResult.getInt("Motor")));
+				
+				temp.setOdnosSnageIMase(qResult.getDouble("OdnosSnageIMase"));
+				temp.setBrojMjestaZaSjedenje(qResult.getInt("BrojMjestaZaSjedenje"));
+				temp.setBrojMjestaZaStajanje(qResult.getInt("BrojMjestaZaStajanje"));
+				temp.setBrojMjestaZaLezanje(qResult.getInt("BrojMjestaZaLezanje"));
+				temp.setEkoKarakteristika(EkoKarakteristike.getEkoKarakteristike
+						(qResult.getString("EkoKarakteristikaVozila")));
+				temp.setKatalizator(qResult.getBoolean("Katalizator"));
+				temp.setDatumPregleda(qResult.getDate("DatumPregleda"));
+				temp.setRegOznaka(qResult.getString("RegOznaka"));
+				result.add(temp);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+
+		return result;
+	}
+	
+	
+	public ArrayList<Vozilo> getByType(String type) {
+
+		ArrayList<Vozilo> result = new ArrayList<Vozilo>();
+
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+
+		// Pocetak pripreme upita
+		ResultSet qResult = null;
+
+		try {
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT * " + "FROM Vozilo " + "WHERE Vrsta = ?");
+			statement.setString(1, type);
+			qResult = statement.executeQuery();
+			// Dobavljanje rezultata
+			while (qResult.next()) {
+				
+				Vozilo temp = new Vozilo();
+				
+				temp.setId(qResult.getInt("IDVozila"));
+				temp.setVrsta(VrstaVozila.getVrstaVozila(qResult.getString("Vrsta")));
+				temp.setMarka(qResult.getString("Marka"));
+				temp.setTip(qResult.getString("Tip"));
+				temp.setModel(qResult.getString("Model"));
+				temp.setBrojSasije(qResult.getString("BrojSasije"));
+				temp.setOblikKaroserije(qResult.getString("OblikKaroserije"));
+				temp.setGodinaProizvodnje(qResult.getInt("GodinaProizvodnje"));
+				temp.setMaxTehnickaDozvoljenaMasa(qResult.getInt("MaxTehnickaDozvoljenaMasa"));
+				temp.setMasaVozila(qResult.getInt("MasaVozila"));
+				temp.setDopustenaNosivost(qResult.getInt("DopustenaNosivost"));
+				
+				MotorDAO motorDAO = new MotorDAO();
+				temp.setMotor(motorDAO.get(qResult.getInt("Motor")));
+				
+				temp.setOdnosSnageIMase(qResult.getDouble("OdnosSnageIMase"));
+				temp.setBrojMjestaZaSjedenje(qResult.getInt("BrojMjestaZaSjedenje"));
+				temp.setBrojMjestaZaStajanje(qResult.getInt("BrojMjestaZaStajanje"));
+				temp.setBrojMjestaZaLezanje(qResult.getInt("BrojMjestaZaLezanje"));
+				temp.setEkoKarakteristika(EkoKarakteristike.getEkoKarakteristike
+						(qResult.getString("EkoKarakteristikaVozila")));
+				temp.setKatalizator(qResult.getBoolean("Katalizator"));
+				temp.setDatumPregleda(qResult.getDate("DatumPregleda"));
+				temp.setRegOznaka(qResult.getString("RegOznaka"));
+				result.add(temp);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+
+		return result;
+	}
+	
+	public ArrayList<Vozilo> getByMark(String marka) {
+
+		ArrayList<Vozilo> result = new ArrayList<Vozilo>();
+
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+
+		// Pocetak pripreme upita
+		ResultSet qResult = null;
+
+		try {
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT * " + "FROM Vozilo " + "WHERE Marka = ?");
+			statement.setString(1, marka);
+			qResult = statement.executeQuery();
+			// Dobavljanje rezultata
+			while (qResult.next()) {
+				
+				Vozilo temp = new Vozilo();
+				
+				temp.setId(qResult.getInt("IDVozila"));
+				temp.setVrsta(VrstaVozila.getVrstaVozila(qResult.getString("Vrsta")));
+				temp.setMarka(qResult.getString("Marka"));
+				temp.setTip(qResult.getString("Tip"));
+				temp.setModel(qResult.getString("Model"));
+				temp.setBrojSasije(qResult.getString("BrojSasije"));
+				temp.setOblikKaroserije(qResult.getString("OblikKaroserije"));
+				temp.setGodinaProizvodnje(qResult.getInt("GodinaProizvodnje"));
+				temp.setMaxTehnickaDozvoljenaMasa(qResult.getInt("MaxTehnickaDozvoljenaMasa"));
+				temp.setMasaVozila(qResult.getInt("MasaVozila"));
+				temp.setDopustenaNosivost(qResult.getInt("DopustenaNosivost"));
+				
+				MotorDAO motorDAO = new MotorDAO();
+				temp.setMotor(motorDAO.get(qResult.getInt("Motor")));
+				
+				temp.setOdnosSnageIMase(qResult.getDouble("OdnosSnageIMase"));
+				temp.setBrojMjestaZaSjedenje(qResult.getInt("BrojMjestaZaSjedenje"));
+				temp.setBrojMjestaZaStajanje(qResult.getInt("BrojMjestaZaStajanje"));
+				temp.setBrojMjestaZaLezanje(qResult.getInt("BrojMjestaZaLezanje"));
+				temp.setEkoKarakteristika(EkoKarakteristike.getEkoKarakteristike
+						(qResult.getString("EkoKarakteristikaVozila")));
+				temp.setKatalizator(qResult.getBoolean("Katalizator"));
+				temp.setDatumPregleda(qResult.getDate("DatumPregleda"));
+				temp.setRegOznaka(qResult.getString("RegOznaka"));
+				result.add(temp);
 			}
 
 		} catch (SQLException e) {

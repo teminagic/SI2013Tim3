@@ -14,6 +14,7 @@ import ba.co.edgewise.jmup.enums.EkoKarakteristike;
 import ba.co.edgewise.jmup.enums.VrstaVozila;
 import ba.co.edgewise.jmup.klase.Motor;
 import ba.co.edgewise.jmup.klase.Osoba;
+import ba.co.edgewise.jmup.klase.Uposlenik;
 import ba.co.edgewise.jmup.klase.Vozilo;
 
 public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
@@ -126,6 +127,162 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 		return result;
 	}
 
+	
+	public ArrayList<Osoba> getByIme(String ime) {
+		ArrayList<Osoba> result = new ArrayList<Osoba>();
+
+		// Dobavljanje konekcije
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+
+		// Po�etak pripreme upita
+		ResultSet qResult = null;
+
+		try {
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT * FROM Osoba Where Ime = ? ");
+			statement.setString(1, ime);
+			qResult = statement.executeQuery();
+			// Dobavljanje rezultata
+			while (qResult.next()) {
+				Osoba osoba = new Osoba();
+				osoba.setId(qResult.getInt("IDOsobe"));
+				osoba.setJmbg_Id(qResult.getString("JMB_ID"));
+				osoba.setIme(qResult.getString("Prezime"));
+				osoba.setIme(qResult.getString("Ime"));
+				osoba.setPrebivaliste(qResult.getString("Prebivaliste"));
+				if (qResult.getInt("PravnoLice") == 1)
+					osoba.setPravnoLice(true);
+				else
+					osoba.setPravnoLice(false);
+				result.add(osoba);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+
+		return result;
+	}
+	
+	public ArrayList<Osoba> getByPrezime(String prezime) {
+		ArrayList<Osoba> result = new ArrayList<Osoba>();
+
+		// Dobavljanje konekcije
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+
+		// Po�etak pripreme upita
+		ResultSet qResult = null;
+
+		try {
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT * FROM Osoba Where Prezime = ? ");
+			statement.setString(1, prezime);
+			qResult = statement.executeQuery();
+			// Dobavljanje rezultata
+			while (qResult.next()) {
+				Osoba osoba = new Osoba();
+				osoba.setId(qResult.getInt("IDOsobe"));
+				osoba.setJmbg_Id(qResult.getString("JMB_ID"));
+				osoba.setIme(qResult.getString("Prezime"));
+				osoba.setIme(qResult.getString("Ime"));
+				osoba.setPrebivaliste(qResult.getString("Prebivaliste"));
+				if (qResult.getInt("PravnoLice") == 1)
+					osoba.setPravnoLice(true);
+				else
+					osoba.setPravnoLice(false);
+				result.add(osoba);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+
+		return result;
+	}
+	
+	public ArrayList<Osoba> getByImeiPrezime(String ime, String prezime) {
+		ArrayList<Osoba> result = new ArrayList<Osoba>();
+
+		// Dobavljanje konekcije
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+
+		// Po�etak pripreme upita
+		ResultSet qResult = null;
+
+		try {
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT * FROM Osoba Where Ime = ? AND Prezime = ? ");
+			statement.setString(1, ime);
+			statement.setString(1, prezime);
+			qResult = statement.executeQuery();
+			// Dobavljanje rezultata
+			while (qResult.next()) {
+				Osoba osoba = new Osoba();
+				osoba.setId(qResult.getInt("IDOsobe"));
+				osoba.setJmbg_Id(qResult.getString("JMB_ID"));
+				osoba.setIme(qResult.getString("Prezime"));
+				osoba.setIme(qResult.getString("Ime"));
+				osoba.setPrebivaliste(qResult.getString("Prebivaliste"));
+				if (qResult.getInt("PravnoLice") == 1)
+					osoba.setPravnoLice(true);
+				else
+					osoba.setPravnoLice(false);
+				result.add(osoba);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+
+		return result;
+	}
+	
+	public ArrayList<Osoba> getByJMBG(String jmbg) {
+		ArrayList<Osoba> result = new ArrayList<Osoba>();
+
+		// Dobavljanje konekcije
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+
+		// Po�etak pripreme upita
+		ResultSet qResult = null;
+
+		try {
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT * FROM Osoba Where JMB_ID = ? ");
+			statement.setString(1, jmbg);
+			qResult = statement.executeQuery();
+			// Dobavljanje rezultata
+			while (qResult.next()) {
+				Osoba osoba = new Osoba();
+				osoba.setId(qResult.getInt("IDOsobe"));
+				osoba.setJmbg_Id(qResult.getString("JMB_ID"));
+				osoba.setIme(qResult.getString("Prezime"));
+				osoba.setIme(qResult.getString("Ime"));
+				osoba.setPrebivaliste(qResult.getString("Prebivaliste"));
+				if (qResult.getInt("PravnoLice") == 1)
+					osoba.setPravnoLice(true);
+				else
+					osoba.setPravnoLice(false);
+				result.add(osoba);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+
+		return result;
+	}
+	
+	
+	
 	public boolean update(Integer id, Osoba o) {
 		boolean success = false;
 		String jmbg_id = o.getJmbg_Id();

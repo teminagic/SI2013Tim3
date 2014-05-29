@@ -131,6 +131,102 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 		return result;
 	}
 	
+	
+	 public ArrayList<Saobracajna> getByPotvrda(String potvrda)
+		{
+			ArrayList<Saobracajna> result = new ArrayList<Saobracajna>();
+			
+			//Dobavljanje konekcije
+			ConnectionManager manager = new ConnectionManager();
+			Connection connection = manager.getConnection();
+			
+			//Pocetak pripreme upita
+			ResultSet qResult = null;
+			
+			try {
+				PreparedStatement statement = 	connection.prepareStatement(
+						"SELECT * "+ 
+						"FROM Saobracajna "+
+						"WHERE BrojDozvole = ?"
+						);
+				statement.setString(1, potvrda);
+				qResult = statement.executeQuery();
+				//Dobavljanje rezultata
+				while(qResult.next()) {
+					
+					Saobracajna temp = new Saobracajna();
+					
+					temp.setBrojDozvole(qResult.getString("BrojDozvole"));
+					
+					VoziloDAO vDAO = new VoziloDAO();
+					temp.setVozilo(vDAO.get(qResult.getInt("Vozilo")));
+					
+					OsobaDAO oDAO = new OsobaDAO();
+					temp.setKorisnik(oDAO.get(qResult.getInt("Korisnik")));
+					
+					result.add(temp);
+				}
+				
+				//ako je prazno da se baci exception
+				if(result.size() == 0)
+					throw new EmptyStackException();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				ConnectionManager.closeConnection(connection);
+			}
+			
+			return result;
+		}
+	 public ArrayList<Saobracajna> getByName(Integer id)
+		{
+			ArrayList<Saobracajna> result = new ArrayList<Saobracajna>();
+			
+			//Dobavljanje konekcije
+			ConnectionManager manager = new ConnectionManager();
+			Connection connection = manager.getConnection();
+			
+			//Pocetak pripreme upita
+			ResultSet qResult = null;
+			
+			try {
+				PreparedStatement statement = 	connection.prepareStatement(
+						"SELECT * "+ 
+						"FROM Saobracajna "+
+						"WHERE Korisnik = ?"
+						);
+				statement.setInt(1, id);
+				qResult = statement.executeQuery();
+				//Dobavljanje rezultata
+				while(qResult.next()) {
+					
+					Saobracajna temp = new Saobracajna();
+					
+					temp.setBrojDozvole(qResult.getString("BrojDozvole"));
+					
+					VoziloDAO vDAO = new VoziloDAO();
+					temp.setVozilo(vDAO.get(qResult.getInt("Vozilo")));
+					
+					OsobaDAO oDAO = new OsobaDAO();
+					temp.setKorisnik(oDAO.get(qResult.getInt("Korisnik")));
+					
+					result.add(temp);
+				}
+				
+				//ako je prazno da se baci exception
+				if(result.size() == 0)
+					throw new EmptyStackException();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				ConnectionManager.closeConnection(connection);
+			}
+			
+			return result;
+		}
+	
 	@Override
 	public boolean update(String brojDozvole, Saobracajna s)
 	{
