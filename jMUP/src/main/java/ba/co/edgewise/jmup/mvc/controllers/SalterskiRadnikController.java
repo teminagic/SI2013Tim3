@@ -25,12 +25,12 @@ public class SalterskiRadnikController {
 	private SalterskiRadnikModel model;
 	private SalterskiRadnikView view;
 	
-	private boolean unosVlasnicke;
+	private boolean unosDozvole;
 	public SalterskiRadnikController(SalterskiRadnikView view, SalterskiRadnikModel model) {
 		super();
 		this.view = view;
 		this.model = model;
-		unosVlasnicke = false;
+		unosDozvole = false;
 	}
 	public void control() {
 				
@@ -62,12 +62,11 @@ public class SalterskiRadnikController {
 								dodajVozaca();
 								
 								// logika za: unos vlasnicke posto se ovaj panel pojavljuje :D
-								if(isUnosVlasnicke() == true)
+								if(isUnosDozvole() == true)
 								{
-									prikaziPanelUnosRegistracije();
 									prikaziPanelUnosVozila();
 								}
-								//
+								
 						} 
 						else{
 							JOptionPane.showMessageDialog(null, "Neispravno popunjena polja!");
@@ -92,11 +91,9 @@ public class SalterskiRadnikController {
 							if(provjeriPopunjenostUnosVozila()) 
 							{
 								dodajVozilo();
-								
-								if(isUnosVlasnicke() == true)
-								{
+								if(isUnosDozvole() == true)
 									prikaziPanelUnosRegistracije();
-								}
+								
 							}							
 						} catch (ParseException e1) {
 							e1.printStackTrace();
@@ -110,13 +107,15 @@ public class SalterskiRadnikController {
 				dodavanjeRegistracije.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-
+						try {
 							if(provjeriPopunjenostRegistracije()) 
 							{
-								//dodajRegistraciju();
-								setUnosVlasnicke(false);
+								dodajRegistraciju();
+								setUnosDozvole(false);
 							}
-						
+						} catch (ParseException e1) {
+							e1.printStackTrace();
+						}
 					}
 				});
 				
@@ -125,7 +124,17 @@ public class SalterskiRadnikController {
 						unosVlasnicke.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						setUnosVlasnicke(true);
+						setUnosDozvole(true);
+						prikaziPanelUnosVozaca();
+						};			
+				});
+						
+				//Listener unos saobracajne
+				JButton unosSaobracajne = this.view.getMeni().getOpcije().getbtnUnosSaobracajne();
+						unosSaobracajne.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						setUnosDozvole(true);
 						prikaziPanelUnosVozaca();
 						};			
 				});
@@ -152,9 +161,9 @@ public class SalterskiRadnikController {
 		
 		model.DodajVozaca(ime, prezime, adresa, mjesto, opcina, pravno, jmbg, idBroj);
 	}
-	/*public void dodajRegistraciju() throws ParseException 
+	public void dodajRegistraciju() throws ParseException 
 	{
-	}*/
+	}
 	public boolean provjeriPopunjenostVozaca() {
 		return true;
 	}
@@ -221,10 +230,10 @@ public class SalterskiRadnikController {
 			zapreminaMotora, maxSnaga,gorivo, brojMotora, vrstaMotora);
 	
 	}
-	public boolean isUnosVlasnicke() {
-		return unosVlasnicke;
+	public boolean isUnosDozvole() {
+		return unosDozvole;
 	}
-	public void setUnosVlasnicke(boolean unosVlasnicke) {
-		this.unosVlasnicke = unosVlasnicke;
+	public void setUnosDozvole(boolean unosVlasnicke) {
+		this.unosDozvole = unosVlasnicke;
 	}
 }
