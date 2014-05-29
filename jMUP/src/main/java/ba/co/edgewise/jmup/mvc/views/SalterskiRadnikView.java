@@ -90,6 +90,9 @@ public class SalterskiRadnikView extends JFrame {
 		strana4Registracija = new RegistracijaUnos();
 		sadrzaj.getPanelSadrzaj().add(strana4Registracija,"Upis registracije");
 		
+		strana6 = new SalterskaPretraga();
+		sadrzaj.getPanelSadrzaj().add(strana6, "Pretraga");
+		
 		contentPane.add(sadrzaj, gbc_naslov);
 
 	}

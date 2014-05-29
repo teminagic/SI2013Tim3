@@ -17,6 +17,8 @@ public class SalterskaPretragaVozilo extends JPanel {
 		// methods for setting layout
 		setLayout();
 		setComponents();
+		DefaultTableModel model = (DefaultTableModel) table_vozila.getModel();
+		model.addRow(new Object[]{"Column 1", "Column 2", "Column 3"});
 	}
 
 	public void setLayout() {
@@ -37,16 +39,13 @@ public class SalterskaPretragaVozilo extends JPanel {
 		add(sp_pretragaTabela, gbc_sp_pretragaTabela);
 
 		table_vozila = new JTable();
-		table_vozila.setModel(new DefaultTableModel(new Object[][] {
-				{ "", null, null, null }, { null, null, null, null },
-				{ null, null, null, null }, { null, null, null, null },
-				{ null, null, null, null }, { null, null, null, null },
-				{ null, null, null, null }, { null, null, null, null },
-				{ null, null, null, null }, { null, null, null, null },
-				{ null, null, null, null }, { null, null, null, null },
-				{ null, null, null, null }, { null, null, null, null }, },
-				new String[] { "Registarska oznaka", "Godina proizvodnje",
-						"Vrsta vozila", "Marka vozila" }));
+		table_vozila.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Registarska oznaka", "Godina proizvodnje", "Vrsta vozila", "Marka vozila"
+			}
+		));
 		sp_pretragaTabela.setViewportView(table_vozila);
 	}
 }

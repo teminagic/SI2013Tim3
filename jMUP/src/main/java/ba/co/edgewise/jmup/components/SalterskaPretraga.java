@@ -22,6 +22,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import ba.co.edgewise.jmup.components.SalterskaPretraga.VoziloPretraga;
+import java.awt.CardLayout;
 
 
 
@@ -42,6 +43,16 @@ public class SalterskaPretraga extends JPanel{
 	private JButton btn_modifikuj;
 	private JButton btnProfil;
 	private JComboBox cb_parametri;
+	
+	private final SalterskaPretraga frejm = this;
+	
+	// Moguci paneli 
+	JPanel panel_pretraga;//=new SalterskaPretragaVozilo();
+	SalterskaPretragaVozilo panel_vozilo;//=new SalterskaPretragaVozac();
+	SalterskaPretragaVozac panel_vozac;
+	SalterskaPretragaSaobracajna panel_saobracajna;
+	SalterskaPretragaVlasnicka panel_vlasnicka;
+	private JButton btnIzlaz;
 	
 	//Enumi za combobox
 	enum VoziloPretraga { Registarska_oznaka("Registarska oznaka"), Godina_proizvodnje("Godina proizvodnje"), Vrsta_vozila("Vrsta vozila"), Marka_vozila("Marka vozila");
@@ -64,13 +75,7 @@ public class SalterskaPretraga extends JPanel{
 	   private SaobracajnaPretraga(final String s) { stringValue = s; }
 	   public String toString() { return stringValue; }
 	   }
-	
-	// Moguci paneli 
-	static JPanel panel_vozilo=new SalterskaPretragaVozilo();
-	static JPanel panel_vozac=new SalterskaPretragaVozac();
-	static JPanel panel_saobracajna=new SalterskaPretragaSaobracajna();
-	static JPanel panel_vlasnicka=new SalterskaPretragaVlasnicka();
-	private JButton btnIzlaz;
+
 
 	public SalterskaPretraga() {
 		initialize();
@@ -173,14 +178,15 @@ public class SalterskaPretraga extends JPanel{
 
 		//JPanel panel = new JPanel();
 		//Default je postavljeno da bude Vozilo.
-
-		final GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.insets = new Insets(0, 0, 5, 0);
-		gbc_panel.gridwidth = 8;
-		gbc_panel.fill = GridBagConstraints.VERTICAL;
-		gbc_panel.gridx = 1;
-		gbc_panel.gridy = 2;
-		okvirPanel.add(panel_vozilo, gbc_panel);
+		panel_pretraga = new JPanel();
+		final GridBagConstraints gbc_panel_pretraga = new GridBagConstraints();
+		gbc_panel_pretraga.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_pretraga.gridwidth = 8;
+		gbc_panel_pretraga.fill = GridBagConstraints.VERTICAL;
+		gbc_panel_pretraga.gridx = 1;
+		gbc_panel_pretraga.gridy = 2;
+		okvirPanel.add(panel_pretraga, gbc_panel_pretraga);
+		panel_pretraga.setLayout(new CardLayout(0, 0));
 		
 		btnProfil = new JButton("Profil");
 		GridBagConstraints gbc_btnProfil = new GridBagConstraints();
@@ -203,17 +209,30 @@ public class SalterskaPretraga extends JPanel{
 		gbc_btnIzlaz.gridy = 3;
 		okvirPanel.add(btnIzlaz, gbc_btnIzlaz);
 		
+		//Cardoviiiiiiiiiiiii
+		panel_vozilo = new SalterskaPretragaVozilo();
+		panel_vozac = new SalterskaPretragaVozac();
+		panel_saobracajna = new SalterskaPretragaSaobracajna();
+		panel_vlasnicka = new SalterskaPretragaVlasnicka();
+			
+		panel_pretraga.add(panel_vozilo, "Vozilo");
+		panel_pretraga.add(panel_vozac, "Vozac");
+		panel_pretraga.add(panel_saobracajna, "Saobracajna");
+		panel_pretraga.add(panel_vlasnicka, "Vlasnicka");
+
+		
+		
 		// Action Listeneri
-		rbVozac.addActionListener(new ActionListener() {
+	/*	rbVozac.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(rbVozac.isSelected()) {
 					cb_parametri.removeAllItems();
 					cb_parametri.setModel(new DefaultComboBoxModel(VozacPretraga.values()));		
-					if(trenutni=="Vozilo") okvirPanel.remove(panel_vozilo);
+					if(trenutni=="Vozilo") okvirPanel.remove(panel_pretraga);
 					else if(trenutni=="Vlasnicka") okvirPanel.remove(panel_vlasnicka);
 					else if(trenutni=="Saobracajna") okvirPanel.remove(panel_saobracajna);
 					trenutni="Vozac";
-					okvirPanel.add(panel_vozac, gbc_panel);
+					okvirPanel.add(panel_vozac, gbc_panel_pretraga);
 					okvirPanel.revalidate();
 					okvirPanel.repaint();
 				}
@@ -228,7 +247,7 @@ public class SalterskaPretraga extends JPanel{
 					else if(trenutni=="Vlasnicka") okvirPanel.remove(panel_vlasnicka);
 					else if(trenutni=="Saobracajna") okvirPanel.remove(panel_saobracajna);
 					trenutni="Vozilo";
-					okvirPanel.add(panel_vozilo, gbc_panel);
+					okvirPanel.add(panel_pretraga, gbc_panel_pretraga);
 					okvirPanel.revalidate();
 					okvirPanel.repaint();
 				}
@@ -239,11 +258,11 @@ public class SalterskaPretraga extends JPanel{
 				if(rbSaobracajna.isSelected()) {
 					cb_parametri.removeAllItems();
 					cb_parametri.setModel(new DefaultComboBoxModel(SaobracajnaPretraga.values()));
-					if(trenutni=="Vozilo") okvirPanel.remove(panel_vozilo);
+					if(trenutni=="Vozilo") okvirPanel.remove(panel_pretraga);
 					else if(trenutni=="Vozac") okvirPanel.remove(panel_vozac);
 					else if(trenutni=="Vlasnicka") okvirPanel.remove(panel_vlasnicka);
 					trenutni="Saobracajna";
-					okvirPanel.add(panel_saobracajna, gbc_panel);
+					okvirPanel.add(panel_saobracajna, gbc_panel_pretraga);
 					okvirPanel.revalidate();
 					okvirPanel.repaint();
 				}
@@ -254,19 +273,42 @@ public class SalterskaPretraga extends JPanel{
 				if(rbVlasnicka.isSelected()) {
 					cb_parametri.removeAllItems();
 					cb_parametri.setModel(new DefaultComboBoxModel(VlasnickaPretraga.values()));
-					if(trenutni=="Vozilo") okvirPanel.remove(panel_vozilo);
+					if(trenutni=="Vozilo") okvirPanel.remove(panel_pretraga);
 					else if(trenutni=="Vozac") okvirPanel.remove(panel_vozac);
 					else if(trenutni=="Saobracajna") okvirPanel.remove(panel_saobracajna);
 					trenutni="Vlasnicka";
-					okvirPanel.add(panel_vlasnicka, gbc_panel);
+					okvirPanel.add(panel_vlasnicka, gbc_panel_pretraga);
 					okvirPanel.revalidate();
 					okvirPanel.repaint();
 				}
 			}
-		});	
+		});	*/
 	}
 
-
+	public void prikaziPretraguVozila()
+	{
+		JPanel cards = frejm.getPanel_pretraga();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Vozilo");
+	}
+	public void prikaziPretraguVozaca()
+	{
+		JPanel cards = frejm.getPanel_pretraga();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Vozac");
+	}
+	public void prikaziPretraguVlasnicke()
+	{
+		JPanel cards = frejm.getPanel_pretraga();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Vlasnicka");
+	}
+	public void prikaziPretraguSaobracajne()
+	{
+		JPanel cards = frejm.getPanel_pretraga();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Saobracajna");
+	}
 	public JRadioButton getRbVozac() {
 		return rbVozac;
 	}
@@ -314,5 +356,8 @@ public class SalterskaPretraga extends JPanel{
 	}
 	public JTextField getTb_unosPretrage() {
 		return tb_unosPretrage;
+	}
+	public JPanel getPanel_pretraga() {
+		return panel_pretraga;
 	}
 }
