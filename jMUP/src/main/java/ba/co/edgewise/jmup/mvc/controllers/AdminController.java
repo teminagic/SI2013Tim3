@@ -135,13 +135,13 @@ public class AdminController {
 		} else {
 			JOptionPane.showOptionDialog(view,
 					"Do\u0161lo je do gre\u0161ke u upisivanju u bazu. "
-							+ "Molimo vas da pokušate ponovo",
+							+ "Molimo vas da pokuï¿½ate ponovo",
 					"Kreiranje korisnika", JOptionPane.OK_OPTION,
 					JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
 					"default");
 		};
 	}
-	
+	////
 	private void pretraziKorisnike() {
 		view.getStrana3().getModel().clearAll();
 		String kriterij = view.getStrana3().getTfPodaci().getText();
