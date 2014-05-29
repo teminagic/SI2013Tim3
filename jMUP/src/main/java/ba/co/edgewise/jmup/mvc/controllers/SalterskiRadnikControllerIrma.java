@@ -50,27 +50,17 @@ public class SalterskiRadnikControllerIrma {
 					prikaziPanelPocetnu();
 					};		
 			});
-//UNOS VOZILA
-			JButton unosVozila = this.view.getMeni().getOpcije().getBtnUnosVozila();
-			unosVozila.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					prikaziPanelUnosVozila();
-					};			
-			});
-						
-			JButton dodavanje_vozila = this.view.getVoziloDodavanje().getBtn_prihvati();
-			dodavanje_vozila.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					try {
-						if(provjeriPopunjenostUnosVozila()) dodajVozilo();
-					} catch (ParseException e1) {
-						e1.printStackTrace();
-					}
-				}
-			});
 			
+			// Pretraga
+			JButton salterskaPretraga= this.view.getMeni().getOpcije().getBtnPretraga();
+			salterskaPretraga.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					prikaziPanelPretraga();
+			};
+				
+			});
+
 		}
 	void prikaziPanelPocetnu()
 	{
@@ -79,52 +69,13 @@ public class SalterskiRadnikControllerIrma {
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Po\u010Detna");
 	}
-	void prikaziPanelUnosVozila()
+	//PRETRAGA
+	void prikaziPanelPretraga()
 	{
-		view.getSadrzaj().getNaslov().postaviNaslov("Dodavanje vozila");
+		view.getSadrzaj().getNaslov().postaviNaslov("Pretraga");
 		JPanel cards = view.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout)cards.getLayout();
-		tmp.show(cards, "Dodavanje vozila");
+		tmp.show(cards, "Pretraga");
 	}
 
-	public boolean provjeriPopunjenostUnosVozila() {
-		return true;
-	}
-	public void dodajVozilo() throws ParseException 
-	{	
-		VrstaVozila vrsta = (VrstaVozila) view.getVoziloDodavanje().getCb_vrstaVozila().getSelectedItem();
-		String tip = view.getVoziloDodavanje().getTf_tipVozila().getText(); 
-		String modelVozila = view.getVoziloDodavanje().getTf_modelVozila().getText(); 
-		String marka = view.getVoziloDodavanje().getTf_markaVozila().getText();
-		int godinaProizvodnje = Integer.parseInt(view.getVoziloDodavanje().getTf_godProizvodnje().getText());
-		//	REGISTARSKE DODATI U KONSTRUKTOR
-		//Neiskoristeno: 
-		String registarske = (String)view.getVoziloDodavanje().getTf_regOznaka().getText();
-		Double odnosSnageIMase = Double.parseDouble(view.getVoziloDodavanje().getTf_odnos().getText());
-		int brojMjestaZaSjedenje = Integer.parseInt(view.getVoziloDodavanje().getTf_sjedenje().getText());
-		int brojMjestaZaStajanje =  Integer.parseInt(view.getVoziloDodavanje().getTf_stajanje().getText()); 
-		int brojMjestaZaLezanje =  Integer.parseInt(view.getVoziloDodavanje().getTf_lezanje().getText()); 
-		EkoKarakteristike ekoKarakteristika =(EkoKarakteristike)view.getVoziloDodavanje().getCb_ekoKarakteristike().getSelectedItem();
-		boolean katalizator = view.getVoziloDodavanje().getRb_katalizator_da().isSelected();
-		String oblikKaroserije = view.getVoziloDodavanje().getTf_karoserija().getText();
-		Date datumPregleda=new SimpleDateFormat("yyyy-MM-dd").parse(view.getVoziloDodavanje().getTf_datumPregleda().getText());
-		String brojSasije = view.getVoziloDodavanje().getTf_brojSasije().getText();
-		int maxTehnickaDozvoljenaMasa = Integer.parseInt(view.getVoziloDodavanje().getTb_maxMasa().getText());
-		int masaVozila = Integer.parseInt(view.getVoziloDodavanje().getTb_masa().getText());
-		int dopustenaNosivost = Integer.parseInt(view.getVoziloDodavanje().getTb_nosivost().getText());
-		// Motor
-		int zapreminaMotora = Integer.parseInt(view.getVoziloDodavanje().getTf_zapremina().getText());
-		int maxSnaga = Integer.parseInt(view.getVoziloDodavanje().getTf_maxSnaga().getText());
-		String gorivo = (String)view.getVoziloDodavanje().getCb_gorivo().getSelectedItem();
-		String brojMotora = view.getVoziloDodavanje().getTf_brojMotora().getText();
-		String vrstaMotora =(String)view.getVoziloDodavanje().getCb_vrstaMotora().getSelectedItem();
-			
-		// Nisu iskoristeni: getTb_bojaVozila(), getCb_nijansa() , getCb_vrstaBoje() 
-				
-	model.dodajVozilo(registarske, vrsta, marka, tip, modelVozila, brojSasije, oblikKaroserije, godinaProizvodnje, 
-			maxTehnickaDozvoljenaMasa, masaVozila, dopustenaNosivost, odnosSnageIMase, brojMjestaZaSjedenje, 
-			brojMjestaZaStajanje, brojMjestaZaLezanje, ekoKarakteristika, katalizator, datumPregleda, 
-			zapreminaMotora, maxSnaga,gorivo, brojMotora, vrstaMotora);
-	
-	}
 }

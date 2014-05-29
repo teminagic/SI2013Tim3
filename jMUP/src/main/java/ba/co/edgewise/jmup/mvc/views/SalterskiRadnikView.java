@@ -15,6 +15,7 @@ import ba.co.edgewise.jmup.components.MeniSalter;
 import ba.co.edgewise.jmup.components.MeniSalterOpcije;
 import ba.co.edgewise.jmup.components.NaslovnaSalterski;
 import ba.co.edgewise.jmup.components.OpcijaSadrzaj;
+import ba.co.edgewise.jmup.components.SalterskaPretraga;
 import ba.co.edgewise.jmup.components.VozacDodavanje;
 import ba.co.edgewise.jmup.components.VoziloDodavanje;
 import ba.co.edgewise.jmup.mvc.controllers.LoginController;
@@ -31,6 +32,7 @@ public class SalterskiRadnikView extends JFrame {
 	
 	private VozacDodavanje strana2;
 	private VoziloDodavanje strana3;
+	private SalterskaPretraga strana6;
 
 	
 	private final SalterskiRadnikView frejm = this;
@@ -80,10 +82,17 @@ public class SalterskiRadnikView extends JFrame {
 		
 		strana3 = new VoziloDodavanje();
 		sadrzaj.getPanelSadrzaj().add(strana3, "Dodavanje vozila");
+		strana6 = new SalterskaPretraga();
+		sadrzaj.getPanelSadrzaj().add(strana6, "Pretraga");
 
 		contentPane.add(sadrzaj, gbc_naslov);
 
 	}
+
+
+	public SalterskaPretraga getStrana6() {
+		return strana6;
+	}	
 
 	public void prikaziPocetnu(){
 		frejm.getSadrzaj().getNaslov().postaviNaslov("Po\u010Detna");
