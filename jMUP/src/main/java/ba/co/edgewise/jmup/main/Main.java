@@ -20,7 +20,7 @@ public class Main {
 					LoginController controler = new LoginController(view, model);
 					controler.control();
 				} catch (Exception e) {
-					e.printStackTrace();
+					e.printStackTrace();//
 				}
 			}
 		});
