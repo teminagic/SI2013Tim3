@@ -23,6 +23,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import ba.co.edgewise.jmup.components.SalterskaPretraga.VoziloPretraga;
 import java.awt.CardLayout;
+import ba.co.edgewise.jmup.enums.VrstaVozila;
 
 
 
@@ -42,7 +43,6 @@ public class SalterskaPretraga extends JPanel{
 	String trenutni="Vozilo";
 	private JButton btn_modifikuj;
 	private JButton btnProfil;
-	private JComboBox cb_parametri;
 	
 	private final SalterskaPretraga frejm = this;
 	
@@ -53,6 +53,8 @@ public class SalterskaPretraga extends JPanel{
 	SalterskaPretragaSaobracajna panel_saobracajna;
 	SalterskaPretragaVlasnicka panel_vlasnicka;
 	private JButton btnIzlaz;
+	private JComboBox cb_parametri;
+	private JButton btnPretrazi;
 	
 	//Enumi za combobox
 	enum VoziloPretraga { Registarska_oznaka("Registarska oznaka"), Godina_proizvodnje("Godina proizvodnje"), Vrsta_vozila("Vrsta vozila"), Marka_vozila("Marka vozila");
@@ -100,7 +102,7 @@ public class SalterskaPretraga extends JPanel{
 		GridBagLayout gbl_okvirPanel = new GridBagLayout();
 		gbl_okvirPanel.columnWidths = new int[]{24, 23, 38, 46, 43, 113, 97, 53, 66, 39, 0};
 		gbl_okvirPanel.rowHeights = new int[]{26, 0, 261, 38, 0};
-		gbl_okvirPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_okvirPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_okvirPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		okvirPanel.setLayout(gbl_okvirPanel);
 		
@@ -114,7 +116,7 @@ public class SalterskaPretraga extends JPanel{
 		
 		tb_unosPretrage = new JTextField();
 		GridBagConstraints gbc_tb_unosPretrage = new GridBagConstraints();
-		gbc_tb_unosPretrage.gridwidth = 4;
+		gbc_tb_unosPretrage.gridwidth = 3;
 		gbc_tb_unosPretrage.insets = new Insets(0, 0, 5, 5);
 		gbc_tb_unosPretrage.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tb_unosPretrage.gridx = 3;
@@ -125,12 +127,19 @@ public class SalterskaPretraga extends JPanel{
 		cb_parametri = new JComboBox();
 		cb_parametri.setModel(new DefaultComboBoxModel(VoziloPretraga.values()));
 		GridBagConstraints gbc_cb_parametri = new GridBagConstraints();
-		gbc_cb_parametri.gridwidth = 2;
 		gbc_cb_parametri.insets = new Insets(0, 0, 5, 5);
 		gbc_cb_parametri.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cb_parametri.gridx = 7;
+		gbc_cb_parametri.gridx = 6;
 		gbc_cb_parametri.gridy = 0;
 		okvirPanel.add(cb_parametri, gbc_cb_parametri);
+		
+		btnPretrazi = new JButton("Pretraži");
+		GridBagConstraints gbc_btnPretrazi = new GridBagConstraints();
+		gbc_btnPretrazi.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnPretrazi.insets = new Insets(0, 0, 5, 5);
+		gbc_btnPretrazi.gridx = 8;
+		gbc_btnPretrazi.gridy = 0;
+		okvirPanel.add(btnPretrazi, gbc_btnPretrazi);
 		
 		rbVozilo = new JRadioButton("Vozilo");
 		rbVozilo.setActionCommand(voziloString);
@@ -180,7 +189,7 @@ public class SalterskaPretraga extends JPanel{
 		//Default je postavljeno da bude Vozilo.
 		panel_pretraga = new JPanel();
 		final GridBagConstraints gbc_panel_pretraga = new GridBagConstraints();
-		gbc_panel_pretraga.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_pretraga.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_pretraga.gridwidth = 8;
 		gbc_panel_pretraga.fill = GridBagConstraints.VERTICAL;
 		gbc_panel_pretraga.gridx = 1;
