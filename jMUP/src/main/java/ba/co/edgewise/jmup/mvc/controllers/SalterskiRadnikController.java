@@ -24,25 +24,16 @@ public class SalterskiRadnikController {
 
 	private SalterskiRadnikModel model;
 	private SalterskiRadnikView view;
-
+	
+	private boolean unosVlasnicke;
 	public SalterskiRadnikController(SalterskiRadnikView view, SalterskiRadnikModel model) {
 		super();
 		this.view = view;
 		this.model = model;
+		unosVlasnicke = false;
 	}
 	public void control() {
-				// Buttoni meni-a:
-		
-				// Listener za unos vozaca
-				JButton unosVozaca = this.view.getMeni().getOpcije().getBtnUnosVozaca();
-				unosVozaca.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						prikaziPanelUnosVozaca();
-						};
-					
-				});
-
+				
 				// Listener za pocetnu
 				JButton pocetna= this.view.getMeni().getOpcije().getBtnPocetna();
 				pocetna.addMouseListener(new MouseAdapter() {
@@ -52,37 +43,40 @@ public class SalterskiRadnikController {
 						};
 					
 				});
-				
-				
-				// Ostali buttoni:
-				/*JButton dodavanjeVozaca = this.view.getStrana2VozacDodavanje().getBtnPrihvati();
-				dodavanjeVozaca.addMouseListener(new MouseAdapter() {
+				// Listener za unos vozaca
+				JButton unosVozaca = this.view.getMeni().getOpcije().getBtnUnosVozaca();
+				unosVozaca.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						if(provjeriPopunjenostVozaca()){
-							try {
-								dodajVozaca();
-							} catch (ParseException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-						} else{
-							JOptionPane.showMessageDialog(null, "Neispravno popunjena polja!");
+						prikaziPanelUnosVozaca();
 						};
-					}
-				});*/
+					
+				});
+				
+				// Listener za dodavanjeVozaca
 				JButton dodavanjeVozaca = this.view.getStrana2().getBtnPrihvati();
 				dodavanjeVozaca.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						if(provjeriPopunjenostVozaca()){							
 								dodajVozaca();
+								
+								// logika za: unos vlasnice posto se ovaj panel pojavljuje :D
+								if(isUnosVlasnicke() == true)
+								{
+									prikaziPanelUnosVozila();
+								}
+								/*else
+								{
+									prikazi obavjest o unesenom!
+								}*/
 						} 
 						else{
 							JOptionPane.showMessageDialog(null, "Neispravno popunjena polja!");
 						};
 					}
 				});
+				
 				//UNOS VOZILA
 				JButton unosVozila = this.view.getMeni().getOpcije().getBtnUnosVozila();
 				unosVozila.addMouseListener(new MouseAdapter() {
@@ -103,7 +97,37 @@ public class SalterskiRadnikController {
 						}
 					}
 				});
-		
+				
+				// dodavanje registracije
+				
+				JButton dodavanjeRegistracije = this.view.getRegistracija().getBtnPrihvati();
+				dodavanjeRegistracije.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						try {
+							if(provjeriPopunjenostRegistracije()) 
+							{
+								dodajRegistraciju();
+								setUnosVlasnicke(false);
+							}
+							/*
+							 * else prikazi da je unio 
+							 * */
+						} catch (ParseException e1) {
+							e1.printStackTrace();
+						}
+					}
+				});
+				
+				//Listener unos vlasnicke
+				JButton unosVlasnicke = this.view.getMeni().getOpcije().getBtnUnosVlasnicke();
+						unosVlasnicke.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						setUnosVlasnicke(true);
+						prikaziPanelUnosVozaca();
+						};			
+				});
 	}
 	
 	public void dodajVozaca()
@@ -127,6 +151,10 @@ public class SalterskiRadnikController {
 		
 		model.DodajVozaca(ime, prezime, adresa, mjesto, opcina, pravno, jmbg, idBroj);
 	}
+	public void dodajRegistraciju() throws ParseException 
+	{
+		
+	}
 	public boolean provjeriPopunjenostVozaca() {
 		return true;
 	}
@@ -147,6 +175,9 @@ public class SalterskiRadnikController {
 	}
 
 	public boolean provjeriPopunjenostUnosVozila() {
+		return true;
+	}
+	public boolean provjeriPopunjenostRegistracije() {
 		return true;
 	}
 	public void dodajVozilo() throws ParseException 
@@ -185,5 +216,11 @@ public class SalterskiRadnikController {
 			brojMjestaZaStajanje, brojMjestaZaLezanje, ekoKarakteristika, katalizator, datumPregleda, 
 			zapreminaMotora, maxSnaga,gorivo, brojMotora, vrstaMotora);
 	
+	}
+	public boolean isUnosVlasnicke() {
+		return unosVlasnicke;
+	}
+	public void setUnosVlasnicke(boolean unosVlasnicke) {
+		this.unosVlasnicke = unosVlasnicke;
 	}
 }

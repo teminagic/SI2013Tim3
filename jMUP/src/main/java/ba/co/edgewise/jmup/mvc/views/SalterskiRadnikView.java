@@ -15,6 +15,7 @@ import ba.co.edgewise.jmup.components.MeniSalter;
 import ba.co.edgewise.jmup.components.MeniSalterOpcije;
 import ba.co.edgewise.jmup.components.NaslovnaSalterski;
 import ba.co.edgewise.jmup.components.OpcijaSadrzaj;
+import ba.co.edgewise.jmup.components.RegistracijaUnos;
 import ba.co.edgewise.jmup.components.SalterskaPretraga;
 import ba.co.edgewise.jmup.components.VozacDodavanje;
 import ba.co.edgewise.jmup.components.VoziloDodavanje;
@@ -33,7 +34,7 @@ public class SalterskiRadnikView extends JFrame {
 	private VozacDodavanje strana2;
 	private VoziloDodavanje strana3;
 	private SalterskaPretraga strana6;
-
+	private RegistracijaUnos strana4Registracija;
 	
 	private final SalterskiRadnikView frejm = this;
 	/**
@@ -82,9 +83,13 @@ public class SalterskiRadnikView extends JFrame {
 		
 		strana3 = new VoziloDodavanje();
 		sadrzaj.getPanelSadrzaj().add(strana3, "Dodavanje vozila");
+		
 		strana6 = new SalterskaPretraga();
 		sadrzaj.getPanelSadrzaj().add(strana6, "Pretraga");
-
+		
+		strana4Registracija = new RegistracijaUnos();
+		sadrzaj.getPanelSadrzaj().add(strana4Registracija,"Upis registracije");
+		
 		contentPane.add(sadrzaj, gbc_naslov);
 
 	}
@@ -102,7 +107,7 @@ public class SalterskiRadnikView extends JFrame {
 	}
 	public void prikaziUnosVozila()
 	{
-		frejm.getSadrzaj().getNaslov().postaviNaslov("Dodavanje vozila");
+		this.getSadrzaj().getNaslov().postaviNaslov("Dodavanje vozila");
 		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Dodavanje vozila");
@@ -115,6 +120,12 @@ public class SalterskiRadnikView extends JFrame {
 		tmp.show(cards, "Dodavanje voza\u010Da");
 	}
 	
+	public void prikaziUnosRegistraijce(){
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Unos registracije");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Unos registracije");
+	}
 	
 	public JPanel getContentPane() {
 		return contentPane;///
@@ -126,7 +137,7 @@ public class SalterskiRadnikView extends JFrame {
 	}
 
 
-	public NaslovnaSalterski getStrana1() {
+	public NaslovnaSalterski getPocetna() {
 		return strana1;
 	}
 
@@ -149,5 +160,10 @@ public class SalterskiRadnikView extends JFrame {
 	}
 	public GridBagConstraints getGbc_meni() {
 		return gbc_meni;
+	}
+
+
+	public RegistracijaUnos getRegistracija() {
+		return strana4Registracija;
 	}
 }

@@ -67,5 +67,11 @@ public class RegistracijaUnos extends JPanel {
 		add(btnPoniti, gbc_btnPoniti);
 
 	}
+	public JButton getBtnPrihvati() {
+		return btnPrihvati;
+	}
+	public JButton getBtnPoniti() {
+		return btnPoniti;
+	}
 
 }
