@@ -141,7 +141,7 @@ public class AdminController {
 					"default");
 		};
 	}
-	////
+	//////
 	private void pretraziKorisnike() {
 		view.getStrana3().getModel().clearAll();
 		String kriterij = view.getStrana3().getTfPodaci().getText();
