@@ -21,6 +21,7 @@ import ba.co.edgewise.jmup.components.RegistracijaUnos;
 import ba.co.edgewise.jmup.components.SalterskaPretraga;
 import ba.co.edgewise.jmup.components.VozacDodavanje;
 import ba.co.edgewise.jmup.components.VoziloDodavanje;
+import ba.co.edgewise.jmup.components.VoziloModifikacija;
 import ba.co.edgewise.jmup.mvc.controllers.LoginController;
 
 public class SalterskiRadnikView extends JFrame {
@@ -39,6 +40,7 @@ public class SalterskiRadnikView extends JFrame {
 	private RegistracijaUnos strana4Registracija;
 	private GodisnjaOvjera strana7;
 	private Izvjestaji strana9;
+	private VoziloModifikacija strana10;
 	
 	private final SalterskiRadnikView frejm = this;
 	/**
@@ -103,6 +105,9 @@ public class SalterskiRadnikView extends JFrame {
 		strana9 = new Izvjestaji();
 		sadrzaj.getPanelSadrzaj().add(strana9, "Izrada izvje\u0161taja");
 		
+		strana10 = new VoziloModifikacija();
+		sadrzaj.getPanelSadrzaj().add(strana10, "Modifikacija vozila");
+		
 		contentPane.add(sadrzaj, gbc_naslov);
 
 	}
@@ -158,6 +163,13 @@ public class SalterskiRadnikView extends JFrame {
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Izrada izvje\u0161taja");
 	}
+	public void prikaziModifikacijuVozila()
+	{
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Modifikacija vozila");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Modifikacija vozila");
+	}
 	public JPanel getContentPane() {
 		return contentPane;///
 	}
@@ -182,6 +194,9 @@ public class SalterskiRadnikView extends JFrame {
 	}
 	public VoziloDodavanje getVoziloDodavanje() {
 		return strana3;
+	}
+	public VoziloModifikacija getVoziloModifikacija() {
+		return strana10;
 	}
 	//public JButton getVoziloDodavanjePrihvatiButton() {
 	//	return voziloDodavanje.getBtn_prihvati();

@@ -76,7 +76,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 			if (qResult.next()) {
 				result.setId(qResult.getInt("IDOsobe"));
 				result.setJmbg_Id(qResult.getString("JMB_ID"));
-				result.setIme(qResult.getString("Prezime"));
+				result.setPrezime(qResult.getString("Prezime"));
 				result.setIme(qResult.getString("Ime"));
 				result.setPrebivaliste(qResult.getString("Prebivaliste"));
 				result.setPravnoLice(qResult.getBoolean("PravnoLice"));
@@ -150,7 +150,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				Osoba osoba = new Osoba();
 				osoba.setId(qResult.getInt("IDOsobe"));
 				osoba.setJmbg_Id(qResult.getString("JMB_ID"));
-				osoba.setIme(qResult.getString("Prezime"));
+				osoba.setPrezime(qResult.getString("Prezime"));
 				osoba.setIme(qResult.getString("Ime"));
 				osoba.setPrebivaliste(qResult.getString("Prebivaliste"));
 				if (qResult.getInt("PravnoLice") == 1)
@@ -188,7 +188,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				Osoba osoba = new Osoba();
 				osoba.setId(qResult.getInt("IDOsobe"));
 				osoba.setJmbg_Id(qResult.getString("JMB_ID"));
-				osoba.setIme(qResult.getString("Prezime"));
+				osoba.setPrezime(qResult.getString("Prezime"));
 				osoba.setIme(qResult.getString("Ime"));
 				osoba.setPrebivaliste(qResult.getString("Prebivaliste"));
 				if (qResult.getInt("PravnoLice") == 1)
@@ -227,7 +227,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				Osoba osoba = new Osoba();
 				osoba.setId(qResult.getInt("IDOsobe"));
 				osoba.setJmbg_Id(qResult.getString("JMB_ID"));
-				osoba.setIme(qResult.getString("Prezime"));
+				osoba.setPrezime(qResult.getString("Prezime"));
 				osoba.setIme(qResult.getString("Ime"));
 				osoba.setPrebivaliste(qResult.getString("Prebivaliste"));
 				if (qResult.getInt("PravnoLice") == 1)
@@ -264,7 +264,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 			if (qResult.next()) {
 					result.setId(qResult.getInt("IDOsobe"));
 					result.setJmbg_Id(qResult.getString("JMB_ID"));
-					result.setIme(qResult.getString("Prezime"));
+					result.setPrezime(qResult.getString("Prezime"));
 					result.setIme(qResult.getString("Ime"));
 					result.setPrebivaliste(qResult.getString("Prebivaliste"));
 					result.setPravnoLice(qResult.getBoolean("PravnoLice"));

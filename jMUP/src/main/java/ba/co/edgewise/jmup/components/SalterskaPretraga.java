@@ -21,7 +21,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
-import ba.co.edgewise.jmup.components.SalterskaPretraga.VoziloPretraga;
+//import ba.co.edgewise.jmup.components.SalterskaPretraga.VoziloPretraga;
 import java.awt.CardLayout;
 import ba.co.edgewise.jmup.enums.VrstaVozila;
 
@@ -35,12 +35,6 @@ public class SalterskaPretraga extends JPanel{
 	JRadioButton rbSaobracajna;
 	JRadioButton rbVlasnicka; 
 	JRadioButton rbVozilo;
-	
-	static String voziloString = "Vozilo";
-	static String VozacString = "Vozac";
-	static String vlasnickaString = "Vlasnicka";
-	static String saobracajnaString = "Saobracajna";
-	String trenutni="Vozilo";
 	private JButton btn_modifikuj;
 	private JButton btnProfil;
 	
@@ -57,7 +51,7 @@ public class SalterskaPretraga extends JPanel{
 	private JButton btnPretrazi;
 	
 	//Enumi za combobox
-	enum VoziloPretraga { Registarska_oznaka("Registarska oznaka"), Godina_proizvodnje("Godina proizvodnje"), Vrsta_vozila("Vrsta vozila"), Marka_vozila("Marka vozila");
+	/*enum VoziloPretraga { Registarska_oznaka("Registarska oznaka"), Godina_proizvodnje("Godina proizvodnje"), Vrsta_vozila("Vrsta vozila"), Marka_vozila("Marka vozila");
 	   private final String stringValue;
 	   private VoziloPretraga(final String s) { stringValue = s; }
 	   public String toString() { return stringValue; }
@@ -76,7 +70,7 @@ public class SalterskaPretraga extends JPanel{
 		private final String stringValue;
 	   private SaobracajnaPretraga(final String s) { stringValue = s; }
 	   public String toString() { return stringValue; }
-	   }
+	   }*/
 
 
 	public SalterskaPretraga() {
@@ -125,7 +119,7 @@ public class SalterskaPretraga extends JPanel{
 		tb_unosPretrage.setColumns(10);
 		
 		cb_parametri = new JComboBox();
-		cb_parametri.setModel(new DefaultComboBoxModel(VoziloPretraga.values()));
+		//cb_parametri.setModel(new DefaultComboBoxModel(VoziloPretraga.values()));
 		GridBagConstraints gbc_cb_parametri = new GridBagConstraints();
 		gbc_cb_parametri.insets = new Insets(0, 0, 5, 5);
 		gbc_cb_parametri.fill = GridBagConstraints.HORIZONTAL;
@@ -142,7 +136,6 @@ public class SalterskaPretraga extends JPanel{
 		okvirPanel.add(btnPretrazi, gbc_btnPretrazi);
 		
 		rbVozilo = new JRadioButton("Vozilo");
-		rbVozilo.setActionCommand(voziloString);
 		rbVozilo.setSelected(true);
 		GridBagConstraints gbc_rbVozilo = new GridBagConstraints();
 		gbc_rbVozilo.fill = GridBagConstraints.HORIZONTAL;
@@ -153,7 +146,6 @@ public class SalterskaPretraga extends JPanel{
 		
 		
 		rbVozac = new JRadioButton("Voza\u010D");
-		rbVozac.setActionCommand(VozacString);
 		GridBagConstraints gbc_rbVozac = new GridBagConstraints();
 		gbc_rbVozac.insets = new Insets(0, 0, 5, 5);
 		gbc_rbVozac.gridx = 4;
@@ -161,7 +153,6 @@ public class SalterskaPretraga extends JPanel{
 		okvirPanel.add(rbVozac, gbc_rbVozac);
 	
 		rbSaobracajna = new JRadioButton("Saobra\u0107ajna dozvola");
-		rbSaobracajna.setActionCommand(saobracajnaString);
 		GridBagConstraints gbc_rbSaobracajna = new GridBagConstraints();
 		gbc_rbSaobracajna.anchor = GridBagConstraints.EAST;
 		gbc_rbSaobracajna.insets = new Insets(0, 0, 5, 5);
@@ -170,7 +161,6 @@ public class SalterskaPretraga extends JPanel{
 		okvirPanel.add(rbSaobracajna, gbc_rbSaobracajna);
 		
 		rbVlasnicka= new JRadioButton("Vlasni\u010Dka dozvola");
-		rbVlasnicka.setActionCommand(vlasnickaString);
 		GridBagConstraints gbc_rbVlasnicka = new GridBagConstraints();
 		gbc_rbVlasnicka.insets = new Insets(0, 0, 5, 5);
 		gbc_rbVlasnicka.fill = GridBagConstraints.HORIZONTAL;
@@ -178,7 +168,6 @@ public class SalterskaPretraga extends JPanel{
 		gbc_rbVlasnicka.gridy = 1;
 		okvirPanel.add(rbVlasnicka, gbc_rbVlasnicka);
 		
-		//Grupisanje radiobuttona - da bi mogao samo jedan biti true
 		ButtonGroup radioGroup = new ButtonGroup();
 		radioGroup.add(rbVozilo);
 		radioGroup.add(rbVozac);
