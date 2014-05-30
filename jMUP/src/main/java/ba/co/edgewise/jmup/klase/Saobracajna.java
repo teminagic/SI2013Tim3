@@ -40,7 +40,11 @@ public class Saobracajna{
 	public void setKorisnik(Osoba korisnik) {
 		this.korisnik = korisnik;
 	}
-	
-	
+	//UBACITI PARAMETRE
+	public Object[] toObjectArray() {
+		return new Object[]{ };
+	}	
+	//public enum VlasnickaPretraga { Broj_potvrde("Broj potvrde"), Registarska_oznaka(""), Ime_prezime("Ime i prezime"), JMBG_vlasnika("JMBG vlasnika") ; 
+
 	
 }

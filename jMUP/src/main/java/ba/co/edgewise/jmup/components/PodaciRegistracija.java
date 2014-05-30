@@ -44,7 +44,7 @@ public class PodaciRegistracija extends JPanel {
 
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 109, 305, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 34, 34, 34, 182, 77, 0 };
+		gridBagLayout.rowHeights = new int[] { 34, 34, 34, 151, 77, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
@@ -131,7 +131,7 @@ public class PodaciRegistracija extends JPanel {
 		gbc_prva.insets = new Insets(0, 0, 0, 5);
 		gbc_prva.gridwidth = 2;
 		gbc_prva.gridx = 1;
-		gbc_prva.gridy = 4;
+		gbc_prva.gridy = 3;
 		add(prva, gbc_prva);
 
 	}

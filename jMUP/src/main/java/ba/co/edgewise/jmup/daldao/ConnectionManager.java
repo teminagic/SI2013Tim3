@@ -33,9 +33,9 @@ public class ConnectionManager {
 	
 	private PoolingDataSource setupDataSource(){
 		GenericObjectPool.Config config = new GenericObjectPool.Config();
-		config.maxActive = 50;
-		config.maxIdle = 20;
-		config.minIdle = 10;
+		config.maxActive = 10;
+		config.maxIdle = 0;
+		config.minIdle = 0;
 		config.maxWait = 1000;
 		
 		@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -66,6 +66,7 @@ public class ConnectionManager {
 	public static void closeConnection(Connection connection) {
 		try {
 			connection.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

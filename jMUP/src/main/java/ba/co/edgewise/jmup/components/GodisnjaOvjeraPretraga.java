@@ -15,7 +15,7 @@ public class GodisnjaOvjeraPretraga extends JPanel {
 	private GridBagLayout gridBagLayout;
 	private JTextField txtId;
 	private JLabel lblId;
-	private BtAzuriranje btgModify;
+	private BtAzuriranje btnModify;
 	
 	public GodisnjaOvjeraPretraga() {		
 		//set title
@@ -56,13 +56,13 @@ public class GodisnjaOvjeraPretraga extends JPanel {
 		add(txtId, gbc_txtId);
 		txtId.setColumns(10);
 		
-		btgModify = new BtAzuriranje();
+		btnModify = new BtAzuriranje();
 		GridBagConstraints gbc_btg = new GridBagConstraints();
 		gbc_btg.anchor = GridBagConstraints.NORTH;
 		gbc_btg.insets = new Insets(5, 5, 0, 5);
 		gbc_btg.gridx = 1;
 		gbc_btg.gridy = 2;
-		add(btgModify, gbc_btg);
+		add(btnModify, gbc_btg);
 	}
 	
 	//getters & setters
@@ -72,6 +72,9 @@ public class GodisnjaOvjeraPretraga extends JPanel {
 
 	public void setTxtId(JTextField txtId) {
 		this.txtId = txtId;
+	}
+	public BtAzuriranje getModifyPanel(){
+		return btnModify;
 	}
 
 }

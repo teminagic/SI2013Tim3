@@ -13,8 +13,13 @@ import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 
 import java.awt.Insets;
+
 import javax.swing.DefaultComboBoxModel;
+
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 //
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
 @SuppressWarnings("rawtypes")
 public class DatumVazenja extends JPanel {
 
@@ -22,25 +27,55 @@ public class DatumVazenja extends JPanel {
 	private GridBagLayout gridBagLayout;
 	private JLabel lblFrom;
 	private JLabel lblTo;
-	private JComboBox cbxFrom_1;
-	private JComboBox cbxFrom_2;
-	private JComboBox cbxFrom_3;
-	private JComboBox cbxTo_1;
-	private JComboBox cbxTo_2;
-	private JComboBox cbxTo_3;
 	private BtAzuriranje btAzuriranje;
-
+	
+	private UtilDateModel modelOdKad;
+	private JDatePanelImpl datePanelOdKad;
+	private JDatePickerImpl datePickerOdKad;
+	
+	private UtilDateModel modelDoKad;
+	private JDatePanelImpl datePanelDoKad;
+	private JDatePickerImpl datePickerDoKad;
+	 
+	//frame.add(datePicker);
 	public DatumVazenja() {
 		
 		//set broder and title
 		setBorder(new TitledBorder(null, "Datum va\u017Eenja", TitledBorder.LEADING, TitledBorder.TOP, null, null));	
 		//calling methods to set layout
+	
 		layoutSet();
 		labelSet();
 		cbxSet();
-
+		dateSet();
 	}
-	
+	public void dateSet()
+	{
+		modelOdKad = new UtilDateModel();
+		datePanelOdKad = new JDatePanelImpl(modelOdKad);
+		datePickerOdKad = new JDatePickerImpl(datePanelOdKad);
+		
+		GridBagConstraints gbc_lblDateOd = new GridBagConstraints();
+		gbc_lblDateOd.anchor = GridBagConstraints.SOUTH;
+		gbc_lblDateOd.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblDateOd.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDateOd.gridx = 2;
+		gbc_lblDateOd.gridy = 0;
+		add(datePickerOdKad, gbc_lblDateOd);
+		
+
+		modelDoKad = new UtilDateModel();
+		datePanelDoKad = new JDatePanelImpl(modelDoKad);
+		datePickerDoKad = new JDatePickerImpl(datePanelDoKad);
+		
+		GridBagConstraints gbc_lblDateDo = new GridBagConstraints();
+		gbc_lblDateDo.anchor = GridBagConstraints.SOUTH;
+		gbc_lblDateDo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblDateDo.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDateDo.gridx = 2;
+		gbc_lblDateDo.gridy = 2;
+		add(datePickerDoKad, gbc_lblDateDo);
+	}
 	public void layoutSet(){
 		
 		gridBagLayout = new GridBagLayout();
@@ -63,6 +98,8 @@ public class DatumVazenja extends JPanel {
 		gbc_lblFrom.gridy = 0;
 		add(lblFrom, gbc_lblFrom);
 		
+		
+		
 		lblTo = new JLabel("Do:");
 		GridBagConstraints gbc_lblTo = new GridBagConstraints();
 		gbc_lblTo.anchor = GridBagConstraints.SOUTH;
@@ -75,68 +112,6 @@ public class DatumVazenja extends JPanel {
 	}
 	
 	public void cbxSet(){
-		
-		cbxFrom_1 = new JComboBox();
-		cbxFrom_1.setModel(new DefaultComboBoxModel(new String[] {"Dan"}));
-		cbxFrom_1.setToolTipText("Dan");
-		GridBagConstraints gbc_cbxFrom_1 = new GridBagConstraints();
-		gbc_cbxFrom_1.fill = GridBagConstraints.BOTH;
-		gbc_cbxFrom_1.insets = new Insets(0, 0, 5, 5);
-		gbc_cbxFrom_1.gridx = 1;
-		gbc_cbxFrom_1.gridy = 1;
-		add(cbxFrom_1, gbc_cbxFrom_1);
-		
-		cbxFrom_2 = new JComboBox();
-		cbxFrom_2.setModel(new DefaultComboBoxModel(new String[] {"Mjesec"}));
-		cbxFrom_2.setToolTipText("Mjesec");
-		GridBagConstraints gbc_cbxFrom_2 = new GridBagConstraints();
-		gbc_cbxFrom_2.insets = new Insets(0, 0, 5, 5);
-		gbc_cbxFrom_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbxFrom_2.gridx = 2;
-		gbc_cbxFrom_2.gridy = 1;
-		add(cbxFrom_2, gbc_cbxFrom_2);
-		
-		cbxFrom_3 = new JComboBox();
-		cbxFrom_3.setModel(new DefaultComboBoxModel(new String[] {"Godina"}));
-		cbxFrom_3.setToolTipText("Godina");
-		GridBagConstraints gbc_cbxFrom_3 = new GridBagConstraints();
-		gbc_cbxFrom_3.insets = new Insets(0, 0, 5, 5);
-		gbc_cbxFrom_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbxFrom_3.gridx = 3;
-		gbc_cbxFrom_3.gridy = 1;
-		add(cbxFrom_3, gbc_cbxFrom_3);
-		
-	
-		
-		cbxTo_1 = new JComboBox();
-		cbxTo_1.setModel(new DefaultComboBoxModel(new String[] {"Dan"}));
-		GridBagConstraints gbc_cbxTo_1 = new GridBagConstraints();
-		gbc_cbxTo_1.anchor = GridBagConstraints.NORTH;
-		gbc_cbxTo_1.insets = new Insets(0, 0, 5, 5);
-		gbc_cbxTo_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbxTo_1.gridx = 1;
-		gbc_cbxTo_1.gridy = 3;
-		add(cbxTo_1, gbc_cbxTo_1);
-		
-		cbxTo_2 = new JComboBox();
-		cbxTo_2.setModel(new DefaultComboBoxModel(new String[] {"Mjesec"}));
-		GridBagConstraints gbc_cbxTo_2 = new GridBagConstraints();
-		gbc_cbxTo_2.anchor = GridBagConstraints.NORTH;
-		gbc_cbxTo_2.insets = new Insets(0, 0, 5, 5);
-		gbc_cbxTo_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbxTo_2.gridx = 2;
-		gbc_cbxTo_2.gridy = 3;
-		add(cbxTo_2, gbc_cbxTo_2);
-		
-		cbxTo_3 = new JComboBox();
-		cbxTo_3.setModel(new DefaultComboBoxModel(new String[] {"Godina"}));
-		GridBagConstraints gbc_cbxTo_3 = new GridBagConstraints();
-		gbc_cbxTo_3.anchor = GridBagConstraints.NORTH;
-		gbc_cbxTo_3.insets = new Insets(0, 0, 5, 5);
-		gbc_cbxTo_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbxTo_3.gridx = 3;
-		gbc_cbxTo_3.gridy = 3;
-		add(cbxTo_3, gbc_cbxTo_3);
 		
 		btAzuriranje = new BtAzuriranje();
 		GridBagLayout gridBagLayout_1 = (GridBagLayout) btAzuriranje.getLayout();
@@ -153,54 +128,17 @@ public class DatumVazenja extends JPanel {
 		add(btAzuriranje, gbc_btAzuriranje);
 		
 	}
+
+	public BtAzuriranje getBtAzuriranje() {
+		return btAzuriranje;
+	}
+
+	public JDatePickerImpl getDatePickerOdKad() {
+		return datePickerOdKad;
+	}
+	public JDatePickerImpl getDatePickerDoKad() {
+		return datePickerDoKad;
+	}
 	
-	//getters & setters
-	public JComboBox getCbxFrom_1() {
-		return cbxFrom_1;
-	}
-
-	public void setCbxFrom_1(JComboBox cbxFrom_1) {
-		this.cbxFrom_1 = cbxFrom_1;
-	}
-
-	public JComboBox getCbxFrom_2() {
-		return cbxFrom_2;
-	}
-
-	public void setCbxFrom_2(JComboBox cbxFrom_2) {
-		this.cbxFrom_2 = cbxFrom_2;
-	}
-
-	public JComboBox getCbxFrom_3() {
-		return cbxFrom_3;
-	}
-
-	public void setCbxFrom_3(JComboBox cbxFrom_3) {
-		this.cbxFrom_3 = cbxFrom_3;
-	}
-
-	public JComboBox getCbxTo_1() {
-		return cbxTo_1;
-	}
-
-	public void setCbxTo_1(JComboBox cbxTo_1) {
-		this.cbxTo_1 = cbxTo_1;
-	}
-
-	public JComboBox getCbxTo_2() {
-		return cbxTo_2;
-	}
-
-	public void setCbxTo_2(JComboBox cbxTo_2) {
-		this.cbxTo_2 = cbxTo_2;
-	}
-
-	public JComboBox getCbxTo_3() {
-		return cbxTo_3;
-	}
-
-	public void setCbxTo_3(JComboBox cbxTo_3) {
-		this.cbxTo_3 = cbxTo_3;
-	}
 
 }

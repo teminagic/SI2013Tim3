@@ -7,29 +7,63 @@ import java.util.List;
 import ba.co.edgewise.jmup.daldao.daos.MotorDAO;
 import ba.co.edgewise.jmup.daldao.daos.OsobaDAO;
 import ba.co.edgewise.jmup.daldao.daos.RegistracijaDAO;
+import ba.co.edgewise.jmup.daldao.daos.SaobracajnaDAO;
 import ba.co.edgewise.jmup.daldao.daos.UposlenikDAO;
+import ba.co.edgewise.jmup.daldao.daos.VlasnickaDAO;
 import ba.co.edgewise.jmup.daldao.daos.VoziloDAO;
 import ba.co.edgewise.jmup.enums.EkoKarakteristike;
 import ba.co.edgewise.jmup.enums.VrstaVozila;
 import ba.co.edgewise.jmup.klase.Motor;
 import ba.co.edgewise.jmup.klase.Osoba;
 import ba.co.edgewise.jmup.klase.Registracija;
+import ba.co.edgewise.jmup.klase.Saobracajna;
 import ba.co.edgewise.jmup.klase.Uposlenik;
+import ba.co.edgewise.jmup.klase.Vlasnicka;
 import ba.co.edgewise.jmup.klase.Vozilo;
 
 // U klasi ce se nalaziti metode koje su potrebne da opisu posao salterskog radnika
 // Sve se radi sa dal dao-om, a obicne klase sluze radi "lakseg i intuituvnijeg prenosa podataka"
 
 public class SalterskiRadnikModel {
-	
-	public Boolean DodajRegistraciju(Integer idDozvole, String regOznaka, String jmbg, Date odKad, Date doKad)
+	public Boolean OvjeriRegistraciju(String brojDozvole, Date odKad, Date doKad)
 	{
+		SaobracajnaDAO sDAO = new SaobracajnaDAO();
+		Saobracajna s = sDAO.get(brojDozvole);
+		Vozilo v = s.getVozilo();
+		//
+		RegistracijaDAO rDAO = new RegistracijaDAO();
+		return rDAO.updateSaIDVozila(v.getId(), odKad, doKad);
+	}
+	public Boolean DodajRegistracijuISaobracajnu(String brojDozvole, String regOznaka, String jmbg, Date odKad, Date doKad)
+	{
+		SaobracajnaDAO sDAO = new SaobracajnaDAO();
 		OsobaDAO oDAO = new OsobaDAO();
 		VoziloDAO vDAO = new VoziloDAO();
+		
 		Osoba o = oDAO.getByJMBG(jmbg);
 		Vozilo vozilica = vDAO.getByReg(regOznaka);
-		Registracija registracija = new Registracija(idDozvole, regOznaka, odKad, doKad, vozilica, o);
+		Saobracajna s = new Saobracajna(brojDozvole,vozilica,o);
+		
+		sDAO.create(s);
+		Registracija registracija = new Registracija(0, regOznaka, odKad, doKad, vozilica, o);
 		RegistracijaDAO rDAO = new RegistracijaDAO();
+	
+		return rDAO.create(registracija);
+	}
+	public Boolean DodajRegistracijuIVlasnicku(String brojDozvole, String regOznaka, String jmbg, Date odKad, Date doKad)
+	{
+		VlasnickaDAO sDAO = new VlasnickaDAO();
+		OsobaDAO oDAO = new OsobaDAO();
+		VoziloDAO vDAO = new VoziloDAO();
+		
+		Osoba o = oDAO.getByJMBG(jmbg);
+		Vozilo vozilica = vDAO.getByReg(regOznaka);
+		Vlasnicka s = new Vlasnicka(brojDozvole,vozilica,o);
+		
+		sDAO.create(s);
+		Registracija registracija = new Registracija(0, regOznaka, odKad, doKad, vozilica, o);
+		RegistracijaDAO rDAO = new RegistracijaDAO();
+	
 		return rDAO.create(registracija);
 	}
 	public Boolean DodajVozaca(String ime, String prezime, String adresa, String mjesto, String opcina, boolean pravno, String jmbg, String id)
@@ -71,5 +105,13 @@ public class SalterskiRadnikModel {
 		VoziloDAO vDAO = new VoziloDAO();
 		//Kreiraj vozilo
 		vDAO.create(vozilo);
+	}
+	public Boolean provjeriBrojSaobracajne(String brojDozvole)
+	{
+		SaobracajnaDAO s = new SaobracajnaDAO();
+		ArrayList<Saobracajna> saobracajne = s.getByPotvrda(brojDozvole);
+		if(saobracajne.size()!=0)
+			return true;
+		return false;
 	}
 }

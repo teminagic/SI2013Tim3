@@ -20,7 +20,7 @@ public class Vozilo {
 	int maxTehnickaDozvoljenaMasa;
 	int MasaVozila;
 	int DopustenaNosivost;
-	Motor motor;
+	Motor motor=new Motor();
 	Double odnosSnageIMase;
 	Integer brojMjestaZaSjedenje;
 	Integer brojMjestaZaStajanje;
@@ -29,7 +29,6 @@ public class Vozilo {
 	Boolean katalizator;
 	Date datumPregleda;
 	String registarskaOznaka;
-	
 	public Vozilo(Integer id, String registarskaOznaka, VrstaVozila vrsta, String marka, String tip,
 			String model, String brojSasije, String oblikKaroserije,
 			int godinaProizvodnje, int maxTehnickaDozvoljenaMasa,
@@ -221,6 +220,29 @@ public class Vozilo {
 		this.datumPregleda = datumPregleda;
 	}
 	
+	public Object[] toObjectArray() {
+		return new Object[]{				
+			this.registarskaOznaka,
+			this.godinaProizvodnje,
+			this.vrsta,
+			this.marka
+			/*this.tip = tip,
+			this.model = model,
+			this.brojSasije = brojSasije,
+			this.oblikKaroserije = oblikKaroserije,*/
+			/*this.maxTehnickaDozvoljenaMasa = maxTehnickaDozvoljenaMasa,
+			this.MasaVozila = MasaVozila,
+			this.DopustenaNosivost = DopustenaNosivost,
+			this.motor = motor,
+			this.odnosSnageIMase = odnosSnageIMase,
+			this.brojMjestaZaSjedenje = brojMjestaZaSjedenje,
+			this.brojMjestaZaStajanje = brojMjestaZaStajanje,
+			this.brojMjestaZaLezanje = brojMjestaZaLezanje,
+			this.ekoKarakteristika = ekoKarakteristika,
+			this.katalizator = katalizator,
+			this.datumPregleda = datumPregleda*/
+		};
+	}
 }
 
 	

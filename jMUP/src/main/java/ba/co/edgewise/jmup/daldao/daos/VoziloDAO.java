@@ -33,8 +33,9 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 		int godinaProizvodnje = vozilo.getGodinaProizvodnje();
 		int maxTehnickaDozvoljenaMasa = vozilo.getMaxTehnickaDozvoljenaMasa();
 		int masaVozila = vozilo.getMasaVozila();
+		int id=vozilo.getId();
 		int dopustenaNosivost = vozilo.getDopustenaNosivost();
-		Motor motor = vozilo.getMotor();
+		int motorId=vozilo.getMotor().getId();
 		Double odnosSnageIMase = vozilo.getOdnosSnageIMase();
 		Integer brojMjestaZaSjedenje = vozilo.getBrojMjestaZaSjedenje();
 		Integer brojMjestaZaStajanje = vozilo.getBrojMjestaZaStajanje();
@@ -51,32 +52,33 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 		try {
 			PreparedStatement statement = connection
 					.prepareStatement("INSERT INTO  `sql339553`.`Vozilo` (" +
-							"`Vrsta`, `Marka`, `Tip`, `Model`, `BrojSasije`,"+
+							"`IDVozila`, `Vrsta`, `Marka`, `Tip`, `Model`, `BrojSasije`,"+
 							"`OblikKaroserije`,`GodinaProizvodnje` ,`MaxTehnickaDozvoljenaMasa` ,"+
 							"`MasaVozila` , `DopustenaNosivost` , `Motor` , `OdnosSnageIMase` ,"+
 							"`BrojMjestaZaSjedenje` ,`BrojMjestaZaStajanje` ,`BrojMjestaZaLezanje` ," +
 							"`EkoKarakteristikaVozila` ,`Katalizator` ,`DatumPregleda`,`RegOznaka`)" +
-							"VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
-
-			statement.setString(1, vrsta);
-			statement.setString(2, marka);
-			statement.setString(3, tip);
-			statement.setString(4, model);
-			statement.setString(5, brojSasije);
-			statement.setString(6, oblikKaroserije);
-			statement.setInt(7, godinaProizvodnje);
-			statement.setInt(8, maxTehnickaDozvoljenaMasa);
-			statement.setInt(9, masaVozila);
-			statement.setInt(10, dopustenaNosivost);
-			statement.setInt(11, motor.getId());
-			statement.setDouble(12, odnosSnageIMase);
-			statement.setInt(13, brojMjestaZaSjedenje);
-			statement.setInt(14, brojMjestaZaStajanje);
-			statement.setInt(15, brojMjestaZaLezanje);
-			statement.setString(16, ekoKarakteristika.toString());
-			statement.setBoolean(17, katalizator);
-			statement.setDate(18, new java.sql.Date(datumPregleda.getTime()));
-			statement.setString(19, reg);
+							"VALUES (?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+			
+			statement.setInt(1, id);
+			statement.setString(2, vrsta);
+			statement.setString(3, marka);
+			statement.setString(4, tip);
+			statement.setString(5, model);
+			statement.setString(6, brojSasije);
+			statement.setString(7, oblikKaroserije);
+			statement.setInt(8, godinaProizvodnje);
+			statement.setInt(9, maxTehnickaDozvoljenaMasa);
+			statement.setInt(10, masaVozila);
+			statement.setInt(11, dopustenaNosivost);
+			statement.setInt(12, motorId);
+			statement.setDouble(13, odnosSnageIMase);
+			statement.setInt(14, brojMjestaZaSjedenje);
+			statement.setInt(15, brojMjestaZaStajanje);
+			statement.setInt(16, brojMjestaZaLezanje);
+			statement.setString(17, ekoKarakteristika.toString());
+			statement.setBoolean(18, katalizator);
+			statement.setDate(19, new java.sql.Date(datumPregleda.getTime()));
+			statement.setString(20, reg);
 
 			statement.executeUpdate();
 			success = true;

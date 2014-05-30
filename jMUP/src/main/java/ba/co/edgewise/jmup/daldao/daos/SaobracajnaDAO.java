@@ -25,7 +25,7 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 		
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO `Saobracajna`(`Vozilo`, 'Korisnik') VALUES (?, ?)");
+					.prepareStatement("INSERT INTO `Saobracajna`(`Vozilo`, `Korisnik`) VALUES (?, ?)");
 
 			statement.setInt(1, vozilo);
 			statement.setInt(2, korisnik);
@@ -131,7 +131,7 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 		return result;
 	}
 	
-	
+	// treba mi niz ne barci!
 	 public ArrayList<Saobracajna> getByPotvrda(String potvrda)
 		{
 			ArrayList<Saobracajna> result = new ArrayList<Saobracajna>();
@@ -167,9 +167,6 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 					result.add(temp);
 				}
 				
-				//ako je prazno da se baci exception
-				if(result.size() == 0)
-					throw new EmptyStackException();
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -261,7 +258,6 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 			
 			return result;
 		}
-	 
 	
 	@Override
 	public boolean update(String brojDozvole, Saobracajna s)

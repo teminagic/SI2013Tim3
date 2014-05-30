@@ -25,6 +25,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 		String prezime = o.getPrezime();
 		String ime = o.getIme();
 		String prebivaliste = o.getPrebivaliste();
+		int id=o.getId();
 		boolean pravnoLice = o.isPravnoLice();
 
 		// Dobavljanje konekcije
@@ -33,14 +34,15 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 
 		try {
 			String sql = "INSERT INTO Osoba (IDOsobe, JMB_ID, Prezime, Ime, Prebivaliste, PravnoLice)"
-					+ " VALUES (null, ?, ?, ?, ?, ?)";
+					+ " VALUES (?, ?, ?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(sql);
-
-			statement.setString(1, jmbg_id);
-			statement.setString(2, prezime);
-			statement.setString(3, ime);
-			statement.setString(4, prebivaliste);
-			statement.setBoolean(5, pravnoLice);
+			
+			statement.setInt(1, id );
+			statement.setString(2, jmbg_id);
+			statement.setString(3, prezime);
+			statement.setString(4, ime);
+			statement.setString(5, prebivaliste);
+			statement.setBoolean(6, pravnoLice);
 
 			statement.executeUpdate();
 			success = true;
@@ -74,7 +76,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 			if (qResult.next()) {
 				result.setId(qResult.getInt("IDOsobe"));
 				result.setJmbg_Id(qResult.getString("JMB_ID"));
-				result.setIme(qResult.getString("Prezime"));
+				result.setPrezime(qResult.getString("Prezime"));
 				result.setIme(qResult.getString("Ime"));
 				result.setPrebivaliste(qResult.getString("Prebivaliste"));
 				result.setPravnoLice(qResult.getBoolean("PravnoLice"));
@@ -109,7 +111,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				Osoba osoba = new Osoba();
 				osoba.setId(qResult.getInt("IDOsobe"));
 				osoba.setJmbg_Id(qResult.getString("JMB_ID"));
-				osoba.setIme(qResult.getString("Prezime"));
+				osoba.setPrezime(qResult.getString("Prezime"));
 				osoba.setIme(qResult.getString("Ime"));
 				osoba.setPrebivaliste(qResult.getString("Prebivaliste"));
 				if (qResult.getInt("PravnoLice") == 1)
@@ -148,7 +150,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				Osoba osoba = new Osoba();
 				osoba.setId(qResult.getInt("IDOsobe"));
 				osoba.setJmbg_Id(qResult.getString("JMB_ID"));
-				osoba.setIme(qResult.getString("Prezime"));
+				osoba.setPrezime(qResult.getString("Prezime"));
 				osoba.setIme(qResult.getString("Ime"));
 				osoba.setPrebivaliste(qResult.getString("Prebivaliste"));
 				if (qResult.getInt("PravnoLice") == 1)
@@ -186,7 +188,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				Osoba osoba = new Osoba();
 				osoba.setId(qResult.getInt("IDOsobe"));
 				osoba.setJmbg_Id(qResult.getString("JMB_ID"));
-				osoba.setIme(qResult.getString("Prezime"));
+				osoba.setPrezime(qResult.getString("Prezime"));
 				osoba.setIme(qResult.getString("Ime"));
 				osoba.setPrebivaliste(qResult.getString("Prebivaliste"));
 				if (qResult.getInt("PravnoLice") == 1)
@@ -225,7 +227,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				Osoba osoba = new Osoba();
 				osoba.setId(qResult.getInt("IDOsobe"));
 				osoba.setJmbg_Id(qResult.getString("JMB_ID"));
-				osoba.setIme(qResult.getString("Prezime"));
+				osoba.setPrezime(qResult.getString("Prezime"));
 				osoba.setIme(qResult.getString("Ime"));
 				osoba.setPrebivaliste(qResult.getString("Prebivaliste"));
 				if (qResult.getInt("PravnoLice") == 1)
@@ -262,7 +264,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 			if (qResult.next()) {
 					result.setId(qResult.getInt("IDOsobe"));
 					result.setJmbg_Id(qResult.getString("JMB_ID"));
-					result.setIme(qResult.getString("Prezime"));
+					result.setPrezime(qResult.getString("Prezime"));
 					result.setIme(qResult.getString("Ime"));
 					result.setPrebivaliste(qResult.getString("Prebivaliste"));
 					result.setPravnoLice(qResult.getBoolean("PravnoLice"));
@@ -339,9 +341,11 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 
 		return success;
 	}
-	/*public static void main(String[] args) {
-		Osoba o = new Osoba(1,"b","b","b","b",true);
+	public static void main(String[] args) {
+		//Osoba o = new Osoba(1,"b","b","b","b",true);
 		OsobaDAO oDao = new OsobaDAO();
-		oDao.create(o);
-	}*/
+		List<Osoba> osobe = new ArrayList<Osoba>();
+		osobe = oDao.getAll();
+		for(Osoba o:osobe) System.out.println(o.getIme()+","+o.getPrezime()+","+o.getJmbg_Id());
+	}
 }

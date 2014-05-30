@@ -15,7 +15,7 @@ public class GOModifikacijaDatum extends JPanel {
 	
 	public GOModifikacijaDatum() {
 		
-		layoutSet();
+		layoutSet(); //
 		componentSet();
 	
 	}
@@ -42,6 +42,10 @@ public class GOModifikacijaDatum extends JPanel {
 		add(registrationDate, gbc_registrationDate);
 		
 		
+	}
+
+	public DatumVazenja getRegistrationDate() {
+		return registrationDate;
 	}
 
 }

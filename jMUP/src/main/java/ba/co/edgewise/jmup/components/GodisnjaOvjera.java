@@ -23,7 +23,7 @@ public class GodisnjaOvjera extends JPanel {
 		
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 278, 0};
-		gridBagLayout.rowHeights = new int[]{0, 147, 29, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 147, 29, 0, -68};
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0};
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0};
 		setLayout(gridBagLayout);
@@ -51,6 +51,14 @@ public class GodisnjaOvjera extends JPanel {
 		gbc_datum.gridy = 3;
 		add(datum, gbc_datum);
 		
+	}
+
+	public GodisnjaOvjeraPretraga getPretraga() {
+		return pretraga;
+	}
+
+	public GOModifikacijaDatum getDatum() {
+		return datum;
 	}
 
 }
