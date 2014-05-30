@@ -15,7 +15,7 @@ public class GOModifikacijaDatum extends JPanel {
 	
 	public GOModifikacijaDatum() {
 		
-		layoutSet();
+		layoutSet(); //
 		componentSet();
 	
 	}
