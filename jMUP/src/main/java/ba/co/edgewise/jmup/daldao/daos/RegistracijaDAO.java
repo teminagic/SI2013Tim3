@@ -175,6 +175,36 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 		return success;
 	}
 
+	public boolean updateSaIDVozila(Integer idVozila, Date odKad, Date doKad) {
+		boolean success = false;
+		
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+	
+		try {
+			PreparedStatement statement = 	connection.prepareStatement(
+					"UPDATE `Registracija`" 
+					+" SET Od = ? , Do = ? " 
+					+" WHERE Vozilo = ? "
+					);
+
+			statement.setDate(1, new java.sql.Date(odKad.getTime()));
+			statement.setDate(2, new java.sql.Date(doKad.getTime()));
+			statement.setInt(3, idVozila);
+			
+			statement.executeUpdate();
+			
+			success = true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+		
+		return success;
+	}
+
 	@Override
 	public boolean delete(Integer id) {
 		boolean success = false;
