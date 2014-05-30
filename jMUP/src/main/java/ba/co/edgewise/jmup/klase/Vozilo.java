@@ -223,16 +223,15 @@ public class Vozilo {
 	
 	public Object[] toObjectArray() {
 		return new Object[]{				
-			this.id = id,
 			this.registarskaOznaka = registarskaOznaka,
+			this.godinaProizvodnje = godinaProizvodnje,
 			this.vrsta = vrsta,
-			this.marka = marka,
-			this.tip = tip,
+			this.marka = marka
+			/*this.tip = tip,
 			this.model = model,
 			this.brojSasije = brojSasije,
-			this.oblikKaroserije = oblikKaroserije,
-			this.godinaProizvodnje = godinaProizvodnje,
-			this.maxTehnickaDozvoljenaMasa = maxTehnickaDozvoljenaMasa,
+			this.oblikKaroserije = oblikKaroserije,*/
+			/*this.maxTehnickaDozvoljenaMasa = maxTehnickaDozvoljenaMasa,
 			this.MasaVozila = MasaVozila,
 			this.DopustenaNosivost = DopustenaNosivost,
 			this.motor = motor,
@@ -242,7 +241,7 @@ public class Vozilo {
 			this.brojMjestaZaLezanje = brojMjestaZaLezanje,
 			this.ekoKarakteristika = ekoKarakteristika,
 			this.katalizator = katalizator,
-			this.datumPregleda = datumPregleda
+			this.datumPregleda = datumPregleda*/
 		};
 	}
 }

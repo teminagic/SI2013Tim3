@@ -5,9 +5,9 @@ import java.util.ListIterator;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
-import ba.co.edgewise.jmup.klase.Vozilo;
+import ba.co.edgewise.jmup.klase.Vlasnicka;
 
-public class TableModelVozilo extends AbstractTableModel {
+public class TableModelVlasnicka extends AbstractTableModel {
 
 	private static final long serialVersionUID = -263608234994707920L;
 
@@ -16,23 +16,23 @@ public class TableModelVozilo extends AbstractTableModel {
 			"Godina proizvodnje", 
 			"Vrsta vozila",
 			"Marka vozila"};
-	private ArrayList<Vozilo> data;
+	private ArrayList<Vlasnicka> data;
 
-	public TableModelVozilo() {
+	public TableModelVlasnicka() {
 		super();
-		this.data = new ArrayList<Vozilo>();
+		this.data = new ArrayList<Vlasnicka>();
 	}
 
-	public TableModelVozilo(ArrayList<Vozilo> data) {
+	public TableModelVlasnicka(ArrayList<Vlasnicka> data) {
 		super();
 		this.data = data;
 	}
 
-	public ArrayList<Vozilo> getData() {
+	public ArrayList<Vlasnicka> getData() {
 		return data;
 	}
 
-	public void setData(ArrayList<Vozilo> data) {
+	public void setData(ArrayList<Vlasnicka> data) {
 		this.data = data;
 	}
 
@@ -73,9 +73,9 @@ public class TableModelVozilo extends AbstractTableModel {
 		this.fireTableRowsDeleted(0, rowCount);
 	}
 	
-	public void addAll(ArrayList<Vozilo> novi){
+	public void addAll(ArrayList<Vlasnicka> novi){
 		int rowCount = this.getRowCount();
-		for(Vozilo u : novi){
+		for(Vlasnicka u : novi){
 			data.add(u);
 		}
 		this.fireTableRowsInserted(rowCount, rowCount + novi.size());
