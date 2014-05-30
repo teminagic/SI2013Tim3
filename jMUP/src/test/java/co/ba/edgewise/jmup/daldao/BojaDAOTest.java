@@ -12,7 +12,7 @@ public class BojaDAOTest extends TestCase {
 	private BojaDAO boja=new BojaDAO();
 	
 	@Test
-	public void testExistingGet(){
+	public void testNotNullGet(){
 		assertEquals(boja.get(1), Boja.CRNA);
 		assertEquals(boja.get(2), Boja.CRVENA);
 		assertEquals(boja.get(3), Boja.ZUTA);
