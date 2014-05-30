@@ -1,24 +1,34 @@
 package ba.co.edgewise.jmup.components;
 //a
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JScrollPane;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.JTable;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+
+import ba.co.edgewise.components.helpers.TableModelVozilo;
 
 public class SalterskaPretragaVozilo extends JPanel {
 
 	private static final long serialVersionUID = 914404948964006300L;
 	private JTable table_vozila;
 	private GridBagLayout gridBagLayout;
+	private TableModelVozilo model;
+	JScrollPane sp_pretragaTabela;
 
 	public SalterskaPretragaVozilo() {
 		// methods for setting layout
 		setLayout();
 		setComponents();
-		DefaultTableModel model = (DefaultTableModel) table_vozila.getModel();
-		model.addRow(new Object[]{"Column 1", "Column 2", "Column 3"});
 	}
 
 	public void setLayout() {
@@ -31,7 +41,7 @@ public class SalterskaPretragaVozilo extends JPanel {
 	}
 
 	public void setComponents() {
-		JScrollPane sp_pretragaTabela = new JScrollPane();
+		sp_pretragaTabela = new JScrollPane();
 		GridBagConstraints gbc_sp_pretragaTabela = new GridBagConstraints();
 		gbc_sp_pretragaTabela.fill = GridBagConstraints.BOTH;
 		gbc_sp_pretragaTabela.gridx = 0;
@@ -39,13 +49,26 @@ public class SalterskaPretragaVozilo extends JPanel {
 		add(sp_pretragaTabela, gbc_sp_pretragaTabela);
 
 		table_vozila = new JTable();
-		table_vozila.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Registarska oznaka", "Godina proizvodnje", "Vrsta vozila", "Marka vozila"
-			}
-		));
+		model = new TableModelVozilo();
+	//	model = (TableModelVozilo) table_vozila.getModel();
+	//	setTable(new JTable(getModel()));
+		getModel().addTableModelListener(getTable());
+		getTable().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		sp_pretragaTabela.setViewportView(table_vozila);
+	}
+	public JTable getTable() {
+		return table_vozila;
+	}
+
+	public void setTable(JTable jTable) {
+		this.table_vozila = jTable;
+	}
+
+	public TableModelVozilo getModel() {
+		return model;
+	}
+
+	public void setModel(TableModelVozilo tableModelVozilo) {
+		this.model = tableModelVozilo;	
 	}
 }

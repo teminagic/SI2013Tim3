@@ -18,6 +18,10 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import ba.co.edgewise.jmup.klase.Motor;
 import ba.co.edgewise.jmup.klase.Uposlenik;
@@ -28,6 +32,7 @@ import ba.co.edgewise.jmup.components.*;
 import ba.co.edgewise.jmup.daldao.daos.MotorDAO;
 import ba.co.edgewise.jmup.daldao.daos.VoziloDAO;
 import ba.co.edgewise.jmup.enums.EkoKarakteristike;
+import ba.co.edgewise.jmup.enums.TipPretrageUposlenika;
 import ba.co.edgewise.jmup.enums.VrstaGoriva;
 import ba.co.edgewise.jmup.enums.VrstaVozila;
 
@@ -75,7 +80,7 @@ public class SalterskiRadnikControllerIrma {
 					};		
 			});
 			
-			// Pretraga
+			// Pretraga - prikaz
 			JButton salterskaPretraga= this.view.getMeni().getOpcije().getBtnPretraga();
 			salterskaPretraga.addMouseListener(new MouseAdapter() {
 				@Override
@@ -84,7 +89,7 @@ public class SalterskiRadnikControllerIrma {
 				};
 				
 			});
-			//RBovi
+			// Pretraga - RBovi - promjene
 			final JRadioButton rbVozilo = this.view.getStrana6().getRbVozilo();
 			rbVozilo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -117,8 +122,34 @@ public class SalterskiRadnikControllerIrma {
 					}
 				};
 			});
+			JButton pretrazi = view.getStrana6().getBtnPretrazi();
+			JTable table = view.getStrana6().getPanel_vozilo().getTable();
+			table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+				@Override
+					public void valueChanged(ListSelectionEvent e) {
+						ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+					//	view.getStrana6().getBtnModifikuj().setEnabled(!lsm.isSelectionEmpty());
+					//	view.getStrana6().getBtnIzbrisiKorisnika().setEnabled(!lsm.isSelectionEmpty());
+					}
+				});
+			pretrazi.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					pretraziKorisnike();
+				}
+			});
 				
 		}
+	private void pretraziKorisnike() {
+		view.getStrana6().getPanel_vozilo().getModel().clearAll();
+		String kriterij = view.getStrana6().getTb_unosPretrage().getText();
+		VoziloPretraga tip = (VoziloPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
+		if(kriterij.equals("")) {
+			view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
+		} else {
+			view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(tip.toString(),kriterij));
+		}
+	}
 	void prikaziPanelPocetnu()
 	{
 		view.prikaziPocetnu();

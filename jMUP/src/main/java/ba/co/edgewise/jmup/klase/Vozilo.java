@@ -221,6 +221,30 @@ public class Vozilo {
 		this.datumPregleda = datumPregleda;
 	}
 	
+	public Object[] toObjectArray() {
+		return new Object[]{				
+			this.id = id,
+			this.registarskaOznaka = registarskaOznaka,
+			this.vrsta = vrsta,
+			this.marka = marka,
+			this.tip = tip,
+			this.model = model,
+			this.brojSasije = brojSasije,
+			this.oblikKaroserije = oblikKaroserije,
+			this.godinaProizvodnje = godinaProizvodnje,
+			this.maxTehnickaDozvoljenaMasa = maxTehnickaDozvoljenaMasa,
+			this.MasaVozila = MasaVozila,
+			this.DopustenaNosivost = DopustenaNosivost,
+			this.motor = motor,
+			this.odnosSnageIMase = odnosSnageIMase,
+			this.brojMjestaZaSjedenje = brojMjestaZaSjedenje,
+			this.brojMjestaZaStajanje = brojMjestaZaStajanje,
+			this.brojMjestaZaLezanje = brojMjestaZaLezanje,
+			this.ekoKarakteristika = ekoKarakteristika,
+			this.katalizator = katalizator,
+			this.datumPregleda = datumPregleda
+		};
+	}
 }
 
 	

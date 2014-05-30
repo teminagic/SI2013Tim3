@@ -218,7 +218,6 @@ public class SalterskaPretraga extends JPanel{
 		gbc_btnIzlaz.gridy = 3;
 		okvirPanel.add(btnIzlaz, gbc_btnIzlaz);
 		
-		//Cardoviiiiiiiiiiiii
 		panel_vozilo = new SalterskaPretragaVozilo();
 		panel_vozac = new SalterskaPretragaVozac();
 		panel_saobracajna = new SalterskaPretragaSaobracajna();
@@ -229,69 +228,6 @@ public class SalterskaPretraga extends JPanel{
 		panel_pretraga.add(panel_saobracajna, "Saobracajna");
 		panel_pretraga.add(panel_vlasnicka, "Vlasnicka");
 
-		
-		
-		// Action Listeneri
-	/*	rbVozac.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(rbVozac.isSelected()) {
-					cb_parametri.removeAllItems();
-					cb_parametri.setModel(new DefaultComboBoxModel(VozacPretraga.values()));		
-					if(trenutni=="Vozilo") okvirPanel.remove(panel_pretraga);
-					else if(trenutni=="Vlasnicka") okvirPanel.remove(panel_vlasnicka);
-					else if(trenutni=="Saobracajna") okvirPanel.remove(panel_saobracajna);
-					trenutni="Vozac";
-					okvirPanel.add(panel_vozac, gbc_panel_pretraga);
-					okvirPanel.revalidate();
-					okvirPanel.repaint();
-				}
-			}
-		});	
-		rbVozilo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(rbVozilo.isSelected()) {
-					cb_parametri.removeAllItems();
-					cb_parametri.setModel(new DefaultComboBoxModel(VoziloPretraga.values()));
-					if(trenutni=="Vozac") okvirPanel.remove(panel_vozac);
-					else if(trenutni=="Vlasnicka") okvirPanel.remove(panel_vlasnicka);
-					else if(trenutni=="Saobracajna") okvirPanel.remove(panel_saobracajna);
-					trenutni="Vozilo";
-					okvirPanel.add(panel_pretraga, gbc_panel_pretraga);
-					okvirPanel.revalidate();
-					okvirPanel.repaint();
-				}
-			}
-		});	
-		rbSaobracajna.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(rbSaobracajna.isSelected()) {
-					cb_parametri.removeAllItems();
-					cb_parametri.setModel(new DefaultComboBoxModel(SaobracajnaPretraga.values()));
-					if(trenutni=="Vozilo") okvirPanel.remove(panel_pretraga);
-					else if(trenutni=="Vozac") okvirPanel.remove(panel_vozac);
-					else if(trenutni=="Vlasnicka") okvirPanel.remove(panel_vlasnicka);
-					trenutni="Saobracajna";
-					okvirPanel.add(panel_saobracajna, gbc_panel_pretraga);
-					okvirPanel.revalidate();
-					okvirPanel.repaint();
-				}
-			}
-		});	
-		rbVlasnicka.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(rbVlasnicka.isSelected()) {
-					cb_parametri.removeAllItems();
-					cb_parametri.setModel(new DefaultComboBoxModel(VlasnickaPretraga.values()));
-					if(trenutni=="Vozilo") okvirPanel.remove(panel_pretraga);
-					else if(trenutni=="Vozac") okvirPanel.remove(panel_vozac);
-					else if(trenutni=="Saobracajna") okvirPanel.remove(panel_saobracajna);
-					trenutni="Vlasnicka";
-					okvirPanel.add(panel_vlasnicka, gbc_panel_pretraga);
-					okvirPanel.revalidate();
-					okvirPanel.repaint();
-				}
-			}
-		});	*/
 	}
 
 	public void prikaziPretraguVozila()
@@ -369,4 +305,20 @@ public class SalterskaPretraga extends JPanel{
 	public JPanel getPanel_pretraga() {
 		return panel_pretraga;
 	}
+	public SalterskaPretragaVozilo getPanel_vozilo() {
+		return panel_vozilo;
+	}
+	public SalterskaPretragaVozac getPanel_vozac() {
+		return panel_vozac;
+	}
+	public SalterskaPretragaSaobracajna getPanel_saobracajna() {
+		return panel_saobracajna;
+	}
+	public SalterskaPretragaVlasnicka getPanel_vlasnicka() {
+		return panel_vlasnicka;
+	}
+	public JButton getBtnPretrazi() {
+		return btnPretrazi;
+	}
+
 }
