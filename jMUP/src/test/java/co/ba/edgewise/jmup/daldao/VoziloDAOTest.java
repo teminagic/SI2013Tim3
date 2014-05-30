@@ -23,10 +23,11 @@ public class VoziloDAOTest {
 	
 	@Test
 	public void testCreate() {
-		
+		MotorDAO md=new MotorDAO();
+		motor=md.get(3);
 		Vozilo v = new Vozilo(17, "1708", VrstaVozila.PUTNICKI_AUTOMOBIL, "BMW", "limuzina","A3", "161616165165", "OblikKaroserije",1990,1000,500,300,motor,50.1,5,4,3,EkoKarakteristike.EURO2, true, new Date() ); 
 		voziloDAO.create(v);
-		assertNotNull(voziloDAO.get(17));
+		assertNotNull(voziloDAO.get(17).getId());
 		
 	}
 

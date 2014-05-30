@@ -20,7 +20,7 @@ public class Vozilo {
 	int maxTehnickaDozvoljenaMasa;
 	int MasaVozila;
 	int DopustenaNosivost;
-	Motor motor;
+	Motor motor=new Motor();
 	Double odnosSnageIMase;
 	Integer brojMjestaZaSjedenje;
 	Integer brojMjestaZaStajanje;
@@ -29,7 +29,6 @@ public class Vozilo {
 	Boolean katalizator;
 	Date datumPregleda;
 	String registarskaOznaka;
-	
 	public Vozilo(Integer id, String registarskaOznaka, VrstaVozila vrsta, String marka, String tip,
 			String model, String brojSasije, String oblikKaroserije,
 			int godinaProizvodnje, int maxTehnickaDozvoljenaMasa,
