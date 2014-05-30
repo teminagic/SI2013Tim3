@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 import ba.co.edgewise.jmup.mvc.models.AdminModel;
 import ba.co.edgewise.jmup.mvc.models.LoginModel;
 import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModel;
-import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModelAmra;
 import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModelIrma;
 import ba.co.edgewise.jmup.mvc.views.Administrator;
 import ba.co.edgewise.jmup.mvc.views.Login;
