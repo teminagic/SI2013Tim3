@@ -34,7 +34,7 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 		
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO Registracija(RegistarskaOznaka, Od, Do, Vozilo, Osoba) VALUES (?, ?, ?, ?, ?, ?)");
+					.prepareStatement("INSERT INTO Registracija(RegistarskaOznaka, Od, Do, Vozilo, Osoba) VALUES (?, ?, ?, ?, ?)");
 		
 			statement.setString(1, regOznaka);
 			statement.setDate(2, new java.sql.Date(datumRegist.getTime()));
