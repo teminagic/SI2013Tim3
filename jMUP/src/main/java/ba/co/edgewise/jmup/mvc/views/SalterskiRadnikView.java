@@ -163,6 +163,13 @@ public class SalterskiRadnikView extends JFrame {
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Izrada izvje\u0161taja");
 	}
+	public void prikaziModifikacijuVozila()
+	{
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Modifikacija vozila");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Modifikacija vozila");
+	}
 	public JPanel getContentPane() {
 		return contentPane;///
 	}
@@ -187,6 +194,9 @@ public class SalterskiRadnikView extends JFrame {
 	}
 	public VoziloDodavanje getVoziloDodavanje() {
 		return strana3;
+	}
+	public VoziloModifikacija getVoziloModifikacija() {
+		return strana10;
 	}
 	//public JButton getVoziloDodavanjePrihvatiButton() {
 	//	return voziloDodavanje.getBtn_prihvati();
