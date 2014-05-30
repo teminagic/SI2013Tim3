@@ -91,10 +91,16 @@ public class LoginController {
 				public void run() {
 					try {
 						SalterskiRadnikView noviView = new SalterskiRadnikView();
-						//SalterskiRadnikModel noviModel = new SalterskiRadnikModel();
-						//SalterskiRadnikController noviController = new SalterskiRadnikController(noviView,noviModel);						
-						SalterskiRadnikModelIrma noviModel = new SalterskiRadnikModelIrma();
-						SalterskiRadnikControllerIrma noviController = new SalterskiRadnikControllerIrma(noviView,noviModel);						
+						SalterskiRadnikModel noviModel = new SalterskiRadnikModel();
+						SalterskiRadnikController noviController = new SalterskiRadnikController(noviView,noviModel);						
+						//SalterskiRadnikModelIrma noviModel = new SalterskiRadnikModelIrma();
+						//SalterskiRadnikControllerIrma noviController = new SalterskiRadnikControllerIrma(noviView,noviModel);						
+					
+	//					SalterskiRadnikModelAmra noviModel = new SalterskiRadnikModelAmra();
+		//				SalterskiRadnikControllerAmra noviController = new SalterskiRadnikControllerAmra(noviView,noviModel);						
+					
+	//					SalterskiRadnikModelAmra noviModel = new SalterskiRadnikModelAmra();
+		//				SalterskiRadnikControllerAmra noviController = new SalterskiRadnikControllerAmra(noviView,noviModel);						
 					
 						noviController.control();
 					} catch (Exception e) {

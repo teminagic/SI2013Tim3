@@ -34,14 +34,13 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 		
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO Registracija(IDRegistracije, RegistarskaOznaka, Od, Do, Vozilo, Osoba) VALUES (?, ?, ?, ?, ?, ?)");
+					.prepareStatement("INSERT INTO Registracija(RegistarskaOznaka, Od, Do, Vozilo, Osoba) VALUES (?, ?, ?, ?, ?)");
 		
-			statement.setInt(1, idRegistracije);
-			statement.setString(2, regOznaka);
-			statement.setDate(3, new java.sql.Date(datumRegist.getTime()));
-			statement.setDate(4, new java.sql.Date(datumIsteka.getTime()));
-			statement.setInt(5, idVozila);
-			statement.setInt(6, idOsobe);
+			statement.setString(1, regOznaka);
+			statement.setDate(2, new java.sql.Date(datumRegist.getTime()));
+			statement.setDate(3, new java.sql.Date(datumIsteka.getTime()));
+			statement.setInt(4, idVozila);
+			statement.setInt(5, idOsobe);
 
 			statement.executeUpdate();
 			success = true;
@@ -97,8 +96,8 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 	}
 
 	@Override
-	public List<Registracija> getAll() {
-		List<Registracija> result = new ArrayList<Registracija>();
+	public ArrayList<Registracija> getAll() {
+		ArrayList<Registracija> result = new ArrayList<Registracija>();
 		
 		//Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();

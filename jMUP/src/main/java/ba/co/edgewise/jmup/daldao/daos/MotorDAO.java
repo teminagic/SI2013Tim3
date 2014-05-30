@@ -21,7 +21,6 @@ public class MotorDAO implements IGenericDAO<Motor, Integer> {
 		String vrstaGoriva = m.getVrstaGoriva();
 		String vrstaMotora = m.getVrstaMotora();
 		String brojMotora = m.getBrojMotora();
-		Integer idMotor=m.getId();
 
 		// primjer za test
 		/*
@@ -35,15 +34,14 @@ public class MotorDAO implements IGenericDAO<Motor, Integer> {
 
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO `Motor`(`IDMotora`, `ZapreminaMotora`, `MaksimalnaSnaga`, `VrstaGoriva`, `BrojMotora`, `VrstaMotora`) "
-							+ " VALUES (?,?,?,?,?,?) ");
+					.prepareStatement("INSERT INTO `Motor`(`ZapreminaMotora`, `MaksimalnaSnaga`, `VrstaGoriva`, `BrojMotora`, `VrstaMotora`) "
+							+ " VALUES (?,?,?,?,?) ");
 
-			statement.setInt(1, idMotor);
-			statement.setInt(2, zapremina);
-			statement.setInt(3, maxSnaga);
-			statement.setString(4, vrstaGoriva);
-			statement.setString(5, brojMotora);
-			statement.setString(6, vrstaMotora);
+			statement.setInt(1, zapremina);
+			statement.setInt(2, maxSnaga);
+			statement.setString(3, vrstaGoriva);
+			statement.setString(4, brojMotora);
+			statement.setString(5, vrstaMotora);
 
 			statement.executeUpdate();
 			success = true;
@@ -67,7 +65,7 @@ public class MotorDAO implements IGenericDAO<Motor, Integer> {
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Poèetak pripreme upita
+		// Poï¿½etak pripreme upita
 		ResultSet qResult = null;
 
 		try {
@@ -100,14 +98,14 @@ public class MotorDAO implements IGenericDAO<Motor, Integer> {
 	}
 
 	@Override
-	public List<Motor> getAll() {
-		List<Motor> result = new ArrayList<Motor>();
+	public ArrayList<Motor> getAll() {
+		ArrayList<Motor> result = new ArrayList<Motor>();
 
 		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Poèetak pripreme upita
+		// Poï¿½etak pripreme upita
 		ResultSet qResult = null;
 
 		try {

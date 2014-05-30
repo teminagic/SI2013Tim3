@@ -25,10 +25,11 @@ public class VlasnickaDAO implements IGenericDAO<Vlasnicka, String> {
 		
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO `Vlasnicka`(`Vozilo`, 'Vlasnik') VALUES (?, ?)");
+					.prepareStatement("INSERT INTO `Vlasnicka`(`Vozilo`, `Vlasnik`, `BrojDozvole`) VALUES (?, ?, ?)");
 
 			statement.setInt(1, vozilo);
 			statement.setInt(2, vlasnik);
+			statement.setString(3, vlasnicka.getBrojDozvole());
 
 			statement.executeUpdate();
 			success = true;
@@ -165,9 +166,9 @@ public Vlasnicka getByVozilo(Integer id){
 	} 
 
 	@Override
-	public List<Vlasnicka> getAll()
+	public ArrayList<Vlasnicka> getAll()
 	{
-		List<Vlasnicka> result = new ArrayList<Vlasnicka>();
+		ArrayList<Vlasnicka> result = new ArrayList<Vlasnicka>();
 		
 		//Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
@@ -219,7 +220,7 @@ public Vlasnicka getByVozilo(Integer id){
 		try {
 			PreparedStatement statement = 	connection.prepareStatement(
 					"UPDATE `Vlasnicka`" +
-					" SET Vozilo = ?, Korisnik = ? " + 
+					" SET Vozilo = ?, Vlasnik = ? " + 
 					" WHERE BrojDozvole = ? "
 					);
 
@@ -274,7 +275,3 @@ public Vlasnicka getByVozilo(Integer id){
 		VlasnickaDAO v = new VlasnickaDAO();
 		v.getByVlasnik(24);
 	
-
-
-	}
-}

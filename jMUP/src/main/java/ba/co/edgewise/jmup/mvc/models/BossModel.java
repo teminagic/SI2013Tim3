@@ -195,8 +195,8 @@ public class BossModel {
 		// vl = b.pretragaVlasnicka("s", "JMBG");
 		// v = b.pretragaVozilo("BMW","Marka vozila");
 		// o = b.pretragaVozac("Dervic", "Prezime");
-		// s = b.pretragaSaobracajna( "b" , "JMBG");
-		b.ekstraktToPDF(pdf);
+		 s = b.pretragaSaobracajna( "Amra Dervic" , "Ime i prezime");
+		//b.ekstraktToPDF(pdf);
 
 	}
 

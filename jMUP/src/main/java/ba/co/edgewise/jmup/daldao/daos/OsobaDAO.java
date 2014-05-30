@@ -25,7 +25,6 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 		String prezime = o.getPrezime();
 		String ime = o.getIme();
 		String prebivaliste = o.getPrebivaliste();
-		int id=o.getId();
 		boolean pravnoLice = o.isPravnoLice();
 
 		// Dobavljanje konekcije
@@ -33,16 +32,15 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 		Connection connection = manager.getConnection();
 
 		try {
-			String sql = "INSERT INTO Osoba (IDOsobe, JMB_ID, Prezime, Ime, Prebivaliste, PravnoLice)"
-					+ " VALUES (?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Osoba (JMB_ID, Prezime, Ime, Prebivaliste, PravnoLice)"
+					+ " VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			
-			statement.setInt(1, id );
-			statement.setString(2, jmbg_id);
-			statement.setString(3, prezime);
-			statement.setString(4, ime);
-			statement.setString(5, prebivaliste);
-			statement.setBoolean(6, pravnoLice);
+			statement.setString(1, jmbg_id);
+			statement.setString(2, prezime);
+			statement.setString(3, ime);
+			statement.setString(4, prebivaliste);
+			statement.setBoolean(5, pravnoLice);
 
 			statement.executeUpdate();
 			success = true;
@@ -91,8 +89,8 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 		return result;
 	}
 
-	public List<Osoba> getAll() {
-		List<Osoba> result = new ArrayList<Osoba>();
+	public ArrayList<Osoba> getAll() {
+		ArrayList<Osoba> result = new ArrayList<Osoba>();
 
 		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();

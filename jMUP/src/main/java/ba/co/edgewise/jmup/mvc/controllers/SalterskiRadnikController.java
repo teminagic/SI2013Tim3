@@ -98,7 +98,7 @@ public class SalterskiRadnikController {
 								};
 								
 						} 
-						else{
+						else{//
 							JOptionPane.showMessageDialog(null, "Neispravno popunjena polja!");
 						};
 					}
@@ -265,6 +265,19 @@ public class SalterskiRadnikController {
 						}
 					}
 				});
+				// Listener za ponistavanje unosa registracije
+				
+				JButton ponistiDodavanjeRegistracije = this.view.getRegistracija().getBtnPoniti();
+				ponistiDodavanjeRegistracije.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+							pocistiPoljaRegistracija();
+							JOptionPane.showOptionDialog(view, "Unos poni\u0161ten.",
+									"Unos registracije", JOptionPane.OK_OPTION,
+									JOptionPane.INFORMATION_MESSAGE, null,
+									new String[] { "Uredu" }, "default");															
+					}
+				});
 				
 				//Listener unos vlasnicke
 				JButton unosVlasnicke = this.view.getMeni().getOpcije().getBtnUnosVlasnicke();
@@ -355,6 +368,12 @@ public class SalterskiRadnikController {
 		view.getStrana2().getTfIdBroj().setText("");
 		view.getStrana2().getPravno().setSelected(false);
 		view.getStrana2().getFizicko().setSelected(false);
+	}
+	public void pocistiPoljaRegistracija()
+	{
+		view.getRegistracija().getPodaci().getTxtRegistrationString().setText("");
+		view.getRegistracija().getPodaci().getTxtId().setText("");
+		view.getRegistracija().getPodaci().getTxtConfirmationNumber().setText("");
 	}
 	public Boolean ovjeriRegistraciju(String brojDozvole)
 	{

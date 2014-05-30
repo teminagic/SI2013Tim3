@@ -37,8 +37,8 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO `BojeVozila`(IDBojeVozila, `Nijansa`, `Vrsta`, `Boja`, `Tip`, `Vozilo`) "
-							+ " VALUES (null, ?,?,?,?,?) ");
+					.prepareStatement("INSERT INTO `BojeVozila`(`Nijansa`, `Vrsta`, `Boja`, `Tip`, `Vozilo`) "
+							+ " VALUES (?,?,?,?,?) ");
 
 			statement.setString(1, nijansa.toString());
 			statement.setString(2, vrsta.toString());
@@ -66,7 +66,7 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Poèetak pripreme upita
+		// Poï¿½etak pripreme upita
 		ResultSet qResult = null;
 
 		try {
@@ -104,14 +104,14 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 	}
 
 	@Override
-	public List<BojaVozila> getAll() {
-		List<BojaVozila> result = new ArrayList<BojaVozila>();
+	public ArrayList<BojaVozila> getAll() {
+		ArrayList<BojaVozila> result = new ArrayList<BojaVozila>();
 
 		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Poèetak pripreme upita
+		// Poï¿½etak pripreme upita
 		ResultSet qResult = null;
 
 		try {
