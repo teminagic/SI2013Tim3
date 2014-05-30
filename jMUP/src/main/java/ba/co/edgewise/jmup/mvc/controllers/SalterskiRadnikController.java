@@ -98,7 +98,7 @@ public class SalterskiRadnikController {
 								};
 								
 						} 
-						else{
+						else{//
 							JOptionPane.showMessageDialog(null, "Neispravno popunjena polja!");
 						};
 					}
