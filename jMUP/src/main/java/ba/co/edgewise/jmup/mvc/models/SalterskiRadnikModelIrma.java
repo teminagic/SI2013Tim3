@@ -143,5 +143,40 @@ public class SalterskiRadnikModelIrma {
 				
 		return null;
 	}
+	//Modifikacija vozila
+	public void updateujVozilo(String registarske, VrstaVozila vrsta, String marka, String tip,
+			String model, String brojSasije, String oblikKaroserije,
+			int godinaProizvodnje, int maxTehnickaDozvoljenaMasa,
+			int masaVozila, int dopustenaNosivost,Double odnosSnageIMase, Integer brojMjestaZaSjedenje,
+			Integer brojMjestaZaStajanje, Integer brojMjestaZaLezanje,
+			EkoKarakteristike ekoKarakteristika, Boolean katalizator,
+			Date datumPregleda, Integer zapreminaMotora, Integer maxSnaga,
+			String vrstaGoriva, String brojMotora, String vrstaMotora) 
+	{
+		//Update motora
+		Motor motor_temp =  new Motor(0, zapreminaMotora, maxSnaga, vrstaGoriva, brojMotora, vrstaMotora);
+		MotorDAO mDAO_temp = new MotorDAO();
+		// OTKUD MI ID?
+		// 	mDAO_temp.update(motor_temp);
+		
+		//Izvlacenje motora iz baze
+		MotorDAO mDAO = new MotorDAO();
+		
+		//ID?
+		// Motor motor = mDAO.getById();
+		
+		//update vozila
+	/*	Vozilo vozilo= new Vozilo(0,registarske,vrsta,marka,tip,
+			model,brojSasije,oblikKaroserije,
+			godinaProizvodnje, maxTehnickaDozvoljenaMasa,
+			masaVozila,dopustenaNosivost,motor,
+			odnosSnageIMase, brojMjestaZaSjedenje,
+			brojMjestaZaStajanje, brojMjestaZaLezanje,
+			ekoKarakteristika, katalizator,
+			datumPregleda);
+		VoziloDAO vDAO = new VoziloDAO();*/
+		//Kreiraj vozilo
+	//	vDAO.update(vozilo);
+	}
 	
 }

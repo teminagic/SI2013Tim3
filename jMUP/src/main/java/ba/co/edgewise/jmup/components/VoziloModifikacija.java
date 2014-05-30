@@ -1,11 +1,22 @@
 package ba.co.edgewise.jmup.components;
+import ba.co.edgewise.jmup.daldao.daos.MotorDAO;
 import ba.co.edgewise.jmup.enums.*;
+import ba.co.edgewise.jmup.klase.Vozilo;
+
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.border.TitledBorder;
+
 import java.awt.Insets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.ButtonGroup;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -80,6 +91,7 @@ public class VoziloModifikacija extends JPanel {
 	private JComboBox cb_vrstaBoje;
 	private JRadioButton rb_katalizator_da;
 	private JRadioButton rb_katalizator_ne;
+	private Vozilo vozilo;
 
 	public VoziloModifikacija() {
 		// calling methods for seting layout
@@ -791,5 +803,70 @@ public class VoziloModifikacija extends JPanel {
 	}
 	public JPanel getButtonPanel() {
 		return buttonPanel;
+	}
+
+	public void postaviVrijednosti() {
+		/*cb_vrstaVozila.setSelectedItem(vozilo.getVrsta());
+		tf_tipVozila.setText(vozilo.getTip()); 
+		tf_modelVozila.setText(vozilo.getModel()); 
+		tf_markaVozila.setText(vozilo.getMarka());
+		tf_godProizvodnje.setText(vozilo.getGodinaProizvodnje());
+		//	REGISTARSKE DODATI U KONSTRUKTOR
+		//Neiskoristeno: 
+		tf_regOznaka.setText(vozilo.getRegOznaka());
+		tf_odnos.setText(vozilo.getOdnosSnageIMase());
+		tf_sjedenje.setText(vozilo.getBrojMjestaZaSjedenje());
+		tf_stajanje.setText(vozilo.getBrojMjestaZaStajanje()); 
+		tf_lezanje.setText(vozilo.getBrojMjestaZaLezanje()); 
+		cb_ekoKarakteristike.setSelectedItem(vozilo.getEkoKarakteristika());
+		rb_katalizator_da.isSelected();
+		tf_karoserija.setText(vozilo.getOblikKaroserije());
+		tf_datumPregleda.setText(vozilo.getDatumPregleda());
+		
+		tf_brojSasije().setText();
+		tb_maxMasa().setText());
+		tb_masa().setText());
+		tb_nosivost().setText());
+		// Motor
+		tf_zapremina().setText());
+		tf_maxSnaga().setText());
+		cb_gorivo().setSelectedItem();
+		tf_brojMotora().setText();
+		cb_vrstaMotora().setSelectedItem();
+			*/
+		
+	}
+	public void postaviVozilo(Vozilo vozilo) {
+	//	this.getVozilo().setId(qResult.getInt("IDVozila"));
+	/*	this.getVozilo().setVrsta( (VrstaVozila) getCb_vrstaVozila().getSelectedItem());
+		this.getVozilo().setMarka(getTf_markaVozila().getText());
+		this.getVozilo().setTip(getTf_tipVozila().getText());
+		this.getVozilo().setModel(getTf_modelVozila().getText());
+		this.getVozilo().setBrojSasije(getTf_brojSasije().getText());
+		this.getVozilo().setOblikKaroserije(getTf_karoserija().getText());
+		this.getVozilo().setGodinaProizvodnje(Integer.parseInt(getTf_godProizvodnje().getText()));
+		this.getVozilo().setMaxTehnickaDozvoljenaMasa(Integer.parseInt(getTb_maxMasa().getText()));
+		this.getVozilo().setMasaVozila(Integer.parseInt(getTb_masa().getText()));
+		this.getVozilo().setDopustenaNosivost(Integer.parseInt(getTb_nosivost().getText()));
+				
+		MotorDAO motorDAO = new MotorDAO();
+		this.getVozilo().setMotor(motorDAO.get(qResult.getInt("Motor")));
+		
+		this.getVozilo().setOdnosSnageIMase(Double.parseDouble(getTf_odnos().getText()));
+		this.getVozilo().setBrojMjestaZaSjedenje(Integer.parseInt(view.getVoziloDodavanje().getTf_sjedenje().getText());
+		this.getVozilo().setBrojMjestaZaStajanje( Integer.parseInt(view.getVoziloDodavanje().getTf_stajanje().getText()); 
+		this.getVozilo().setBrojMjestaZaLezanje(Integer.parseInt(view.getVoziloDodavanje().getTf_lezanje().getText()); 
+		this.getVozilo().setEkoKarakteristika((EkoKarakteristike)view.getVoziloDodavanje().getCb_ekoKarakteristike().getSelectedItem();
+		this.getVozilo().setKatalizator(getRb_katalizator_da().isSelected();
+		this.getVozilo().setDatumPregleda(new SimpleDateFormat("yyyy-MM-dd").parse(view.getVoziloDodavanje().getTf_datumPregleda().getText());
+		this.getVozilo().setRegOznaka((String)view.getVoziloDodavanje().getTf_regOznaka().getText();
+	*/
+	}
+	public Vozilo getVozilo() {
+		return vozilo;
+	}
+
+	public void setVozilo(Vozilo vozilo) {
+		this.vozilo = vozilo;
 	}
 }
