@@ -270,5 +270,11 @@ public Vlasnicka getByVozilo(Integer id){
 		return success;
 		
 	}
+	public static void main(String[] args) {
+		VlasnickaDAO v = new VlasnickaDAO();
+		v.getByVlasnik(24);
 	
+
+
+	}
 }

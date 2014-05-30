@@ -3,12 +3,17 @@ package ba.co.edgewise.jmup.mvc.models;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.io.File;
 import java.io.FileOutputStream;
+
 import ba.co.edgewise.jmup.klase.*;
 import ba.co.edgewise.jmup.daldao.daos.*;
+
 import java.awt.Color;
+
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.*;
+import com.lowagie.text.pdf.codec.Base64.OutputStream;
 
 
 public class BossModel {
@@ -149,17 +154,26 @@ public class BossModel {
 		return (temp == null) ? null : temp.getMotor();
 	}
 
-	public void ekstraktToPDF() {
+	@SuppressWarnings("deprecation")
+	public void ekstraktToPDF(ArrayList<String> podaci) {
 		try {
-			   Document document=new Document();
-		       PdfWriter.getInstance(document,new FileOutputStream("C:\Users\Ahmed\Desktop\test.pdf");
-		       document.open();
-		       PdfPTable tab=new PdfPTable(2);
-		       tab.addCell("Name");
-		       tab.addCell("Address");
-		       document.add(tab);
-		       document.close();
-
+			// output treba postaviti nemam vremne sada radim Browse pa da bira korisnik, C je zakljucan pod defaultu (barem kod mene)
+			// ovako trenutno rjesavam da budu jedinstveni naziv dokumenta 
+			@SuppressWarnings("deprecation")
+			//***
+			FileOutputStream file = new FileOutputStream(new File("E:\\Izvjestaj " + new Date().getTime() +".pdf"));
+			 
+            Document document = new Document();
+            PdfWriter.getInstance(document, file);
+ 
+            document.open();
+            document.add(new Paragraph("Izvještaj " +  new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getYear()));
+            for ( String s : podaci) {
+            	document.add(new Paragraph(s.toString()));
+			}
+          
+            document.close();
+            file.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -173,12 +187,16 @@ public class BossModel {
 		ArrayList<Osoba> o = new ArrayList<>();
 		ArrayList<Saobracajna> s = new ArrayList<>();
 		ArrayList<Vlasnicka> vl = new ArrayList();
-
-		//vl = b.pretragaVlasnicka("77", "Registarska oznaka");
+		ArrayList<String> pdf = new ArrayList<String>();
+		pdf.add("Vlasnik Kemo je bio kuci");
+		pdf.add("Vlasnik Kemo je bio kuci2");
+		pdf.add("Vlasnik Kemo je bio kuci3"); 
+		pdf.add("Vlasnik Kemo je bio kuci4");
+		// vl = b.pretragaVlasnicka("s", "JMBG");
 		// v = b.pretragaVozilo("BMW","Marka vozila");
 		// o = b.pretragaVozac("Dervic", "Prezime");
 		// s = b.pretragaSaobracajna( "b" , "JMBG");
-		b.ekstraktToPDF();
+		b.ekstraktToPDF(pdf);
 
 	}
 
