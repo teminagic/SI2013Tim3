@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ba.co.edgewise.jmup.components.GodisnjaOvjera;
+import ba.co.edgewise.jmup.components.Izvjestaji;
 import ba.co.edgewise.jmup.components.MeniSalter;
 import ba.co.edgewise.jmup.components.MeniSalterOpcije;
 import ba.co.edgewise.jmup.components.NaslovnaSalterski;
@@ -35,6 +37,8 @@ public class SalterskiRadnikView extends JFrame {
 	private VoziloDodavanje strana3;
 	private SalterskaPretraga strana6;
 	private RegistracijaUnos strana4Registracija;
+	private GodisnjaOvjera strana7;
+	private Izvjestaji strana9;
 	
 	private final SalterskiRadnikView frejm = this;
 	/**
@@ -93,6 +97,12 @@ public class SalterskiRadnikView extends JFrame {
 		strana6 = new SalterskaPretraga();
 		sadrzaj.getPanelSadrzaj().add(strana6, "Pretraga");
 		
+		strana7 = new GodisnjaOvjera();
+		sadrzaj.getPanelSadrzaj().add(strana7, "Godi\u0161nja ovjera registracije");
+		
+		strana9 = new Izvjestaji();
+		sadrzaj.getPanelSadrzaj().add(strana9, "Izrada izvje\u0161taja");
+		
 		contentPane.add(sadrzaj, gbc_naslov);
 
 	}
@@ -136,6 +146,18 @@ public class SalterskiRadnikView extends JFrame {
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Pretraga");
 	}
+	public void prikaziOvjeruRegistracije() {
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Godi\u0161nja ovjera registracije");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Godi\u0161nja ovjera registracije");
+	}
+	public void prikaziIzvjestaje() {
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Izrada izvje\u0161taja");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Izrada izvje\u0161taja");
+	}
 	public JPanel getContentPane() {
 		return contentPane;///
 	}
@@ -172,5 +194,15 @@ public class SalterskiRadnikView extends JFrame {
 	}
 	public RegistracijaUnos getRegistracija() {
 		return strana4Registracija;
+	}
+
+
+	public GodisnjaOvjera getDodisnjaOvjera() {
+		return strana7;
+	}
+
+
+	public Izvjestaji getIzvjestaji() {
+		return strana9;
 	}
 }
