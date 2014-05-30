@@ -18,6 +18,7 @@ import javax.swing.JButton;
 
 
 public class PregledVozila extends JPanel {
+	private JLabel lblVrsta;
 
 	public PregledVozila() {
 		
@@ -74,7 +75,7 @@ public class PregledVozila extends JPanel {
 		gbc_label.gridy = 0;
 		osnovniPodaci.add(label, gbc_label);
 		
-		JLabel lblVrsta = new JLabel("Vrsta");
+		lblVrsta = new JLabel("Vrsta");
 		GridBagConstraints gbc_lblVrsta = new GridBagConstraints();
 		gbc_lblVrsta.insets = new Insets(0, 0, 5, 0);
 		gbc_lblVrsta.gridx = 1;
@@ -551,4 +552,7 @@ public class PregledVozila extends JPanel {
 		buttonPanel.add(btn_izlaz, gbc_btn_izlaz);
 	}
 
+	public JLabel getLblVrsta() {
+		return lblVrsta;
+	}
 }
