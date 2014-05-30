@@ -162,7 +162,7 @@ public class SalterskiRadnikController {
 						JOptionPane.showOptionDialog(view, "Gre\u0161ka prilikom upisa u bazu.",
 								"Godi\u0161nja ovjera registracije", JOptionPane.OK_OPTION,
 								JOptionPane.INFORMATION_MESSAGE, null,
-								new String[] { "Uredu" }, "default");	//
+								new String[] { "Uredu" }, "default");//
 					}
 					}
 					else
