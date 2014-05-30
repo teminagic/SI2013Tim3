@@ -25,13 +25,21 @@ public class SalterskiRadnikController {
 	private SalterskiRadnikModel model;
 	private SalterskiRadnikView view;
 	
-	private boolean unosDozvole;
+	// Moram imati dva pokazatelja o kojoj se dozvoli radi
+	// Ako se redno unosi saobracajna, varijabla unosSDozvole je na true
+	// tako znam i koju cu DAOmetodu za kreiranje dozvole pozvati
+	// Mozam ih razlikovati jer ako je unosSDozvole true pozvat cu metodu za kreiranje saobracajne dozvole
+	// ona tamos stvara sve isto kao i vlasnicka, ali dodatno i broj saobracajne dozvole povezuje
+	// sa odredjenim vozilom i osobom/vozacem
+	private boolean unosSDozvole;
+	private boolean unosVDozvole;
 	private boolean odjavaSaltera;
 	public SalterskiRadnikController(SalterskiRadnikView view, SalterskiRadnikModel model) {
 		super();
 		this.view = view;
 		this.model = model;
-		unosDozvole = false;
+		unosSDozvole = false;
+		unosVDozvole = false;
 		odjavaSaltera = false;
 	}
 	public void control() {
@@ -69,8 +77,12 @@ public class SalterskiRadnikController {
 											JOptionPane.INFORMATION_MESSAGE, null,
 											new String[] { "Uredu" }, "default");
 									pocistiPoljaVozac();
-									// logika za: unos vlasnicke posto se ovaj panel pojavljuje :D
-									if(isUnosDozvole() == true)
+									// logika za: unos vlasnicke ili saobracajne posto se ovaj panel pojavljuje :D
+									if(isUnosVDozvole() == true)
+									{
+										prikaziPanelUnosVozila();
+									}
+									if(isUnosSDozvole() == true)
 									{
 										prikaziPanelUnosVozila();
 									}
@@ -102,6 +114,17 @@ public class SalterskiRadnikController {
 					}
 				});
 				
+				/*JButton potvrdaIDaSaobracajne = this.view.getIzvjestaji().get
+				potvrdaIDaSaobracajne.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+							pocistiPoljaVozac();
+							JOptionPane.showOptionDialog(view, "Unos poni\u0161ten.",
+									"Unos voza\u010Da", JOptionPane.OK_OPTION,
+									JOptionPane.INFORMATION_MESSAGE, null,
+									new String[] { "Uredu" }, "default");															
+					}
+				})*/;
 				//UNOS VOZILA
 				JButton unosVozila = this.view.getMeni().getOpcije().getBtnUnosVozila();
 				unosVozila.addMouseListener(new MouseAdapter() {
@@ -119,7 +142,9 @@ public class SalterskiRadnikController {
 							if(provjeriPopunjenostUnosVozila()) 
 							{
 								dodajVozilo();
-								if(isUnosDozvole() == true)
+								if(isUnosSDozvole() == true)
+									prikaziPanelUnosRegistracije();
+								if(isUnosVDozvole() == true)
 									prikaziPanelUnosRegistracije();
 								
 							}							
@@ -138,24 +163,48 @@ public class SalterskiRadnikController {
 						try {
 							if(provjeriPopunjenostRegistracije()) 
 							{
-								if (dodajRegistraciju()) {
-									JOptionPane.showOptionDialog(view, "Dozvola uspje\u0161no dodana.",
-											"Unos dozvole", JOptionPane.OK_OPTION,
-											JOptionPane.INFORMATION_MESSAGE, null,
-											new String[] { "Uredu" }, "default");
-									
-									pocistiPoljaDozvola();
-									
-									setUnosDozvole(false);
-								} else {
-									JOptionPane.showOptionDialog(view,
-											"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
-													+ "Molimo vas da poku\u0161ate ponovo",
-											"Unos dozvole", JOptionPane.OK_OPTION,
-											JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
-											"default");
-								};
-								
+								if(isUnosSDozvole() == true)
+								{
+									if (dodajRegistracijuISaobracajnu()) {
+										JOptionPane.showOptionDialog(view, "Saobra\u0107ajna dozvola je uspje\u0161no dodana.",
+												"Unos saobra\u0107ajne dozvole", JOptionPane.OK_OPTION,
+												JOptionPane.INFORMATION_MESSAGE, null,
+												new String[] { "Uredu" }, "default");
+										
+										pocistiPoljaDozvola();
+										
+										setUnosVDozvole(false);
+										setUnosSDozvole(false);
+									} else {
+										JOptionPane.showOptionDialog(view,
+												"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
+														+ "Molimo vas da poku\u0161ate ponovo",
+												"Unos saobra\u0107ajne dozvole", JOptionPane.OK_OPTION,
+												JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+												"default");
+									};
+								}
+								if (isUnosVDozvole() == true)
+								{
+									if (dodajRegistracijuIVlasnicku()) {
+										JOptionPane.showOptionDialog(view, "Vlasni\u010Dke dozvola je uspje\u0161no dodana.",
+												"Unos vlasni\u010Dke dozvole", JOptionPane.OK_OPTION,
+												JOptionPane.INFORMATION_MESSAGE, null,
+												new String[] { "Uredu" }, "default");
+										
+										pocistiPoljaDozvola();
+										
+										setUnosSDozvole(false);
+										setUnosVDozvole(false);
+									} else {
+										JOptionPane.showOptionDialog(view,
+												"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
+														+ "Molimo vas da poku\u0161ate ponovo",
+												"Unos vlasni\u010Dke dozvole", JOptionPane.OK_OPTION,
+												JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+												"default");
+									};
+								}
 							}
 							else{
 								JOptionPane.showMessageDialog(null, "Neispravno popunjena polja!");
@@ -171,7 +220,7 @@ public class SalterskiRadnikController {
 						unosVlasnicke.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						setUnosDozvole(true);
+						setUnosVDozvole(true);
 						prikaziPanelUnosVozaca();
 						};			
 				});
@@ -181,7 +230,7 @@ public class SalterskiRadnikController {
 						unosSaobracajne.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						setUnosDozvole(true);
+						setUnosSDozvole(true);
 						prikaziPanelUnosVozaca();
 						};			
 				});
@@ -272,12 +321,12 @@ public class SalterskiRadnikController {
 		
 		return model.DodajVozaca(ime, prezime, adresa, mjesto, opcina, pravno, jmbg, idBroj);
 	}
-	public Boolean dodajRegistraciju() throws ParseException 
+	public Boolean dodajRegistracijuIVlasnicku() throws ParseException 
 	{
 		String registracija = view.getRegistracija().getPodaci().getTxtRegistrationString().getText();
 		String jmbgKorisnika = view.getRegistracija().getPodaci().getTxtId().getText();
 		// nek ga samo uzme
-		Integer brojPotvrde = Integer.parseInt(view.getRegistracija().getPodaci().getTxtConfirmationNumber().getText());
+		String brojPotvrde = view.getRegistracija().getPodaci().getTxtConfirmationNumber().getText();
 		// dodati date time pickere
 //		java.sql.Date selectedDate = (java.sql.Date) datePicker.getModel().getValue();
 		java.util.Date oodKad = (java.util.Date) view.getRegistracija().getPodaci().getDatumVazenja().getDatePickerOdKad().getModel().getValue();
@@ -285,8 +334,18 @@ public class SalterskiRadnikController {
 		//Date odKad=new SimpleDateFormat("yyyy-MM-dd").parse("1991-2-1");
 		//Date doKad=new SimpleDateFormat("yyyy-MM-dd").parse("1992-2-1");
 		
-		return model.DodajRegistraciju(brojPotvrde, registracija, jmbgKorisnika, oodKad, dooKad);
-	}//
+		return model.DodajRegistracijuIVlasnicku(brojPotvrde, registracija, jmbgKorisnika, oodKad, dooKad);
+	}
+	public Boolean dodajRegistracijuISaobracajnu() throws ParseException 
+	{
+		String registracija = view.getRegistracija().getPodaci().getTxtRegistrationString().getText();
+		String jmbgKorisnika = view.getRegistracija().getPodaci().getTxtId().getText();
+		String brojPotvrde = view.getRegistracija().getPodaci().getTxtConfirmationNumber().getText();
+		java.util.Date oodKad = (java.util.Date) view.getRegistracija().getPodaci().getDatumVazenja().getDatePickerOdKad().getModel().getValue();
+		java.util.Date dooKad = (java.util.Date) view.getRegistracija().getPodaci().getDatumVazenja().getDatePickerDoKad().getModel().getValue();
+		
+		return model.DodajRegistracijuISaobracajnu(brojPotvrde, registracija, jmbgKorisnika, oodKad, dooKad);
+	}
 	public boolean provjeriPopunjenostVozaca() {
 		return true;
 	}
@@ -360,11 +419,17 @@ public class SalterskiRadnikController {
 			zapreminaMotora, maxSnaga,gorivo, brojMotora, vrstaMotora);
 	
 	}
-	public boolean isUnosDozvole() {
-		return unosDozvole;
+	public boolean isUnosSDozvole() {
+		return unosSDozvole;
 	}
-	public void setUnosDozvole(boolean unosVlasnicke) {
-		this.unosDozvole = unosVlasnicke;
+	public void setUnosSDozvole(boolean dozvola) {
+		this.unosSDozvole = dozvola;
+	}
+	public boolean isUnosVDozvole() {
+		return unosVDozvole;
+	}
+	public void setUnosVDozvole(boolean dozvola) {
+		this.unosVDozvole = dozvola;
 	}
 	public boolean isOdjavaSaltera() {
 		return odjavaSaltera;
