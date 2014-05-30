@@ -27,19 +27,21 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 		Date datumIsteka = registracija.getDatumIsteka();
 		int idVozila = registracija.getVozilo().getId();
 		int idOsobe = registracija.getOsoba().getId();
+		int idRegistracije=registracija.getId();
 		
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 		
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO Registracija(RegistarskaOznaka, Od, Do, Vozilo, Osoba) VALUES (?, ?, ?, ?, ?)");
-			//statement.setInt(1, 1);
-			statement.setString(1, regOznaka);
-			statement.setDate(2, new java.sql.Date(datumRegist.getTime()));
-			statement.setDate(3, new java.sql.Date(datumIsteka.getTime()));
-			statement.setInt(4, idVozila);
-			statement.setInt(5, idOsobe);
+					.prepareStatement("INSERT INTO Registracija(IDRegistracije, RegistarskaOznaka, Od, Do, Vozilo, Osoba) VALUES (?, ?, ?, ?, ?, ?)");
+		
+			statement.setInt(1, idRegistracije);
+			statement.setString(2, regOznaka);
+			statement.setDate(3, new java.sql.Date(datumRegist.getTime()));
+			statement.setDate(4, new java.sql.Date(datumIsteka.getTime()));
+			statement.setInt(5, idVozila);
+			statement.setInt(6, idOsobe);
 
 			statement.executeUpdate();
 			success = true;
