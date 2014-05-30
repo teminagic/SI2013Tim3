@@ -29,7 +29,7 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 
 			statement.setInt(1, vozilo);
 			statement.setInt(2, korisnik);
-			statement.setString(3, s.getBrojDozvole());
+			statement.setString(3, s.getBrojDozvole());//
 
 			statement.executeUpdate();
 			success = true;
