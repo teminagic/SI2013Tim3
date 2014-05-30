@@ -371,8 +371,8 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 	}
 
 	@Override
-	public List<Vozilo> getAll() {
-		List<Vozilo> result = new ArrayList<Vozilo>();
+	public ArrayList<Vozilo> getAll() {
+		ArrayList<Vozilo> result = new ArrayList<Vozilo>();
 
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();

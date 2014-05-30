@@ -98,8 +98,8 @@ public class MotorDAO implements IGenericDAO<Motor, Integer> {
 	}
 
 	@Override
-	public List<Motor> getAll() {
-		List<Motor> result = new ArrayList<Motor>();
+	public ArrayList<Motor> getAll() {
+		ArrayList<Motor> result = new ArrayList<Motor>();
 
 		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();

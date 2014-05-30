@@ -104,8 +104,8 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 	}
 
 	@Override
-	public List<BojaVozila> getAll() {
-		List<BojaVozila> result = new ArrayList<BojaVozila>();
+	public ArrayList<BojaVozila> getAll() {
+		ArrayList<BojaVozila> result = new ArrayList<BojaVozila>();
 
 		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
