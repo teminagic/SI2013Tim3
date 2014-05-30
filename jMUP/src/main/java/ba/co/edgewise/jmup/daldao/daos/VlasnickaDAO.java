@@ -165,9 +165,9 @@ public Vlasnicka getByVozilo(Integer id){
 	} 
 
 	@Override
-	public List<Vlasnicka> getAll()
+	public ArrayList<Vlasnicka> getAll()
 	{
-		List<Vlasnicka> result = new ArrayList<Vlasnicka>();
+		ArrayList<Vlasnicka> result = new ArrayList<Vlasnicka>();
 		
 		//Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();

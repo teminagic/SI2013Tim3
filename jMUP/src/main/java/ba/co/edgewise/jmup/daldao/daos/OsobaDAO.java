@@ -89,8 +89,8 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 		return result;
 	}
 
-	public List<Osoba> getAll() {
-		List<Osoba> result = new ArrayList<Osoba>();
+	public ArrayList<Osoba> getAll() {
+		ArrayList<Osoba> result = new ArrayList<Osoba>();
 
 		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();

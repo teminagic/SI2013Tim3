@@ -84,9 +84,9 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 	} 
 
 	@Override
-	 public List<Saobracajna> getAll()
+	 public ArrayList<Saobracajna> getAll()
 	{
-		List<Saobracajna> result = new ArrayList<Saobracajna>();
+		ArrayList<Saobracajna> result = new ArrayList<Saobracajna>();
 		
 		//Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();

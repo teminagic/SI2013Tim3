@@ -96,8 +96,8 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 	}
 
 	@Override
-	public List<Registracija> getAll() {
-		List<Registracija> result = new ArrayList<Registracija>();
+	public ArrayList<Registracija> getAll() {
+		ArrayList<Registracija> result = new ArrayList<Registracija>();
 		
 		//Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
