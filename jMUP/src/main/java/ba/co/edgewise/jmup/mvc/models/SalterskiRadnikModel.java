@@ -27,7 +27,12 @@ import ba.co.edgewise.jmup.klase.Vozilo;
 public class SalterskiRadnikModel {
 	public Boolean OvjeriRegistraciju(String brojDozvole, Date odKad, Date doKad)
 	{
-		return true;
+		SaobracajnaDAO sDAO = new SaobracajnaDAO();
+		Saobracajna s = sDAO.get(brojDozvole);
+		Vozilo v = s.getVozilo();
+		
+		RegistracijaDAO rDAO = new RegistracijaDAO();
+		return rDAO.updateSaIDVozila(v.getId(), odKad, doKad);
 	}
 	public Boolean DodajRegistracijuISaobracajnu(String brojDozvole, String regOznaka, String jmbg, Date odKad, Date doKad)
 	{
