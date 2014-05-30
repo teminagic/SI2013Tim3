@@ -30,7 +30,7 @@ public class SalterskiRadnikModel {
 		SaobracajnaDAO sDAO = new SaobracajnaDAO();
 		Saobracajna s = sDAO.get(brojDozvole);
 		Vozilo v = s.getVozilo();
-		
+		//
 		RegistracijaDAO rDAO = new RegistracijaDAO();
 		return rDAO.updateSaIDVozila(v.getId(), odKad, doKad);
 	}
