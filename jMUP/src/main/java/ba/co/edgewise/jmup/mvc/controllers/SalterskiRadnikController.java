@@ -130,7 +130,7 @@ public class SalterskiRadnikController {
 								JOptionPane.showOptionDialog(view, "Saobra\u0107ajna ne postoji, ponovite unos.",
 										"Unos voza\u010Da", JOptionPane.OK_OPTION,
 										JOptionPane.INFORMATION_MESSAGE, null,
-										new String[] { "Uredu" }, "default");	
+										new String[] { "Uredu" }, "default");	//
 							}
 								
 					}
