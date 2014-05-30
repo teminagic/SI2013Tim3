@@ -96,6 +96,9 @@ public class LoginController {
 						//SalterskiRadnikModelIrma noviModel = new SalterskiRadnikModelIrma();
 						//SalterskiRadnikControllerIrma noviController = new SalterskiRadnikControllerIrma(noviView,noviModel);						
 					
+	//					SalterskiRadnikModelAmra noviModel = new SalterskiRadnikModelAmra();
+		//				SalterskiRadnikControllerAmra noviController = new SalterskiRadnikControllerAmra(noviView,noviModel);						
+					
 						noviController.control();
 					} catch (Exception e) {
 						e.printStackTrace();
