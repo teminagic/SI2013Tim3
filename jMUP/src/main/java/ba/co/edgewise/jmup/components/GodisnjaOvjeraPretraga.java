@@ -73,5 +73,8 @@ public class GodisnjaOvjeraPretraga extends JPanel {
 	public void setTxtId(JTextField txtId) {
 		this.txtId = txtId;
 	}
+	public BtAzuriranje getModifyPanel(){
+		return btgModify;
+	}
 
 }

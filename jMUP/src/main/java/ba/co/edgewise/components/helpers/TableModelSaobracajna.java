@@ -12,10 +12,11 @@ public class TableModelSaobracajna extends AbstractTableModel {
 	private static final long serialVersionUID = -263608234994707920L;
 
 	private String[] columnNames = { 
+			"Broj potvrde",
 			"Registarska oznaka", 
-			"Godina proizvodnje", 
-			"Vrsta vozila",
-			"Marka vozila"};
+			"Ime i prezime", 
+			"JMBG vozača"
+			};
 	private ArrayList<Saobracajna> data;
 
 	public TableModelSaobracajna() {

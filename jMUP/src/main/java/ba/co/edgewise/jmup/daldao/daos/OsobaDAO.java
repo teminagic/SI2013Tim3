@@ -111,7 +111,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				Osoba osoba = new Osoba();
 				osoba.setId(qResult.getInt("IDOsobe"));
 				osoba.setJmbg_Id(qResult.getString("JMB_ID"));
-				osoba.setIme(qResult.getString("Prezime"));
+				osoba.setPrezime(qResult.getString("Prezime"));
 				osoba.setIme(qResult.getString("Ime"));
 				osoba.setPrebivaliste(qResult.getString("Prebivaliste"));
 				if (qResult.getInt("PravnoLice") == 1)
@@ -341,9 +341,11 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 
 		return success;
 	}
-	/*public static void main(String[] args) {
-		Osoba o = new Osoba(1,"b","b","b","b",true);
+	public static void main(String[] args) {
+		//Osoba o = new Osoba(1,"b","b","b","b",true);
 		OsobaDAO oDao = new OsobaDAO();
-		oDao.create(o);
-	}*/
+		List<Osoba> osobe = new ArrayList<Osoba>();
+		osobe = oDao.getAll();
+		for(Osoba o:osobe) System.out.println(o.getIme()+","+o.getPrezime()+","+o.getJmbg_Id());
+	}
 }

@@ -130,6 +130,12 @@ public class SalterskiRadnikView extends JFrame {
 		tmp.show(cards, "Unos registracije");
 	}
 	
+	public void prikaziPretragu() {
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Pretraga");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Pretraga");
+	}
 	public JPanel getContentPane() {
 		return contentPane;///
 	}

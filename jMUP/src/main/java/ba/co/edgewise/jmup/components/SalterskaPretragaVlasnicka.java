@@ -45,13 +45,10 @@ public class SalterskaPretragaVlasnicka extends JPanel {
 		gbc_sp_pretragaTabela.gridy = 0;
 		add(sp_pretragaTabela, gbc_sp_pretragaTabela);
 
-//{ "Identifikacijski broj potvrde",
-//						"Registarska oznaka", "Ime i prezime vlasnika",
-//						"JMBG Vlasnika" }
-		model = new TableModelVlasnicka();
-		table_vlasnicke = new JTable(model);
-		//	model = (TableModelVozilo) table_vozila.getModel();
-		//	setTable(new JTable(getModel()));
+		//model = new TableModelVlasnicka();
+		//table_vlasnicke = new JTable(model);
+		this.setModel(new TableModelVlasnicka());
+		setTable(new JTable(getModel()));
 		getModel().addTableModelListener(getTable());
 		getTable().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		sp_pretragaTabela.setViewportView(table_vlasnicke);

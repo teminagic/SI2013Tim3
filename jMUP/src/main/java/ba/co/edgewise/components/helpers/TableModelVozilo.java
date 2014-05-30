@@ -15,7 +15,8 @@ public class TableModelVozilo extends AbstractTableModel {
 			"Registarska oznaka", 
 			"Godina proizvodnje", 
 			"Vrsta vozila",
-			"Marka vozila"};
+			"Marka vozila"
+			};
 	private ArrayList<Vozilo> data;
 
 	public TableModelVozilo() {
@@ -79,11 +80,6 @@ public class TableModelVozilo extends AbstractTableModel {
 			data.add(u);
 		}
 		this.fireTableRowsInserted(rowCount, rowCount + novi.size());
-	}
-
-	public void addTableModelListener(JTable table) {
-		// TODO Auto-generated method stub
-		
 	}
 
 

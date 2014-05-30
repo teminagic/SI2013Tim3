@@ -223,10 +223,10 @@ public class Vozilo {
 	
 	public Object[] toObjectArray() {
 		return new Object[]{				
-			this.registarskaOznaka = registarskaOznaka,
-			this.godinaProizvodnje = godinaProizvodnje,
-			this.vrsta = vrsta,
-			this.marka = marka
+			this.registarskaOznaka,
+			this.godinaProizvodnje,
+			this.vrsta,
+			this.marka
 			/*this.tip = tip,
 			this.model = model,
 			this.brojSasije = brojSasije,

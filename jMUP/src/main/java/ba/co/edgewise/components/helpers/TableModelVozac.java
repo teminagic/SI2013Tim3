@@ -11,8 +11,7 @@ public class TableModelVozac extends AbstractTableModel {
 
 	private static final long serialVersionUID = -263608234994707920L;
 
-	private String[] columnNames = { "Ime", "Prezime", "JMBG",
-	"Broj lične karte" };
+	private String[] columnNames = { "Ime", "Prezime", "JMBG" };
 	private ArrayList<Osoba> data;
 
 	public TableModelVozac() {

@@ -48,10 +48,10 @@ public class SalterskaPretragaVozilo extends JPanel {
 		gbc_sp_pretragaTabela.gridy = 0;
 		add(sp_pretragaTabela, gbc_sp_pretragaTabela);
 
-		model = new TableModelVozilo();
-		table_vozila = new JTable(model);
-	//	model = (TableModelVozilo) table_vozila.getModel();
-	//	setTable(new JTable(getModel()));
+	//	model = new TableModelVozilo();
+	//	table_vozila = new JTable(model);
+		this.setModel(new TableModelVozilo());
+		setTable(new JTable(getModel()));
 		getModel().addTableModelListener(getTable());
 		getTable().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		sp_pretragaTabela.setViewportView(table_vozila);

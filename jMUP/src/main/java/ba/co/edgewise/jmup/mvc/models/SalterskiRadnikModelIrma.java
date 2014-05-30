@@ -24,23 +24,28 @@ public class SalterskiRadnikModelIrma {
 	public ArrayList<Vozilo> dohvatiSvaVozila() {
 		return (ArrayList<Vozilo>) _voziloDAO.getAll();
 	}
+	public ArrayList<Osoba> dohvatiSveVozace() {
+		return (ArrayList<Osoba>) _osobaDAO.getAll();
+	}
+
+	
 	public ArrayList<Vozilo> pretragaVozilo( String parametar, String kriterij ) {
 		
 		switch (kriterij){
-		case "Registarska oznaka":
-			ArrayList<Vozilo> v = new ArrayList<Vozilo>();
-			Vozilo v1 = _voziloDAO.getByReg(parametar);
-			v.add(v1);
-			return (v == null) ? null : v;
-		case "Godina proizvodnje":
-			ArrayList<Vozilo> v2 = _voziloDAO.getByDate(Integer.parseInt(parametar));
-			return (v2 == null) ? null : v2;
-		case "Vrsta vozila":
-			ArrayList<Vozilo> v3 = _voziloDAO.getByType(parametar);
-			return (v3 == null) ? null : v3;
-		case "Marka vozila":
-			ArrayList<Vozilo> v4 = _voziloDAO.getByMark(parametar);
-			return (v4 == null) ? null : v4;
+			case "Registarska oznaka":
+				ArrayList<Vozilo> v = new ArrayList<Vozilo>();
+				Vozilo v1 = _voziloDAO.getByReg(parametar);
+				v.add(v1);
+				return (v == null) ? null : v;
+			case "Godina proizvodnje":
+				ArrayList<Vozilo> v2 = _voziloDAO.getByDate(Integer.parseInt(parametar));
+				return (v2 == null) ? null : v2;
+			case "Vrsta vozila":
+				ArrayList<Vozilo> v3 = _voziloDAO.getByType(parametar);
+				return (v3 == null) ? null : v3;
+			case "Marka vozila":
+				ArrayList<Vozilo> v4 = _voziloDAO.getByMark(parametar);
+				return (v4 == null) ? null : v4;
 		}
 		
 		return null;

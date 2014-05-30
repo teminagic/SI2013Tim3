@@ -45,13 +45,10 @@ public class SalterskaPretragaSaobracajna extends JPanel {
 		gbc_sp_pretragaTabela.gridy = 0;
 		add(sp_pretragaTabela, gbc_sp_pretragaTabela);
 
-	//"Identifikacijski broj potvrde",
-	//					"Registarska oznaka", "Ime i prezime vozača",
-	//					"JMBG vozača" }));
-		model = new TableModelSaobracajna();
-		table_saobracajne = new JTable(model);
-		//	model = (TableModelVozilo) table_vozila.getModel();
-		//	setTable(new JTable(getModel()));
+		//model = new TableModelSaobracajna();
+		//table_saobracajne = new JTable(model);
+		this.setModel(new TableModelSaobracajna());
+		setTable(new JTable(getModel()));
 		getModel().addTableModelListener(getTable());
 		getTable().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		sp_pretragaTabela.setViewportView(table_saobracajne);

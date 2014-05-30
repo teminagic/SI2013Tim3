@@ -12,10 +12,12 @@ public class TableModelVlasnicka extends AbstractTableModel {
 	private static final long serialVersionUID = -263608234994707920L;
 
 	private String[] columnNames = { 
+			"Broj potvrde",
 			"Registarska oznaka", 
-			"Godina proizvodnje", 
-			"Vrsta vozila",
-			"Marka vozila"};
+			"Ime i prezime", 
+			"JMBG vlasnika"
+			};
+
 	private ArrayList<Vlasnicka> data;
 
 	public TableModelVlasnicka() {
