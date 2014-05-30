@@ -27,8 +27,12 @@ public class SalterskiRadnikModelIrma {
 	public ArrayList<Osoba> dohvatiSveVozace() {
 		return (ArrayList<Osoba>) _osobaDAO.getAll();
 	}
-
-	
+	public ArrayList<Saobracajna> dohvatiSveSaobracajne() {
+		return (ArrayList<Saobracajna>) _saobracajnaDAO.getAll();
+	}
+	public ArrayList<Vlasnicka> dohvatiSveVlasnicke() {
+		return (ArrayList<Vlasnicka>) _vlasnickaDAO.getAll();
+	}
 	public ArrayList<Vozilo> pretragaVozilo( String parametar, String kriterij ) {
 		
 		switch (kriterij){
@@ -90,7 +94,7 @@ public class SalterskiRadnikModelIrma {
 			s2.add(_saobracajnaDAO.getByReg(vt.getId()));
 			return (s2 == null) ? null : s2;
 		
-		case "JMBG":
+		case "JMBG vozača":
 			Osoba o = _osobaDAO.getByJMBG(parametar);
 			ArrayList<Saobracajna> s3 = new ArrayList<>();
 			s3.add(_saobracajnaDAO.getByName(o.getId()));	
@@ -125,7 +129,7 @@ public class SalterskiRadnikModelIrma {
 		vl2.add(_vlasnickaDAO.getByVozilo(vt.getId()));
 		return (vl2 == null) ? null : vl2;
 		
-		case "JMBG":
+		case "JMBG vlasnika":
 		Osoba o = _osobaDAO.getByJMBG(parametar);
 		ArrayList<Vlasnicka> vl3 = new ArrayList<>();
 		vl3.add(_vlasnickaDAO.getByVlasnik(o.getId()));	
