@@ -185,7 +185,23 @@ public class SalterskiRadnikController {
 						prikaziPanelUnosVozaca();
 						};			
 				});
-				
+						
+				//Listener za godisnju ovjeru registracije
+				JButton godisnjaRegistracija = this.view.getMeni().getOpcije().getBtnOvjera();
+					godisnjaRegistracija.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						prikaziPanelOvjeraRegistracije();
+						};			
+				});
+				//Listener za izvjestaje
+				JButton izvjestaji = this.view.getMeni().getOpcije().getBtnIzvjestaji();
+				izvjestaji.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						prikaziPanelIzvjestaji();
+						};			
+				});
 				//Listener za odjavu
 				JButton odjava = this.view.getMeni().getOpcije().getBtnOdjava();
 				odjava.addMouseListener(new MouseAdapter() {
@@ -274,7 +290,14 @@ public class SalterskiRadnikController {
 	public boolean provjeriPopunjenostVozaca() {
 		return true;
 	}
-	
+	void prikaziPanelIzvjestaji()
+	{
+		view.prikaziIzvjestaje();
+	}
+	void prikaziPanelOvjeraRegistracije()
+	{
+		view.prikaziOvjeruRegistracije();
+	}
 	// Prikazi za buttone iz menija:
 	void prikaziPanelUnosRegistracije()
 	{
