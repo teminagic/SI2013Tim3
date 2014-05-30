@@ -51,8 +51,7 @@ public class SalterskiRadnikController {
 				pocetna.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						prikaziPanelUnosRegistracije();
-						//prikaziPanelPocetnu();
+						prikaziPanelPocetnu();
 						};
 					
 				});
@@ -265,6 +264,8 @@ public class SalterskiRadnikController {
 						}
 					}
 				});
+				// Listener za ponistavanje unosa registracije
+				
 				
 				//Listener unos vlasnicke
 				JButton unosVlasnicke = this.view.getMeni().getOpcije().getBtnUnosVlasnicke();

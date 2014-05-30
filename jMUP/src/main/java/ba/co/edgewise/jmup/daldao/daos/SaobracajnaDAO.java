@@ -25,11 +25,11 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 		
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO `Saobracajna`(`Vozilo`, `Korisnik`, 'BrojDozvole') VALUES (?, ?, ?)");
+					.prepareStatement("INSERT INTO `Saobracajna`(`Vozilo`, `Korisnik`, `BrojDozvole`) VALUES (?, ?, ?)");
 
 			statement.setInt(1, vozilo);
 			statement.setInt(2, korisnik);
-			statement.setString(3, s.getBrojDozvole());
+			statement.setString(3, s.getBrojDozvole());//
 
 			statement.executeUpdate();
 			success = true;
