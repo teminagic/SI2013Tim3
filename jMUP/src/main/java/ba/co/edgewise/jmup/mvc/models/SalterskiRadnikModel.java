@@ -98,4 +98,11 @@ public class SalterskiRadnikModel {
 		//Kreiraj vozilo
 		vDAO.create(vozilo);
 	}
+	public Boolean provjeriBrojSaobracajne(String brojDozvole)
+	{
+		SaobracajnaDAO s = new SaobracajnaDAO();
+		if(s.get(brojDozvole)!=null)
+			return true;
+		return false;
+	}
 }

@@ -114,17 +114,27 @@ public class SalterskiRadnikController {
 					}
 				});
 				
-				/*JButton potvrdaIDaSaobracajne = this.view.getIzvjestaji().get
-				potvrdaIDaSaobracajne.addMouseListener(new MouseAdapter() {
+				JButton potvrdaIDaSaobracajne = this.view.getGodisnjaOvjera().getPretraga().getModifyPanel().getBtnModify();
+					potvrdaIDaSaobracajne.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-							pocistiPoljaVozac();
-							JOptionPane.showOptionDialog(view, "Unos poni\u0161ten.",
-									"Unos voza\u010Da", JOptionPane.OK_OPTION,
-									JOptionPane.INFORMATION_MESSAGE, null,
-									new String[] { "Uredu" }, "default");															
+						String brojDozvole = view.getGodisnjaOvjera().getPretraga().getTxtId().getText();
+							if(provjeriUneseniBrojSaobracajne(brojDozvole) == true){
+								JOptionPane.showOptionDialog(view, "Saobra\u0107ajna postoji.",
+										"Unos broja saobra\u0107ajne dozvole", JOptionPane.OK_OPTION,
+										JOptionPane.INFORMATION_MESSAGE, null,
+										new String[] { "Uredu" }, "default");															
+							}
+							else{
+								view.getGodisnjaOvjera().getPretraga().getTxtId().setText("");
+								JOptionPane.showOptionDialog(view, "Saobra\u0107ajna ne postoji, ponovite unos.",
+										"Unos voza\u010Da", JOptionPane.OK_OPTION,
+										JOptionPane.INFORMATION_MESSAGE, null,
+										new String[] { "Uredu" }, "default");	
+							}
+								
 					}
-				})*/;
+				});
 				//UNOS VOZILA
 				JButton unosVozila = this.view.getMeni().getOpcije().getBtnUnosVozila();
 				unosVozila.addMouseListener(new MouseAdapter() {
@@ -276,6 +286,11 @@ public class SalterskiRadnikController {
 						};			
 				});
 				
+	}
+	
+	Boolean provjeriUneseniBrojSaobracajne(String brojDozvole)
+	{
+		return model.provjeriBrojSaobracajne(brojDozvole);
 	}
 	public void odjaviSkroz()
 	{
