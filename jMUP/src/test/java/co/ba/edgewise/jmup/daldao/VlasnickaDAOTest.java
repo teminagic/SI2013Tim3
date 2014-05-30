@@ -57,7 +57,7 @@ public class VlasnickaDAOTest {
 		VoziloDAO vd=new VoziloDAO();
 		Vozilo vozilo =vd.get(1);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(5);
+		Osoba osoba=od.get(1);
 		Vlasnicka vl = new Vlasnicka("17", vozilo, osoba);
 		//vlDAO.create(vl);
 		assertTrue(vlDAO.update("17", vl)); //zeza update..
