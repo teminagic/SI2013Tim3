@@ -25,7 +25,10 @@ import ba.co.edgewise.jmup.klase.Vozilo;
 // Sve se radi sa dal dao-om, a obicne klase sluze radi "lakseg i intuituvnijeg prenosa podataka"
 
 public class SalterskiRadnikModel {
-	
+	public Boolean OvjeriRegistraciju(String brojDozvole, Date odKad, Date doKad)
+	{
+		return true;
+	}
 	public Boolean DodajRegistracijuISaobracajnu(String brojDozvole, String regOznaka, String jmbg, Date odKad, Date doKad)
 	{
 		SaobracajnaDAO sDAO = new SaobracajnaDAO();

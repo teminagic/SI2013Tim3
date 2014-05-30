@@ -44,4 +44,8 @@ public class GOModifikacijaDatum extends JPanel {
 		
 	}
 
+	public DatumVazenja getRegistrationDate() {
+		return registrationDate;
+	}
+
 }
