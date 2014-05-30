@@ -212,7 +212,7 @@ public class SalterskiRadnikView extends JFrame {
 	}
 
 
-	public GodisnjaOvjera getDodisnjaOvjera() {
+	public GodisnjaOvjera getGodisnjaOvjera() {
 		return strana7;
 	}
 

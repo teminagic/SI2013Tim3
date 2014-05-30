@@ -53,4 +53,12 @@ public class GodisnjaOvjera extends JPanel {
 		
 	}
 
+	public GodisnjaOvjeraPretraga getPretraga() {
+		return pretraga;
+	}
+
+	public GOModifikacijaDatum getDatum() {
+		return datum;
+	}
+
 }
