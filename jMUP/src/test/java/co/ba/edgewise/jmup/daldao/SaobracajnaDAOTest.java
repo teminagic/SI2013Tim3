@@ -63,7 +63,7 @@ public class SaobracajnaDAOTest {
 		Osoba osoba=od.get(5);
 		Saobracajna sa = new Saobracajna("17", vozilo, osoba);
 		//vlDAO.create(vl);
-		assertTrue(saDAO.update("17", sa)); //zeza update..
+		assertTrue(saDAO.update("17", sa));
 	}
 
 	@Test
