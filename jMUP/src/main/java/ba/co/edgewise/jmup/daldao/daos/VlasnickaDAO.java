@@ -25,7 +25,7 @@ public class VlasnickaDAO implements IGenericDAO<Vlasnicka, String> {
 		
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO `Vlasnicka`(`Vozilo`, 'Vlasnik', 'BrojDozvole') VALUES (?, ?, ?)");
+					.prepareStatement("INSERT INTO `Vlasnicka`(`Vozilo`, `Vlasnik`, `BrojDozvole`) VALUES (?, ?, ?)");
 
 			statement.setInt(1, vozilo);
 			statement.setInt(2, vlasnik);
