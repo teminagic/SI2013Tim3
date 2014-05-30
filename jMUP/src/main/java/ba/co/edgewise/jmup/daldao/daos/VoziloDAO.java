@@ -441,6 +441,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 		int masaVozila = vozilo.getMasaVozila();
 		int dopustenaNosivost = vozilo.getDopustenaNosivost();
 		Motor motor = vozilo.getMotor();
+		int idMotora=motor.getId();
 		Double odnosSnageIMase = vozilo.getOdnosSnageIMase();
 		Integer brojMjestaZaSjedenje = vozilo.getBrojMjestaZaSjedenje();
 		Integer brojMjestaZaStajanje = vozilo.getBrojMjestaZaStajanje();
@@ -458,8 +459,8 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 			PreparedStatement statement = connection
 					.prepareStatement("UPDATE `Vozilo`"
 							+ " SET Vrsta = ?, Marka = ?, Tip = ?, Model = ?, BrojSasije = ?, "
-							+ "OblikKaroserije =?, GodinaProizvodnje = ?, MaxTehnickaDozvoljenaMasa = ?"
-							+ "MasaVozila=?, DopustenaNosivost = ?, Motor = ?, "
+							+ "OblikKaroserije =?, GodinaProizvodnje = ?, MaxTehnickaDozvoljenaMasa = ?,"
+							+ " MasaVozila=?, DopustenaNosivost = ?, Motor = ?, "
 							+ "OdnosSnageIMase = ?, BrojMjestaZaSjedenje = ?, BrojMjestaZaStajanje =?, "
 							+ "BrojMjestaZaLezanje = ?, EkoKarakteristikaVozila = ?,"
 							+ " Katalizator = ?, DatumPregleda = ?, RegOznaka = ?" 
@@ -475,7 +476,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 			statement.setInt(8, maxTehnickaDozvoljenaMasa);
 			statement.setInt(9, masaVozila);
 			statement.setInt(10, dopustenaNosivost);
-			statement.setInt(11, motor.getId());
+			statement.setInt(11, idMotora);
 			statement.setDouble(12, odnosSnageIMase);
 			statement.setInt(13, brojMjestaZaSjedenje);
 			statement.setInt(14, brojMjestaZaStajanje);
@@ -484,6 +485,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 			statement.setBoolean(17, katalizator);
 			statement.setDate(18, new java.sql.Date(datumPregleda.getTime()));
 			statement.setString(19, reg);
+			statement.setInt(20, vozilo.getId());
 
 			statement.executeUpdate();
 			success = true;
