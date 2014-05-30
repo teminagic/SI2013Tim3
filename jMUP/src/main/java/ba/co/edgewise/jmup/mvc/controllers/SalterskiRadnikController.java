@@ -263,10 +263,13 @@ public class SalterskiRadnikController {
 		// nek ga samo uzme
 		Integer brojPotvrde = Integer.parseInt(view.getRegistracija().getPodaci().getTxtConfirmationNumber().getText());
 		// dodati date time pickere
-		Date odKad=new SimpleDateFormat("yyyy-MM-dd").parse("1991-2-1");
-		Date doKad=new SimpleDateFormat("yyyy-MM-dd").parse("1992-2-1");
+//		java.sql.Date selectedDate = (java.sql.Date) datePicker.getModel().getValue();
+		java.util.Date oodKad = (java.util.Date) view.getRegistracija().getPodaci().getDatumVazenja().getDatePickerOdKad().getModel().getValue();
+		java.util.Date dooKad = (java.util.Date) view.getRegistracija().getPodaci().getDatumVazenja().getDatePickerDoKad().getModel().getValue();
+		//Date odKad=new SimpleDateFormat("yyyy-MM-dd").parse("1991-2-1");
+		//Date doKad=new SimpleDateFormat("yyyy-MM-dd").parse("1992-2-1");
 		
-		return model.DodajRegistraciju(brojPotvrde, registracija, jmbgKorisnika, odKad, doKad);
+		return model.DodajRegistraciju(brojPotvrde, registracija, jmbgKorisnika, oodKad, dooKad);
 	}//
 	public boolean provjeriPopunjenostVozaca() {
 		return true;
