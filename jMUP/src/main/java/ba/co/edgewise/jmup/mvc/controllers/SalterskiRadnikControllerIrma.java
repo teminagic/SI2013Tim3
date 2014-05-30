@@ -131,15 +131,16 @@ public class SalterskiRadnikControllerIrma {
 	//PRETRAGA
 	void prikaziPanelPretraga()
 	{
-		//Podaci iz baze
+		//Prikaz panela pretraga
+		view.prikaziPretragu();
+		/*//Podaci iz baze
 		view.getStrana6().getPanel_vozilo().getModel().clearAll();
 		view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());		
 		//Podaci u comboboxu
-		this.view.getStrana6().getCb_parametri().removeAllItems();		
-		//Prikaz panela pretraga
-		view.prikaziPretragu();
+		this.view.getStrana6().getCb_parametri().removeAllItems();			
 		//Defaultni prikaz - vozila
-		view.getStrana6().prikaziPretraguVozila();
+		view.getStrana6().prikaziPretraguVozila();*/
+		prikaziPanelPretragaVozila();
 	}
 	void prikaziPanelPretragaVozila() {
 		//Baza
@@ -187,42 +188,42 @@ public class SalterskiRadnikControllerIrma {
 	}
 	void pretraziVozila() {
 		view.getStrana6().getPanel_vozilo().getModel().clearAll();
-		String kriterij = view.getStrana6().getTb_unosPretrage().getText();
-		VoziloPretraga tip = (VoziloPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
-		if(kriterij.equals("")) {
+		String parametar = view.getStrana6().getTb_unosPretrage().getText();
+		VoziloPretraga kriterij = (VoziloPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
+		if(parametar.equals("")) {
 			view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
 		} else {
-			view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(tip.toString(),kriterij));
+			view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(parametar,kriterij.toString()));
 		}
 	}
 	void pretraziVozace() {
-		view.getStrana6().getPanel_vozilo().getModel().clearAll();
-		String kriterij = view.getStrana6().getTb_unosPretrage().getText();
-		VozacPretraga tip = (VozacPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
-		if(kriterij.equals("")) {
-			view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
+		view.getStrana6().getPanel_vozac().getModel().clearAll();
+		String parametar = view.getStrana6().getTb_unosPretrage().getText();
+		VozacPretraga kriterij = (VozacPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
+		if(parametar.equals("")) {
+			view.getStrana6().getPanel_vozac().getModel().addAll(model.dohvatiSveVozace());
 		} else {
-			view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(tip.toString(),kriterij));
+			view.getStrana6().getPanel_vozac().getModel().addAll(model.pretragaVozac(parametar,kriterij.toString()));
 		}
 	}
 	void pretraziSaobracajne() {
 		view.getStrana6().getPanel_vozilo().getModel().clearAll();
-		String kriterij = view.getStrana6().getTb_unosPretrage().getText();
-		SaobracajnaPretraga tip = (SaobracajnaPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
-		if(kriterij.equals("")) {
+		String parametar = view.getStrana6().getTb_unosPretrage().getText();
+		SaobracajnaPretraga kriterij = (SaobracajnaPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
+		if(parametar.equals("")) {
 			view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
 		} else {
-			view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(tip.toString(),kriterij));
+			view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(parametar,kriterij.toString()));
 		}
 	}
 	void pretraziVlasnicke() {
 		view.getStrana6().getPanel_vozilo().getModel().clearAll();
-		String kriterij = view.getStrana6().getTb_unosPretrage().getText();
-		VlasnickaPretraga tip = (VlasnickaPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
-		if(kriterij.equals("")) {
+		String parametar = view.getStrana6().getTb_unosPretrage().getText();
+		VlasnickaPretraga kriterij = (VlasnickaPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
+		if(parametar.equals("")) {
 			view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
 		} else {
-			view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(tip.toString(),kriterij));
+			view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(parametar,kriterij.toString()));
 		}
 	}
 
