@@ -163,7 +163,7 @@ public class SalterskiRadnikController {
 						try {
 							if(provjeriPopunjenostRegistracije()) 
 							{
-								if(isUnosSDozvole() == true)
+								if(isUnosSDozvole() == true)//
 								{
 									if (dodajRegistracijuISaobracajnu()) {
 										JOptionPane.showOptionDialog(view, "Saobra\u0107ajna dozvola je uspje\u0161no dodana.",
