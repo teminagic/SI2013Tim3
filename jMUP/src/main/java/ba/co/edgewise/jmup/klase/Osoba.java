@@ -70,6 +70,7 @@ public class Osoba {
 	public void setPravnoLice(boolean pravnoLice) {
 		this.pravnoLice = pravnoLice;
 	}
-
-	
+	public Object[] toObjectArray() {
+		return new Object[]{this.ime, this.prezime, this.jmbg_Id};
+	}
 }

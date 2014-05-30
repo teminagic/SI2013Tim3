@@ -50,5 +50,11 @@ public class Vlasnicka{
 		this.vlasnik = vlasnik;
 	}
 	
+	//UBACITI PARAMETRE
+	public Object[] toObjectArray() {
+		return new Object[]{ };
+	}	
+	//public enum VlasnickaPretraga { Broj_potvrde("Broj potvrde"), Registarska_oznaka(""), Ime_prezime("Ime i prezime"), JMBG_vlasnika("JMBG vlasnika") ; 
+
 	
 }
