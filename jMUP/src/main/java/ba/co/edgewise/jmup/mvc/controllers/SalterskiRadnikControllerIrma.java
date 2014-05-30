@@ -238,10 +238,56 @@ public class SalterskiRadnikControllerIrma {
 		else if(rbSaobracajna.isSelected()) modifikujSaobracajnu();
 		else if(rbVlasnicka.isSelected()) modifikujVlasnicku();
 	}
-	void modifikujVozilo(){}
+	void modifikujVozilo(){
+		int rowSelected = view.getStrana6().getPanel_vozilo().getTable().getSelectedRow();
+		Vozilo temp = view.getStrana6().getPanel_vozilo().getModel().getData().get(rowSelected);
+		view.getVoziloModifikacija().setVozilo(temp);
+		//Ovo treba doraditi...
+		/*try {
+			updateVozila();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}*/
+		view.prikaziModifikacijuVozila();
+	}
 	void modifikujVozaca(){}
 	void modifikujSaobracajnu(){}
 	void modifikujVlasnicku(){}
-
+	
+	void updateVozila() throws ParseException {
+		VrstaVozila vrsta = (VrstaVozila) view.getVoziloDodavanje().getCb_vrstaVozila().getSelectedItem();
+		String tip = view.getVoziloDodavanje().getTf_tipVozila().getText(); 
+		String modelVozila = view.getVoziloDodavanje().getTf_modelVozila().getText(); 
+		String marka = view.getVoziloDodavanje().getTf_markaVozila().getText();
+		int godinaProizvodnje = Integer.parseInt(view.getVoziloDodavanje().getTf_godProizvodnje().getText());
+		//	REGISTARSKE DODATI U KONSTRUKTOR
+		//Neiskoristeno: 
+		String registarske = (String)view.getVoziloDodavanje().getTf_regOznaka().getText();
+		Double odnosSnageIMase = Double.parseDouble(view.getVoziloDodavanje().getTf_odnos().getText());
+		int brojMjestaZaSjedenje = Integer.parseInt(view.getVoziloDodavanje().getTf_sjedenje().getText());
+		int brojMjestaZaStajanje =  Integer.parseInt(view.getVoziloDodavanje().getTf_stajanje().getText()); 
+		int brojMjestaZaLezanje =  Integer.parseInt(view.getVoziloDodavanje().getTf_lezanje().getText()); 
+		EkoKarakteristike ekoKarakteristika =(EkoKarakteristike)view.getVoziloDodavanje().getCb_ekoKarakteristike().getSelectedItem();
+		boolean katalizator = view.getVoziloDodavanje().getRb_katalizator_da().isSelected();
+		String oblikKaroserije = view.getVoziloDodavanje().getTf_karoserija().getText();
+		Date datumPregleda=new SimpleDateFormat("yyyy-MM-dd").parse(view.getVoziloDodavanje().getTf_datumPregleda().getText());
+		String brojSasije = view.getVoziloDodavanje().getTf_brojSasije().getText();
+		int maxTehnickaDozvoljenaMasa = Integer.parseInt(view.getVoziloDodavanje().getTb_maxMasa().getText());
+		int masaVozila = Integer.parseInt(view.getVoziloDodavanje().getTb_masa().getText());
+		int dopustenaNosivost = Integer.parseInt(view.getVoziloDodavanje().getTb_nosivost().getText());
+		// Motor
+		int zapreminaMotora = Integer.parseInt(view.getVoziloDodavanje().getTf_zapremina().getText());
+		int maxSnaga = Integer.parseInt(view.getVoziloDodavanje().getTf_maxSnaga().getText());
+		String gorivo = (String)view.getVoziloDodavanje().getCb_gorivo().getSelectedItem();
+		String brojMotora = view.getVoziloDodavanje().getTf_brojMotora().getText();
+		String vrstaMotora =(String)view.getVoziloDodavanje().getCb_vrstaMotora().getSelectedItem();
+			
+		// Nisu iskoristeni: getTb_bojaVozila(), getCb_nijansa() , getCb_vrstaBoje() 
+				
+	model.updateujVozilo(registarske, vrsta, marka, tip, modelVozila, brojSasije, oblikKaroserije, godinaProizvodnje, 
+			maxTehnickaDozvoljenaMasa, masaVozila, dopustenaNosivost, odnosSnageIMase, brojMjestaZaSjedenje, 
+			brojMjestaZaStajanje, brojMjestaZaLezanje, ekoKarakteristika, katalizator, datumPregleda, 
+			zapreminaMotora, maxSnaga,gorivo, brojMotora, vrstaMotora);
+	}
 
 }

@@ -185,6 +185,7 @@ public class SalterskaPretraga extends JPanel{
 		panel_pretraga.setLayout(new CardLayout(0, 0));
 		
 		btnProfil = new JButton("Profil");
+		btnProfil.setEnabled(false);
 		GridBagConstraints gbc_btnProfil = new GridBagConstraints();
 		gbc_btnProfil.insets = new Insets(0, 0, 0, 5);
 		gbc_btnProfil.gridx = 7;
@@ -192,6 +193,7 @@ public class SalterskaPretraga extends JPanel{
 		okvirPanel.add(btnProfil, gbc_btnProfil);
 		
 		btn_modifikuj = new JButton("Modifikuj");
+		btn_modifikuj.setEnabled(false);
 		GridBagConstraints gbc_btn_modifikuj = new GridBagConstraints();
 		gbc_btn_modifikuj.insets = new Insets(0, 0, 0, 5);
 		gbc_btn_modifikuj.gridx = 8;
