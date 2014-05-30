@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import ba.co.edgewise.jmup.mvc.models.AdminModel;
 import ba.co.edgewise.jmup.mvc.models.LoginModel;
 import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModel;
+import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModelAmra;
 import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModelIrma;
 import ba.co.edgewise.jmup.mvc.views.Administrator;
 import ba.co.edgewise.jmup.mvc.views.Login;
@@ -95,6 +96,9 @@ public class LoginController {
 						//SalterskiRadnikController noviController = new SalterskiRadnikController(noviView,noviModel);						
 						SalterskiRadnikModelIrma noviModel = new SalterskiRadnikModelIrma();
 						SalterskiRadnikControllerIrma noviController = new SalterskiRadnikControllerIrma(noviView,noviModel);						
+					
+	//					SalterskiRadnikModelAmra noviModel = new SalterskiRadnikModelAmra();
+		//				SalterskiRadnikControllerAmra noviController = new SalterskiRadnikControllerAmra(noviView,noviModel);						
 					
 						noviController.control();
 					} catch (Exception e) {
