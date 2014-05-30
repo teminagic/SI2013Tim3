@@ -185,8 +185,6 @@ public class SalterskaPretraga extends JPanel{
 		radioGroup.add(rbSaobracajna);
 		radioGroup.add(rbVlasnicka);
 
-		//JPanel panel = new JPanel();
-		//Default je postavljeno da bude Vozilo.
 		panel_pretraga = new JPanel();
 		final GridBagConstraints gbc_panel_pretraga = new GridBagConstraints();
 		gbc_panel_pretraga.insets = new Insets(0, 0, 5, 5);

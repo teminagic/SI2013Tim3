@@ -128,7 +128,7 @@ public class SalterskiRadnikControllerIrma {
 				@Override
 					public void valueChanged(ListSelectionEvent e) {
 						ListSelectionModel lsm = (ListSelectionModel)e.getSource();
-					//	view.getStrana6().getBtnModifikuj().setEnabled(!lsm.isSelectionEmpty());
+						view.getStrana6().getBtn_modifikuj().setEnabled(!lsm.isSelectionEmpty());
 					//	view.getStrana6().getBtnIzbrisiKorisnika().setEnabled(!lsm.isSelectionEmpty());
 					}
 				});
@@ -140,14 +140,53 @@ public class SalterskiRadnikControllerIrma {
 			});
 				
 		}
-	private void pretraziKorisnike() {
-		view.getStrana6().getPanel_vozilo().getModel().clearAll();
-		String kriterij = view.getStrana6().getTb_unosPretrage().getText();
-		VoziloPretraga tip = (VoziloPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
-		if(kriterij.equals("")) {
-			view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
-		} else {
-			view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(tip.toString(),kriterij));
+	private void pretraziKorisnike() {	
+		final JRadioButton rbVozilo = this.view.getStrana6().getRbVozilo();
+		if(rbVozilo.isSelected()) {
+			view.getStrana6().getPanel_vozilo().getModel().clearAll();
+			String kriterij = view.getStrana6().getTb_unosPretrage().getText();
+			VoziloPretraga tip = (VoziloPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
+			if(kriterij.equals("")) {
+				view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
+			} else {
+				view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(tip.toString(),kriterij));
+			}
+		}
+		
+		final JRadioButton rbVozac = this.view.getStrana6().getRbVozac();
+		if(rbVozac.isSelected()) {
+			view.getStrana6().getPanel_vozilo().getModel().clearAll();
+			String kriterij = view.getStrana6().getTb_unosPretrage().getText();
+			VozacPretraga tip = (VozacPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
+			if(kriterij.equals("")) {
+				view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
+			} else {
+				view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(tip.toString(),kriterij));
+			}
+		}
+
+		final JRadioButton rbSaobracajna = this.view.getStrana6().getRbSaobracajna();
+		if(rbSaobracajna.isSelected()) {
+			view.getStrana6().getPanel_vozilo().getModel().clearAll();
+			String kriterij = view.getStrana6().getTb_unosPretrage().getText();
+			SaobracajnaPretraga tip = (SaobracajnaPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
+			if(kriterij.equals("")) {
+				view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
+			} else {
+				view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(tip.toString(),kriterij));
+			}
+		}
+
+		final JRadioButton rbVlasnicka = this.view.getStrana6().getRbVlasnicka();
+		if(rbVlasnicka.isSelected()) {
+			view.getStrana6().getPanel_vozilo().getModel().clearAll();
+			String kriterij = view.getStrana6().getTb_unosPretrage().getText();
+			VlasnickaPretraga tip = (VlasnickaPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
+			if(kriterij.equals("")) {
+				view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
+			} else {
+				view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(tip.toString(),kriterij));
+			}
 		}
 	}
 	void prikaziPanelPocetnu()
@@ -157,29 +196,36 @@ public class SalterskiRadnikControllerIrma {
 	//PRETRAGA
 	void prikaziPanelPretraga()
 	{
-		// view.prikaziPretragu();
-		// ovo smjestiti tamo..
 		view.getSadrzaj().getNaslov().postaviNaslov("Pretraga");
 		JPanel cards = view.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Pretraga");
+
 	}
 	void prikaziPanelPretragaVozila() {
+		//	view.getStrana6().getPanel_vozilo().getModel().clearAll();
+		//	view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
 		this.view.getStrana6().getCb_parametri().removeAllItems();
 		this.view.getStrana6().getCb_parametri().setModel(new DefaultComboBoxModel(VoziloPretraga.values()));		
 		this.view.getStrana6().prikaziPretraguVozila();
 	}
 	void prikaziPanelPretragaVozaca() {
+		//	view.getStrana6().getPanel_vozilo().getModel().clearAll();
+		//	view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
 		this.view.getStrana6().getCb_parametri().removeAllItems();
 		this.view.getStrana6().getCb_parametri().setModel(new DefaultComboBoxModel(VozacPretraga.values()));		
 		this.view.getStrana6().prikaziPretraguVozaca();
 	}
 	void prikaziPanelPretragaSaobracajnih() {
+		//	view.getStrana6().getPanel_vozilo().getModel().clearAll();
+		//	view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
 		this.view.getStrana6().getCb_parametri().removeAllItems();
 		this.view.getStrana6().getCb_parametri().setModel(new DefaultComboBoxModel(SaobracajnaPretraga.values()));		
 		this.view.getStrana6().prikaziPretraguSaobracajne();
 	}
 	void prikaziPanelPretragaVlasnickih() {
+		//	view.getStrana6().getPanel_vozilo().getModel().clearAll();
+		//	view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
 		this.view.getStrana6().getCb_parametri().removeAllItems();
 		this.view.getStrana6().getCb_parametri().setModel(new DefaultComboBoxModel(VlasnickaPretraga.values()));		
 		this.view.getStrana6().prikaziPretraguVlasnicke();
