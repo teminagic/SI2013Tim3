@@ -175,7 +175,7 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 		try {
 			PreparedStatement statement = connection
 					.prepareStatement("UPDATE `BojeVozila`"
-							+ " SET, Nijansa = ?, Vrsta= ? , Boja= ? , Tip= ?"
+							+ " SET Nijansa = ?, Vrsta= ? , Boja= ? , Tip= ?"
 							+ " WHERE Vozilo = ?");
 
 			statement.setString(1, nijansa.toString());
@@ -206,7 +206,7 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("DELETE`" + " FROM BojeVozila"
+					.prepareStatement("DELETE" + " FROM BojeVozila"
 							+ " WHERE Vozilo = ? ");
 
 			statement.setInt(1, idVozila);
