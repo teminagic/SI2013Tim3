@@ -25,7 +25,7 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 		
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO `Saobracajna`(`Vozilo`, 'Korisnik') VALUES (?, ?)");
+					.prepareStatement("INSERT INTO `Saobracajna`(`Vozilo`, `Korisnik`) VALUES (?, ?)");
 
 			statement.setInt(1, vozilo);
 			statement.setInt(2, korisnik);

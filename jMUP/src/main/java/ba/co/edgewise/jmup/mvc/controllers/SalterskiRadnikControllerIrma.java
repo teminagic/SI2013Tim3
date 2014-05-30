@@ -122,6 +122,14 @@ public class SalterskiRadnikControllerIrma {
 					pretrazi();
 				}
 			});
+			// Klik na button Modifikuj
+			JButton modifikuj = view.getStrana6().getBtn_modifikuj();
+			modifikuj.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					modifikuj();
+				}
+			});
 				
 		}
 	void prikaziPanelPocetnu()
@@ -131,15 +139,10 @@ public class SalterskiRadnikControllerIrma {
 	//PRETRAGA
 	void prikaziPanelPretraga()
 	{
-		//Podaci iz baze
-		view.getStrana6().getPanel_vozilo().getModel().clearAll();
-		view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());		
-		//Podaci u comboboxu
-		this.view.getStrana6().getCb_parametri().removeAllItems();		
 		//Prikaz panela pretraga
 		view.prikaziPretragu();
-		//Defaultni prikaz - vozila
-		view.getStrana6().prikaziPretraguVozila();
+		//Defaultni - Vozila
+		prikaziPanelPretragaVozila();
 	}
 	void prikaziPanelPretragaVozila() {
 		//Baza
@@ -162,15 +165,15 @@ public class SalterskiRadnikControllerIrma {
 		this.view.getStrana6().prikaziPretraguVozaca();
 	}
 	void prikaziPanelPretragaSaobracajnih() {
-		//	view.getStrana6().getPanel_vozilo().getModel().clearAll();
-		//	view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
+		view.getStrana6().getPanel_saobracajna().getModel().clearAll();
+		view.getStrana6().getPanel_saobracajna().getModel().addAll(model.dohvatiSveSaobracajne());
 		this.view.getStrana6().getCb_parametri().removeAllItems();
 		this.view.getStrana6().getCb_parametri().setModel(new DefaultComboBoxModel(SaobracajnaPretraga.values()));		
 		this.view.getStrana6().prikaziPretraguSaobracajne();
 	}
 	void prikaziPanelPretragaVlasnickih() {
-		//	view.getStrana6().getPanel_vozilo().getModel().clearAll();
-		//	view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
+		view.getStrana6().getPanel_vlasnicka().getModel().clearAll();
+		view.getStrana6().getPanel_vlasnicka().getModel().addAll(model.dohvatiSveVlasnicke());
 		this.view.getStrana6().getCb_parametri().removeAllItems();
 		this.view.getStrana6().getCb_parametri().setModel(new DefaultComboBoxModel(VlasnickaPretraga.values()));		
 		this.view.getStrana6().prikaziPretraguVlasnicke();
@@ -187,45 +190,58 @@ public class SalterskiRadnikControllerIrma {
 	}
 	void pretraziVozila() {
 		view.getStrana6().getPanel_vozilo().getModel().clearAll();
-		String kriterij = view.getStrana6().getTb_unosPretrage().getText();
-		VoziloPretraga tip = (VoziloPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
-		if(kriterij.equals("")) {
+		String parametar = view.getStrana6().getTb_unosPretrage().getText();
+		VoziloPretraga kriterij = (VoziloPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
+		if(parametar.equals("")) {
 			view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
 		} else {
-			view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(tip.toString(),kriterij));
+			view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(parametar,kriterij.toString()));
 		}
 	}
 	void pretraziVozace() {
-		view.getStrana6().getPanel_vozilo().getModel().clearAll();
-		String kriterij = view.getStrana6().getTb_unosPretrage().getText();
-		VozacPretraga tip = (VozacPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
-		if(kriterij.equals("")) {
-			view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
+		view.getStrana6().getPanel_vozac().getModel().clearAll();
+		String parametar = view.getStrana6().getTb_unosPretrage().getText();
+		VozacPretraga kriterij = (VozacPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
+		if(parametar.equals("")) {
+			view.getStrana6().getPanel_vozac().getModel().addAll(model.dohvatiSveVozace());
 		} else {
-			view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(tip.toString(),kriterij));
+			view.getStrana6().getPanel_vozac().getModel().addAll(model.pretragaVozac(parametar,kriterij.toString()));
 		}
 	}
 	void pretraziSaobracajne() {
-		view.getStrana6().getPanel_vozilo().getModel().clearAll();
-		String kriterij = view.getStrana6().getTb_unosPretrage().getText();
-		SaobracajnaPretraga tip = (SaobracajnaPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
-		if(kriterij.equals("")) {
-			view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
+		view.getStrana6().getPanel_saobracajna().getModel().clearAll();
+		String parametar = view.getStrana6().getTb_unosPretrage().getText();
+		SaobracajnaPretraga kriterij = (SaobracajnaPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
+		if(parametar.equals("")) {
+			view.getStrana6().getPanel_saobracajna().getModel().addAll(model.dohvatiSveSaobracajne());
 		} else {
-			view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(tip.toString(),kriterij));
+			view.getStrana6().getPanel_saobracajna().getModel().addAll(model.pretragaSaobracajna(parametar,kriterij.toString()));
 		}
 	}
 	void pretraziVlasnicke() {
-		view.getStrana6().getPanel_vozilo().getModel().clearAll();
-		String kriterij = view.getStrana6().getTb_unosPretrage().getText();
-		VlasnickaPretraga tip = (VlasnickaPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
-		if(kriterij.equals("")) {
-			view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
+		view.getStrana6().getPanel_vlasnicka().getModel().clearAll();
+		String parametar = view.getStrana6().getTb_unosPretrage().getText();
+		VlasnickaPretraga kriterij = (VlasnickaPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
+		if(parametar.equals("")) {
+			view.getStrana6().getPanel_vlasnicka().getModel().addAll(model.dohvatiSveVlasnicke());
 		} else {
-			view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(tip.toString(),kriterij));
+			view.getStrana6().getPanel_vlasnicka().getModel().addAll(model.pretragaVlasnicka(parametar,kriterij.toString()));
 		}
 	}
+	void modifikuj(){
+		final JRadioButton rbVozilo = this.view.getStrana6().getRbVozilo();
+		final JRadioButton rbVozac = this.view.getStrana6().getRbVozac();
+		final JRadioButton rbSaobracajna = this.view.getStrana6().getRbSaobracajna();
+		final JRadioButton rbVlasnicka = this.view.getStrana6().getRbVlasnicka();
+		if(rbVozilo.isSelected()) modifikujVozilo();
+		else if(rbVozac.isSelected()) modifikujVozaca();
+		else if(rbSaobracajna.isSelected()) modifikujSaobracajnu();
+		else if(rbVlasnicka.isSelected()) modifikujVlasnicku();
+	}
+	void modifikujVozilo(){}
+	void modifikujVozaca(){}
+	void modifikujSaobracajnu(){}
+	void modifikujVlasnicku(){}
 
-	
 
 }

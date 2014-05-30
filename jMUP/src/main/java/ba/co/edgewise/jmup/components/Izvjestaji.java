@@ -27,9 +27,9 @@ public class Izvjestaji extends JPanel {
 	private JPanel panel_1;
 	private JLabel label;
 	private JLabel label_1;
-	private JButton button;
-	private JButton button_1;
-	private SalterskaPretraga pretraga;
+	private JButton btnKreiranjeIzvjestaja1;
+	private JButton btnKreiranjeIzvjestaja2;
+	private SalterskaPretraga btrPretraga;
 	
 	public Izvjestaji() {
 		layoutSet();
@@ -68,31 +68,31 @@ public class Izvjestaji extends JPanel {
 	
 	public void buttonSet() {
 		
-		button = new JButton("Kreiraj Izvještaj");
+		btnKreiranjeIzvjestaja1 = new JButton("Kreiraj Izvještaj");
 		GridBagConstraints gbc_button = new GridBagConstraints();
 		gbc_button.anchor = GridBagConstraints.NORTH;
 		gbc_button.fill = GridBagConstraints.HORIZONTAL;
 		gbc_button.insets = new Insets(0, 0, 5, 0);
 		gbc_button.gridx = 2;
 		gbc_button.gridy = 0;
-		panel_1.add(button, gbc_button);
+		panel_1.add(btnKreiranjeIzvjestaja1, gbc_button);
 		
-		button_1 = new JButton("Kreiraj Izvještaj");
+		btnKreiranjeIzvjestaja2 = new JButton("Kreiraj Izvještaj");
 		GridBagConstraints gbc_button_1 = new GridBagConstraints();
 		gbc_button_1.anchor = GridBagConstraints.NORTH;
 		gbc_button_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_button_1.gridx = 2;
 		gbc_button_1.gridy = 1;
-		panel_1.add(button_1, gbc_button_1);
+		panel_1.add(btnKreiranjeIzvjestaja2, gbc_button_1);
 		
 		//action listeners
-		button.addActionListener(new ActionListener() {
+		btnKreiranjeIzvjestaja1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Izvještaji: Implementacija u toku");
 			}
 		});
 		
-		button_1.addActionListener(new ActionListener() {
+		btnKreiranjeIzvjestaja2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Izvještaji: Implementacija u toku");
 			}
@@ -102,18 +102,18 @@ public class Izvjestaji extends JPanel {
 	
 	public void componenteSet() {
 		
-		pretraga = new SalterskaPretraga();
-		pretraga.getBtn_modifikuj().setText("Kreiraj izvještaj");
-		pretraga.getBtnProfil().setVisible(false);
-		pretraga.getBtnProfil().setEnabled(false);
+		btrPretraga = new SalterskaPretraga();
+		btrPretraga.getBtn_modifikuj().setText("Kreiraj izvještaj");
+		btrPretraga.getBtnProfil().setVisible(false);
+		btrPretraga.getBtnProfil().setEnabled(false);
 		GridBagConstraints gbc_pretraga = new GridBagConstraints();
 		gbc_pretraga.insets = new Insets(0, 0, 5, 5);
 		gbc_pretraga.gridx = 1;
 		gbc_pretraga.gridy = 2;
-		add(pretraga, gbc_pretraga);
+		add(btrPretraga, gbc_pretraga);
 		
 		//action listeners
-		pretraga.getBtn_modifikuj().addActionListener(new ActionListener() {
+		btrPretraga.getBtn_modifikuj().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Izvještaji: Implementacija u toku");
 			}
@@ -140,6 +140,18 @@ public class Izvjestaji extends JPanel {
 		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
+	}
+
+	public JButton getBtnKreiranjeIzvjestaja1() {
+		return btnKreiranjeIzvjestaja1;
+	}
+
+	public JButton getBtnKreiranjeIzvjestaja2() {
+		return btnKreiranjeIzvjestaja2;
+	}
+
+	public SalterskaPretraga getBtrPretraga() {
+		return btrPretraga;
 	}
 }
 
