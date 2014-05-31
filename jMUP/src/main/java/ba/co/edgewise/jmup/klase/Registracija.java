@@ -4,21 +4,20 @@ import java.util.Date;
 
 public class Registracija {
 	int id;
-	String registarskaOznaka;
+
 	Date datumRegistrovanja;
 	Date datumIsteka;
-	Vozilo vozilo;
-	Osoba osoba;
+	Integer vozilo;
+	Integer osoba;
 	public Registracija() {
 		super();
 	}
 	
-	public Registracija(int id, String registarskaOznaka,
-			Date datumRegistrovanja, Date datumIsteka, Vozilo vozilo,
-			Osoba osoba) {
+	public Registracija(int id,
+			Date datumRegistrovanja, Date datumIsteka, Integer vozilo,
+			Integer osoba) {
 		super();
 		this.id = id;
-		this.registarskaOznaka = registarskaOznaka;
 		this.datumRegistrovanja = datumRegistrovanja;
 		this.datumIsteka = datumIsteka;
 		this.vozilo = vozilo;
@@ -32,12 +31,6 @@ public class Registracija {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getRegistarskaOznaka() {
-		return registarskaOznaka;
-	}
-	public void setRegistarskaOznaka(String registarskaOznaka) {
-		this.registarskaOznaka = registarskaOznaka;
-	}
 	public Date getDatumRegistrovanja() {
 		return datumRegistrovanja;
 	}
@@ -50,16 +43,16 @@ public class Registracija {
 	public void setDatumIsteka(Date datumIsteka) {
 		this.datumIsteka = datumIsteka;
 	}
-	public Vozilo getVozilo() {
+	public Integer getVozilo() {
 		return vozilo;
 	}
-	public void setVozilo(Vozilo vozilo) {
+	public void setVozilo(Integer vozilo) {
 		this.vozilo = vozilo;
 	}
-	public Osoba getOsoba() {
+	public Integer getOsoba() {
 		return osoba;
 	}
-	public void setOsoba(Osoba osoba) {
+	public void setOsoba(Integer osoba) {
 		this.osoba = osoba;
 	}
 	
