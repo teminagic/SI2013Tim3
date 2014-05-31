@@ -49,10 +49,9 @@ public class Vlasnicka{
 	public void setVlasnik(Osoba vlasnik) {
 		this.vlasnik = vlasnik;
 	}
-	
-	//UBACITI PARAMETRE
+
 	public Object[] toObjectArray() {
-		return new Object[]{ };
+		return new Object[]{ this.vozilo.getRegOznaka(), this.vozilo.getGodinaProizvodnje(), this.vozilo.getVrsta(), this.vozilo.getMarka() };
 	}	
 	//public enum VlasnickaPretraga { Broj_potvrde("Broj potvrde"), Registarska_oznaka(""), Ime_prezime("Ime i prezime"), JMBG_vlasnika("JMBG vlasnika") ; 
 

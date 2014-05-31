@@ -180,7 +180,7 @@ public Vlasnicka getByVozilo(Integer id){
 		try {
 			PreparedStatement statement = 	connection.prepareStatement(
 					"SELECT * "+ 
-					"FROM Saobracajna "
+					"FROM Vlasnicka "
 					);
 			
 			qResult = statement.executeQuery();
@@ -274,4 +274,7 @@ public Vlasnicka getByVozilo(Integer id){
 	public static void main(String[] args) {
 		VlasnickaDAO v = new VlasnickaDAO();
 		v.getByVlasnik(24);
+		ArrayList<Vlasnicka> v2 = v.getAll();
+	}
+}
 	
