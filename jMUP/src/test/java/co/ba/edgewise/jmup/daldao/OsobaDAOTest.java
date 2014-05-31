@@ -17,11 +17,11 @@ public class OsobaDAOTest {
 	public void testCreate() {
 		Osoba o = new Osoba(1324, "1345991198221", "Prezime", "Ime", "Prebivaliste", true); 
 		osoba.create(o);
-		assertNotNull(osoba.get(1324));
+		assertNotNull(osoba.get(1352));
 	}
 	@Test
 	public void testNotNullGet() { 
-		assertNotNull(osoba.get(1324).getJmbg_Id());
+		assertNotNull(osoba.get(1352).getJmbg_Id());
 	}
 	@Test
 	public void testNullGet() { 
@@ -56,13 +56,13 @@ public class OsobaDAOTest {
 	@Test
 	public void testUpdate() { 
 		Osoba o = new Osoba(1324, "1345991198322", "Dervic", "Amra", "Prebivaliste", true); 
-		assertTrue(osoba.update(1324, o));
+		assertTrue(osoba.update(1352, o));
 	}
 	@Test
 	public void testDelete() { 
 		Osoba o = new Osoba(1323, "1345991198333", "Dervic", "Amra", "Prebivaliste", true); 
 		osoba.create(o);
-		assertTrue(osoba.delete(1323));
+		assertTrue(osoba.delete(1353));
 	}
 	
 

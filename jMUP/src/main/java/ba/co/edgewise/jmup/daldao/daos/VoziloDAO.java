@@ -605,7 +605,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 			PreparedStatement statement1 = connection
 					.prepareStatement("UPDATE `Vozilo`"
 							+ " SET Vrsta = ?, Marka = ?, Tip = ?, Model = ?, BrojSasije = ?, "
-							+ "OblikKaroserije =?, GodinaProizvodnje = ?, MaxTehnickaDozvoljenaMasa = ?"
+							+ "OblikKaroserije =?, GodinaProizvodnje = ?, MaxTehnickaDozvoljenaMasa = ?,"
 							+ "MasaVozila=?, DopustenaNosivost = ?, Motor = ?, "
 							+ "OdnosSnageIMase = ?, BrojMjestaZaSjedenje = ?, BrojMjestaZaStajanje =?, "
 							+ "BrojMjestaZaLezanje = ?, EkoKarakteristikaVozila = ?,"
@@ -632,7 +632,8 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 			statement1.setDate(18, new java.sql.Date(datumPregleda.getTime()));
 			statement1.setString(19, reg);
 			statement1.setString(20, statusVozila.toString());
-
+			statement1.setInt(21, vozilo.getId());
+			
 			statement1.executeUpdate();
 			
 			
