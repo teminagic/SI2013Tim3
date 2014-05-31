@@ -33,6 +33,18 @@ public class SalterskiRadnikModelIrma {
 	public ArrayList<Vlasnicka> dohvatiSveVlasnicke() {
 		return (ArrayList<Vlasnicka>) _vlasnickaDAO.getAll();
 	}
+	public Boolean brisanjeVozila(Vozilo vozilo){
+		return _voziloDAO.delete(vozilo.getId());
+	}
+	public Boolean brisanjeVozaca(Osoba osoba){
+		return _osobaDAO.delete(osoba.getId());
+	}
+	public Boolean brisanjeVlasnicke(Vlasnicka vlasnicka){
+		return _vlasnickaDAO.delete(vlasnicka.getBrojDozvole());
+	}
+	public Boolean brisanjeS(Vozilo vozilo){
+		return _voziloDAO.delete(vozilo.getId());
+	}
 	public ArrayList<Vozilo> pretragaVozilo( String parametar, String kriterij ) {
 		
 		switch (kriterij){
@@ -40,7 +52,8 @@ public class SalterskiRadnikModelIrma {
 				ArrayList<Vozilo> v = new ArrayList<Vozilo>();
 				Vozilo v1 = _voziloDAO.getByReg(parametar);
 				v.add(v1);
-				return (v == null) ? null : v;
+				//return (v == null) ? null : v;
+				return v;
 			case "Godina proizvodnje":
 				ArrayList<Vozilo> v2 = _voziloDAO.getByDate(Integer.parseInt(parametar));
 				return (v2 == null) ? null : v2;
@@ -94,7 +107,7 @@ public class SalterskiRadnikModelIrma {
 			s2.add(_saobracajnaDAO.getByReg(vt.getId()));
 			return (s2 == null) ? null : s2;
 		
-		case "JMBG vozaƒça":
+		case "JMBG vozaËa":
 			Osoba o = _osobaDAO.getByJMBG(parametar);
 			ArrayList<Saobracajna> s3 = new ArrayList<>();
 			s3.add(_saobracajnaDAO.getByName(o.getId()));	

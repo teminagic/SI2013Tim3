@@ -42,11 +42,10 @@ public class Saobracajna{
 	}
 	
 	public Object[] toObjectArray() {
-		return new Object[]{ 
-		this.vozilo.getRegOznaka(), this.vozilo.getGodinaProizvodnje(), this.vozilo.getVrsta(), this.vozilo.getMarka()
+		return new Object[]{ 			
+		this.brojDozvole, this.vozilo.getRegOznaka(), this.korisnik.getIme(), this.korisnik.getJmbg_Id()
 		};
-	}	
 	//public enum VlasnickaPretraga { Broj_potvrde("Broj potvrde"), Registarska_oznaka(""), Ime_prezime("Ime i prezime"), JMBG_vlasnika("JMBG vlasnika") ; 
-
+	}
 	
 }
