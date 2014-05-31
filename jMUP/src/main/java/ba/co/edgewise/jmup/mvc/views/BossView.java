@@ -4,6 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+<<<<<<< HEAD
+import ba.co.edgewise.jmup.components.Izvjestaji;
+=======
+>>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 import ba.co.edgewise.jmup.components.KorisnikKreiranje;
 import ba.co.edgewise.jmup.components.KorisnikModificiranje;
 import ba.co.edgewise.jmup.components.KorisnikPretraga;
@@ -15,7 +19,10 @@ import ba.co.edgewise.jmup.components.SalterskaPretraga;
 import ba.co.edgewise.jmup.components.VozacDodavanje;
 import ba.co.edgewise.jmup.components.VoziloDodavanje;
 import ba.co.edgewise.jmup.components.VoziloModifikacija;
+<<<<<<< HEAD
+=======
 import ba.co.edgewise.jmup.components.Izvjestaji;
+>>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 
 import java.awt.CardLayout;
 import java.awt.GridBagLayout;
@@ -34,9 +41,10 @@ public class BossView extends JFrame {
 	private NaslovnaMenadzer strana1;
 	private SalterskaPretraga strana2;
 	private VoziloModifikacija strana21;
+<<<<<<< HEAD
+	private Izvjestaji strana3;
+=======
 	private Izvjestaji izvjestaji;
-	private VozacDodavanje osMod;
-	private VoziloDodavanje vozMod;
 
 	private final BossView frejm = this;
 
@@ -67,6 +75,11 @@ public class BossView extends JFrame {
 		strana2.getBtnProfil().setVisible(false);
 		sadrzaj.getPanelSadrzaj().add(strana2, "Pretraga");
 		
+<<<<<<< HEAD
+		strana3 = new Izvjestaji();
+		sadrzaj.getPanelSadrzaj().add(strana3, "Izvjestaji");
+			
+=======
 		izvjestaji = new Izvjestaji();
 		sadrzaj.getPanelSadrzaj().add(izvjestaji, "Izrada izvještaja");
 		
@@ -77,6 +90,7 @@ public class BossView extends JFrame {
 		sadrzaj.getPanelSadrzaj().add(vozMod, "Unos vozila");
 
 		
+>>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 		contentPane.add(sadrzaj, gbc_sadrzaj);	
 	}
 	//
@@ -107,7 +121,10 @@ public class BossView extends JFrame {
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Pretraga");
 	}
+<<<<<<< HEAD
+=======
 	
+>>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 	public void prikaziModifikacijuVozila()
 	{
 		frejm.getSadrzaj().getNaslov().postaviNaslov("Modifikacija vozila");
@@ -115,6 +132,14 @@ public class BossView extends JFrame {
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Modifikacija vozila");
 	}
+<<<<<<< HEAD
+	public void prikaziIzvjestaje()
+	{
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Izvjestaji");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Izvjestaji");
+=======
 	
 	public void prikaziIzvjestaje()
 	{
@@ -122,6 +147,7 @@ public class BossView extends JFrame {
 		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Izrada izvještaja");
+>>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 	}
 	public NaslovnaMenadzer getStrana1() {
 		return strana1;
@@ -132,19 +158,23 @@ public class BossView extends JFrame {
 	public VoziloModifikacija getVoziloModifikacija() {
 		return strana21;
 	}
+<<<<<<< HEAD
+	public Izvjestaji getStrana3() {
+		return this.strana3;
+	}
+=======
+>>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 	public MeniBoss getMeni() {
 		return meni;
 	}
 	public OpcijaSadrzaj getSadrzaj() {
 		return sadrzaj;
 	}
+<<<<<<< HEAD
+=======
 	
 	public Izvjestaji getIzvjestaj() {
 		return izvjestaji;
-	}
-	
-	public VozacDodavanje getOsMod() {
-		return osMod;
 	}
 
 	public VoziloDodavanje getVozMod() {
