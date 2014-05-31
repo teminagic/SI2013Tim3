@@ -8,18 +8,18 @@ import ba.co.edgewise.jmup.klase.Vozilo;
 public class BojaVozila {
 	
 	private Boja boja;
-	private Vozilo vozilo;
+	private Integer idVozilo;
 	private NijansaBoje nijansa;
 	private VrstaBoje vrsta;
 	private String tip;
 	
 	public BojaVozila() {}
 	
-	public BojaVozila(Boja boja, Vozilo vozilo, NijansaBoje nijansa,
+	public BojaVozila(Boja boja, Integer id, NijansaBoje nijansa,
 			VrstaBoje vrsta, String tip) {
 		super();
 		this.boja = boja;
-		this.vozilo = vozilo;
+		this.idVozilo = id;
 		this.nijansa = nijansa;
 		this.vrsta = vrsta;
 		this.tip = tip;
@@ -34,12 +34,12 @@ public class BojaVozila {
 		this.boja = boja;
 	}
 
-	public Vozilo getVozilo() {
-		return vozilo;
+	public Integer getVoziloId() {
+		return idVozilo;
 	}
 
-	public void setVozilo(Vozilo vozilo) {
-		this.vozilo = vozilo;
+	public void setVoziloId(Integer id) {
+		this.idVozilo = id;
 	}
 
 	public NijansaBoje getNijansa() {
