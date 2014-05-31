@@ -208,13 +208,19 @@ public class SalterskiRadnikController {
 							if(provjeriPopunjenostUnosVozila()) 
 							{
 								dodajVozilo();
+								//if true...
+								JOptionPane.showOptionDialog(view, "Vozilo uspjesno dodano.",
+										"Unos vozilaa", JOptionPane.OK_OPTION,
+										JOptionPane.INFORMATION_MESSAGE, null,
+										new String[] { "Uredu" }, "default");
+								pocistiPoljaVozilo();
 								if(isUnosSDozvole() == true)
 									prikaziPanelUnosRegistracije();
 								if(isUnosVDozvole() == true)
 									prikaziPanelUnosRegistracije();						
 							}							
 						} catch (ParseException e1) {
-							e1.printStackTrace();
+							JOptionPane.showMessageDialog(null, "Neispravno popunjena polja!");
 						}
 					}
 				});
@@ -462,6 +468,29 @@ public class SalterskiRadnikController {
 		view.getStrana2().getTfIdBroj().setText("");
 		view.getStrana2().getPravno().setSelected(false);
 		view.getStrana2().getFizicko().setSelected(false);
+	}
+	public void pocistiPoljaVozilo() {
+		view.getVoziloDodavanje().getCb_vrstaVozila().setSelectedItem(VrstaVozila.PUTNICKI_AUTOMOBIL);
+		view.getVoziloDodavanje().getTf_tipVozila().setText(""); 
+		view.getVoziloDodavanje().getTf_modelVozila().setText(""); 
+		view.getVoziloDodavanje().getTf_markaVozila().setText("");		
+		view.getVoziloDodavanje().getTf_regOznaka().setText("");
+		view.getVoziloDodavanje().getTf_odnos().setText("");
+		view.getVoziloDodavanje().getTf_sjedenje().setText("");
+		view.getVoziloDodavanje().getTf_stajanje().setText(""); 
+		view.getVoziloDodavanje().getTf_lezanje().setText(""); 		
+		view.getVoziloDodavanje().getCb_ekoKarakteristike().setSelectedItem(EkoKarakteristike.KONVENCIONALNO);
+		view.getVoziloDodavanje().getRb_katalizator_da().setSelected(true);
+		view.getVoziloDodavanje().getTf_karoserija().setText("");
+		view.getVoziloDodavanje().getTf_brojSasije().setText("");	
+		view.getVoziloDodavanje().getTb_maxMasa().setText("");
+		view.getVoziloDodavanje().getTb_masa().setText("");
+		view.getVoziloDodavanje().getTb_nosivost().setText("");
+		view.getVoziloDodavanje().getTf_zapremina().setText("");
+		view.getVoziloDodavanje().getTf_maxSnaga().setText("");		
+		view.getVoziloDodavanje().getCb_gorivo().setSelectedItem("");
+		view.getVoziloDodavanje().getTf_brojMotora().setText("");
+		view.getVoziloDodavanje().getCb_vrstaMotora().setSelectedItem("Gorivo");
 	}
 	public void pocistiPoljaRegistracija()
 	{
