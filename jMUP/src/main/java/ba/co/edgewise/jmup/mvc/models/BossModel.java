@@ -178,10 +178,34 @@ public class BossModel {
 		}
 	}
 	
-	public boolean modifikacijaVozilo(ArrayList<Vozilo> kolekcija)
+	public boolean modifikacijaVozilo(Integer id, Vozilo v)
 	{
-		
+		if(_voziloDAO.update(id, v))
+			return true;
+		return false;
 	}
+	
+	public boolean modifikacijaOsoba(Integer id, Osoba o)
+	{
+		if(_osobaDAO.update(id, o))
+			return true;
+		return false;
+	}
+	
+	public boolean modifikacijaVlasnicka(String brojDozvole, Vlasnicka v)
+	{
+		if(_vlasnickaDAO.update(brojDozvole, v))
+			return true;
+		return false;
+	}
+	
+	public boolean modifikacijaSaobracajna(String brojDozvole, Saobracajna s)
+	{
+		if(_saobracajnaDAO.update(brojDozvole, s))
+			return true;
+		return false;
+	}
+	
 	
 
 	public static void main(String[] args) {
