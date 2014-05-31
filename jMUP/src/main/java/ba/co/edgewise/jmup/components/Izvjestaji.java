@@ -29,6 +29,7 @@ public class Izvjestaji extends JPanel {
 	private JLabel label_1;
 	private JButton btnKreiranjeIzvjestaja1;
 	private JButton btnKreiranjeIzvjestaja2;
+	
 	private SalterskaPretraga btrPretraga;
 	
 	public Izvjestaji() {
