@@ -1,11 +1,18 @@
 package ba.co.edgewise.jmup.components;
 import ba.co.edgewise.jmup.enums.*;
+
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.border.TitledBorder;
+
 import java.awt.Insets;
+
 import javax.swing.ButtonGroup;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -15,8 +22,12 @@ import javax.swing.UIManager;
 import javax.swing.JRadioButton;
 import javax.swing.DefaultComboBoxModel;
 
-public class VoziloDodavanje extends JPanel {
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
+public class VoziloDodavanje extends JPanel {
 	private static final long serialVersionUID = 2259547713349336656L;
 	private JTextField tf_tipVozila;
 	private JTextField tf_modelVozila;
@@ -32,11 +43,9 @@ public class VoziloDodavanje extends JPanel {
 	private JTextField tf_stajanje;
 	private JTextField tf_lezanje;
 	private JTextField tf_karoserija;
-	private JTextField tf_datumPregleda;
 	private JTextField tb_maxMasa;
 	private JTextField tb_masa;
 	private JTextField tb_nosivost;
-	private JTextField tb_bojaVozila;
 	private JButton btn_prihvati;
 	private JButton btn_ponisti;
 	private GridBagLayout gridBagLayout;
@@ -80,6 +89,11 @@ public class VoziloDodavanje extends JPanel {
 	private JComboBox cb_vrstaBoje;
 	private JRadioButton rb_katalizator_da;
 	private JRadioButton rb_katalizator_ne;
+	
+	private UtilDateModel modelDatumPregleda;
+	private JDatePanelImpl dpanelDatumPregleda;
+	private JDatePickerImpl dpDatumPregleda;
+	private JComboBox cbBoja;
 
 	public VoziloDodavanje() {
 		// calling methods for seting layout
@@ -563,23 +577,16 @@ public class VoziloDodavanje extends JPanel {
 		gbc_tf_karoserija.gridy = 6;
 		detaljniPodaci.add(tf_karoserija, gbc_tf_karoserija);
 
-		tf_datumPregleda = new JTextField();
-		tf_datumPregleda.setColumns(10);
+		modelDatumPregleda = new UtilDateModel();
+		dpanelDatumPregleda = new JDatePanelImpl(modelDatumPregleda);
+		dpDatumPregleda= new JDatePickerImpl(dpanelDatumPregleda);
+		
 		GridBagConstraints gbc_tf_datumPregleda = new GridBagConstraints();
 		gbc_tf_datumPregleda.gridwidth = 2;
 		gbc_tf_datumPregleda.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tf_datumPregleda.gridx = 1;
 		gbc_tf_datumPregleda.gridy = 7;
-		detaljniPodaci.add(tf_datumPregleda, gbc_tf_datumPregleda);
-
-		tb_bojaVozila = new JTextField();
-		GridBagConstraints gbc_tb_bojaVozila = new GridBagConstraints();
-		gbc_tb_bojaVozila.insets = new Insets(0, 0, 5, 0);
-		gbc_tb_bojaVozila.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tb_bojaVozila.gridx = 1;
-		gbc_tb_bojaVozila.gridy = 0;
-		bojaMasaVozila.add(tb_bojaVozila, gbc_tb_bojaVozila);
-		tb_bojaVozila.setColumns(10);
+		detaljniPodaci.add(getDpDatumPregleda(), gbc_tf_datumPregleda);
 
 		tb_maxMasa = new JTextField();
 		tb_maxMasa.setColumns(10);
@@ -609,6 +616,8 @@ public class VoziloDodavanje extends JPanel {
 	}
 
 	public void componentSet() {
+		
+		
 		cb_vrstaVozila = new JComboBox();
 		cb_vrstaVozila.setModel(new DefaultComboBoxModel(VrstaVozila.values()));
 		GridBagConstraints gbc_cb_vrstaVozila = new GridBagConstraints();
@@ -619,7 +628,7 @@ public class VoziloDodavanje extends JPanel {
 		osnovniPodaci.add(cb_vrstaVozila, gbc_cb_vrstaVozila);
 
 		cb_gorivo = new JComboBox();
-		cb_gorivo.setModel(new DefaultComboBoxModel(new String[] {"Benzin", "Benzin/LPG", "Benzin/CNG", "Benzin/elektri\\u010Dni", "Dizel", "Dizel/CNG", "Dizel/elektri\\u010Dni", "Elektri\\u010Dni pogon", "Biodizel", "Etanol", "Metanol", "Hidrogen(vodonik)", "LPG", "CNG"}));
+		cb_gorivo.setModel(new DefaultComboBoxModel(VrstaGoriva.values()));
 		GridBagConstraints gbc_cb_gorivo = new GridBagConstraints();
 		gbc_cb_gorivo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cb_gorivo.insets = new Insets(0, 0, 5, 0);
@@ -628,7 +637,7 @@ public class VoziloDodavanje extends JPanel {
 		motorPodaci.add(cb_gorivo, gbc_cb_gorivo);
 
 		cb_vrstaMotora = new JComboBox();
-		cb_vrstaMotora.setModel(new DefaultComboBoxModel(new String[] {"OTTO", "DIESEL", "WANKEL", "Elektromotor", "Kombinovani pogon"}));
+		cb_vrstaMotora.setModel(new DefaultComboBoxModel(VrstaMotora.values()));
 		GridBagConstraints gbc_cb_vrstaMotora = new GridBagConstraints();
 		gbc_cb_vrstaMotora.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cb_vrstaMotora.gridx = 1;
@@ -696,6 +705,15 @@ public class VoziloDodavanje extends JPanel {
 		gbc_btn_ponisti.gridx = 5;
 		gbc_btn_ponisti.gridy = 0;
 		buttonPanel.add(btn_ponisti, gbc_btn_ponisti);
+		
+		cbBoja = new JComboBox();
+		cbBoja.setModel(new DefaultComboBoxModel(Boja.values()));
+		GridBagConstraints gbc_cbBoja = new GridBagConstraints();
+		gbc_cbBoja.insets = new Insets(0, 0, 5, 0);
+		gbc_cbBoja.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cbBoja.gridx = 1;
+		gbc_cbBoja.gridy = 0;
+		bojaMasaVozila.add(cbBoja, gbc_cbBoja);
 
 	}
 
@@ -747,9 +765,6 @@ public class VoziloDodavanje extends JPanel {
 	public JTextField getTf_karoserija() {
 		return tf_karoserija;
 	}
-	public JTextField getTf_datumPregleda() {
-		return tf_datumPregleda;
-	}
 	public JTextField getTf_brojSasije() {
 		return tf_brojSasije;
 	}
@@ -767,9 +782,6 @@ public class VoziloDodavanje extends JPanel {
 	}
 	public JComboBox getCb_vrstaMotora() {
 		return cb_vrstaMotora;
-	}
-	public JTextField getTb_bojaVozila() {
-		return tb_bojaVozila;
 	}
 	public JComboBox getCb_nijansa() {
 		return cb_nijansa;
@@ -792,4 +804,15 @@ public class VoziloDodavanje extends JPanel {
 	public JPanel getButtonPanel() {
 		return buttonPanel;
 	}
+
+	public JDatePickerImpl getDpDatumPregleda() {
+		return dpDatumPregleda;
+	}
+	public JPanel getBojaMasaVozila() {
+		return bojaMasaVozila;
+	}
+	public JComboBox getCbBoja() {
+		return cbBoja;
+	}
+	
 }

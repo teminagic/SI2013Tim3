@@ -226,6 +226,7 @@ public class VozacDodavanje extends JPanel {
 		gbc_tfIdBroj.gridx = 1;
 		gbc_tfIdBroj.gridy = 5;
 		panelPodaci.add(tfIdBroj, gbc_tfIdBroj);
+		tfIdBroj.setEditable(false);
 		tfIdBroj.setColumns(10);
 
 	}
@@ -249,6 +250,7 @@ public class VozacDodavanje extends JPanel {
 		gbc_fizicko.gridx = 2;
 		gbc_fizicko.gridy = 3;
 		panelPodaci.add(fizicko, gbc_fizicko);
+		fizicko.setSelected(true);
 		tipLica.add(fizicko);
 		
 		ButtonGroup radioGroup = new ButtonGroup();
@@ -317,5 +319,8 @@ public class VozacDodavanje extends JPanel {
 
 	public JRadioButton getFizicko() {
 		return fizicko;
+	}
+	public JPanel getPanelPodaci() {
+		return panelPodaci;
 	}
 }
