@@ -177,6 +177,12 @@ public class BossModel {
 			e.printStackTrace();
 		}
 	}
+	
+	public boolean modifikacijaVozilo(ArrayList<Vozilo> kolekcija)
+	{
+		
+	}
+	
 
 	public static void main(String[] args) {
 
