@@ -61,6 +61,7 @@ public class SalterskiRadnikModelTest {
 	}
 	@Test
 	public void testDodavanjaVozila() {
+		//kad cita iz baze motor javlja duplicate entry za brojmotora
 		Motor m=new Motor(104, 2030, 280, VrstaGoriva.BENZIN, "566j56gf5", VrstaMotora.DIESEL);
 		BojeVozilaDAO bd=new BojeVozilaDAO();
 		BojaVozila boja=new BojaVozila();
