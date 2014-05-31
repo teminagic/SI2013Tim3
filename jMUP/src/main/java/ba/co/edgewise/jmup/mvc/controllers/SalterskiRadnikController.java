@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -32,6 +33,7 @@ import ba.co.edgewise.jmup.mvc.models.LoginModel;
 import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModel;
 import ba.co.edgewise.jmup.mvc.views.Login;
 import ba.co.edgewise.jmup.mvc.views.SalterskiRadnikView;
+import java.math.*;
 
 public class SalterskiRadnikController {
 
@@ -209,8 +211,7 @@ public class SalterskiRadnikController {
 								if(isUnosSDozvole() == true)
 									prikaziPanelUnosRegistracije();
 								if(isUnosVDozvole() == true)
-									prikaziPanelUnosRegistracije();
-								
+									prikaziPanelUnosRegistracije();						
 							}							
 						} catch (ParseException e1) {
 							e1.printStackTrace();
@@ -745,7 +746,26 @@ public class SalterskiRadnikController {
 	}
 
 	public boolean provjeriPopunjenostUnosVozila() {
+		if(!daLiJeBroj(view.getVoziloDodavanje().getTf_sjedenje().getText())) return false;
+		if(!daLiJeBroj(view.getVoziloDodavanje().getTf_stajanje().getText())) return false;
+		if(!daLiJeBroj(view.getVoziloDodavanje().getTf_lezanje().getText())) return false;
+		if(!daLiJeBroj(view.getVoziloDodavanje().getTb_maxMasa().getText())) return false;
+		if(!daLiJeBroj(view.getVoziloDodavanje().getTb_masa().getText())) return false;
+		if(!daLiJeBroj(view.getVoziloDodavanje().getTb_nosivost().getText())) return false;
+		if(!daLiJeBroj(view.getVoziloDodavanje().getTb_maxMasa().getText())) return false;
+		if(!daLiJeBroj(view.getVoziloDodavanje().getTb_masa().getText())) return false;
+		if(!daLiJeBroj(view.getVoziloDodavanje().getTb_nosivost().getText())) return false;
+		if(!daLiJeBroj(view.getVoziloDodavanje().getTf_zapremina().getText())) return false;
+		if(!daLiJeBroj(view.getVoziloDodavanje().getTf_maxSnaga().getText())) return false;
 		return true;
+	}
+	public boolean daLiJeBroj(String string) {
+		String regex = "\\d+";
+		return Pattern.compile(regex).matcher(string).matches();
+	}
+	public boolean daLiJeDecimalanBroj(String string) {
+		String regex= "^\\d+(.\d+){0,1}$";
+		return Pattern.compile(regex).matcher(string).matches();
 	}
 	public boolean provjeriPopunjenostRegistracije() {
 		return true;
@@ -756,25 +776,28 @@ public class SalterskiRadnikController {
 		String tip = view.getVoziloDodavanje().getTf_tipVozila().getText(); 
 		String modelVozila = view.getVoziloDodavanje().getTf_modelVozila().getText(); 
 		String marka = view.getVoziloDodavanje().getTf_markaVozila().getText();
-		int godinaProizvodnje = Integer.parseInt(view.getVoziloDodavanje().getTf_godProizvodnje().getText());
-		//	REGISTARSKE DODATI U KONSTRUKTOR
-		//Neiskoristeno: 
+		int godinaProizvodnje = view.getVoziloDodavanje().getDatePickerGodina().getModel().getYear();
+		
 		String registarske = (String)view.getVoziloDodavanje().getTf_regOznaka().getText();
+		//
 		Double odnosSnageIMase = Double.parseDouble(view.getVoziloDodavanje().getTf_odnos().getText());
 		int brojMjestaZaSjedenje = Integer.parseInt(view.getVoziloDodavanje().getTf_sjedenje().getText());
 		int brojMjestaZaStajanje =  Integer.parseInt(view.getVoziloDodavanje().getTf_stajanje().getText()); 
 		int brojMjestaZaLezanje =  Integer.parseInt(view.getVoziloDodavanje().getTf_lezanje().getText()); 
+		
 		EkoKarakteristike ekoKarakteristika =(EkoKarakteristike)view.getVoziloDodavanje().getCb_ekoKarakteristike().getSelectedItem();
 		boolean katalizator = view.getVoziloDodavanje().getRb_katalizator_da().isSelected();
 		String oblikKaroserije = view.getVoziloDodavanje().getTf_karoserija().getText();
-		Date datumPregleda=new SimpleDateFormat("yyyy-MM-dd").parse(view.getVoziloDodavanje().getTf_datumPregleda().getText());
+		java.util.Date datumPregleda= (Date) view.getVoziloDodavanje().getDatePickerDatumPregleda().getModel().getValue();
 		String brojSasije = view.getVoziloDodavanje().getTf_brojSasije().getText();
+		
 		int maxTehnickaDozvoljenaMasa = Integer.parseInt(view.getVoziloDodavanje().getTb_maxMasa().getText());
 		int masaVozila = Integer.parseInt(view.getVoziloDodavanje().getTb_masa().getText());
 		int dopustenaNosivost = Integer.parseInt(view.getVoziloDodavanje().getTb_nosivost().getText());
 		// Motor
 		int zapreminaMotora = Integer.parseInt(view.getVoziloDodavanje().getTf_zapremina().getText());
 		int maxSnaga = Integer.parseInt(view.getVoziloDodavanje().getTf_maxSnaga().getText());
+		
 		String gorivo = (String)view.getVoziloDodavanje().getCb_gorivo().getSelectedItem();
 		String brojMotora = view.getVoziloDodavanje().getTf_brojMotora().getText();
 		String vrstaMotora =(String)view.getVoziloDodavanje().getCb_vrstaMotora().getSelectedItem();
@@ -787,6 +810,7 @@ public class SalterskiRadnikController {
 			zapreminaMotora, maxSnaga,gorivo, brojMotora, vrstaMotora);
 	
 	}
+	
 	public boolean isUnosSDozvole() {
 		return unosSDozvole;
 	}

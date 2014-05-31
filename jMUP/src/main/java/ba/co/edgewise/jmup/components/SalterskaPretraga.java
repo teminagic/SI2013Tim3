@@ -14,6 +14,10 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
+
 
 
 public class SalterskaPretraga extends JPanel{
@@ -26,7 +30,7 @@ public class SalterskaPretraga extends JPanel{
 	JRadioButton rbVozilo;
 	private JButton btn_modifikuj;
 	private JButton btnProfil;
-	
+
 	private final SalterskaPretraga frejm = this;
 	
 	// Moguci paneli 
@@ -38,28 +42,6 @@ public class SalterskaPretraga extends JPanel{
 	private JComboBox cb_parametri;
 	private JButton btnPretrazi;
 	private JButton btnIzbrisi;
-	
-	//Enumi za combobox
-	/*enum VoziloPretraga { Registarska_oznaka("Registarska oznaka"), Godina_proizvodnje("Godina proizvodnje"), Vrsta_vozila("Vrsta vozila"), Marka_vozila("Marka vozila");
-	   private final String stringValue;
-	   private VoziloPretraga(final String s) { stringValue = s; }
-	   public String toString() { return stringValue; }
-	}
-	enum VozacPretraga { Ime("Ime"), Prezime("Prezime"), JMBG("JMBG"), Broj_licne("Broj liène"); 
-	private final String stringValue;
-	   private VozacPretraga(final String s) { stringValue = s; }
-	   public String toString() { return stringValue; }
-	}
-	public enum VlasnickaPretraga { Broj_potvrde("Broj potvrde"), Registarska_oznaka(""), Ime_prezime("Ime i prezime"), JMBG_vlasnika("JMBG vlasnika") ; 
-		private final String stringValue;
-	   private VlasnickaPretraga(final String s) { stringValue = s; }
-	   public String toString() { return stringValue; }
-	}
-	public enum SaobracajnaPretraga { Broj_potvrde("Broj potvrde"), Registarska_oznaka("Registarska oznaka"), Ime_prezime("Ime i prezime"), JMBG_vozaca("JMBG vozaèa"); 
-		private final String stringValue;
-	   private SaobracajnaPretraga(final String s) { stringValue = s; }
-	   public String toString() { return stringValue; }
-	   }*/
 
 
 	public SalterskaPretraga() {
@@ -117,7 +99,7 @@ public class SalterskaPretraga extends JPanel{
 		gbc_cb_parametri.gridy = 0;
 		okvirPanel.add(cb_parametri, gbc_cb_parametri);
 		
-		btnPretrazi = new JButton("Pretraži");
+		btnPretrazi = new JButton("Pretraï¿½i");
 		GridBagConstraints gbc_btnPretrazi = new GridBagConstraints();
 		gbc_btnPretrazi.gridwidth = 2;
 		gbc_btnPretrazi.fill = GridBagConstraints.HORIZONTAL;
@@ -176,7 +158,7 @@ public class SalterskaPretraga extends JPanel{
 		okvirPanel.add(panel_pretraga, gbc_panel_pretraga);
 		panel_pretraga.setLayout(new CardLayout(0, 0));
 		
-		btnIzbrisi = new JButton("Izbriši");
+		btnIzbrisi = new JButton("Izbriï¿½i");
 		btnIzbrisi.setEnabled(false);
 		GridBagConstraints gbc_btnIzbrisi = new GridBagConstraints();
 		gbc_btnIzbrisi.fill = GridBagConstraints.HORIZONTAL;
