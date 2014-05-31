@@ -114,12 +114,30 @@ public class BossController {
 				}
 			};
 		});
+		// Izvjestaji - Pretraga - Prikaz panela Vozilo
+		final JRadioButton rbVozilo2 = this.view.getStrana3().getBtrPretraga().getRbVozilo();
+		rbVozilo2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(rbVozilo2.isSelected()) {
+					prikaziPanelPretragaVozila2();
+				}
+			};
+		});
 		// Pretraga - Prikaz panela Vozac
 		final JRadioButton rbVozac = this.view.getStrana2().getRbVozac();
 		rbVozac.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(rbVozac.isSelected()) {
 					prikaziPanelPretragaVozaca();
+				}
+			};
+		});
+		// Izvjestaji - Pretraga - Prikaz panela Vozac
+		final JRadioButton rbVozac2 = this.view.getStrana3().getBtrPretraga().getRbVozac();
+		rbVozac2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(rbVozac2.isSelected()) {
+					prikaziPanelPretragaVozaca2();
 				}
 			};
 		});
@@ -132,6 +150,15 @@ public class BossController {
 				}
 			};
 		});
+		// Izvjestaji - Pretraga - Prikaz panela Saobracajna
+		final JRadioButton rbSaobracajna2 = this.view.getStrana3().getBtrPretraga().getRbSaobracajna();
+		rbSaobracajna2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(rbSaobracajna2.isSelected()) {
+					prikaziPanelPretragaSaobracajnih2();
+				}
+			};
+		});
 		// Pretraga - Prikaz panela Vlasnicka
 		final JRadioButton rbVlasnicka = this.view.getStrana2().getRbVlasnicka();
 		rbVlasnicka.addActionListener(new ActionListener() {
@@ -141,6 +168,17 @@ public class BossController {
 				}
 			};
 		});
+<<<<<<< HEAD
+		// Izvjestaji - Pretraga - Prikaz panela Vlasnicka
+				final JRadioButton rbVlasnicka2 = this.view.getStrana3().getBtrPretraga().getRbVlasnicka();
+				rbVlasnicka2.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						if(rbVlasnicka2.isSelected()) {
+							prikaziPanelPretragaVlasnickih2();
+						}
+					};
+				});
+=======
 		
 		//Izvjestaj kreiraj
 		JButton izvjestajIstekleRegistracije = this.view.getIzvjestaj().getBtnKreiranjeIzvjestaja1();
@@ -169,6 +207,7 @@ public class BossController {
 			};
 		});
 		
+>>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 		//Enable - disable buttoni
 		JTable table = view.getStrana2().getPanel_vozilo().getTable();
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
@@ -180,12 +219,32 @@ public class BossController {
 					view.getStrana2().getBtnProfil().setEnabled(!lsm.isSelectionEmpty());
 				}
 			});
+		//Izvjestaji - Enable - disable buttoni
+		JTable table2 = view.getStrana3().getBtrPretraga().getPanel_vozilo().getTable();
+		table2.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+			@Override
+				public void valueChanged(ListSelectionEvent e) {
+					ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+					view.getStrana3().getBtrPretraga().getBtn_modifikuj().setEnabled(!lsm.isSelectionEmpty());
+					view.getStrana3().getBtrPretraga().getBtnIzbrisi().setEnabled(!lsm.isSelectionEmpty());
+					view.getStrana3().getBtrPretraga().getBtnProfil().setEnabled(!lsm.isSelectionEmpty());
+				}
+			});
+		
 		// Klik na button Pretrazi
 		JButton pretrazi = view.getStrana2().getBtnPretrazi();
 		pretrazi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				pretrazi();
+			}
+		});
+		// Izvjestaji - Klik na button Pretrazi
+		JButton pretrazi2 = view.getStrana3().getBtrPretraga().getBtnPretrazi();
+		pretrazi2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				pretrazi2();
 			}
 		});
 		// Klik na button Modifikuj
@@ -196,6 +255,14 @@ public class BossController {
 				modifikuj();
 			}
 		});
+		// Klik na button Modifikuj
+		JButton modifikuj2 = view.getStrana3().getBtrPretraga().getBtn_modifikuj();
+		modifikuj2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				modifikuj2();
+			}
+		});
 		// Klik na button Izbrisi
 		JButton izbrisi = view.getStrana2().getBtnIzbrisi();
 		izbrisi.addMouseListener(new MouseAdapter() {
@@ -204,17 +271,40 @@ public class BossController {
 				izbrisi();
 			}
 		});	
+		// Izvjestaji -  Klik na button Izbrisi
+		JButton izbrisi2 = view.getStrana3().getBtrPretraga().getBtnIzbrisi();
+		izbrisi2.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+				izbrisi2();
+			}
+		});	
+		// Listener za izvjestaje
+		JButton izvjestaji= this.view.getMeni().getOpcije().getBtnIzradaIzvjestaja();
+		izvjestaji.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				prikaziPanelIzvjestaji();
+				};		
+		});
 	}
 	void prikaziPanelPocetnu()
 	{
 		view.prikaziPocetnu();
 	}
+<<<<<<< HEAD
+	void prikaziPanelIzvjestaji() {
+		view.prikaziIzvjestaje();
+		prikaziPanelPretragaVozila2();
+	}
+=======
 	
 	void prikaziPanelIzvjestaji()
 	{
 		view.prikaziIzvjestaje();
 	}
 	
+>>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 	//PRETRAGA
 	void prikaziPanelPretraga()
 	{
@@ -233,6 +323,16 @@ public class BossController {
 		//Prikaz
 		this.view.getStrana2().prikaziPretraguVozila();
 	}
+	void prikaziPanelPretragaVozila2() {
+		//Baza
+		view.getStrana3().getBtrPretraga().getPanel_vozilo().getModel().clearAll();
+		view.getStrana3().getBtrPretraga().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
+		//Comboboxi
+		this.view.getStrana3().getBtrPretraga().getCb_parametri().removeAllItems();
+		this.view.getStrana3().getBtrPretraga().getCb_parametri().setModel(new DefaultComboBoxModel(VoziloPretraga.values()));		
+		//Prikaz
+		this.view.getStrana3().getBtrPretraga().prikaziPretraguVozila();
+	}
 	void prikaziPanelPretragaVozaca() {
 		//Baza
 		view.getStrana2().getPanel_vozac().getModel().clearAll();
@@ -243,6 +343,16 @@ public class BossController {
 		//Prikaz
 		this.view.getStrana2().prikaziPretraguVozaca();
 	}
+	void prikaziPanelPretragaVozaca2() {
+		//Baza
+		view.getStrana3().getBtrPretraga().getPanel_vozac().getModel().clearAll();
+		view.getStrana3().getBtrPretraga().getPanel_vozac().getModel().addAll(model.dohvatiSveVozace());
+		//Comboxi
+		this.view.getStrana3().getBtrPretraga().getCb_parametri().removeAllItems();
+		this.view.getStrana3().getBtrPretraga().getCb_parametri().setModel(new DefaultComboBoxModel(VozacPretraga.values()));		
+		//Prikaz
+		this.view.getStrana3().getBtrPretraga().prikaziPretraguVozaca();
+	}
 	void prikaziPanelPretragaSaobracajnih() {
 		view.getStrana2().getPanel_saobracajna().getModel().clearAll();
 		view.getStrana2().getPanel_saobracajna().getModel().addAll(model.dohvatiSveSaobracajne());
@@ -250,12 +360,26 @@ public class BossController {
 		this.view.getStrana2().getCb_parametri().setModel(new DefaultComboBoxModel(SaobracajnaPretraga.values()));		
 		this.view.getStrana2().prikaziPretraguSaobracajne();
 	}
+	void prikaziPanelPretragaSaobracajnih2() {
+		view.getStrana3().getBtrPretraga().getPanel_saobracajna().getModel().clearAll();
+		view.getStrana3().getBtrPretraga().getPanel_saobracajna().getModel().addAll(model.dohvatiSveSaobracajne());
+		this.view.getStrana3().getBtrPretraga().getCb_parametri().removeAllItems();
+		this.view.getStrana3().getBtrPretraga().getCb_parametri().setModel(new DefaultComboBoxModel(SaobracajnaPretraga.values()));		
+		this.view.getStrana3().getBtrPretraga().prikaziPretraguSaobracajne();
+	}
 	void prikaziPanelPretragaVlasnickih() {
 		view.getStrana2().getPanel_vlasnicka().getModel().clearAll();
 		view.getStrana2().getPanel_vlasnicka().getModel().addAll(model.dohvatiSveVlasnicke());
 		this.view.getStrana2().getCb_parametri().removeAllItems();
 		this.view.getStrana2().getCb_parametri().setModel(new DefaultComboBoxModel(VlasnickaPretraga.values()));		
 		this.view.getStrana2().prikaziPretraguVlasnicke();
+	}
+	void prikaziPanelPretragaVlasnickih2() {
+		view.getStrana3().getBtrPretraga().getPanel_vlasnicka().getModel().clearAll();
+		view.getStrana3().getBtrPretraga().getPanel_vlasnicka().getModel().addAll(model.dohvatiSveVlasnicke());
+		this.view.getStrana3().getBtrPretraga().getCb_parametri().removeAllItems();
+		this.view.getStrana3().getBtrPretraga().getCb_parametri().setModel(new DefaultComboBoxModel(VlasnickaPretraga.values()));		
+		this.view.getStrana3().getBtrPretraga().prikaziPretraguVlasnicke();
 	}
 	private void pretrazi() {	
 		final JRadioButton rbVozilo = this.view.getStrana2().getRbVozilo();
@@ -266,6 +390,16 @@ public class BossController {
 		else if(rbVozac.isSelected()) pretraziVozace();
 		else if(rbSaobracajna.isSelected()) pretraziSaobracajne();
 		else if(rbVlasnicka.isSelected()) pretraziVlasnicke();
+	}
+	private void pretrazi2() {	
+		final JRadioButton rbVozilo = this.view.getStrana3().getBtrPretraga().getRbVozilo();
+		final JRadioButton rbVozac = this.view.getStrana3().getBtrPretraga().getRbVozac();
+		final JRadioButton rbSaobracajna = this.view.getStrana3().getBtrPretraga().getRbSaobracajna();
+		final JRadioButton rbVlasnicka = this.view.getStrana3().getBtrPretraga().getRbVlasnicka();
+		if(rbVozilo.isSelected()) pretraziVozila2();
+		else if(rbVozac.isSelected()) pretraziVozace2();
+		else if(rbSaobracajna.isSelected()) pretraziSaobracajne2();
+		else if(rbVlasnicka.isSelected()) pretraziVlasnicke2();
 	}
 	void pretraziVozila() {
 		view.getStrana2().getPanel_vozilo().getModel().clearAll();
@@ -293,6 +427,32 @@ public class BossController {
 		view.getStrana2().getTb_unosPretrage().setText("");
 
 	}
+	void pretraziVozila2() {
+		view.getStrana3().getBtrPretraga().getPanel_vozilo().getModel().clearAll();
+		String parametar = view.getStrana3().getBtrPretraga().getTb_unosPretrage().getText();
+		VoziloPretraga kriterij = (VoziloPretraga)view.getStrana3().getBtrPretraga().getCb_parametri().getSelectedItem();
+		if(parametar.equals("")) {
+			if(model.dohvatiSvaVozila() == null) {
+				view.getStrana3().getBtrPretraga().getPanel_vozilo().getModel().clearAll();
+				JOptionPane.showOptionDialog(view, "Nije uneseno nijedno vozilo.",
+						"Upozorenje.", JOptionPane.OK_OPTION,
+						JOptionPane.INFORMATION_MESSAGE, null,
+						new String[] { "Uredu" }, "default");
+			}
+			else view.getStrana3().getBtrPretraga().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
+		} else {
+			if(model.pretragaVozilo(parametar,kriterij.toString()) == null) {
+				view.getStrana3().getBtrPretraga().getPanel_vozilo().getModel().clearAll();
+				JOptionPane.showOptionDialog(view, "Nije prona�eno nijedno vozilo s unesenim parametrima.",
+						"Upozorenje.", JOptionPane.OK_OPTION,
+						JOptionPane.INFORMATION_MESSAGE, null,
+						new String[] { "Uredu" }, "default");
+			}
+			else view.getStrana3().getBtrPretraga().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(parametar,kriterij.toString()));
+		}
+		view.getStrana3().getBtrPretraga().getTb_unosPretrage().setText("");
+
+	}
 	void pretraziVozace() {
 		view.getStrana2().getPanel_vozac().getModel().clearAll();
 		String parametar = view.getStrana2().getTb_unosPretrage().getText();
@@ -303,6 +463,17 @@ public class BossController {
 			view.getStrana2().getPanel_vozac().getModel().addAll(model.pretragaVozac(parametar,kriterij.toString()));
 		}
 		view.getStrana2().getTb_unosPretrage().setText("");
+	}
+	void pretraziVozace2() {
+		view.getStrana3().getBtrPretraga().getPanel_vozac().getModel().clearAll();
+		String parametar = view.getStrana3().getBtrPretraga().getTb_unosPretrage().getText();
+		VozacPretraga kriterij = (VozacPretraga)view.getStrana3().getBtrPretraga().getCb_parametri().getSelectedItem();
+		if(parametar.equals("")) {
+			view.getStrana3().getBtrPretraga().getPanel_vozac().getModel().addAll(model.dohvatiSveVozace());
+		} else {
+			view.getStrana3().getBtrPretraga().getPanel_vozac().getModel().addAll(model.pretragaVozac(parametar,kriterij.toString()));
+		}
+		view.getStrana3().getBtrPretraga().getTb_unosPretrage().setText("");
 	}
 	void pretraziSaobracajne() {
 		view.getStrana2().getPanel_saobracajna().getModel().clearAll();
@@ -315,6 +486,17 @@ public class BossController {
 		}
 		view.getStrana2().getTb_unosPretrage().setText("");
 	}
+	void pretraziSaobracajne2() {
+		view.getStrana3().getBtrPretraga().getPanel_saobracajna().getModel().clearAll();
+		String parametar = view.getStrana3().getBtrPretraga().getTb_unosPretrage().getText();
+		SaobracajnaPretraga kriterij = (SaobracajnaPretraga)view.getStrana3().getBtrPretraga().getCb_parametri().getSelectedItem();
+		if(parametar.equals("")) {
+			view.getStrana3().getBtrPretraga().getPanel_saobracajna().getModel().addAll(model.dohvatiSveSaobracajne());
+		} else {
+			view.getStrana3().getBtrPretraga().getPanel_saobracajna().getModel().addAll(model.pretragaSaobracajna(parametar,kriterij.toString()));
+		}
+		view.getStrana3().getBtrPretraga().getTb_unosPretrage().setText("");
+	}
 	void pretraziVlasnicke() {
 		view.getStrana2().getPanel_vlasnicka().getModel().clearAll();
 		String parametar = view.getStrana2().getTb_unosPretrage().getText();
@@ -325,6 +507,17 @@ public class BossController {
 			view.getStrana2().getPanel_vlasnicka().getModel().addAll(model.pretragaVlasnicka(parametar,kriterij.toString()));
 		}
 		view.getStrana2().getTb_unosPretrage().setText("");
+	}
+	void pretraziVlasnicke2() {
+		view.getStrana3().getBtrPretraga().getPanel_vlasnicka().getModel().clearAll();
+		String parametar = view.getStrana3().getBtrPretraga().getTb_unosPretrage().getText();
+		VlasnickaPretraga kriterij = (VlasnickaPretraga)view.getStrana3().getBtrPretraga().getCb_parametri().getSelectedItem();
+		if(parametar.equals("")) {
+			view.getStrana3().getBtrPretraga().getPanel_vlasnicka().getModel().addAll(model.dohvatiSveVlasnicke());
+		} else {
+			view.getStrana3().getBtrPretraga().getPanel_vlasnicka().getModel().addAll(model.pretragaVlasnicka(parametar,kriterij.toString()));
+		}
+		view.getStrana3().getBtrPretraga().getTb_unosPretrage().setText("");
 	}
 	void modifikuj(){
 		final JRadioButton rbVozilo = this.view.getStrana2().getRbVozilo();
@@ -348,6 +541,8 @@ public class BossController {
 		}*/
 		view.prikaziModifikacijuVozila();
 	}
+	void modifikuj2() {}
+	void izbrisi2() {}
 	void modifikujVozaca(){}
 	void modifikujSaobracajnu(){}
 	void modifikujVlasnicku(){}

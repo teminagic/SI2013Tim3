@@ -25,6 +25,11 @@ import javax.swing.DefaultComboBoxModel;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
+<<<<<<< HEAD
+
+public class VoziloDodavanje extends JPanel {
+=======
+>>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class VoziloDodavanje extends JPanel {
@@ -89,11 +94,20 @@ public class VoziloDodavanje extends JPanel {
 	private JComboBox cb_vrstaBoje;
 	private JRadioButton rb_katalizator_da;
 	private JRadioButton rb_katalizator_ne;
+<<<<<<< HEAD
+	private UtilDateModel modelPrva;
+	private JDatePanelImpl datePanelPrva;
+	private JDatePickerImpl datePickerPrva_1;
+	private UtilDateModel modelGodina;
+	private JDatePanelImpl datePanelGodina;
+	private JDatePickerImpl datePickerGodina;
+=======
 	
 	private UtilDateModel modelDatumPregleda;
 	private JDatePanelImpl dpanelDatumPregleda;
 	private JDatePickerImpl dpDatumPregleda;
 	private JComboBox cbBoja;
+>>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 
 	public VoziloDodavanje() {
 		// calling methods for seting layout
@@ -446,6 +460,14 @@ public class VoziloDodavanje extends JPanel {
 	}
 
 	public void inputSet() {
+		modelPrva = new UtilDateModel();
+		datePanelPrva= new JDatePanelImpl(modelPrva);
+		datePickerPrva_1 = new JDatePickerImpl(datePanelPrva);
+		
+		modelGodina = new UtilDateModel();
+		datePanelGodina= new JDatePanelImpl(modelGodina);
+		datePickerGodina = new JDatePickerImpl(datePanelGodina);
+		
 		tf_tipVozila = new JTextField();
 		tf_tipVozila.setColumns(10);
 		GridBagConstraints gbc_tf_tipVozila = new GridBagConstraints();
@@ -473,15 +495,13 @@ public class VoziloDodavanje extends JPanel {
 		gbc_tf_markaVozila.gridy = 3;
 		osnovniPodaci.add(tf_markaVozila, gbc_tf_markaVozila);
 
-		tf_godProizvodnje = new JTextField();
-		tf_godProizvodnje.setColumns(10);
 		GridBagConstraints gbc_tf_godProizvodnje = new GridBagConstraints();
 		gbc_tf_godProizvodnje.anchor = GridBagConstraints.NORTH;
 		gbc_tf_godProizvodnje.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tf_godProizvodnje.insets = new Insets(0, 0, 5, 0);
 		gbc_tf_godProizvodnje.gridx = 1;
 		gbc_tf_godProizvodnje.gridy = 4;
-		osnovniPodaci.add(tf_godProizvodnje, gbc_tf_godProizvodnje);
+		osnovniPodaci.add(datePickerGodina, gbc_tf_godProizvodnje);
 
 		tf_regOznaka = new JTextField();
 		tf_regOznaka.setColumns(10);
@@ -577,6 +597,16 @@ public class VoziloDodavanje extends JPanel {
 		gbc_tf_karoserija.gridy = 6;
 		detaljniPodaci.add(tf_karoserija, gbc_tf_karoserija);
 
+<<<<<<< HEAD
+		tb_bojaVozila = new JTextField();
+		GridBagConstraints gbc_tb_bojaVozila = new GridBagConstraints();
+		gbc_tb_bojaVozila.insets = new Insets(0, 0, 5, 0);
+		gbc_tb_bojaVozila.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tb_bojaVozila.gridx = 1;
+		gbc_tb_bojaVozila.gridy = 0;
+		bojaMasaVozila.add(tb_bojaVozila, gbc_tb_bojaVozila);
+		tb_bojaVozila.setColumns(10);
+=======
 		modelDatumPregleda = new UtilDateModel();
 		dpanelDatumPregleda = new JDatePanelImpl(modelDatumPregleda);
 		dpDatumPregleda= new JDatePickerImpl(dpanelDatumPregleda);
@@ -587,6 +617,7 @@ public class VoziloDodavanje extends JPanel {
 		gbc_tf_datumPregleda.gridx = 1;
 		gbc_tf_datumPregleda.gridy = 7;
 		detaljniPodaci.add(getDpDatumPregleda(), gbc_tf_datumPregleda);
+>>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 
 		tb_maxMasa = new JTextField();
 		tb_maxMasa.setColumns(10);
@@ -613,6 +644,15 @@ public class VoziloDodavanje extends JPanel {
 		gbc_tb_nosivost.gridx = 1;
 		gbc_tb_nosivost.gridy = 5;
 		bojaMasaVozila.add(tb_nosivost, gbc_tb_nosivost);
+		
+		//tf_datumPregleda = new JTextField();
+		//tf_datumPregleda.setColumns(10);
+		GridBagConstraints gbc_tf_datumPregleda = new GridBagConstraints();
+		gbc_tf_datumPregleda.gridwidth = 2;
+		gbc_tf_datumPregleda.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tf_datumPregleda.gridx = 1;
+		gbc_tf_datumPregleda.gridy = 7;
+		detaljniPodaci.add(datePickerPrva_1, gbc_tf_datumPregleda);
 	}
 
 	public void componentSet() {
@@ -804,6 +844,14 @@ public class VoziloDodavanje extends JPanel {
 	public JPanel getButtonPanel() {
 		return buttonPanel;
 	}
+<<<<<<< HEAD
+	public JDatePickerImpl getDatePickerDatumPregleda() {
+		return datePickerPrva_1;
+	}
+	public JDatePickerImpl getDatePickerGodina() {
+		return datePickerGodina;
+	}
+=======
 
 	public JDatePickerImpl getDpDatumPregleda() {
 		return dpDatumPregleda;
@@ -815,4 +863,5 @@ public class VoziloDodavanje extends JPanel {
 		return cbBoja;
 	}
 	
+>>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 }
