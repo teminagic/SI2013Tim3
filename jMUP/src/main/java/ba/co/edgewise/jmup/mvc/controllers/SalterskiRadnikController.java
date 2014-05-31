@@ -572,7 +572,6 @@ public class SalterskiRadnikController {
 		else if(rbVlasnicka.isSelected()) pretraziVlasnicke();
 	}
 	void pretraziVozila() {
-		view.getStrana6().getTb_unosPretrage().setText("");
 		view.getStrana6().getPanel_vozilo().getModel().clearAll();
 		String parametar = view.getStrana6().getTb_unosPretrage().getText();
 		VoziloPretraga kriterij = (VoziloPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
@@ -588,16 +587,17 @@ public class SalterskiRadnikController {
 		} else {
 			if(model.pretragaVozilo(parametar,kriterij.toString()) == null) {
 				view.getStrana6().getPanel_vozilo().getModel().clearAll();
-				JOptionPane.showOptionDialog(view, "Nije pronaðeno nijedno vozilo s unesenim parametrima.",
+				JOptionPane.showOptionDialog(view, "Nije pronaï¿½eno nijedno vozilo s unesenim parametrima.",
 						"Upozorenje.", JOptionPane.OK_OPTION,
 						JOptionPane.INFORMATION_MESSAGE, null,
 						new String[] { "Uredu" }, "default");
 			}
 			else view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(parametar,kriterij.toString()));
 		}
+		view.getStrana6().getTb_unosPretrage().setText("");
+
 	}
 	void pretraziVozace() {
-		view.getStrana6().getTb_unosPretrage().setText("");
 		view.getStrana6().getPanel_vozac().getModel().clearAll();
 		String parametar = view.getStrana6().getTb_unosPretrage().getText();
 		VozacPretraga kriterij = (VozacPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
@@ -606,9 +606,10 @@ public class SalterskiRadnikController {
 		} else {
 			view.getStrana6().getPanel_vozac().getModel().addAll(model.pretragaVozac(parametar,kriterij.toString()));
 		}
+		view.getStrana6().getTb_unosPretrage().setText("");
+
 	}
 	void pretraziSaobracajne() {
-		view.getStrana6().getTb_unosPretrage().setText("");
 		view.getStrana6().getPanel_saobracajna().getModel().clearAll();
 		String parametar = view.getStrana6().getTb_unosPretrage().getText();
 		SaobracajnaPretraga kriterij = (SaobracajnaPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
@@ -617,9 +618,10 @@ public class SalterskiRadnikController {
 		} else {
 			view.getStrana6().getPanel_saobracajna().getModel().addAll(model.pretragaSaobracajna(parametar,kriterij.toString()));
 		}
+		view.getStrana6().getTb_unosPretrage().setText("");
+
 	}
 	void pretraziVlasnicke() {
-		view.getStrana6().getTb_unosPretrage().setText("");
 		view.getStrana6().getPanel_vlasnicka().getModel().clearAll();
 		String parametar = view.getStrana6().getTb_unosPretrage().getText();
 		VlasnickaPretraga kriterij = (VlasnickaPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
@@ -628,6 +630,7 @@ public class SalterskiRadnikController {
 		} else {
 			view.getStrana6().getPanel_vlasnicka().getModel().addAll(model.pretragaVlasnicka(parametar,kriterij.toString()));
 		}
+		view.getStrana6().getTb_unosPretrage().setText("");
 	}
 	void modifikuj(){
 		final JRadioButton rbVozilo = this.view.getStrana6().getRbVozilo();
