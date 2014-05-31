@@ -16,6 +16,7 @@ import ba.co.edgewise.jmup.enums.VrstaBoje;
 import ba.co.edgewise.jmup.enums.VrstaVozila;
 import ba.co.edgewise.jmup.klase.BojaVozila;
 import ba.co.edgewise.jmup.klase.Motor;
+import ba.co.edgewise.jmup.klase.Vlasnicka;
 import ba.co.edgewise.jmup.klase.Vozilo;
 
 public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
@@ -679,8 +680,8 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 
 		return success;
 	}
-
-	// Nije provjerena!
+	
+	//deaktivira vozilo
 	@Override
 	public boolean delete(Integer id) {
 		// Konekcija:
@@ -690,11 +691,13 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 		boolean success = false;
 
 		try {
-			PreparedStatement statement = connection.prepareStatement("DELETE"
-					+ " FROM `Vozilo` " + " WHERE IDVozila = ? ");
-			statement.setInt(1, id);
+			PreparedStatement statement = connection
+					.prepareStatement("UPDATE `Vozilo`"
+							+ " SET Status = ?"
+							+ " WHERE IDVozila = ?");
+			statement.setString(1, "Neaktivan");
+			statement.setInt(2, id);
 			statement.executeUpdate();
-
 			success = true;
 
 		} catch (SQLException e) {
@@ -704,5 +707,9 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 		}
 		return success;
 	}
-
+	
+	public static void main(String[] args) {
+		VoziloDAO v = new VoziloDAO();
+		v.delete(65);
+	}
 }
