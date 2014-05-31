@@ -60,12 +60,14 @@ public class TableModelVlasnicka extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return (Object) (data.get(rowIndex).toObjectArray())[columnIndex];
+	    Object o = (Object) (data.get(rowIndex).toObjectArray())[columnIndex];
+		return o;
 	}
 
-	@Override
+	@Override //bug
 	public Class<?> getColumnClass(int columnIndex) {
-		return getValueAt(0, columnIndex).getClass();
+		Object value = getValueAt(0, columnIndex);
+		return value != null ? value.getClass() : String.class;
 	}
 	
 	public void clearAll()
