@@ -192,7 +192,8 @@ public class BossModel {
             PdfWriter.getInstance(document, file);
  
             document.open();
-            document.add(new Paragraph("Izvje�taj " +  new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getYear()));
+            document.add(new Paragraph("JMUP"));
+            document.add(new Paragraph("Izvjestaj " +  new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getYear()));
             for ( String s : podaci) {
             	document.add(new Paragraph(s.toString()));
 			}
