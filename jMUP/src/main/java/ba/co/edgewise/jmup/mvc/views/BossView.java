@@ -93,6 +93,9 @@ public class BossView extends JFrame {
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Pretraga");
 	}
+	
+	
+	
 	public void prikaziModifikacijuVozila()
 	{
 		frejm.getSadrzaj().getNaslov().postaviNaslov("Modifikacija vozila");

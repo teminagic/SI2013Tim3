@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class Registracija {
 	int id;
-
 	Date datumRegistrovanja;
 	Date datumIsteka;
 	Integer vozilo;

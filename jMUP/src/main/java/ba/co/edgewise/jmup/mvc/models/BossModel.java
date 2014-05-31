@@ -181,7 +181,7 @@ public class BossModel {
 		Vozilo temp = _voziloDAO.get(id);
 		return (temp == null) ? null : temp.getMotor();
 	}
-
+	
 	@SuppressWarnings("deprecation")
 	public void ekstraktToPDF(ArrayList<String> podaci, String path) {
 		try { 
@@ -232,9 +232,20 @@ public class BossModel {
 		return _saobracajnaDAO.update(brojDozvole, s);
 	}
 	
+	//za izvjestaj podaci
 	public ArrayList<String> getIstekleRegistracije() throws ParseException
 	{
 		return _voziloDAO.getAllRegistracijeDeaktivirane() ;
+	}
+	
+	public ArrayList<String> getBrojDozvola(){
+		
+		ArrayList<String> temp = new ArrayList<>();
+		temp.add(_saobracajnaDAO.getBrojSaobracajnih());
+		temp.add(_vlasnickaDAO.getBrojVlasnickih());
+		
+		return temp;
+		
 	}
 	
 

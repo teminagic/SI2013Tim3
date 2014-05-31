@@ -6,8 +6,6 @@ public class Vlasnicka{
 	Vozilo vozilo = new Vozilo();
 	Osoba vlasnik = new Osoba();
 	
-	
-
 	public Vlasnicka() {
 		super();
 	}
