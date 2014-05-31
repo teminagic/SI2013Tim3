@@ -24,7 +24,7 @@ public class BojaVozila {
 		this.vrsta = vrsta;
 		this.tip = tip;
 	}
-
+	
 	//get & set
 	public Boja getBoja() {
 		return boja;

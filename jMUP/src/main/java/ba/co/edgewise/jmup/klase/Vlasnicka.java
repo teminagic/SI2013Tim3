@@ -6,8 +6,6 @@ public class Vlasnicka{
 	Vozilo vozilo;
 	Osoba vlasnik;
 	
-	
-
 	public Vlasnicka() {
 		super();
 	}
@@ -18,7 +16,7 @@ public class Vlasnicka{
 		this.brojDozvole = brojDozvole;
 		this.vozilo = vozilo;
 		this.vlasnik = vlasnik;
-	}
+	} 
 
 
 	public String getBrojDozvole() {
@@ -51,7 +49,7 @@ public class Vlasnicka{
 	}
 
 	public Object[] toObjectArray() {
-		return new Object[]{ this.brojDozvole, this.vozilo.getRegOznaka(), this.vlasnik.getIme()+" "+this.vlasnik.getPrezime(), this.vlasnik.getJmbg_Id()
+		return new Object[]{ this.brojDozvole, this.vozilo.getRegistarskaOznaka(), this.vlasnik.getIme()+" "+this.vlasnik.getPrezime(), this.vlasnik.getJmbg_Id()
 		};
 
 	}	

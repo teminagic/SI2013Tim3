@@ -34,11 +34,11 @@ public class BojeVozilaDAOTest extends TestCase{
 	@Test
 	public void testCreate() {
 		VoziloDAO vdao = new VoziloDAO();
-		Vozilo vozilo1=vdao.get(1);
-		BojaVozila boja1=new BojaVozila(Boja.CRVENA, vozilo1, NijansaBoje.STANDARDNA, VrstaBoje.OBICNA, "tip" );
+		Vozilo vozilo1=vdao.get(65);
+		BojaVozila boja1=new BojaVozila(Boja.CRVENA, vozilo1.getId(), NijansaBoje.STANDARDNA, VrstaBoje.OBICNA, "tip" );
 		bojeVozila=new BojeVozilaDAO();
 		bojeVozila.create(boja1);
-		assertNotNull(bojeVozila.get(boja1.getVozilo().getId()));
+		assertNotNull(bojeVozila.get(boja1.getVoziloId()));
 	}
 	
 	@Test
@@ -46,31 +46,26 @@ public class BojeVozilaDAOTest extends TestCase{
 		bojeVozila=new BojeVozilaDAO();
 		
 		VoziloDAO vdao = new VoziloDAO();
-		Vozilo vozilo1=vdao.get(22);
-		BojaVozila boja1=new BojaVozila(Boja.CRVENA, vozilo1, NijansaBoje.STANDARDNA, VrstaBoje.OBICNA, "tip" );
+		Vozilo vozilo1=vdao.get(65);
+		BojaVozila boja1=new BojaVozila(Boja.CRVENA, vozilo1.getId(), NijansaBoje.STANDARDNA, VrstaBoje.OBICNA, "tip" );
 		bojeVozila.create(boja1);
 		
-		assertEquals(bojeVozila.get(boja1.getVozilo().getId()).getBoja(),Boja.CRVENA);
-		assertEquals(bojeVozila.get(boja1.getVozilo().getId()).getTip(), "tip");
-		assertEquals(bojeVozila.get(boja1.getVozilo().getId()).getNijansa(), NijansaBoje.STANDARDNA);
-		assertEquals(bojeVozila.get(boja1.getVozilo().getId()).getVrsta(), VrstaBoje.OBICNA);
-		assertEquals(bojeVozila.get(boja1.getVozilo().getId()).getVozilo().getRegOznaka(), vozilo1.getRegOznaka());
+		assertEquals(bojeVozila.get(boja1.getVoziloId()).getBoja(),Boja.CRVENA);
+		assertEquals(bojeVozila.get(boja1.getVoziloId()).getTip(), "tip");
+		assertEquals(bojeVozila.get(boja1.getVoziloId()).getNijansa(), NijansaBoje.STANDARDNA);
+		assertEquals(bojeVozila.get(boja1.getVoziloId()).getVrsta(), VrstaBoje.OBICNA);
+		assertEquals(bojeVozila.get(boja1.getVoziloId()).getVoziloId(), vozilo1.getId());
 	}
 	
 	@Test
 	public void testGetAll(){
-		//ovu sam mozda odradila nelogicno..tj mozda testiram isto. 
-		//eventualno kad zamijenimo bazu mozemo testirati na velicinu baze tj.
-		//assertEquals(bojaVozila.size(), "ta velicina baze");
 		bojeVozila=new BojeVozilaDAO();
 		VoziloDAO vdao = new VoziloDAO();
 		List<BojaVozila> bojaVozila=bojeVozila.getAll();
 		
 		for(int i=1; i<bojaVozila.size(); i++)
 		{
-			//Vozilo vozilo=vdao.get(bojaVozila.get(i).getVozilo().getId());
-			//assertEquals(bojeVozila.get(bojaVozila.get(i).getVozilo().getId()).getVozilo().getRegOznaka(), vozilo.getRegOznaka());
-			assertNotNull(bojaVozila.get(i).getVozilo().getId());
+			assertNotNull(bojaVozila.get(i).getVoziloId());
 		}
 	}
 	@Test
@@ -78,10 +73,10 @@ public class BojeVozilaDAOTest extends TestCase{
 		bojeVozila=new BojeVozilaDAO();
 		
 		VoziloDAO vdao = new VoziloDAO();
-		Vozilo vozilo1=vdao.get(1);
-		BojaVozila boja1=new BojaVozila(Boja.CRVENA, vozilo1, NijansaBoje.STANDARDNA, VrstaBoje.OBICNA, "tip" );
-		BojaVozila boja2=new BojaVozila(Boja.CRNA, vozilo1, NijansaBoje.STANDARDNA, VrstaBoje.OBICNA, "tip" );
+		Vozilo vozilo1=vdao.get(67);
+		BojaVozila boja1=new BojaVozila(Boja.CRVENA, vozilo1.getId(), NijansaBoje.STANDARDNA, VrstaBoje.OBICNA, "tip" );
 		bojeVozila.create(boja1);
+		BojaVozila boja2=new BojaVozila(Boja.CRNA, vozilo1.getId(), NijansaBoje.STANDARDNA, VrstaBoje.OBICNA, "tip" );
 		
 		assertTrue(bojeVozila.update(vozilo1.getId(), boja2));
 	}
@@ -90,8 +85,8 @@ public class BojeVozilaDAOTest extends TestCase{
 		bojeVozila=new BojeVozilaDAO();
 		
 		VoziloDAO vdao = new VoziloDAO();
-		Vozilo vozilo1=vdao.get(1);
-		BojaVozila boja1=new BojaVozila(Boja.CRVENA, vozilo1, NijansaBoje.STANDARDNA, VrstaBoje.OBICNA, "tip" );
+		Vozilo vozilo1=vdao.get(65);
+		BojaVozila boja1=new BojaVozila(Boja.CRVENA, vozilo1.getId(), NijansaBoje.STANDARDNA, VrstaBoje.OBICNA, "tip" );
 		bojeVozila.create(boja1);
 		
 		assertTrue(bojeVozila.delete(vozilo1.getId()));

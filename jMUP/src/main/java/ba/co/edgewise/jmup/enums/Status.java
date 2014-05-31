@@ -2,7 +2,7 @@ package ba.co.edgewise.jmup.enums;
 
 public enum Status {
 	AKTIVAN("Aktivan"),
-	NEAKTIVAN("Nije aktivan");
+	NEAKTIVAN("Neaktivan");
 	
 	private final String status;
 	
@@ -21,7 +21,7 @@ public enum Status {
 		switch (tip) {
 		case "Aktivan":
 			return Status.AKTIVAN;
-		case "Nije aktivan":
+		case "Neaktivan":
 			return Status.NEAKTIVAN;
 		default:
 			return null;
