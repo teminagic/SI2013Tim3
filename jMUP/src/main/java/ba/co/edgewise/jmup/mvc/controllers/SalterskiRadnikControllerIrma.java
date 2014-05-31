@@ -111,7 +111,8 @@ public class SalterskiRadnikControllerIrma {
 					public void valueChanged(ListSelectionEvent e) {
 						ListSelectionModel lsm = (ListSelectionModel)e.getSource();
 						view.getStrana6().getBtn_modifikuj().setEnabled(!lsm.isSelectionEmpty());
-					//	view.getStrana6().getBtnIzbrisiKorisnika().setEnabled(!lsm.isSelectionEmpty());
+						view.getStrana6().getBtnIzbrisi().setEnabled(!lsm.isSelectionEmpty());
+						view.getStrana6().getBtnProfil().setEnabled(!lsm.isSelectionEmpty());
 					}
 				});
 			// Klik na button Pretrazi
@@ -130,6 +131,14 @@ public class SalterskiRadnikControllerIrma {
 					modifikuj();
 				}
 			});
+			// Klik na button Izbrisi
+			JButton izbrisi = view.getStrana6().getBtnIzbrisi();
+			izbrisi.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+					izbrisi();
+				}
+			});		
 				
 		}
 	void prikaziPanelPocetnu()
@@ -189,16 +198,32 @@ public class SalterskiRadnikControllerIrma {
 		else if(rbVlasnicka.isSelected()) pretraziVlasnicke();
 	}
 	void pretraziVozila() {
+		view.getStrana6().getTb_unosPretrage().setText("");
 		view.getStrana6().getPanel_vozilo().getModel().clearAll();
 		String parametar = view.getStrana6().getTb_unosPretrage().getText();
 		VoziloPretraga kriterij = (VoziloPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
 		if(parametar.equals("")) {
-			view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
+			if(model.dohvatiSvaVozila() == null) {
+				view.getStrana6().getPanel_vozilo().getModel().clearAll();
+				JOptionPane.showOptionDialog(view, "Nije uneseno nijedno vozilo.",
+						"Upozorenje.", JOptionPane.OK_OPTION,
+						JOptionPane.INFORMATION_MESSAGE, null,
+						new String[] { "Uredu" }, "default");
+			}
+			else view.getStrana6().getPanel_vozilo().getModel().addAll(model.dohvatiSvaVozila());
 		} else {
-			view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(parametar,kriterij.toString()));
+			if(model.pretragaVozilo(parametar,kriterij.toString()) == null) {
+				view.getStrana6().getPanel_vozilo().getModel().clearAll();
+				JOptionPane.showOptionDialog(view, "Nije pronaðeno nijedno vozilo s unesenim parametrima.",
+						"Upozorenje.", JOptionPane.OK_OPTION,
+						JOptionPane.INFORMATION_MESSAGE, null,
+						new String[] { "Uredu" }, "default");
+			}
+			else view.getStrana6().getPanel_vozilo().getModel().addAll(model.pretragaVozilo(parametar,kriterij.toString()));
 		}
 	}
 	void pretraziVozace() {
+		view.getStrana6().getTb_unosPretrage().setText("");
 		view.getStrana6().getPanel_vozac().getModel().clearAll();
 		String parametar = view.getStrana6().getTb_unosPretrage().getText();
 		VozacPretraga kriterij = (VozacPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
@@ -209,6 +234,7 @@ public class SalterskiRadnikControllerIrma {
 		}
 	}
 	void pretraziSaobracajne() {
+		view.getStrana6().getTb_unosPretrage().setText("");
 		view.getStrana6().getPanel_saobracajna().getModel().clearAll();
 		String parametar = view.getStrana6().getTb_unosPretrage().getText();
 		SaobracajnaPretraga kriterij = (SaobracajnaPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
@@ -219,6 +245,7 @@ public class SalterskiRadnikControllerIrma {
 		}
 	}
 	void pretraziVlasnicke() {
+		view.getStrana6().getTb_unosPretrage().setText("");
 		view.getStrana6().getPanel_vlasnicka().getModel().clearAll();
 		String parametar = view.getStrana6().getTb_unosPretrage().getText();
 		VlasnickaPretraga kriterij = (VlasnickaPretraga)view.getStrana6().getCb_parametri().getSelectedItem();
@@ -289,5 +316,25 @@ public class SalterskiRadnikControllerIrma {
 			brojMjestaZaStajanje, brojMjestaZaLezanje, ekoKarakteristika, katalizator, datumPregleda, 
 			zapreminaMotora, maxSnaga,gorivo, brojMotora, vrstaMotora);
 	}
-
+	public void izbrisi() {
+		/*
+		 	int rowSelected = view.getStrana3().getTable().getSelectedRow();
+		Uposlenik temp = view.getStrana3().getModel().getData().get(rowSelected);
+		model.setUposlenik(temp);
+		if (model.brisanjeKorisnika()) {
+			if(JOptionPane.showOptionDialog(view, "Korisnik uspje\u0161no izbrisan.",
+					"Kreiranje korisnika", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default") == JOptionPane.OK_OPTION)
+				nextPretraga();
+		} else {
+			JOptionPane.showOptionDialog(view,
+					"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
+							+ "Molimo vas da poku\u0161ate ponovo",
+					"Kreiranje korisnika", JOptionPane.OK_OPTION,
+					JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+					"default");
+		};
+		nextPretraga();*/
+	}
 }
