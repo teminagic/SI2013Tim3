@@ -92,7 +92,7 @@ public class MeniBossOpcije extends JPanel {
 	public JButton getBtnPregledLogova() {
 		return btnPregledLogova;
 	}
-	public JButton getBtnIzradaIzvjetaja() {
+	public JButton getBtnIzradaIzvjestaja() {
 		return btnIzradaIzvjetaja;
 	}
 	public JButton getBtnPretraga() {
