@@ -1,5 +1,7 @@
 package ba.co.edgewise.jmup.daldao.daos;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +11,7 @@ import java.sql.SQLException;
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.daos.VoziloDAO;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
+import ba.co.edgewise.jmup.klase.Osoba;
 import ba.co.edgewise.jmup.klase.Saobracajna;
 import ba.co.edgewise.jmup.klase.Vozilo;
 
@@ -325,6 +328,37 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 		
 	}
 	
+	public String getBrojSaobracajnih()
+	{
+		Integer result = null;
+		
+		//Dobavljanje konekcije
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+		
+		//Pocetak pripreme upita
+		ResultSet qResult = null;
+		
+		try {
+			PreparedStatement statement = 	connection.prepareStatement(
+					"SELECT Count(BrojDozvole) "+ 
+					"FROM Saobracajna "
+					);
+			qResult = statement.executeQuery();
+			//Dobavljanje rezultata
+			if(qResult.next()) {
+				result = qResult.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+		
+		return result.toString();
+	}
+	
 	public boolean voziloExists(String registracija)
 	{
 		VoziloDAO v = new VoziloDAO();
@@ -335,5 +369,9 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 		return false;
 	}
 	
+	public static void main(String[] args) throws ParseException {
+		SaobracajnaDAO s =  new SaobracajnaDAO();
+		Integer r = s.getBrojSaobracajnih();
+	}
 	
 }

@@ -147,7 +147,20 @@ public class BossController {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					ShowDialogInput dialog = new ShowDialogInput("Unesite lokaciju za premanje izvještaja:");
+					ShowDialogInput dialog = new ShowDialogInput("Unesite lokaciju za spremanje izvještaja:", 1);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			};
+		});
+		
+		JButton izvjestajDozvole = this.view.getIzvjestaj().getBtnKreiranjeIzvjestaja2();
+		izvjestajDozvole.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					ShowDialogInput dialog = new ShowDialogInput("Unesite lokaciju za spremanje izvještaja:", 2);
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
