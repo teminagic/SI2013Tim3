@@ -344,7 +344,8 @@ public class Vozilo {
 			this.registarskaOznaka,
 			this.godinaProizvodnje,
 			this.vrsta,
-			this.marka
+			this.marka,
+			this.statusVozila
 		};
 	}
 }

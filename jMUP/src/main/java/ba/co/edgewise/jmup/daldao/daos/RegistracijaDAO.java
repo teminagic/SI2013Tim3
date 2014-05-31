@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
@@ -226,6 +227,43 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 		return success;
 	}
 	
+	public ArrayList<String> getAllRegistracijeIstekle() throws ParseException
+	{
+		ArrayList<String> result = new ArrayList<String>();
+
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date d = new Date();
+		String date = sdf.format(d);
+		
+		Date now = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+		// Pocetak pripreme upita
+		ResultSet qResult = null;
+
+		try {
+			
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT * " + "FROM `Registracija` " + "WHERE Do < ?");
+			statement.setDate(1, new java.sql.Date(now.getTime()));
+			qResult = statement.executeQuery();
+			// Dobavljanje rezultata
+			while (qResult.next()) {
+				String temp = qResult.getString("Vozilo");
+				result.add(temp);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+
+		return result;
+	}
+	
+	
 	public static void main(String[] args) throws ParseException {
 		RegistracijaDAO rDAO = new RegistracijaDAO();
 		VoziloDAO vDAO = new VoziloDAO();
@@ -234,6 +272,9 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 		Osoba o = oDAO.getByJMBG("2");
 		Date odKad=new SimpleDateFormat("yyyy-MM-dd").parse("1991-2-1");
 		Date doKad=new SimpleDateFormat("yyyy-MM-dd").parse("1992-2-1");
+		ArrayList<String> a = new ArrayList<>();
+		//v.delete(65);
+		a= rDAO.getAllRegistracijeIstekle();
 		//Registracija r = new Registracija(5,odKad, doKad, v,o);
 		//System.out.print(rDAO.create(r));
 	}

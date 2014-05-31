@@ -1,5 +1,6 @@
 package ba.co.edgewise.jmup.mvc.models;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -192,7 +193,12 @@ public class BossModel {
             PdfWriter.getInstance(document, file);
  
             document.open();
-            document.add(new Paragraph("JMUP"));
+            document.addTitle("JMUP");
+            document.addSubject("Izvjestaj");
+            document.addKeywords("Izvještaj JMUP");
+            
+            
+            
             document.add(new Paragraph("Izvjestaj " +  new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getYear()));
             for ( String s : podaci) {
             	document.add(new Paragraph(s.toString()));
@@ -224,6 +230,11 @@ public class BossModel {
 	public boolean modifikacijaSaobracajna(String brojDozvole, Saobracajna s)
 	{
 		return _saobracajnaDAO.update(brojDozvole, s);
+	}
+	
+	public ArrayList<String> getIstekleRegistracije() throws ParseException
+	{
+		return _voziloDAO.getAllRegistracijeDeaktivirane() ;
 	}
 	
 

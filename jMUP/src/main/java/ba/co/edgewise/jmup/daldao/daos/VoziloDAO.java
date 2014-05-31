@@ -1,5 +1,7 @@
 package ba.co.edgewise.jmup.daldao.daos;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +11,7 @@ import java.sql.Savepoint;
 
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
+import ba.co.edgewise.jmup.daldao.daos.RegistracijaDAO;
 import ba.co.edgewise.jmup.enums.EkoKarakteristike;
 import ba.co.edgewise.jmup.enums.NijansaBoje;
 import ba.co.edgewise.jmup.enums.Status;
@@ -18,6 +21,7 @@ import ba.co.edgewise.jmup.klase.BojaVozila;
 import ba.co.edgewise.jmup.klase.Motor;
 import ba.co.edgewise.jmup.klase.Vlasnicka;
 import ba.co.edgewise.jmup.klase.Vozilo;
+import ba.co.edgewise.jmup.klase.Registracija;
 
 public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 
@@ -708,8 +712,51 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 		return success;
 	}
 	
-	public static void main(String[] args) {
-		VoziloDAO v = new VoziloDAO();
-		v.delete(65);
+	
+	public ArrayList<String> getAllRegistracijeDeaktivirane() throws ParseException 
+	{
+		RegistracijaDAO r = new RegistracijaDAO();
+		ArrayList<String> result = new ArrayList<String>();
+		ArrayList<String> temp = r.getAllRegistracijeIstekle();
+		
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+		
+		// Pocetak pripreme upita
+		ResultSet qResult = null;
+
+		try {
+			
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT * " + "FROM `Vozilo` " + "WHERE  IDVozila = ?");
+			
+			for (String string : temp) {
+				
+			statement.setInt(1, Integer.parseInt(string));
+			qResult = statement.executeQuery();
+			// Dobavljanje rezultata
+			while (qResult.next()) {
+				String t = qResult.getString("RegOznaka");
+				result.add(t);
+			}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+
+		return result;
 	}
+	
+	public static void main(String[] args) throws ParseException {
+		VoziloDAO v = new VoziloDAO();
+		ArrayList<String> vl = v.getAllRegistracijeDeaktivirane();
+	}
+	
 }
+
+
+
+
