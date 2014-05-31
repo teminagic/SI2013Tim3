@@ -156,9 +156,7 @@ public class BossModel {
 
 	@SuppressWarnings("deprecation")
 	public void ekstraktToPDF(ArrayList<String> podaci, String path) {
-		try {
-			// output treba postaviti nemam vremne sada radim Browse pa da bira korisnik, C je zakljucan pod defaultu (barem kod mene)
-			// ovako trenutno rjesavam da budu jedinstveni naziv dokumenta 
+		try { 
 			@SuppressWarnings("deprecation")
 			
 			FileOutputStream file = new FileOutputStream(new File(path));
