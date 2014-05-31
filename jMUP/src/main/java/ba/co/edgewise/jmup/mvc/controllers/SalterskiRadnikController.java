@@ -757,6 +757,7 @@ public class SalterskiRadnikController {
 		if(!daLiJeBroj(view.getVoziloDodavanje().getTb_nosivost().getText())) return false;
 		if(!daLiJeBroj(view.getVoziloDodavanje().getTf_zapremina().getText())) return false;
 		if(!daLiJeBroj(view.getVoziloDodavanje().getTf_maxSnaga().getText())) return false;
+		if(!daLiJeDecimalanBroj(view.getVoziloDodavanje().getTf_odnos().getText())) return false;
 		return true;
 	}
 	public boolean daLiJeBroj(String string) {
@@ -764,7 +765,8 @@ public class SalterskiRadnikController {
 		return Pattern.compile(regex).matcher(string).matches();
 	}
 	public boolean daLiJeDecimalanBroj(String string) {
-		String regex= "^\\d+(.\d+){0,1}$";
+		//Treba provjeriti
+		String regex= "^\\d+(.\\d+){0,1}$";
 		return Pattern.compile(regex).matcher(string).matches();
 	}
 	public boolean provjeriPopunjenostRegistracije() {
