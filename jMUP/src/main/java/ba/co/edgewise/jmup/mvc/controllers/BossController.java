@@ -20,6 +20,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import ba.co.edgewise.jmup.components.OpcijaSadrzaj;
+import ba.co.edgewise.components.helpers.ShowDialogInput;
 import ba.co.edgewise.jmup.components.VoziloDodavanje;
 import ba.co.edgewise.jmup.enums.EkoKarakteristike;
 import ba.co.edgewise.jmup.enums.SaobracajnaPretraga;
@@ -56,6 +57,17 @@ public class BossController {
 				prikaziPanelPocetnu();
 				};		
 		});
+		
+		// Izvjestaji
+		JButton izvjestaj= this.view.getMeni().getOpcije().getBtnIzradaIzvjestaja();
+		izvjestaj.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				 prikaziPanelPretraga();
+				 prikaziPanelIzvjestaji();
+				};		
+		});
+		
 		//Listener za odjavu
 		JButton odjava = this.view.getMeni().getOpcije().getBtnOdjava();
 		odjava.addMouseListener(new MouseAdapter() {
@@ -80,6 +92,9 @@ public class BossController {
 				}
 				};			
 		});
+		
+		
+		
 		
 		// Pretraga - Prikaz osnovnog panela
 		JButton salterskaPretraga= this.view.getMeni().getOpcije().getBtnPretraga();
@@ -153,6 +168,7 @@ public class BossController {
 				}
 			};
 		});
+<<<<<<< HEAD
 		// Izvjestaji - Pretraga - Prikaz panela Vlasnicka
 				final JRadioButton rbVlasnicka2 = this.view.getStrana3().getBtrPretraga().getRbVlasnicka();
 				rbVlasnicka2.addActionListener(new ActionListener() {
@@ -162,6 +178,36 @@ public class BossController {
 						}
 					};
 				});
+=======
+		
+		//Izvjestaj kreiraj
+		JButton izvjestajIstekleRegistracije = this.view.getIzvjestaj().getBtnKreiranjeIzvjestaja1();
+		izvjestajIstekleRegistracije.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					ShowDialogInput dialog = new ShowDialogInput("Unesite lokaciju za spremanje izvještaja:", 1);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			};
+		});
+		
+		JButton izvjestajDozvole = this.view.getIzvjestaj().getBtnKreiranjeIzvjestaja2();
+		izvjestajDozvole.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					ShowDialogInput dialog = new ShowDialogInput("Unesite lokaciju za spremanje izvještaja:", 2);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			};
+		});
+		
+>>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 		//Enable - disable buttoni
 		JTable table = view.getStrana2().getPanel_vozilo().getTable();
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
@@ -246,10 +292,19 @@ public class BossController {
 	{
 		view.prikaziPocetnu();
 	}
+<<<<<<< HEAD
 	void prikaziPanelIzvjestaji() {
 		view.prikaziIzvjestaje();
 		prikaziPanelPretragaVozila2();
 	}
+=======
+	
+	void prikaziPanelIzvjestaji()
+	{
+		view.prikaziIzvjestaje();
+	}
+	
+>>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 	//PRETRAGA
 	void prikaziPanelPretraga()
 	{

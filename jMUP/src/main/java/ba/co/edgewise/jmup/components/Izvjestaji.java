@@ -87,7 +87,7 @@ public class Izvjestaji extends JPanel {
 		panel_1.add(btnKreiranjeIzvjestaja2, gbc_button_1);
 		
 		//action listeners
-		btnKreiranjeIzvjestaja1.addActionListener(new ActionListener() {
+		/*btnKreiranjeIzvjestaja1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Izvještaji: Implementacija u toku");
 			}
@@ -97,7 +97,7 @@ public class Izvjestaji extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Izvještaji: Implementacija u toku");
 			}
-		});
+		});*/
 		
 	}
 	
@@ -108,17 +108,18 @@ public class Izvjestaji extends JPanel {
 		btrPretraga.getBtnProfil().setVisible(false);
 		btrPretraga.getBtnProfil().setEnabled(false);
 		GridBagConstraints gbc_pretraga = new GridBagConstraints();
+		gbc_pretraga.gridwidth = 2;
 		gbc_pretraga.insets = new Insets(0, 0, 5, 5);
 		gbc_pretraga.gridx = 1;
 		gbc_pretraga.gridy = 2;
 		add(btrPretraga, gbc_pretraga);
 		
 		//action listeners
-		btrPretraga.getBtn_modifikuj().addActionListener(new ActionListener() {
+		/*btrPretraga.getBtn_modifikuj().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Izvještaji: Implementacija u toku");
 			}
-		});
+		});*/
 	}
 
 	

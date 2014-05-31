@@ -17,8 +17,8 @@ public class VlasnickaDAO implements IGenericDAO<Vlasnicka, String> {
 	{
 		boolean success = false;
 		
-		int vozilo = vlasnicka.getVozilo().getId();
-		int vlasnik = vlasnicka.getVlasnik().getId();
+		Integer vozilo = vlasnicka.getVozilo().getId();
+		Integer vlasnik = vlasnicka.getVlasnik().getId();
 		
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
@@ -42,6 +42,37 @@ public class VlasnickaDAO implements IGenericDAO<Vlasnicka, String> {
 
 		return success;
 		
+	}
+	
+	public String getBrojVlasnickih()
+	{
+		Integer result = null;
+		
+		//Dobavljanje konekcije
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+		
+		//Pocetak pripreme upita
+		ResultSet qResult = null;
+		
+		try {
+			PreparedStatement statement = 	connection.prepareStatement(
+					"SELECT Count(BrojDozvole) "+ 
+					"FROM Vlasnicka "
+					);
+			qResult = statement.executeQuery();
+			//Dobavljanje rezultata
+			if(qResult.next()) {
+				result = qResult.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+		
+		return result.toString();
 	}
 
 	@Override

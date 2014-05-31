@@ -15,7 +15,8 @@ public class TableModelVozilo extends AbstractTableModel {
 			"Registarska oznaka", 
 			"Godina proizvodnje", 
 			"Vrsta vozila",
-			"Marka vozila"
+			"Marka vozila",
+			"Status"
 			};
 	private ArrayList<Vozilo> data;
 

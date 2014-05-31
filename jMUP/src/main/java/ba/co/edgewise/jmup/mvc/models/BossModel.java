@@ -1,5 +1,6 @@
 package ba.co.edgewise.jmup.mvc.models;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -180,7 +181,7 @@ public class BossModel {
 		Vozilo temp = _voziloDAO.get(id);
 		return (temp == null) ? null : temp.getMotor();
 	}
-
+	
 	@SuppressWarnings("deprecation")
 	public void ekstraktToPDF(ArrayList<String> podaci, String path) {
 		try { 
@@ -192,7 +193,13 @@ public class BossModel {
             PdfWriter.getInstance(document, file);
  
             document.open();
-            document.add(new Paragraph("Izvjeï¿½taj " +  new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getYear()));
+            document.addTitle("JMUP");
+            document.addSubject("Izvjestaj");
+            document.addKeywords("Izvještaj JMUP");
+            
+            
+            
+            document.add(new Paragraph("Izvjestaj " +  new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getYear()));
             for ( String s : podaci) {
             	document.add(new Paragraph(s.toString()));
 			}
@@ -223,6 +230,22 @@ public class BossModel {
 	public boolean modifikacijaSaobracajna(String brojDozvole, Saobracajna s)
 	{
 		return _saobracajnaDAO.update(brojDozvole, s);
+	}
+	
+	//za izvjestaj podaci
+	public ArrayList<String> getIstekleRegistracije() throws ParseException
+	{
+		return _voziloDAO.getAllRegistracijeDeaktivirane() ;
+	}
+	
+	public ArrayList<String> getBrojDozvola(){
+		
+		ArrayList<String> temp = new ArrayList<>();
+		temp.add(_saobracajnaDAO.getBrojSaobracajnih());
+		temp.add(_vlasnickaDAO.getBrojVlasnickih());
+		
+		return temp;
+		
 	}
 	
 
