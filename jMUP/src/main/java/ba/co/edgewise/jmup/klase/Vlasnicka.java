@@ -16,7 +16,7 @@ public class Vlasnicka{
 		this.brojDozvole = brojDozvole;
 		this.vozilo = vozilo;
 		this.vlasnik = vlasnik;
-	}
+	} 
 
 
 	public String getBrojDozvole() {

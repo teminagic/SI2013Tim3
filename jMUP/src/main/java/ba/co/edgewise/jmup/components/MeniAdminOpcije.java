@@ -16,8 +16,6 @@ public class MeniAdminOpcije extends JPanel {
 	private JButton btnKreiranjeKorisnika;
 	private JButton btnOdjava;
 	private JButton btnPretragaKorisnika;
-	private JButton btnPregledLogova;
-	private JButton btnIzradaBackupa;
 	private GridBagLayout gridBagLayoutMeniAdminOpcije;
 	
 	/**
@@ -39,7 +37,7 @@ public class MeniAdminOpcije extends JPanel {
 	public void btnSet(){
 		btnPocetna = new JButton("Po\u010Detna");
 		GridBagConstraints gbc_btnPocetna = new GridBagConstraints();
-		gbc_btnPocetna.insets = new Insets(0, 0, 0, 0);
+		gbc_btnPocetna.insets = new Insets(0, 0, 5, 0);
 		gbc_btnPocetna.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnPocetna.gridx = 0;
 		gbc_btnPocetna.gridy = 0;
@@ -48,7 +46,7 @@ public class MeniAdminOpcije extends JPanel {
 		btnKreiranjeKorisnika = new JButton("Kreiraj korisnika");
 		GridBagConstraints gbc_btnStrana = new GridBagConstraints();
 		gbc_btnStrana.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnStrana.insets = new Insets(0, 0, 0, 0);
+		gbc_btnStrana.insets = new Insets(0, 0, 5, 0);
 		gbc_btnStrana.gridx = 0;
 		gbc_btnStrana.gridy = 1;
 		add(btnKreiranjeKorisnika, gbc_btnStrana);
@@ -56,36 +54,20 @@ public class MeniAdminOpcije extends JPanel {
 		btnPretragaKorisnika = new JButton("Pretraga korisnika");
 		GridBagConstraints gbc_btnPretragaKorisnika = new GridBagConstraints();
 		gbc_btnPretragaKorisnika.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnPretragaKorisnika.insets = new Insets(0, 0, 0, 0);
+		gbc_btnPretragaKorisnika.insets = new Insets(0, 0, 5, 0);
 		gbc_btnPretragaKorisnika.gridx = 0;
 		gbc_btnPretragaKorisnika.gridy = 2;
 		add(btnPretragaKorisnika, gbc_btnPretragaKorisnika);
-		
-		btnPregledLogova = new JButton("Pregled historije promjena");
-		GridBagConstraints gbc_btnPregledLogova = new GridBagConstraints();
-		gbc_btnPregledLogova.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnPregledLogova.insets = new Insets(0, 0, 0, 0);
-		gbc_btnPregledLogova.gridx = 0;
-		gbc_btnPregledLogova.gridy = 3;
-		add(btnPregledLogova, gbc_btnPregledLogova);
-		
-		btnIzradaBackupa = new JButton("Izrada backup-a");
-		GridBagConstraints gbc_btnIzradaBackupa = new GridBagConstraints();
-		gbc_btnIzradaBackupa.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnIzradaBackupa.insets = new Insets(0, 0, 0, 0);
-		gbc_btnIzradaBackupa.gridx = 0;
-		gbc_btnIzradaBackupa.gridy = 4;
-		add(btnIzradaBackupa, gbc_btnIzradaBackupa);
+	}
+	public void panelSet(){
 		
 		btnOdjava = new JButton("Odjava");
 		GridBagConstraints gbc_btnOdjava = new GridBagConstraints();
 		gbc_btnOdjava.insets = new Insets(0, 0, 5, 0);
 		gbc_btnOdjava.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnOdjava.gridx = 0;
-		gbc_btnOdjava.gridy = 6;
+		gbc_btnOdjava.gridy = 3;
 		add(btnOdjava, gbc_btnOdjava);
-	}
-	public void panelSet(){
 		JPanel panelEmpty = new JPanel();
 		GridBagConstraints gbc_panelEmpty = new GridBagConstraints();
 		gbc_panelEmpty.insets = new Insets(0, 0, 5, 0);
@@ -106,12 +88,7 @@ public class MeniAdminOpcije extends JPanel {
 	public JButton getBtnPretragaKorisnika() {
 		return btnPretragaKorisnika;
 	}
-	public JButton getBtnPregledLogova() {
-		return btnPregledLogova;
-	}
-	public JButton getBtnIzradaBackupa() {
-		return btnIzradaBackupa;
-	}
+	
 	public GridBagLayout getGridBagLayoutMeniAdminOpcije() {
 		return gridBagLayoutMeniAdminOpcije;
 	}

@@ -28,6 +28,7 @@ import ba.co.edgewise.jmup.enums.VlasnickaPretraga;
 import ba.co.edgewise.jmup.enums.VozacPretraga;
 import ba.co.edgewise.jmup.enums.VoziloPretraga;
 import ba.co.edgewise.jmup.enums.VrstaVozila;
+import ba.co.edgewise.jmup.klase.Uposlenik;
 import ba.co.edgewise.jmup.klase.Vozilo;
 import ba.co.edgewise.jmup.mvc.models.BossModel;
 import ba.co.edgewise.jmup.mvc.models.LoginModel;
@@ -63,10 +64,21 @@ public class BossController {
 		izvjestaj.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				 prikaziPanelPretraga();
-				 prikaziPanelIzvjestaji();
+				 prikaziPanelIzvjestaji();				 
 				};		
 		});
+		
+		//mod
+		JButton modifikacija= this.view.getIzvjestaj().getBtrPretraga().getBtn_modifikuj();
+		modifikacija.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+					getPodatke();
+				};		
+		});
+		
+		
+	
 		
 		//Listener za odjavu
 		JButton odjava = this.view.getMeni().getOpcije().getBtnOdjava();
@@ -170,7 +182,7 @@ public class BossController {
 		});
 		
 		//Enable - disable buttoni
-		JTable table = view.getStrana2().getPanel_vozilo().getTable();
+		final JTable table = view.getStrana2().getPanel_vozilo().getTable();
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 			@Override
 				public void valueChanged(ListSelectionEvent e) {
@@ -214,6 +226,16 @@ public class BossController {
 	{
 		view.prikaziIzvjestaje();
 	}
+	
+	  void getPodatke() {
+			int rowSelected = this.view.getStrana2().getPanel_vozilo().getTable().getSelectedRow();
+			Vozilo v = this.view.getStrana2().getPanel_vozilo().getModel().getData().get(rowSelected);
+			
+			/*view.getSadrzaj().getNaslov().postaviNaslov("Modificiranje korisnika");
+			JPanel cards = view.getSadrzaj().getPanelSadrzaj();
+			CardLayout tmp = (CardLayout) cards.getLayout();
+			tmp.show(cards, "Modificiranje korisnika");*/
+		}
 	
 	//PRETRAGA
 	void prikaziPanelPretraga()

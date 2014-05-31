@@ -12,6 +12,8 @@ import ba.co.edgewise.jmup.components.MeniBoss;
 import ba.co.edgewise.jmup.components.NaslovnaMenadzer;
 import ba.co.edgewise.jmup.components.OpcijaSadrzaj;
 import ba.co.edgewise.jmup.components.SalterskaPretraga;
+import ba.co.edgewise.jmup.components.VozacDodavanje;
+import ba.co.edgewise.jmup.components.VoziloDodavanje;
 import ba.co.edgewise.jmup.components.VoziloModifikacija;
 import ba.co.edgewise.jmup.components.Izvjestaji;
 
@@ -33,6 +35,8 @@ public class BossView extends JFrame {
 	private SalterskaPretraga strana2;
 	private VoziloModifikacija strana21;
 	private Izvjestaji izvjestaji;
+	private VozacDodavanje osMod;
+	private VoziloDodavanje vozMod;
 
 	private final BossView frejm = this;
 
@@ -58,11 +62,21 @@ public class BossView extends JFrame {
 		sadrzaj.getPanelSadrzaj().add(strana1, "Po\u010Detna");
 		
 		strana2 = new SalterskaPretraga();
+		strana2.getBtn_modifikuj().setVisible(false);
+		strana2.getBtnIzbrisi().setVisible(false);
+		strana2.getBtnProfil().setVisible(false);
 		sadrzaj.getPanelSadrzaj().add(strana2, "Pretraga");
 		
 		izvjestaji = new Izvjestaji();
 		sadrzaj.getPanelSadrzaj().add(izvjestaji, "Izrada izvještaja");
-				
+		
+		osMod = new VozacDodavanje();
+		sadrzaj.getPanelSadrzaj().add(osMod, "Unos voza\u010Da");
+		
+		vozMod = new VoziloDodavanje();
+		sadrzaj.getPanelSadrzaj().add(vozMod, "Unos vozila");
+
+		
 		contentPane.add(sadrzaj, gbc_sadrzaj);	
 	}
 	//
@@ -93,8 +107,6 @@ public class BossView extends JFrame {
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Pretraga");
 	}
-	
-	
 	
 	public void prikaziModifikacijuVozila()
 	{
@@ -129,6 +141,14 @@ public class BossView extends JFrame {
 	
 	public Izvjestaji getIzvjestaj() {
 		return izvjestaji;
+	}
+	
+	public VozacDodavanje getOsMod() {
+		return osMod;
+	}
+
+	public VoziloDodavanje getVozMod() {
+		return vozMod;
 	}
 
 }

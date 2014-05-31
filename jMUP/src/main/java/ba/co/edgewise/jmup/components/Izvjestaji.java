@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class Izvjestaji extends JPanel {
 
@@ -103,9 +104,10 @@ public class Izvjestaji extends JPanel {
 	public void componenteSet() {
 		
 		btrPretraga = new SalterskaPretraga();
-		btrPretraga.getBtn_modifikuj().setText("Kreiraj izvještaj");
-		btrPretraga.getBtnProfil().setVisible(false);
-		btrPretraga.getBtnProfil().setEnabled(false);
+		btrPretraga.getBtnIzbrisi().setVerticalAlignment(SwingConstants.TOP);
+		btrPretraga.getBtnIzbrisi().setText("");
+		btrPretraga.getBtnProfil().setText("");
+		btrPretraga.getBtn_modifikuj().setText("");
 		GridBagConstraints gbc_pretraga = new GridBagConstraints();
 		gbc_pretraga.gridwidth = 2;
 		gbc_pretraga.insets = new Insets(0, 0, 5, 5);
