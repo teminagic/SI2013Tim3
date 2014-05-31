@@ -63,6 +63,7 @@ public class BossController {
 		izvjestaj.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				 prikaziPanelPretraga();
 				 prikaziPanelIzvjestaji();
 				};		
 		});

@@ -6,8 +6,6 @@ public class Vlasnicka{
 	Vozilo vozilo;
 	Osoba vlasnik;
 	
-	
-
 	public Vlasnicka() {
 		super();
 	}
