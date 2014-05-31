@@ -2,9 +2,9 @@ package ba.co.edgewise.jmup.klase;
 
 public class Vlasnicka{
 	
-	String brojDozvole;
-	Vozilo vozilo;
-	Osoba vlasnik;
+	String brojDozvole = new String();
+	Vozilo vozilo = new Vozilo();
+	Osoba vlasnik = new Osoba();
 	
 	
 

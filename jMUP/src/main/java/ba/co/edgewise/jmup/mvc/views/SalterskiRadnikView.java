@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import ba.co.edgewise.jmup.components.MeniSalter;
 import ba.co.edgewise.jmup.components.NaslovnaSalterski;
 import ba.co.edgewise.jmup.components.OpcijaSadrzaj;
+import ba.co.edgewise.jmup.components.RegistracijaUnos;
 import ba.co.edgewise.jmup.components.VozacDodavanje;
 import ba.co.edgewise.jmup.components.VoziloDodavanje;
 
@@ -26,8 +27,9 @@ public class SalterskiRadnikView extends JFrame {
 	private NaslovnaSalterski strana1;
 	private VozacDodavanje strana2;
 	private VoziloDodavanje strana3;
-	private Boolean nadjenVozac = false;
-	private Boolean nadjenoVozilo = false;
+	private VozacDodavanje strana4;
+	private VoziloDodavanje strana5;
+	private RegistracijaUnos strana6;
 
 	// Constructors
 	public SalterskiRadnikView() {
@@ -74,6 +76,15 @@ public class SalterskiRadnikView extends JFrame {
 
 		strana3 = new VoziloDodavanje();
 		sadrzaj.getPanelSadrzaj().add(strana3, "Unos vozila");
+		
+		strana4 = new VozacDodavanje();
+		sadrzaj.getPanelSadrzaj().add(strana4, "Unos vlasnika - Vlasnička dozvola");
+		
+		strana5 = new VoziloDodavanje();
+		sadrzaj.getPanelSadrzaj().add(strana5, "Unos vozila - Vlasnička dozvola");
+		
+		strana6 = new RegistracijaUnos();
+		sadrzaj.getPanelSadrzaj().add(strana6, "Unos ovjere registracije - Vlasnička dozvola");
 	}
 
 	// public methods
@@ -99,20 +110,13 @@ public class SalterskiRadnikView extends JFrame {
 		return strana3;
 	}
 
-	public Boolean getNadjenVozac() {
-		return nadjenVozac;
+	public VozacDodavanje getStrana4() {
+		return strana4;
 	}
-
-	public void setNadjenVozac(Boolean nadjenVozac) {
-		this.nadjenVozac = nadjenVozac;
+	public VoziloDodavanje getStrana5() {
+		return strana5;
 	}
-
-	public Boolean getNadjenoVozilo() {
-		return nadjenoVozilo;
+	public RegistracijaUnos getStrana6() {
+		return strana6;
 	}
-
-	public void setNadjenoVozilo(Boolean nadjenoVozilo) {
-		this.nadjenoVozilo = nadjenoVozilo;
-	}
-
 }

@@ -12,6 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import ba.co.edgewise.jmup.components.DatumVazenja;
+import ba.co.edgewise.jmup.components.PodaciRegistracija;
+import ba.co.edgewise.jmup.components.RegistracijaUnos;
 import ba.co.edgewise.jmup.components.VozacDodavanje;
 import ba.co.edgewise.jmup.components.VoziloDodavanje;
 import ba.co.edgewise.jmup.enums.Boja;
@@ -47,8 +50,14 @@ public class SalterskiRadnikController {
 		}
 		
 		
-		//Meni kontrole
+		/**
+		 * Meni kontrola
+		 */
 		public void meniControl(){
+			
+			/**
+			 * Početna strana
+			 */
 			JButton pocetna = view.getMeni().getOpcije().getBtnPocetna();
 			pocetna.addMouseListener(new MouseAdapter() {
 				@Override
@@ -56,7 +65,10 @@ public class SalterskiRadnikController {
 					nextStrana1();
 				}
 			});
-		
+			
+			/**
+			 * Unos vozaca
+			 */
 			JButton unosVozaca = view.getMeni().getOpcije().getBtnUnosVozaca();
 			unosVozaca.addMouseListener(new MouseAdapter() {
 				@Override
@@ -65,6 +77,9 @@ public class SalterskiRadnikController {
 				}
 			});
 			
+			/**
+			 * Unos vozila
+			 */
 			JButton unosVozila = view.getMeni().getOpcije().getBtnUnosVozila();
 			unosVozila.addMouseListener(new MouseAdapter() {
 				@Override
@@ -72,11 +87,26 @@ public class SalterskiRadnikController {
 					nextStrana3();
 				}
 			});
+			
+			/**
+			 * Unos vlasničke dozvole
+			 */
+			JButton unosVlasnicke = view.getMeni().getOpcije().getBtnUnosVlasnicke();
+			unosVlasnicke.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					nextStrana4();
+				}
+			});
+			
 		}
 		
 		//Button kontrole
 		public void buttonControl(){
 			
+			/**
+			 * Spašavanje vozača
+			 */
 			JButton spasiVozaca = view.getStrana2().getBtnPrihvati();
 			spasiVozaca.addMouseListener(new MouseAdapter() {
 				@Override
@@ -85,6 +115,9 @@ public class SalterskiRadnikController {
 				}
 			});
 			
+			/**
+			 * Poništavanje popunjenih stvari vozača
+			 */
 			JButton ponistiStrana2 = view.getStrana2().getBtnPonisti();
 			ponistiStrana2.addMouseListener(new MouseAdapter() {
 				@Override
@@ -93,13 +126,19 @@ public class SalterskiRadnikController {
 				}
 			});
 			
+			/**
+			 * Upravljanje radio buttonom za Pravno/FIzicko lice unos vozača
+			 */
 			JRadioButton pravno = view.getStrana2().getPravno();
 			pravno.addItemListener(new ItemListener() {
 				public void itemStateChanged(ItemEvent e) {
-					dohvatiStatusPravno();
+					dohvatiStatusPravno(view.getStrana2());
 				}
 			});
 			
+			/**
+			 * Unos vozila
+			 */
 			JButton spasiVozilo = view.getStrana3().getBtn_prihvati();
 			spasiVozilo.addMouseListener(new MouseAdapter() {
 				@Override
@@ -108,9 +147,57 @@ public class SalterskiRadnikController {
 				}
 			});
 			
+			/**
+			 * Unos vlasničke - spašavanje vlasnika
+			 */
+			JButton spasiVlasnika = view.getStrana4().getBtnPrihvati();
+			spasiVlasnika.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					dodajVlasnikaUVlasničku();
+					nextStrana5();
+				}
+			});
+			
+			/**
+			 * Upravljanje radio buttonom za Pravno/FIzicko lice unos vlasnika Vlasničke
+			 */
+			JRadioButton pravnoVlasnicka = view.getStrana4().getPravno();
+			pravnoVlasnicka.addItemListener(new ItemListener() {
+				public void itemStateChanged(ItemEvent e) {
+					dohvatiStatusPravno(view.getStrana4());
+				}
+			});
+			
+			/**
+			 * Unos vlasničke - spašavanje vlasnika
+			 */
+			JButton spasiVlasnickaVozilo = view.getStrana5().getBtn_prihvati();
+			spasiVlasnickaVozilo.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					dodajVoziloUVlasničku();
+					nextStrana6();
+				}
+			});
+			
+			/**
+			 * Unos vlasničke - dodavanje registracije
+			 */
+			JButton spasiRegistracijuVlasnicka = view.getStrana6().getBtnPrihvati();
+			spasiRegistracijuVlasnicka.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					dodajRegistracijuUVlasničku();
+				}
+			});
+			
+			
 		}
 		
-		//navigacija
+		/**
+		 * Navigacija strana 1
+		 */
 		private void nextStrana1() {
 			view.getSadrzaj().getNaslov().postaviNaslov("Po\u010Detna");
 			JPanel cards = view.getSadrzaj().getPanelSadrzaj();
@@ -118,6 +205,9 @@ public class SalterskiRadnikController {
 			tmp.show(cards, "Po\u010Detna");
 		}
 		
+		/**
+		 * Navigacija strana 2
+		 */
 		private void nextStrana2() {
 			view.getSadrzaj().getNaslov().postaviNaslov("Unos voza\u010Da");
 			JPanel cards = view.getSadrzaj().getPanelSadrzaj();
@@ -125,6 +215,9 @@ public class SalterskiRadnikController {
 			tmp.show(cards, "Unos voza\u010Da");
 		}
 		
+		/**
+		 * Navigacija strana 3
+		 */
 		private void nextStrana3() {
 			view.getSadrzaj().getNaslov().postaviNaslov("Unos vozila");
 			JPanel cards = view.getSadrzaj().getPanelSadrzaj();
@@ -133,9 +226,38 @@ public class SalterskiRadnikController {
 		}
 		
 		/**
-		 * Dodavanje
+		 * Navigacija strana 4
 		 */
+		private void nextStrana4() {
+			view.getSadrzaj().getNaslov().postaviNaslov("Unos vlasnika - Vlasnička dozvola(1/3)");
+			JPanel cards = view.getSadrzaj().getPanelSadrzaj();
+			CardLayout tmp = (CardLayout) cards.getLayout();
+			tmp.show(cards, "Unos vlasnika - Vlasnička dozvola");
+		}
 		
+		/**
+		 * Navigacija strana 5
+		 */
+		private void nextStrana5() {
+			view.getSadrzaj().getNaslov().postaviNaslov("Unos vozila - Vlasnička dozvola(2/3)");
+			JPanel cards = view.getSadrzaj().getPanelSadrzaj();
+			CardLayout tmp = (CardLayout) cards.getLayout();
+			tmp.show(cards, "Unos vozila - Vlasnička dozvola");
+		}
+		
+		/**
+		 * Navigacija strana 6
+		 */
+		private void nextStrana6() {
+			view.getSadrzaj().getNaslov().postaviNaslov("Unos vozila - Ovjera registracije(3/3)");
+			JPanel cards = view.getSadrzaj().getPanelSadrzaj();
+			CardLayout tmp = (CardLayout) cards.getLayout();
+			tmp.show(cards, "Unos ovjere registracije - Vlasnička dozvola");
+		}
+		
+		/**
+		 * Dodavanje vozača
+		 */
 		private void dodajVozaca() {
 			dohvatiPodatkeVlasnika(view.getStrana2());
 			if (model.dodajVozaca()) {
@@ -154,6 +276,9 @@ public class SalterskiRadnikController {
 			};
 		}
 		
+		/**
+		 * Dodavanje vozila
+		 */
 		private void dodajVozilo() {
 			dohvatiPodatkeVozila(view.getStrana3());
 			if (model.dodajVozilo()) {
@@ -170,6 +295,75 @@ public class SalterskiRadnikController {
 						"default");
 			}
 		}
+		
+		/**
+		 * Dodavanje vozača u vlasničku
+		 */
+		private void dodajVlasnikaUVlasničku() {
+			dohvatiPodatkeVlasnika(view.getStrana4());
+			model.getVlasnicka().setVlasnik(model.getVozac());
+			model.getRegistracija().setOsoba(model.getVozac().getId());
+			if (model.dodajVozaca()) {
+				JOptionPane.showOptionDialog(view, "Voza\u010D uspje\u0161no dodan.",
+						"Kreiranje korisnika", JOptionPane.OK_OPTION,
+						JOptionPane.INFORMATION_MESSAGE, null,
+						new String[] { "Uredu" }, "default");
+				ocistiStranu2();
+			} else {
+				JOptionPane.showOptionDialog(view,
+						"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
+								+ "Molimo vas da poku\u0161ate ponovo",
+						"Kreiranje korisnika", JOptionPane.OK_OPTION,
+						JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+						"default");
+			};
+		}
+		
+		/**
+		 * Dodavanje vozila u vlasničku
+		 */
+		private void dodajVoziloUVlasničku() {
+			dohvatiPodatkeVozila(view.getStrana5());
+			model.getVlasnicka().setVozilo(model.getVozilo());
+			model.getRegistracija().setVozilo(model.getVozilo().getId());
+			if (model.dodajVozilo()) {
+				JOptionPane.showOptionDialog(view, "Vozilo uspje\u0161no dodan.",
+						"Kreiranje korisnika", JOptionPane.OK_OPTION,
+						JOptionPane.INFORMATION_MESSAGE, null,
+						new String[] { "Uredu" }, "default");
+				ocistiStranu2();
+			} else {
+				JOptionPane.showOptionDialog(view,
+						"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
+								+ "Molimo vas da poku\u0161ate ponovo",
+						"Kreiranje korisnika", JOptionPane.OK_OPTION,
+						JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+						"default");
+			};
+		}
+		
+		/**
+		 * Dodavanje registracije u vlasničku
+		 */
+		private void dodajRegistracijuUVlasničku() {
+			dohvatiPodatkeRegistracije(view.getStrana6());
+			if (model.dodajVlasnicku()) {
+				JOptionPane.showOptionDialog(view, "Vlasnička uspje\u0161no dodana.",
+						"Kreiranje korisnika", JOptionPane.OK_OPTION,
+						JOptionPane.INFORMATION_MESSAGE, null,
+						new String[] { "Uredu" }, "default");
+				ocistiStranu2();
+			} else {
+				JOptionPane.showOptionDialog(view,
+						"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
+								+ "Molimo vas da poku\u0161ate ponovo",
+						"Kreiranje korisnika", JOptionPane.OK_OPTION,
+						JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+						"default");
+			};
+		}
+		
+		
 		
 		
 		/**
@@ -220,8 +414,8 @@ public class SalterskiRadnikController {
 		/**
 		 * Swicha izmedju pravno i fizicko lice
 		 */
-		private void dohvatiStatusPravno(){
-			Boolean pravno = view.getStrana2().getPravno().isSelected();
+		private void dohvatiStatusPravno(VozacDodavanje frame){
+			Boolean pravno = frame.getPravno().isSelected();
 			view.getStrana2().getTfJMBG().setEditable(!pravno);
 			view.getStrana2().getTfIdBroj().setEditable(pravno);
 		}
@@ -287,6 +481,11 @@ public class SalterskiRadnikController {
 					frame.getCb_vrstaBoje().getSelectedItem());
 			vozilo.getBojaVozila().setTip("Osnovna");
 			
+		}
+		
+		private void dohvatiPodatkeRegistracije(RegistracijaUnos frame) {
+			String brojDozvole = frame.getPodaci().getTfBrojDozvole().getText().toString();
+			model.getVlasnicka().setBrojDozvole(brojDozvole);
 		}
 		
 }
