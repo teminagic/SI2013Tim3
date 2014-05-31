@@ -43,6 +43,8 @@ public class BossModel {
 	public ArrayList<Vlasnicka> dohvatiSveVlasnicke() {
 		return (ArrayList<Vlasnicka>) _vlasnickaDAO.getAll();
 	}
+	
+	// deaktivacija
 	public Boolean brisanjeVozila(Vozilo vozilo){
 		return _voziloDAO.delete(vozilo.getId());
 	}
@@ -55,6 +57,8 @@ public class BossModel {
 	public Boolean brisanjeS(Vozilo vozilo){
 		return _voziloDAO.delete(vozilo.getId());
 	}
+	
+	//pretraga
 	public ArrayList<Vozilo> pretragaVozilo(String parametar, String kriterij) {
 
 		switch (kriterij) {
@@ -200,35 +204,26 @@ public class BossModel {
 			e.printStackTrace();
 		}
 	}
-	
+	//modifikacija
 	public boolean modifikacijaVozilo(Integer id, Vozilo v)
 	{
-		if(_voziloDAO.update(id, v))
-			return true;
-		return false;
+		return _voziloDAO.update(id, v);
 	}
 	
 	public boolean modifikacijaOsoba(Integer id, Osoba o)
 	{
-		if(_osobaDAO.update(id, o))
-			return true;
-		return false;
+		return _osobaDAO.update(id, o);
 	}
 	
 	public boolean modifikacijaVlasnicka(String brojDozvole, Vlasnicka v)
 	{
-		if(_vlasnickaDAO.update(brojDozvole, v))
-			return true;
-		return false;
+		return _vlasnickaDAO.update(brojDozvole, v);
 	}
 	
 	public boolean modifikacijaSaobracajna(String brojDozvole, Saobracajna s)
 	{
-		if(_saobracajnaDAO.update(brojDozvole, s))
-			return true;
-		return false;
+		return _saobracajnaDAO.update(brojDozvole, s);
 	}
-	
 	
 
 	public static void main(String[] args) {
@@ -248,7 +243,6 @@ public class BossModel {
 		// o = b.pretragaVozac("Dervic", "Prezime");
 		 s = b.pretragaSaobracajna( "Amra Dervic" , "Ime i prezime");
 		//b.ekstraktToPDF(pdf);
-
 	}
 
 }
