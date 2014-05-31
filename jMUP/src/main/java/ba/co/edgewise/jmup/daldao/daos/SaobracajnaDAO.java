@@ -370,8 +370,8 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 	}
 	
 	public static void main(String[] args) throws ParseException {
-		SaobracajnaDAO s =  new SaobracajnaDAO();
-		Integer r = s.getBrojSaobracajnih();
+	//	SaobracajnaDAO s =  new SaobracajnaDAO();
+//		Integer r = s.getBrojSaobracajnih();
 	}
 	
 }
