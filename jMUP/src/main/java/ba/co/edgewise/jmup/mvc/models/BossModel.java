@@ -31,7 +31,30 @@ public class BossModel {
 		_osobaDAO = new OsobaDAO();
 		_motorDAO = new MotorDAO();
 	}
-
+	public ArrayList<Vozilo> dohvatiSvaVozila() {
+		return (ArrayList<Vozilo>) _voziloDAO.getAll();
+	}
+	public ArrayList<Osoba> dohvatiSveVozace() {
+		return (ArrayList<Osoba>) _osobaDAO.getAll();
+	}
+	public ArrayList<Saobracajna> dohvatiSveSaobracajne() {
+		return (ArrayList<Saobracajna>) _saobracajnaDAO.getAll();
+	}
+	public ArrayList<Vlasnicka> dohvatiSveVlasnicke() {
+		return (ArrayList<Vlasnicka>) _vlasnickaDAO.getAll();
+	}
+	public Boolean brisanjeVozila(Vozilo vozilo){
+		return _voziloDAO.delete(vozilo.getId());
+	}
+	public Boolean brisanjeVozaca(Osoba osoba){
+		return _osobaDAO.delete(osoba.getId());
+	}
+	public Boolean brisanjeVlasnicke(Vlasnicka vlasnicka){
+		return _vlasnickaDAO.delete(vlasnicka.getBrojDozvole());
+	}
+	public Boolean brisanjeS(Vozilo vozilo){
+		return _voziloDAO.delete(vozilo.getId());
+	}
 	public ArrayList<Vozilo> pretragaVozilo(String parametar, String kriterij) {
 
 		switch (kriterij) {
@@ -165,7 +188,7 @@ public class BossModel {
             PdfWriter.getInstance(document, file);
  
             document.open();
-            document.add(new Paragraph("Izvještaj " +  new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getYear()));
+            document.add(new Paragraph("Izvjeï¿½taj " +  new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getYear()));
             for ( String s : podaci) {
             	document.add(new Paragraph(s.toString()));
 			}

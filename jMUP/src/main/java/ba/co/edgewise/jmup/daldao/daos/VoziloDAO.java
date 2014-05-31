@@ -99,7 +99,8 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 							"`OblikKaroserije`,`GodinaProizvodnje` ,`MaxTehnickaDozvoljenaMasa` ,"+
 							"`MasaVozila` , `DopustenaNosivost` , `Motor` , `OdnosSnageIMase` ,"+
 							"`BrojMjestaZaSjedenje` ,`BrojMjestaZaStajanje` ,`BrojMjestaZaLezanje` ," +
-							"`EkoKarakteristikaVozila` ,`Katalizator` ,`DatumPregleda`,`RegOznaka`, `Status`)" +
+							"`EkoKarakteristikaVozila`,`Katalizator`,`DatumPregleda`,`RegOznaka`,`Status`)" +
+							"`EkoKarakteristikaVozila`,`Katalizator`,`DatumPregleda`,`RegOznaka`,`Status`)" +
 							"VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 			
 			statement3.setString(1, vrsta);
