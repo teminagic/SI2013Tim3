@@ -7,10 +7,13 @@ import java.util.List;
 
 import org.junit.Test;
 
+import ba.co.edgewise.jmup.daldao.daos.BojeVozilaDAO;
 import ba.co.edgewise.jmup.daldao.daos.VoziloDAO;
 import ba.co.edgewise.jmup.daldao.daos.MotorDAO;
 import ba.co.edgewise.jmup.enums.EkoKarakteristike;
+import ba.co.edgewise.jmup.enums.Status;
 import ba.co.edgewise.jmup.enums.VrstaVozila;
+import ba.co.edgewise.jmup.klase.BojaVozila;
 import ba.co.edgewise.jmup.klase.Osoba;
 import ba.co.edgewise.jmup.klase.Vozilo;
 import ba.co.edgewise.jmup.klase.Motor;
@@ -19,26 +22,29 @@ import junit.framework.TestCase;
 public class VoziloDAOTest {
 
 	private Motor motor = new Motor();
+	private BojaVozila boja=new BojaVozila();
 	VoziloDAO voziloDAO = new VoziloDAO();
 	
 	@Test
 	public void testCreate() {
 		MotorDAO md=new MotorDAO();
-		motor=md.get(3);
-		Vozilo v = new Vozilo(17, "1708", VrstaVozila.PUTNICKI_AUTOMOBIL, "BMW", "limuzina","A3", "161616165165", "OblikKaroserije",1990,1000,500,300,motor,50.1,5,4,3,EkoKarakteristike.EURO2, true, new Date() ); 
+		motor=md.get(120);
+		BojeVozilaDAO bd=new BojeVozilaDAO();
+		boja=bd.get(67);
+		Vozilo v = new Vozilo(17, VrstaVozila.PUTNICKI_AUTOMOBIL, "BMW", "limuzina","A3", "161616165165", "OblikKaroserije",1990,1000,500,300, 50.1,5,4,3,EkoKarakteristike.EURO2, true, new Date(), "1234a45", Status.AKTIVAN, boja, motor ); 
 		voziloDAO.create(v);
-		assertNotNull(voziloDAO.get(17).getId());
+		assertNotNull(voziloDAO.get(65).getId());
 		
 	}
 
 	@Test
 	public void testExistingGet() {
-		assertNotNull(voziloDAO.get(17).getId());
+		assertNotNull(voziloDAO.get(65).getId());
 	}
 
 	@Test
 	public void testNullGet() {
-		assertNull(voziloDAO.get(178).getId());
+		assertNull(voziloDAO.get(103).getId());
 	}
 	
 	@Test
@@ -76,19 +82,24 @@ public class VoziloDAOTest {
 	@Test
 	public void testUpdate() {
 		MotorDAO md=new MotorDAO();
-		motor=md.get(3);
-		Vozilo v = new Vozilo(21, "170899", VrstaVozila.PUTNICKI_AUTOMOBIL, "Audi", "limuzina","A1", "161616165165", "OblikKaroserije",1990,1000,500,300,motor,50.1,5,4,3,EkoKarakteristike.EURO2, true, new Date() ); 
+		motor=md.get(120);
+		BojeVozilaDAO bd=new BojeVozilaDAO();
+		boja=bd.get(67);
+		Vozilo v = new Vozilo(17, VrstaVozila.AUTOBUS, "BMW", "limuzina","A3", "161616165165", "OblikKaroserije",1990,1000,500,300, 50.1,5,4,3,EkoKarakteristike.EURO2, true, new Date(), "1234b45", Status.AKTIVAN, boja, motor ); 
+		
 		//voziloDAO.create(v);
-		assertTrue(voziloDAO.update(21, v)); // nesto nece update..
+		assertTrue(voziloDAO.update(67, v)); // nesto nece update..
 	}
 
 	@Test
 	public void testDelete() {
 		MotorDAO md=new MotorDAO();
-		motor=md.get(3);
-		Vozilo v = new Vozilo(40, "1708990", VrstaVozila.PUTNICKI_AUTOMOBIL, "Audi", "limuzina","A3", "161616165165", "OblikKaroserije",1990,1000,500,300,motor,50.1,5,4,3,EkoKarakteristike.EURO2, true, new Date() ); 
+		motor=md.get(120);
+		BojeVozilaDAO bd=new BojeVozilaDAO();
+		boja=bd.get(67);
+		Vozilo v = new Vozilo(17, VrstaVozila.PUTNICKI_AUTOMOBIL, "BMW", "limuzina","A3", "161616165165", "OblikKaroserije",1990,1000,500,300, 50.1,5,4,3,EkoKarakteristike.EURO2, true, new Date(), "1234b45", Status.AKTIVAN, boja, motor ); 
 		voziloDAO.create(v);
-		assertTrue(voziloDAO.delete(40));
+		assertTrue(voziloDAO.delete(67));
 	}
 
 }

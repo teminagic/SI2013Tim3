@@ -1,6 +1,6 @@
 package ba.co.edgewise.jmup.enums;
 
-public enum Motor {
+public enum VrstaMotora {
 		OTTO("OTTO"), 
 		DIESEL("DIESEL"), 
 		WANKEL("WANKEL"), 
@@ -8,7 +8,7 @@ public enum Motor {
 		KOMBINOVANI_POGON("Kombinovani pogon");
 		
 		private String _naziv;		
-		private Motor(final String naziv)
+		private VrstaMotora(final String naziv)
 		{
 			this._naziv = naziv;
 		}
@@ -18,19 +18,19 @@ public enum Motor {
 			return this._naziv;			
 		}
 			
-		public static Motor getMotor(String motor)
+		public static VrstaMotora getMotor(String motor)
 		{	
 			switch (motor) {
 				case "OTTO":
-					return Motor.OTTO;
+					return VrstaMotora.OTTO;
 				case "DIESEL":
-					return Motor.DIESEL;
+					return VrstaMotora.DIESEL;
 				case "WANKEL":
-					return Motor.WANKEL;
+					return VrstaMotora.WANKEL;
 				case "Elektromotor":
-					return Motor.ELEKTROMOTOR;
+					return VrstaMotora.ELEKTROMOTOR;
 				case "Kombinovani pogon":
-					return Motor.KOMBINOVANI_POGON;
+					return VrstaMotora.KOMBINOVANI_POGON;
 				default:
 					return null;
 				}

@@ -49,18 +49,21 @@ public class Uposlenik {
 		return id;
 	}
 	public void setId(int id) {
+		if(praznoPolje(String.valueOf(id))) throw new IllegalArgumentException("Polje id je prazno.");
 		this.id = id;
 	}
 	public String getIme() {
 		return ime;
 	}
 	public void setIme(String ime) {
+		if(praznoPolje(ime)) throw new IllegalArgumentException("Polje ime je prazno.");
 		this.ime = ime;
 	}
 	public String getPrezime() {
 		return prezime;
 	}
 	public void setPrezime(String prezime) {
+		if(praznoPolje(prezime)) throw new IllegalArgumentException("Polje prezime je prazno.");
 		this.prezime = prezime;
 	}
 	public BufferedImage getSlikaKorisnika() {
@@ -73,28 +76,37 @@ public class Uposlenik {
 		return korisnickoIme;
 	}
 	public void setKorisnickoIme(String korisnickoIme) {
+		if(praznoPolje(korisnickoIme)) throw new IllegalArgumentException("Polje korisnicko ime je prazno.");
 		this.korisnickoIme = korisnickoIme;
 	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
+		if(praznoPolje(korisnickoIme)) throw new IllegalArgumentException("Polje šifra je prazno.");
 		this.password = password;
 	}
 	public Status getStatus() {
 		return status;
 	}
 	public void setStatus(Status status) {
+		if(praznoPolje(status.toString())) throw new IllegalArgumentException("Polje status je prazno.");
 		this.status = status;
 	}
 	public TipUposlenika getTip() {
 		return tip;
 	}
 	public void setTip(TipUposlenika tip) {
+		if(praznoPolje(tip.toString())) throw new IllegalArgumentException("Polje tip je prazno.");
 		this.tip = tip;
 	}
 	
 	public Object[] toObjectArray() {
 		return new Object[]{this.ime, this.prezime, this.korisnickoIme, this.tip, this.status};
 	}
+	
+	private boolean praznoPolje(String varijabla){
+	    String EMPTY_STRING = "";
+	    return (varijabla == null) || (varijabla.trim().equals(EMPTY_STRING));
+	  }
 }
