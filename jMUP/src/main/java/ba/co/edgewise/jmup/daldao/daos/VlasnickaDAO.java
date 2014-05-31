@@ -17,8 +17,8 @@ public class VlasnickaDAO implements IGenericDAO<Vlasnicka, String> {
 	{
 		boolean success = false;
 		
-		int vozilo = vlasnicka.getVozilo().getId();
-		int vlasnik = vlasnicka.getVlasnik().getId();
+		Integer vozilo = vlasnicka.getVozilo().getId();
+		Integer vlasnik = vlasnicka.getVlasnik().getId();
 		
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
