@@ -7,8 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
+import ba.co.edgewise.jmup.daldao.daos.VoziloDAO;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
 import ba.co.edgewise.jmup.klase.Saobracajna;
+import ba.co.edgewise.jmup.klase.Vozilo;
 
 public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 
@@ -322,5 +324,16 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 		return success;
 		
 	}
+	
+	public boolean voziloExists(String registracija)
+	{
+		VoziloDAO v = new VoziloDAO();
+		Vozilo temp = v.getByReg(registracija);
+		Saobracajna s = getByReg(temp.getId());
+		if( s != null)
+			return true;
+		return false;
+	}
+	
 	
 }
