@@ -5,10 +5,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import ba.co.edgewise.jmup.daldao.daos.LogDAO;
+import ba.co.edgewise.jmup.klase.Log;
 import ba.co.edgewise.jmup.mvc.models.AdminModel;
 import ba.co.edgewise.jmup.mvc.models.LoginModel;
 import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModel;
@@ -75,8 +78,13 @@ public class LoginController {
 					try {
 						Administrator noviView = new Administrator();
 						AdminModel noviModel = new AdminModel();
-						AdminController noviController = new AdminController(noviView,noviModel);
+						AdminController noviController = new AdminController(noviView,noviModel,
+								model.getUposlenik());
 						noviController.control();
+						LogDAO lDAO = new LogDAO();
+						Log log = new Log(0, model.getUposlenik().getKorisnickoIme(), new Date(),
+								"Prijava na sistem", null);
+						lDAO.create(log);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

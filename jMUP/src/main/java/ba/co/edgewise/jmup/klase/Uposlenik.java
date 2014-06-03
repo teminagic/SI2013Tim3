@@ -6,7 +6,7 @@ import ba.co.edgewise.jmup.enums.Status;
 import ba.co.edgewise.jmup.enums.TipUposlenika;
 
 public class Uposlenik {
-	
+
 	private int id;
 	private String ime;
 	private String prezime;
@@ -17,10 +17,11 @@ public class Uposlenik {
 	private String password;
 	private Status status; // aktivan = true ili neaktivan = false
 	private TipUposlenika tip;
-	
+
 	// Konstruktor sa parametrima
-	public Uposlenik(int id, String ime, String prezime, BufferedImage slikaKorisnika, String korisnickoIme, String password, Status status, TipUposlenika tip)
-	{
+	public Uposlenik(int id, String ime, String prezime,
+			BufferedImage slikaKorisnika, String korisnickoIme,
+			String password, Status status, TipUposlenika tip) {
 		this.setId(id);
 		this.setIme(ime);
 		this.setPrezime(prezime);
@@ -30,9 +31,10 @@ public class Uposlenik {
 		this.setStatus(status);
 		this.setTip(tip);
 	}
+
 	// Konstruktor bez slike - Irma dodala za probu :)
-	public Uposlenik(int id, String ime, String prezime, String korisnickoIme, String password, Status status, TipUposlenika tip)
-	{
+	public Uposlenik(int id, String ime, String prezime, String korisnickoIme,
+			String password, Status status, TipUposlenika tip) {
 		this.setId(id);
 		this.setIme(ime);
 		this.setPrezime(prezime);
@@ -41,60 +43,86 @@ public class Uposlenik {
 		this.setStatus(status);
 		this.setTip(tip);
 	}
+
 	// Konstruktor bez parametara
-	public Uposlenik () {
+	public Uposlenik() {
 	}
 
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getIme() {
 		return ime;
 	}
+
 	public void setIme(String ime) {
+		if (!ime.matches("[A-Z][a-zA-Z\\s\\-ČčĆćŠšĐđŽž]+"))
+			throw new IllegalArgumentException("Ime nije u pravom formatu");
 		this.ime = ime;
 	}
+
 	public String getPrezime() {
 		return prezime;
 	}
+
 	public void setPrezime(String prezime) {
+		if (!prezime.matches("[A-Z][a-zA-Z\\s\\-ČčĆćŠšĐđŽž]+"))
+			throw new IllegalArgumentException("Prezime nije u pravom formatu");
 		this.prezime = prezime;
 	}
+
 	public BufferedImage getSlikaKorisnika() {
 		return slikaKorisnika;
 	}
+
 	public void setSlikaKorisnika(BufferedImage slikaKorisnika) {
 		this.slikaKorisnika = slikaKorisnika;
 	}
+
 	public String getKorisnickoIme() {
 		return korisnickoIme;
 	}
+
 	public void setKorisnickoIme(String korisnickoIme) {
+		if (!korisnickoIme.matches("[a-zA-Z\\s]+"))
+			throw new IllegalArgumentException(
+					"Korisničko ime nije u pravom formatu");
 		this.korisnickoIme = korisnickoIme;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
+		//if (!password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$"))
+		//	throw new IllegalArgumentException("Šifra nije u pravom formatu");
 		this.password = password;
 	}
+
 	public Status getStatus() {
 		return status;
 	}
+
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+
 	public TipUposlenika getTip() {
 		return tip;
 	}
+
 	public void setTip(TipUposlenika tip) {
 		this.tip = tip;
 	}
-	
+
 	public Object[] toObjectArray() {
-		return new Object[]{this.ime, this.prezime, this.korisnickoIme, this.tip, this.status};
+		return new Object[] { this.ime, this.prezime, this.korisnickoIme,
+				this.tip, this.status };
 	}
 }

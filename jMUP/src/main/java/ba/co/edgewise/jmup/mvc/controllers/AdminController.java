@@ -3,6 +3,7 @@ package ba.co.edgewise.jmup.mvc.controllers;
 import java.awt.CardLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -13,9 +14,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import ba.co.edgewise.jmup.components.KorisnikKreiranje;
+import ba.co.edgewise.jmup.daldao.daos.LogDAO;
 import ba.co.edgewise.jmup.enums.Status;
 import ba.co.edgewise.jmup.enums.TipPretrageUposlenika;
 import ba.co.edgewise.jmup.enums.TipUposlenika;
+import ba.co.edgewise.jmup.klase.Log;
 import ba.co.edgewise.jmup.klase.Uposlenik;
 import ba.co.edgewise.jmup.mvc.models.AdminModel;
 import ba.co.edgewise.jmup.mvc.views.Administrator;
@@ -23,11 +26,13 @@ import ba.co.edgewise.jmup.mvc.views.Administrator;
 public class AdminController {
 	private Administrator view;
 	private AdminModel model;
+	private Uposlenik user;
 
-	public AdminController(Administrator view, AdminModel model) {
+	public AdminController(Administrator view, AdminModel model, Uposlenik user) {
 		super();
 		this.view = view;
 		this.model = model;
+		this.user = user;
 	}
 
 	public void control() {
@@ -150,6 +155,7 @@ public class AdminController {
 	private void postaviIKreirajKorisnika() {
 		KorisnikKreiranje sadrzaj = view.getStrana2();
 		Uposlenik tmp = new Uposlenik();
+			
 		tmp.setIme(sadrzaj.getTfIme().getText());
 		tmp.setPrezime(sadrzaj.getTfPrezime().getText());
 		tmp.setKorisnickoIme(sadrzaj.getTfKorisnickoIme().getText());
@@ -159,11 +165,18 @@ public class AdminController {
 		tmp.setTip((TipUposlenika) sadrzaj.getCbTipKorisnickogRacuna()
 				.getSelectedItem());
 		this.model.setUposlenik(tmp);
+		
 		if (model.kreiranjeKorisnika()) {
 			JOptionPane.showOptionDialog(view, "Korisnik uspje\u0161no dodan.",
 					"Kreiranje korisnika", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
+			
+			LogDAO lDAO = new LogDAO();
+			Log log = new Log(0, user.getKorisnickoIme(), new Date(),
+					"Kreiranje novog korisnika", "Korisničko ime = " + tmp.getKorisnickoIme());
+			lDAO.create(log);
+			
 		} else {
 			JOptionPane.showOptionDialog(view,
 					"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
@@ -181,8 +194,14 @@ public class AdminController {
 			if(JOptionPane.showOptionDialog(view, "Korisnik uspje\u0161no modificiran.",
 					"Kreiranje korisnika", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
-					new String[] { "Uredu" }, "default")==JOptionPane.OK_OPTION)
+					new String[] { "Uredu" }, "default")==JOptionPane.OK_OPTION) {
 				nextPretraga();
+				LogDAO lDAO = new LogDAO();
+				Log log = new Log(0, user.getKorisnickoIme(), new Date(),
+						"Modifikovanje korisnika", 
+						"Korisničko ime = " + model.getUposlenik().getKorisnickoIme());
+				lDAO.create(log);
+			}
 		} else {
 			JOptionPane.showOptionDialog(view,
 					"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
@@ -202,8 +221,16 @@ public class AdminController {
 			if(JOptionPane.showOptionDialog(view, "Korisnik uspje\u0161no izbrisan.",
 					"Kreiranje korisnika", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
-					new String[] { "Uredu" }, "default") == JOptionPane.OK_OPTION)
+					new String[] { "Uredu" }, "default") == JOptionPane.OK_OPTION){
+				
 				nextPretraga();
+				
+				LogDAO lDAO = new LogDAO();
+				Log log = new Log(0, user.getKorisnickoIme(), new Date(),
+						"Brisanje korisnika", 
+						"Korisničko ime = " + model.getUposlenik().getKorisnickoIme());
+				lDAO.create(log);
+			}
 		} else {
 			JOptionPane.showOptionDialog(view,
 					"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
