@@ -635,6 +635,7 @@ public class SalterskiRadnikController {
 		return true;
 	}
 	public boolean provjeriPopunjenostRegistracije() {
+		
 		return true;
 	}
 	public void dodajVozilo() throws ParseException 
