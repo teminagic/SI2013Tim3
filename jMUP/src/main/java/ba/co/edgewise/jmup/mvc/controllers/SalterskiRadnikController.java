@@ -564,7 +564,8 @@ public class SalterskiRadnikController {
 		EkoKarakteristike ekoKarakteristika =(EkoKarakteristike)view.getVoziloDodavanje().getCb_ekoKarakteristike().getSelectedItem();
 		boolean katalizator = view.getVoziloDodavanje().getRb_katalizator_da().isSelected();
 		String oblikKaroserije = view.getVoziloDodavanje().getTf_karoserija().getText();
-		Date datumPregleda=new SimpleDateFormat("yyyy-MM-dd").parse(view.getVoziloDodavanje().getTf_datumPregleda().getText());
+		
+		java.util.Date  datumPregleda= (java.util.Date) view.getVoziloDodavanje().getDatePickerDatumPregleda().getModel().getValue();
 		String brojSasije = view.getVoziloDodavanje().getTf_brojSasije().getText();
 		int maxTehnickaDozvoljenaMasa = Integer.parseInt(view.getVoziloDodavanje().getTb_maxMasa().getText());
 		int masaVozila = Integer.parseInt(view.getVoziloDodavanje().getTb_masa().getText());
