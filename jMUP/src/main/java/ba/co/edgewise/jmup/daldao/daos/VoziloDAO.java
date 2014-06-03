@@ -55,8 +55,8 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 							"`OblikKaroserije`,`GodinaProizvodnje` ,`MaxTehnickaDozvoljenaMasa` ,"+
 							"`MasaVozila` , `DopustenaNosivost` , `Motor` , `OdnosSnageIMase` ,"+
 							"`BrojMjestaZaSjedenje` ,`BrojMjestaZaStajanje` ,`BrojMjestaZaLezanje` ," +
-							"`EkoKarakteristikaVozila` ,`Katalizator` ,`DatumPregleda`,`RegOznaka`)" +
-							"VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+							"`EkoKarakteristikaVozila` ,`Katalizator` ,`DatumPregleda`,`RegOznaka`, `Status`)" +
+							"VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 			
 			statement.setString(1, vrsta);
 			statement.setString(2, marka);
@@ -77,6 +77,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 			statement.setBoolean(17, katalizator);
 			statement.setDate(18, new java.sql.Date(datumPregleda.getTime()));
 			statement.setString(19, reg);
+			statement.setString(20, "Aktivan");
 
 			statement.executeUpdate();
 			success = true;
@@ -534,8 +535,8 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 		// novi = new Motor(0, 650, 200,
 					// "LPG", "la", "la");
 					// d.create(novi);
-		Vozilo v = new Vozilo(null,"registracija" ,VrstaVozila.PUTNICKI_AUTOMOBIL, "BMW", "limuzina",
-					"A1", "aaa54", "oblikkaroserije", 2013, 4500,
+		Vozilo v = new Vozilo(null,"registracija5" ,VrstaVozila.PUTNICKI_AUTOMOBIL, "BMW", "limuzina",
+					"A12", "aaa5421", "oblikkaroserije", 2013, 4500,
 					3000, 1500, motor, 5.1, 5, 0, 0, EkoKarakteristike.EURO2, true, new Date());
 		VoziloDAO vdao = new VoziloDAO();
 		
