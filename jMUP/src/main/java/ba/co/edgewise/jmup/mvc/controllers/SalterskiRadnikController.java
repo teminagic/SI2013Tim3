@@ -21,12 +21,16 @@ import javax.swing.event.ListSelectionListener;
 
 import ba.co.edgewise.jmup.components.OpcijaSadrzaj;
 import ba.co.edgewise.jmup.components.VoziloDodavanje;
+import ba.co.edgewise.jmup.daldao.daos.OsobaDAO;
+import ba.co.edgewise.jmup.daldao.daos.VlasnickaDAO;
 import ba.co.edgewise.jmup.enums.EkoKarakteristike;
 import ba.co.edgewise.jmup.enums.SaobracajnaPretraga;
 import ba.co.edgewise.jmup.enums.VlasnickaPretraga;
 import ba.co.edgewise.jmup.enums.VozacPretraga;
 import ba.co.edgewise.jmup.enums.VoziloPretraga;
 import ba.co.edgewise.jmup.enums.VrstaVozila;
+import ba.co.edgewise.jmup.klase.Osoba;
+import ba.co.edgewise.jmup.klase.Vlasnicka;
 import ba.co.edgewise.jmup.klase.Vozilo;
 import ba.co.edgewise.jmup.mvc.models.LoginModel;
 import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModel;
@@ -188,7 +192,7 @@ public class SalterskiRadnikController {
 							
 				}
 			});	
-				//getPromjenaVlasnika
+				
 				// Promjena vlasnika
 				JButton promVlasnika = this.view.getMeni().getOpcije().getBtnPromjenaVlasnika();
 				promVlasnika.addMouseListener(new MouseAdapter() {
@@ -227,6 +231,19 @@ public class SalterskiRadnikController {
 						};
 					}
 				});
+				
+				JButton ponistiPromjenuVlasnika = this.view.getPromjenaVlasnika().getBtnPonisti();
+				ponistiPromjenuVlasnika.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						pocistiPoljaZaPromjenuVlasnika();
+							JOptionPane.showOptionDialog(view, "Unos poni\u0161ten.",
+									"Promjena vlasnika", JOptionPane.OK_OPTION,
+									JOptionPane.INFORMATION_MESSAGE, null,
+									new String[] { "Uredu" }, "default");															
+					}
+				});
+				
 				
 				//UNOS VOZILA
 				JButton unosVozila = this.view.getMeni().getOpcije().getBtnUnosVozila();
@@ -465,6 +482,7 @@ public class SalterskiRadnikController {
 				});
 				
 	}
+	
 	Boolean promijeniVlasnika(){
 		return model.PromijeniVlasnika(view.getPromjenaVlasnika().getTfBrojVlasnickeDozvole().getText(),
 		view.getPromjenaVlasnika().getTfJMBGNovogVlasnika().getText());
@@ -474,6 +492,28 @@ public class SalterskiRadnikController {
 		view.getPromjenaVlasnika().getTfJMBGNovogVlasnika().setText("");
 	}
 	Boolean provjeriPopunjenostZaPromjenuVlasnika(){
+		OsobaDAO oDAO = new OsobaDAO();
+		Osoba o = oDAO.getByJMBG(view.getPromjenaVlasnika().getTfJMBGNovogVlasnika().getText());
+		if(o.getJmbg_Id()!=view.getPromjenaVlasnika().getTfJMBGNovogVlasnika().getText()){
+			
+			JOptionPane.showOptionDialog(view, "Uneseni JMBG ne postoji u bazi podataka.",
+					"Promjena vlasnika", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+					pocistiPoljaZaPromjenuVlasnika();
+			return false;
+		}
+
+		VlasnickaDAO vlDAO = new VlasnickaDAO();
+		Vlasnicka v = vlDAO.get(view.getPromjenaVlasnika().getTfBrojVlasnickeDozvole().getText());
+		if(v.getBrojDozvole()!=view.getPromjenaVlasnika().getTfBrojVlasnickeDozvole().getText()){
+			JOptionPane.showOptionDialog(view, "Uneseni broj dozvole ne postoji u bazi podataka.",
+					"Promjena vlasnika", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+					pocistiPoljaZaPromjenuVlasnika();
+			return false;
+		}	
 		return true;
 	}
 	Boolean provjeriUneseniBrojSaobracajne(String brojDozvole)
