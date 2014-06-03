@@ -1,24 +1,35 @@
 package ba.co.edgewise.jmup.mvc.controllers;
 
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
+import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import ba.co.edgewise.jmup.klase.Log;
+import ba.co.edgewise.jmup.klase.Uposlenik;
+import ba.co.edgewise.jmup.mvc.models.AdminModel;
+import ba.co.edgewise.jmup.mvc.models.LoginModel;
+import ba.co.edgewise.jmup.mvc.views.AdminView;
+import ba.co.edgewise.jmup.mvc.views.Login;
+import ba.co.edgewise.jmup.daldao.daos.LogDAO;
 import ba.co.edgewise.jmup.enums.SaobracajnaPretraga;
 import ba.co.edgewise.jmup.enums.VlasnickaPretraga;
 import ba.co.edgewise.jmup.enums.VozacPretraga;
 import ba.co.edgewise.jmup.enums.VoziloPretraga;
+import ba.co.edgewise.jmup.klase.Log;
 import ba.co.edgewise.jmup.mvc.models.*;
 import ba.co.edgewise.jmup.mvc.views.*;
 import ba.co.edgewise.components.helpers.ShowDialogInput;
@@ -27,6 +38,7 @@ public class BossControler {
 	private BossModel model;
 	private BossView view;
 	private boolean odjavaBossa;
+	private Uposlenik user;
 
 	public BossControler(BossView view, BossModel model) {
 		super();
@@ -60,6 +72,10 @@ public class BossControler {
 							LoginModel model = new LoginModel();
 							LoginController controler = new LoginController(view, model);
 							controler.control();
+							LogDAO lDAO = new LogDAO();
+							Log log = new Log(0, user.getKorisnickoIme(), new Date(),
+									"Odjava sa sistema", "Korisnik: " + user.getKorisnickoIme());
+							lDAO.create(log);
 				        }
 				       
 				} catch (Exception izuzetak) {
@@ -76,7 +92,14 @@ public class BossControler {
 		 				 prikaziPanelIzvjestaji();
 		 				};		
 		 		});
-				
+	   //LOGOVI
+		   	JButton logovi = view.getMeni().getOpcije().getBtnPregledLogova();
+				logovi.addMouseListener(new MouseAdapter(){
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						nextLogovi();
+					}
+				});
 		
 		
 		//PRETRAGA
@@ -174,7 +197,17 @@ public class BossControler {
 			 	{
 			 		view.prikaziIzvjestaje();
 			 	}
-			
+			private void nextLogovi()
+			{
+				view.getSadrzaj().getNaslov().postaviNaslov("Pregled historije promjena");
+				
+				view.getStrana5().getModel().clearAll();
+				view.getStrana5().getModel().addAll(model.dohvatiLogove());
+				
+				JPanel cards = view.getSadrzaj().getPanelSadrzaj();
+				CardLayout tmp = (CardLayout) cards.getLayout();
+				tmp.show(cards, "Pregled historije promjena");
+			}
 			void prikaziPanelPretragaVozila() {
 				//Baza
 				view.getStrana2().getPanel_vozilo().getModel().clearAll();

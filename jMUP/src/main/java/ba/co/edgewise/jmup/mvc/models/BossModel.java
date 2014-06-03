@@ -25,6 +25,7 @@ public class BossModel {
 	private OsobaDAO _osobaDAO;
 	private MotorDAO _motorDAO;
 	private RegistracijaDAO _regDao;
+	private LogDAO _logDAO = new LogDAO();
 
 	public BossModel() {
 		_vlasnickaDAO = new VlasnickaDAO();
@@ -259,7 +260,10 @@ public class BossModel {
 
 	}
 
-
+	public ArrayList<Log> dohvatiLogove(){
+		return _logDAO.getAll();
+	}
+	
 	public static void main(String[] args) {
 
 		BossModel b = new BossModel();

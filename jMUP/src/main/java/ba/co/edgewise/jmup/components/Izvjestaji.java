@@ -33,7 +33,6 @@ public class Izvjestaji extends JPanel {
 	private JLabel label_1;
 	private JButton btnKreiranjeIzvjestaja1;
 	private JButton btnKreiranjeIzvjestaja2;
-	private SalterskaPretraga btrPretraga;
 
 	public Izvjestaji() {
 		layoutSet();
@@ -115,24 +114,6 @@ public class Izvjestaji extends JPanel {
 	}
 
 	public void componenteSet() {
-
-		btrPretraga = new SalterskaPretraga();
-		btrPretraga.getBtn_modifikuj().setText("Kreiraj izvještaj");
-		btrPretraga.getBtnProfil().setVisible(false);
-		btrPretraga.getBtnProfil().setEnabled(false);
-		GridBagConstraints gbc_pretraga = new GridBagConstraints();
-		gbc_pretraga.gridwidth = 2;
-		gbc_pretraga.insets = new Insets(0, 0, 5, 5);
-		gbc_pretraga.gridx = 1;
-		gbc_pretraga.gridy = 2;
-		add(btrPretraga, gbc_pretraga);
-
-		//action listeners
-		btrPretraga.getBtn_modifikuj().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Izvještaji: Implementacija u toku");
-			}
-		});
 	}
 
 
@@ -165,7 +146,5 @@ public class Izvjestaji extends JPanel {
 		return btnKreiranjeIzvjestaja2;
 	}
 
-	public SalterskaPretraga getBtrPretraga() {
-		return btrPretraga;
-	}
+
 }

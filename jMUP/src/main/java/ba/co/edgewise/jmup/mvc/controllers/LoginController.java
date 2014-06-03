@@ -96,6 +96,10 @@ public class LoginController {
 						BossModel noviModel = new BossModel();
 						BossControler noviController = new BossControler(noviView,noviModel);
 						noviController.control();
+						LogDAO lDAO = new LogDAO();
+						Log log = new Log(0, model.getUposlenik().getKorisnickoIme(), new Date(),
+								"Prijava na sistem", "Korisnik: " + model.getUposlenik().getKorisnickoIme());
+						lDAO.create(log);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -117,6 +121,11 @@ public class LoginController {
 		//				SalterskiRadnikControllerAmra noviController = new SalterskiRadnikControllerAmra(noviView,noviModel);						
 					
 						noviController.control();
+						
+						LogDAO lDAO = new LogDAO();
+						Log log = new Log(0, model.getUposlenik().getKorisnickoIme(), new Date(),
+								"Prijava na sistem", "Korisnik: " + model.getUposlenik().getKorisnickoIme());
+						lDAO.create(log);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

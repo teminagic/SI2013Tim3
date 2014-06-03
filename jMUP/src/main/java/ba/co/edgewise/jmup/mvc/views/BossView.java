@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import ba.co.edgewise.jmup.components.Izvjestaji;
 import ba.co.edgewise.jmup.components.*;
 
 public class BossView extends JFrame {
@@ -22,7 +21,7 @@ public class BossView extends JFrame {
 	private NaslovnaMenadzer strana1;
 	private SalterskaPretraga strana2;
 	private Izvjestaji strana3;
-
+	private PregledLogova strana5;
 	
 	GridBagConstraints gbc_naslov;
 	GridBagConstraints gbc_meni;
@@ -75,6 +74,9 @@ public class BossView extends JFrame {
 		strana3 = new Izvjestaji();
 		sadrzaj.getPanelSadrzaj().add(strana3, "IzvjeÅ¡taji");
 		
+		strana5 = new PregledLogova();
+		sadrzaj.getPanelSadrzaj().add(strana5, "Pregled historije promjena");
+		
 		izvjestaji = new Izvjestaji();
 		sadrzaj.getPanelSadrzaj().add(izvjestaji, "Izrada izvještaja");
 		
@@ -123,7 +125,10 @@ public class BossView extends JFrame {
 		return sadrzaj;
 	}
 	
-
+	public PregledLogova getStrana5() {
+		return strana5;
+	}
+	
 	public GridBagConstraints getGbc_naslov() {
 		return gbc_naslov;
 	}
