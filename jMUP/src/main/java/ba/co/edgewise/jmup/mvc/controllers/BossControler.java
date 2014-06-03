@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -20,6 +21,7 @@ import ba.co.edgewise.jmup.enums.VozacPretraga;
 import ba.co.edgewise.jmup.enums.VoziloPretraga;
 import ba.co.edgewise.jmup.mvc.models.*;
 import ba.co.edgewise.jmup.mvc.views.*;
+import ba.co.edgewise.components.helpers.ShowDialogInput;
 
 public class BossControler {
 	private BossModel model;
@@ -65,6 +67,18 @@ public class BossControler {
 				}
 			};		
 		});	
+		
+		//Izvjestaji
+		 		JButton izvjestaj= this.view.getMeni().getOpcije().getBtnIzradaIzvjetaja();
+		 		izvjestaj.addMouseListener(new MouseAdapter() {
+		 			@Override
+		 			public void mouseClicked(MouseEvent e) {
+		 				 prikaziPanelIzvjestaji();
+		 				};		
+		 		});
+				
+		
+		
 		//PRETRAGA
 		// Pretraga - Prikaz osnovnog panela
 		JButton salterskaPretraga= this.view.getMeni().getOpcije().getBtnPretraga();
@@ -75,6 +89,7 @@ public class BossControler {
 			};
 			
 		});
+		
 		// Pretraga - Prikaz panela Vozilo
 		final JRadioButton rbVozilo = this.view.getStrana2().getRbVozilo();
 		rbVozilo.addActionListener(new ActionListener() {
@@ -84,6 +99,7 @@ public class BossControler {
 				}
 			};
 		});
+		
 		// Pretraga - Prikaz panela Vozac
 		final JRadioButton rbVozac = this.view.getStrana2().getRbVozac();
 		rbVozac.addActionListener(new ActionListener() {
@@ -153,6 +169,12 @@ public class BossControler {
 				//Defaultni - Vozila
 				prikaziPanelPretragaVozila();
 			}
+			
+			void prikaziPanelIzvjestaji()
+			 	{
+			 		view.prikaziIzvjestaje();
+			 	}
+			
 			void prikaziPanelPretragaVozila() {
 				//Baza
 				view.getStrana2().getPanel_vozilo().getModel().clearAll();

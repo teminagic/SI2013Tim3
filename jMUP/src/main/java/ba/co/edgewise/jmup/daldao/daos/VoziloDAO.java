@@ -77,7 +77,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 			statement.setBoolean(17, katalizator);
 			statement.setDate(18, new java.sql.Date(datumPregleda.getTime()));
 			statement.setString(19, reg);
-			statement.setString(20, "Aktivan");
+			statement.setString(20, "1");
 
 			statement.executeUpdate();
 			success = true;

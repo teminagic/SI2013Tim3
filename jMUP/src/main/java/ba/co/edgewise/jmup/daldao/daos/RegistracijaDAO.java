@@ -175,6 +175,44 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 		return success;
 	}
 
+	public ArrayList<String> getAllRegistracijeIstekle() throws ParseException
+	 	{
+	 		ArrayList<String> result = new ArrayList<String>();
+	 
+	 		ConnectionManager manager = new ConnectionManager();
+	 		Connection connection = manager.getConnection();
+	 		
+	 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	 		Date d = new Date();
+	 		String date = sdf.format(d);
+	 		
+	 		Date now = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+	 		// Pocetak pripreme upita
+	 		ResultSet qResult = null;
+	 
+	 		try {
+	 			
+	 			PreparedStatement statement = connection
+	 			.prepareStatement("SELECT * " + "FROM `Registracija` " + "WHERE Do < ?");
+	 			statement.setDate(1, new java.sql.Date(now.getTime()));
+	 			qResult = statement.executeQuery();
+	 		// Dobavljanje rezultata
+	 			while (qResult.next()) {
+	 				String temp = qResult.getString("RegistarskaOznaka");
+	 				result.add(temp);
+	 			}
+	 
+	 		} catch (SQLException e) {
+	 			e.printStackTrace();
+	 	} finally {
+	 			ConnectionManager.closeConnection(connection);
+	 		}
+	 
+	 		return result;
+	 	}
+	
+	
+	
 	public boolean updateSaIDVozila(Integer idVozila, Date odKad, Date doKad) {
 		boolean success = false;
 		
