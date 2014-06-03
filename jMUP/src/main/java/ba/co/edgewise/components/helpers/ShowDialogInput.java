@@ -25,7 +25,7 @@ public class ShowDialogInput {
 		 }
 	
 	 }
-	 
+	 //registracije
 	  public void filePickerReg()
 	 {
 		  JFileChooser fileChooser=new JFileChooser("C:/");	
@@ -48,7 +48,7 @@ public class ShowDialogInput {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 	 			  JOptionPane.showMessageDialog(null, "Doslo je do greske, provjerite lokaciju za snimanje da nije zasticena", "jMUP", 1);
-
+	 			
 			}
 	 		 
 	          
