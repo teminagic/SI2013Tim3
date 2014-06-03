@@ -1,11 +1,18 @@
 package ba.co.edgewise.jmup.components;
 import ba.co.edgewise.jmup.enums.*;
+
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.border.TitledBorder;
+
 import java.awt.Insets;
+
 import javax.swing.ButtonGroup;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -14,6 +21,10 @@ import javax.swing.JButton;
 import javax.swing.UIManager;
 import javax.swing.JRadioButton;
 import javax.swing.DefaultComboBoxModel;
+
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 public class VoziloDodavanje extends JPanel {
 
@@ -80,6 +91,9 @@ public class VoziloDodavanje extends JPanel {
 	private JComboBox cb_vrstaBoje;
 	private JRadioButton rb_katalizator_da;
 	private JRadioButton rb_katalizator_ne;
+	private UtilDateModel modelDatumPregleda;
+	private JDatePanelImpl datePanelDatumPregleda;
+	private JDatePickerImpl datePickerDatumPregleda;
 
 	public VoziloDodavanje() {
 		// calling methods for seting layout
@@ -563,14 +577,17 @@ public class VoziloDodavanje extends JPanel {
 		gbc_tf_karoserija.gridy = 6;
 		detaljniPodaci.add(tf_karoserija, gbc_tf_karoserija);
 
-		tf_datumPregleda = new JTextField();
-		tf_datumPregleda.setColumns(10);
+	//	tf_datumPregleda = new JTextField();
+	//	tf_datumPregleda.setColumns(10);
+		modelDatumPregleda = new UtilDateModel();
+		datePanelDatumPregleda = new JDatePanelImpl(modelDatumPregleda);
+		datePickerDatumPregleda = new JDatePickerImpl(datePanelDatumPregleda);
 		GridBagConstraints gbc_tf_datumPregleda = new GridBagConstraints();
 		gbc_tf_datumPregleda.gridwidth = 2;
 		gbc_tf_datumPregleda.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tf_datumPregleda.gridx = 1;
 		gbc_tf_datumPregleda.gridy = 7;
-		detaljniPodaci.add(tf_datumPregleda, gbc_tf_datumPregleda);
+		detaljniPodaci.add(datePickerDatumPregleda, gbc_tf_datumPregleda);
 
 		tb_bojaVozila = new JTextField();
 		GridBagConstraints gbc_tb_bojaVozila = new GridBagConstraints();
@@ -696,6 +713,8 @@ public class VoziloDodavanje extends JPanel {
 		gbc_btn_ponisti.gridx = 5;
 		gbc_btn_ponisti.gridy = 0;
 		buttonPanel.add(btn_ponisti, gbc_btn_ponisti);
+		
+	
 
 	}
 
@@ -791,5 +810,8 @@ public class VoziloDodavanje extends JPanel {
 	}
 	public JPanel getButtonPanel() {
 		return buttonPanel;
+	}
+	public JDatePickerImpl getDatePickerDatumPregleda() {
+		return datePickerDatumPregleda;
 	}
 }
