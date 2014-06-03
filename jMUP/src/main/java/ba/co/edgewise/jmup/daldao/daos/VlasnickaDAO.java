@@ -252,7 +252,7 @@ public Vlasnicka getByVozilo(Integer id){
 		try {
 			PreparedStatement statement = 	connection.prepareStatement(
 					"UPDATE `Vlasnicka`" +
-					" SET Vozilo = ?, Vlasnik = ? " + 
+					" SET Vozilo = ?, Vlasnik = ? " + //
 					" WHERE BrojDozvole = ? "
 					);
 
