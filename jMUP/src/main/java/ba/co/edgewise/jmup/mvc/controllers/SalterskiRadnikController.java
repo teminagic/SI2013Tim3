@@ -64,9 +64,8 @@ public class SalterskiRadnikController {
 				pocetna.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						prikaziPanelUnosRegistracije();
-						//prikaziPanelPocetnu();
-						};
+						prikaziPanelPocetnu();
+				};
 					
 				});
 				// Listener za unos vozaca
