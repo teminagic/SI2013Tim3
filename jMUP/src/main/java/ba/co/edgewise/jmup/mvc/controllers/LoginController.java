@@ -52,7 +52,7 @@ public class LoginController {
 				if(provjeriCredentials()){
 					getNext();
 				} else{
-					JOptionPane.showMessageDialog(null, "Progrešan Username/Password!");
+					JOptionPane.showMessageDialog(null, "Progreï¿½an Username/Password!");
 				};
 			}
 		});
@@ -78,7 +78,7 @@ public class LoginController {
 						noviController.control();
 						LogDAO lDAO = new LogDAO();
 						Log log = new Log(0, model.getUposlenik().getKorisnickoIme(), new Date(),
-								"Prijava na sistem", null);
+								"Prijava na sistem", "Korisnik: " + model.getUposlenik().getKorisnickoIme());
 						lDAO.create(log);
 					} catch (Exception e) {
 						e.printStackTrace();

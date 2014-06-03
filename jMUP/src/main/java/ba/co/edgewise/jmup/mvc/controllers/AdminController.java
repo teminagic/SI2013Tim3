@@ -1,8 +1,11 @@
 package ba.co.edgewise.jmup.mvc.controllers;
 
 import java.awt.CardLayout;
+import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -21,12 +24,15 @@ import ba.co.edgewise.jmup.enums.TipUposlenika;
 import ba.co.edgewise.jmup.klase.Log;
 import ba.co.edgewise.jmup.klase.Uposlenik;
 import ba.co.edgewise.jmup.mvc.models.AdminModel;
+import ba.co.edgewise.jmup.mvc.models.LoginModel;
 import ba.co.edgewise.jmup.mvc.views.AdminView;
+import ba.co.edgewise.jmup.mvc.views.Login;
 
 public class AdminController {
 	private AdminView view;
 	private AdminModel model;
 	private Uposlenik user;
+	private WindowAdapter windowControler;
 
 	public AdminController(AdminView view, AdminModel model, Uposlenik user) {
 		super();
@@ -37,6 +43,24 @@ public class AdminController {
 
 	public void control() {
 		meniControl();
+		
+		windowControler = new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				if(JOptionPane.showOptionDialog(view, "Da li \u017Eelite iza\u0107i iz aplikacije i odjaviti se?",
+						"Potvrda izlaza", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+						null, new String[] {"Da", "Ne"}, "default") 
+						== JOptionPane.OK_OPTION){
+					view.setVisible(false);
+					view.dispose();
+					LogDAO lDAO = new LogDAO();
+					Log log = new Log(0, user.getKorisnickoIme(), new Date(),
+							"Odjava sa sistema", "Korisnik: " + user.getKorisnickoIme());
+					lDAO.create(log);
+				}
+			}
+		};
+		this.view.addWindowListener(windowControler);
 
 		JButton spasiKorisnika = view.getStrana2().getBtSpasiKorisnika();
 		spasiKorisnika.addMouseListener(new MouseAdapter() {
@@ -124,8 +148,43 @@ public class AdminController {
 				nextLogovi();
 			}
 		});
+		
+		JButton odjava = view.getMeni().getOpcije().getBtnOdjava();
+		odjava.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				nextOdjava();
+			}
+		});
 	}
 
+	private void nextOdjava() {
+		if(JOptionPane.showOptionDialog(view, "Da li se stvarno \u017Eelite odjaviti?",
+				"Potvrda izlaza", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+				null, new String[] {"Da", "Ne"}, "default") 
+				== JOptionPane.OK_OPTION){
+			view.setVisible(false);
+			view.dispose();
+			LogDAO lDAO = new LogDAO();
+			Log log = new Log(0, user.getKorisnickoIme(), new Date(),
+					"Odjava sa sistema", "Korisnik: " + user.getKorisnickoIme());
+			lDAO.create(log);
+			
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						Login view = new Login();
+						LoginModel model = new LoginModel();
+						LoginController controler = new LoginController(view, model);
+						controler.control();
+					} catch (Exception e) {
+						e.printStackTrace();//
+					}
+				}
+			});
+		}
+	}
+	
 	private void nextModificiranje() {
 		int rowSelected = view.getStrana3().getTable().getSelectedRow();
 		Uposlenik temp = view.getStrana3().getModel().getData().get(rowSelected);
