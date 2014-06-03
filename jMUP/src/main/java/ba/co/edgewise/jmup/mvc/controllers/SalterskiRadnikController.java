@@ -334,12 +334,12 @@ public class SalterskiRadnikController {
 					public void mouseClicked(MouseEvent e) {
 						try {
 							if(JOptionPane.showOptionDialog(view, "Eventualne promjene nece biti spa\u0161ene. "
-							 		+ "\u017Delite li se odjaviti?",
-									"Potvrda odjave", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+							 	 	+ "\u017Delite li se odjaviti?",
+								 	"Potvrda odjave", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
 									null, new String[] {"Da", "Ne"}, "default")== JOptionPane.OK_OPTION)
 								{
-							    	setOdjavaSaltera(true);
 									odjaviSkroz();
+							    	setOdjavaSaltera(true);
 									Login view = new Login();
 									LoginModel model = new LoginModel();
 									LoginController controler = new LoginController(view, model);
@@ -347,7 +347,7 @@ public class SalterskiRadnikController {
 						        }
 						       
 						} catch (Exception izuzetak) {
-							izuzetak.printStackTrace();//
+							izuzetak.printStackTrace();
 						}
 						};			
 				});
