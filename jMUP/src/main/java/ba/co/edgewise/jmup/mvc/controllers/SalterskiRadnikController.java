@@ -162,7 +162,7 @@ public class SalterskiRadnikController {
 					String brojDozvole = view.getGodisnjaOvjera().getPretraga().getTxtId().getText();
 					if(provjeriUneseniBrojSaobracajne(brojDozvole) == true)
 						setOKSaobracajnaZaOvjeruRegistracije(true);
-					if(isOKSaobracajnaZaOvjeruRegistracije() == true)
+					if(isOKSaobracajnaZaOvjeruRegistracije() == true && provjeriPopunjenostDatumaZaOvjeruRegistracije()==true)
 					{
 						if(ovjeriRegistraciju(brojDozvole) == true)
 						{
@@ -634,8 +634,21 @@ public class SalterskiRadnikController {
 	public boolean provjeriPopunjenostUnosVozila() {
 		return true;
 	}
-	public boolean provjeriPopunjenostRegistracije() {
-		
+	public boolean provjeriPopunjenostDatumaZaOvjeruRegistracije() {
+		java.util.Date odKad = (java.util.Date) this.view.getGodisnjaOvjera().getDatum().getRegistrationDate().getDatePickerOdKad().getModel().getValue();
+		java.util.Date doKad = (java.util.Date) this.view.getGodisnjaOvjera().getDatum().getRegistrationDate().getDatePickerDoKad().getModel().getValue();
+		if((odKad.getYear()-doKad.getYear())!=1)
+		{
+			JOptionPane.showOptionDialog(view, "Razmak između datuma mora biti minimalno godina dana.",
+					"Godi\u0161nja Ovjera registracije", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			return false;
+		}
+		else
+			return true;
+	}
+	public boolean provjeriPopunjenostRegistracije(){
 		return true;
 	}
 	public void dodajVozilo() throws ParseException 
