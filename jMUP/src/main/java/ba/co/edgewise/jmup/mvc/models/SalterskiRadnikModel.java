@@ -35,6 +35,14 @@ public class SalterskiRadnikModel {
 		_voziloDAO = new VoziloDAO();
 		_osobaDAO = new OsobaDAO();
 	}
+	public Boolean PromijeniVlasnika(String brojDozvole, String jmbg){
+		OsobaDAO oDAO = new OsobaDAO();
+		Osoba v = oDAO.getByJMBG(jmbg);
+		VlasnickaDAO vlDAO = new VlasnickaDAO();
+		Vlasnicka vl = vlDAO.get(brojDozvole);
+		vl.setVlasnik(v);
+		return vlDAO.update(brojDozvole, vl);
+	}
 	public Boolean OvjeriRegistraciju(String brojDozvole, Date odKad, Date doKad)
 	{
 		SaobracajnaDAO sDAO = new SaobracajnaDAO();

@@ -188,6 +188,46 @@ public class SalterskiRadnikController {
 							
 				}
 			});	
+				//getPromjenaVlasnika
+				// Promjena vlasnika
+				JButton promVlasnika = this.view.getMeni().getOpcije().getBtnPromjenaVlasnika();
+				promVlasnika.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						view.prikaziPromjenuVlasnika();
+						};			
+				});
+				
+				// Azuriranje podataka o promjeni vlasnika
+				JButton azurirajVlasnika = this.view.getPromjenaVlasnika().getBtnAzurirajPodatke();
+				azurirajVlasnika.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						if(provjeriPopunjenostZaPromjenuVlasnika()){							
+								
+								if (promijeniVlasnika()) {
+									JOptionPane.showOptionDialog(view, "Vlasnik uspje\u0161no promijenjen.",
+											"Promjena vlasnika", JOptionPane.OK_OPTION,
+											JOptionPane.INFORMATION_MESSAGE, null,
+											new String[] { "Uredu" }, "default");
+									pocistiPoljaZaPromjenuVlasnika();
+									
+								} else {
+									JOptionPane.showOptionDialog(view,
+											"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
+													+ "Molimo vas da poku\u0161ate ponovo",
+											"Promjena vlasnika", JOptionPane.OK_OPTION,
+											JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+											"default");
+								};
+								
+						} 
+						else{//
+							JOptionPane.showMessageDialog(null, "Neispravno popunjena polja!");
+						};
+					}
+				});
+				
 				//UNOS VOZILA
 				JButton unosVozila = this.view.getMeni().getOpcije().getBtnUnosVozila();
 				unosVozila.addMouseListener(new MouseAdapter() {
@@ -425,7 +465,17 @@ public class SalterskiRadnikController {
 				});
 				
 	}
-	
+	Boolean promijeniVlasnika(){
+		return model.PromijeniVlasnika(view.getPromjenaVlasnika().getTfBrojVlasnickeDozvole().getText(),
+		view.getPromjenaVlasnika().getTfJMBGNovogVlasnika().getText());
+	}
+	void pocistiPoljaZaPromjenuVlasnika(){
+		view.getPromjenaVlasnika().getTfBrojVlasnickeDozvole().setText("");
+		view.getPromjenaVlasnika().getTfJMBGNovogVlasnika().setText("");
+	}
+	Boolean provjeriPopunjenostZaPromjenuVlasnika(){
+		return true;
+	}
 	Boolean provjeriUneseniBrojSaobracajne(String brojDozvole)
 	{
 		return model.provjeriBrojSaobracajne(brojDozvole);

@@ -17,6 +17,7 @@ import ba.co.edgewise.jmup.components.MeniSalter;
 import ba.co.edgewise.jmup.components.MeniSalterOpcije;
 import ba.co.edgewise.jmup.components.NaslovnaSalterski;
 import ba.co.edgewise.jmup.components.OpcijaSadrzaj;
+import ba.co.edgewise.jmup.components.PromjenaVlasnikaVozila;
 import ba.co.edgewise.jmup.components.RegistracijaUnos;
 import ba.co.edgewise.jmup.components.SalterskaPretraga;
 import ba.co.edgewise.jmup.components.VozacDodavanje;
@@ -40,6 +41,7 @@ public class SalterskiRadnikView extends JFrame {
 	private RegistracijaUnos strana4Registracija;
 	private GodisnjaOvjera strana7;
 	private Izvjestaji strana9;
+	private PromjenaVlasnikaVozila strana8;
 	private VoziloModifikacija strana10;
 	
 	private final SalterskiRadnikView frejm = this;
@@ -102,6 +104,9 @@ public class SalterskiRadnikView extends JFrame {
 		strana7 = new GodisnjaOvjera();
 		sadrzaj.getPanelSadrzaj().add(strana7, "Godi\u0161nja ovjera registracije");
 		
+		strana8 = new PromjenaVlasnikaVozila();
+		sadrzaj.getPanelSadrzaj().add(strana8, "Promjena vlasnika");
+		
 		strana9 = new Izvjestaji();
 		sadrzaj.getPanelSadrzaj().add(strana9, "Izrada izvje\u0161taja");
 		
@@ -116,7 +121,12 @@ public class SalterskiRadnikView extends JFrame {
 	public SalterskaPretraga getStrana6() {
 		return strana6;
 	}	
-
+	public void prikaziPromjenuVlasnika(){
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Promjena vlasnika");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Promjena vlasnika");
+	}
 	public void prikaziPocetnu(){
 		frejm.getSadrzaj().getNaslov().postaviNaslov("Po\u010Detna");
 		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
@@ -219,5 +229,10 @@ public class SalterskiRadnikView extends JFrame {
 
 	public Izvjestaji getIzvjestaji() {
 		return strana9;
+	}
+
+
+	public PromjenaVlasnikaVozila getPromjenaVlasnika() {
+		return strana8;
 	}
 }
