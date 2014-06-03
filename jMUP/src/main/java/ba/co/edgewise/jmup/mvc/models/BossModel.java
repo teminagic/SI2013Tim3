@@ -6,6 +6,7 @@ import java.util.List;
 
 import ba.co.edgewise.jmup.klase.*;
 import ba.co.edgewise.jmup.daldao.daos.*;
+
 import java.io.FileOutputStream;
 
 import javax.swing.text.Document;
@@ -28,7 +29,19 @@ public class BossModel {
 	//	PdfWriter.
 	//	Document document = new Document();
 	}
-	
+	//PRETRAGA
+		public ArrayList<Vozilo> dohvatiSvaVozila() {
+			return (ArrayList<Vozilo>) _voziloDAO.getAll();
+		}
+		public ArrayList<Osoba> dohvatiSveVozace() {
+			return (ArrayList<Osoba>) _osobaDAO.getAll();
+		}
+		public ArrayList<Saobracajna> dohvatiSveSaobracajne() {
+			return (ArrayList<Saobracajna>) _saobracajnaDAO.getAll();
+		}
+		public ArrayList<Vlasnicka> dohvatiSveVlasnicke() {
+			return (ArrayList<Vlasnicka>) _vlasnickaDAO.getAll();
+		}
 	public ArrayList<Vozilo> pretragaVozilo( String parametar, String kriterij ) {
 		
 		switch (kriterij){

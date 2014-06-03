@@ -69,7 +69,7 @@ public class SalterskiRadnikView extends JFrame {
 		
 		meni =  new MeniSalter();
 		GridBagLayout gridBagLayout_1 = (GridBagLayout) meni.getLayout();
-		gridBagLayout_1.columnWidths = new int[]{176};
+		gridBagLayout_1.columnWidths = new int[]{133};
 		gbc_meni = new GridBagConstraints();
 		gbc_meni.anchor = GridBagConstraints.NORTH;
 		gbc_meni.fill = GridBagConstraints.HORIZONTAL;

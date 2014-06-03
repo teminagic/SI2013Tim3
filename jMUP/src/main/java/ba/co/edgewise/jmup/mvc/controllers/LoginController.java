@@ -12,13 +12,8 @@ import javax.swing.JOptionPane;
 
 import ba.co.edgewise.jmup.daldao.daos.LogDAO;
 import ba.co.edgewise.jmup.klase.Log;
-import ba.co.edgewise.jmup.mvc.models.AdminModel;
-import ba.co.edgewise.jmup.mvc.models.LoginModel;
-import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModel;
-import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModelIrma;
-import ba.co.edgewise.jmup.mvc.views.AdminView;
-import ba.co.edgewise.jmup.mvc.views.Login;
-import ba.co.edgewise.jmup.mvc.views.SalterskiRadnikView;
+import ba.co.edgewise.jmup.mvc.models.*;
+import ba.co.edgewise.jmup.mvc.views.*;
 
 public class LoginController {
 	
@@ -57,7 +52,7 @@ public class LoginController {
 				if(provjeriCredentials()){
 					getNext();
 				} else{
-					JOptionPane.showMessageDialog(null, "Progre≈°an Username/Password!");
+					JOptionPane.showMessageDialog(null, "Progreöan Username/Password!");
 				};
 			}
 		});
@@ -83,7 +78,7 @@ public class LoginController {
 						noviController.control();
 						LogDAO lDAO = new LogDAO();
 						Log log = new Log(0, model.getUposlenik().getKorisnickoIme(), new Date(),
-								"Prijava na sistem", "Korisnik: " + model.getUposlenik().getKorisnickoIme());
+								"Prijava na sistem", null);
 						lDAO.create(log);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -93,6 +88,19 @@ public class LoginController {
 			this.view.dispose();
 			break;
 		case MENADZER:
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						BossView noviView = new BossView();
+						BossModel noviModel = new BossModel();
+						BossControler noviController = new BossControler(noviView,noviModel);
+						noviController.control();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			this.view.dispose();
 			break;
 		case SALTERSKI_RADNIK:
 			EventQueue.invokeLater(new Runnable() {
