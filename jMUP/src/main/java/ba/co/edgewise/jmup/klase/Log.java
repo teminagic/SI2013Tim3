@@ -70,6 +70,9 @@ public class Log {
 		this.opis = opis;
 	}
 	
-	
+	public Object[] toObjectArray() {
+		return new Object[] { this.username, this.datum, this.akcija,
+				this.opis};
+	}
 
 }

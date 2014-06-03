@@ -16,7 +16,7 @@ import ba.co.edgewise.jmup.mvc.models.AdminModel;
 import ba.co.edgewise.jmup.mvc.models.LoginModel;
 import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModel;
 import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModelIrma;
-import ba.co.edgewise.jmup.mvc.views.Administrator;
+import ba.co.edgewise.jmup.mvc.views.AdminView;
 import ba.co.edgewise.jmup.mvc.views.Login;
 import ba.co.edgewise.jmup.mvc.views.SalterskiRadnikView;
 
@@ -76,14 +76,14 @@ public class LoginController {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						Administrator noviView = new Administrator();
+						AdminView noviView = new AdminView();
 						AdminModel noviModel = new AdminModel();
 						AdminController noviController = new AdminController(noviView,noviModel,
 								model.getUposlenik());
 						noviController.control();
 						LogDAO lDAO = new LogDAO();
 						Log log = new Log(0, model.getUposlenik().getKorisnickoIme(), new Date(),
-								"Prijava na sistem", null);
+								"Prijava na sistem", "Korisnik: " + model.getUposlenik().getKorisnickoIme());
 						lDAO.create(log);
 					} catch (Exception e) {
 						e.printStackTrace();

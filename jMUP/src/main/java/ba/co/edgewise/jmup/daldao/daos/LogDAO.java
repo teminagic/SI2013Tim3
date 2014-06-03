@@ -90,7 +90,7 @@ public class LogDAO implements IGenericDAO<Log, Integer> {
 		ResultSet qResult = null;
 		
 		try {
-			PreparedStatement statement =connection.prepareStatement("SELECT * FROM Logovi;");
+			PreparedStatement statement =connection.prepareStatement("SELECT * FROM Logovi");
 			
 			qResult = statement.executeQuery();
 			
@@ -111,7 +111,7 @@ public class LogDAO implements IGenericDAO<Log, Integer> {
 			ConnectionManager.closeResultSet(qResult);
 			ConnectionManager.closeConnection(connection);
 		}
-		return null;
+		return result;
 	}
 
 	@Override
@@ -173,6 +173,12 @@ public class LogDAO implements IGenericDAO<Log, Integer> {
 		}
 		
 		return success;
+	}
+	
+	public static void main(String[] args) {
+		LogDAO lDAO = new LogDAO();
+		for(Log l : lDAO.getAll())
+			System.out.println(l.getAkcija());
 	}
 
 }

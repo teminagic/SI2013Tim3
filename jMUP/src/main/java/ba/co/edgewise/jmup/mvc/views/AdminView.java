@@ -10,12 +10,13 @@ import ba.co.edgewise.jmup.components.KorisnikPretraga;
 import ba.co.edgewise.jmup.components.MeniAdmin;
 import ba.co.edgewise.jmup.components.NaslovnaAdministrator;
 import ba.co.edgewise.jmup.components.OpcijaSadrzaj;
+import ba.co.edgewise.jmup.components.PregledLogova;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-public class Administrator extends JFrame {
+public class AdminView extends JFrame {
 
 	/**
 	 * 
@@ -27,9 +28,11 @@ public class Administrator extends JFrame {
 	private NaslovnaAdministrator strana1;
 	private KorisnikKreiranje strana2;
 	private KorisnikPretraga strana3;
-	KorisnikModificiranje strana4;
+	private KorisnikModificiranje strana4;
+	private PregledLogova strana5;
 
-	public Administrator() {
+	public AdminView() {
+		setTitle("jMUP - Administrator");
 		initialize();
 		
 		meni =  new MeniAdmin();
@@ -58,6 +61,9 @@ public class Administrator extends JFrame {
 		
 		strana4 = new KorisnikModificiranje();
 		sadrzaj.getPanelSadrzaj().add(strana4, "Modificiranje korisnika");
+		
+		strana5 = new PregledLogova();
+		sadrzaj.getPanelSadrzaj().add(strana5, "Pregled historije promjena");
 		
 		contentPane.add(sadrzaj, gbc_sadrzaj);	
 	}
@@ -95,5 +101,8 @@ public class Administrator extends JFrame {
 	}
 	public KorisnikModificiranje getStrana4() {
 		return strana4;
+	}
+	public PregledLogova getStrana5() {
+		return strana5;
 	}
 }

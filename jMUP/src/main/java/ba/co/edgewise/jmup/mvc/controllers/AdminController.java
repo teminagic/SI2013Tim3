@@ -21,14 +21,14 @@ import ba.co.edgewise.jmup.enums.TipUposlenika;
 import ba.co.edgewise.jmup.klase.Log;
 import ba.co.edgewise.jmup.klase.Uposlenik;
 import ba.co.edgewise.jmup.mvc.models.AdminModel;
-import ba.co.edgewise.jmup.mvc.views.Administrator;
+import ba.co.edgewise.jmup.mvc.views.AdminView;
 
 public class AdminController {
-	private Administrator view;
+	private AdminView view;
 	private AdminModel model;
 	private Uposlenik user;
 
-	public AdminController(Administrator view, AdminModel model, Uposlenik user) {
+	public AdminController(AdminView view, AdminModel model, Uposlenik user) {
 		super();
 		this.view = view;
 		this.model = model;
@@ -116,6 +116,14 @@ public class AdminController {
 				nextPretraga();
 			}
 		});
+		
+		JButton logovi = view.getMeni().getOpcije().getBtnPregledLogova();
+		logovi.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				nextLogovi();
+			}
+		});
 	}
 
 	private void nextModificiranje() {
@@ -127,6 +135,18 @@ public class AdminController {
 		JPanel cards = view.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout) cards.getLayout();
 		tmp.show(cards, "Modificiranje korisnika");
+	}
+	
+	private void nextLogovi()
+	{
+		view.getSadrzaj().getNaslov().postaviNaslov("Pregled historije promjena");
+		
+		view.getStrana5().getModel().clearAll();
+		view.getStrana5().getModel().addAll(model.dohvatiLogove());
+		
+		JPanel cards = view.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout) cards.getLayout();
+		tmp.show(cards, "Pregled historije promjena");
 	}
 	
 	private void nextPocetna() {
@@ -151,20 +171,31 @@ public class AdminController {
 		CardLayout tmp = (CardLayout) cards.getLayout();
 		tmp.show(cards, "Pretraga korisnika");
 	}
+	
+	
 
 	private void postaviIKreirajKorisnika() {
 		KorisnikKreiranje sadrzaj = view.getStrana2();
 		Uposlenik tmp = new Uposlenik();
-			
-		tmp.setIme(sadrzaj.getTfIme().getText());
-		tmp.setPrezime(sadrzaj.getTfPrezime().getText());
-		tmp.setKorisnickoIme(sadrzaj.getTfKorisnickoIme().getText());
-		tmp.setPassword(new String(sadrzaj.getPwdSifra().getPassword()));
-		tmp.setStatus((Status) sadrzaj.getCbStatusKorisnickogRacuna()
-				.getSelectedItem());
-		tmp.setTip((TipUposlenika) sadrzaj.getCbTipKorisnickogRacuna()
-				.getSelectedItem());
-		this.model.setUposlenik(tmp);
+		try {
+			tmp.setIme(sadrzaj.getTfIme().getText());
+			tmp.setPrezime(sadrzaj.getTfPrezime().getText());
+			tmp.setKorisnickoIme(sadrzaj.getTfKorisnickoIme().getText());
+			tmp.setPassword(new String(sadrzaj.getPwdSifra().getPassword()));
+			tmp.setStatus((Status) sadrzaj.getCbStatusKorisnickogRacuna()
+					.getSelectedItem());
+			tmp.setTip((TipUposlenika) sadrzaj.getCbTipKorisnickogRacuna()
+					.getSelectedItem());
+			this.model.setUposlenik(tmp);
+		} catch (IllegalArgumentException e){
+			JOptionPane.showOptionDialog(view,
+					e.getMessage(),
+					"Kreiranje korisnika", JOptionPane.OK_OPTION,
+					JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+					"default");
+			return;
+		}
+		
 		
 		if (model.kreiranjeKorisnika()) {
 			JOptionPane.showOptionDialog(view, "Korisnik uspje\u0161no dodan.",
@@ -188,8 +219,18 @@ public class AdminController {
 	}
 	
 	private void spasiModifikacije(){
-		view.getStrana4().postaviKorisnika();
-		model.setUposlenik(view.getStrana4().getUposlenik());
+		try {
+			view.getStrana4().postaviKorisnika();
+			model.setUposlenik(view.getStrana4().getUposlenik());
+		} catch (IllegalArgumentException e){
+			JOptionPane.showOptionDialog(view,
+					e.getMessage(),
+					"Kreiranje korisnika", JOptionPane.OK_OPTION,
+					JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+					"default");
+			return;
+		}
+		
 		if (model.modifikovanjeKorisnika()) {
 			if(JOptionPane.showOptionDialog(view, "Korisnik uspje\u0161no modificiran.",
 					"Kreiranje korisnika", JOptionPane.OK_OPTION,

@@ -62,7 +62,10 @@ public class Uposlenik {
 
 	public void setIme(String ime) {
 		if (!ime.matches("[A-Z][a-zA-Z\\s\\-ČčĆćŠšĐđŽž]+"))
-			throw new IllegalArgumentException("Ime nije u pravom formatu");
+			throw new IllegalArgumentException("<html>Ime nije u pravom formatu!<br>"
+					+ "Format imena:<br>"
+					+ " - Prvo slovo mora biti veliko <br>"
+					+ " - Ime može sadržavati slova, prazna mjesta i -</html>");
 		this.ime = ime;
 	}
 
@@ -72,7 +75,10 @@ public class Uposlenik {
 
 	public void setPrezime(String prezime) {
 		if (!prezime.matches("[A-Z][a-zA-Z\\s\\-ČčĆćŠšĐđŽž]+"))
-			throw new IllegalArgumentException("Prezime nije u pravom formatu");
+			throw new IllegalArgumentException("<html>Prezime nije u pravom formatu!<br>"
+					+ "Format prezimena:<br>"
+					+ " - Prvo slovo mora biti veliko <br>"
+					+ " - Prezime može sadržavati slova, prazna mjesta i -</html>");
 		this.prezime = prezime;
 	}
 
@@ -89,9 +95,11 @@ public class Uposlenik {
 	}
 
 	public void setKorisnickoIme(String korisnickoIme) {
-		if (!korisnickoIme.matches("[a-zA-Z\\s]+"))
+		if (!korisnickoIme.matches("[a-zA-Z0-9]+"))
 			throw new IllegalArgumentException(
-					"Korisničko ime nije u pravom formatu");
+					"<html>Korisničko ime nije u pravom formatu!<br>"
+					+ "Format korisničkog imena:<br>"
+					+ " - Korisničko ime se može sastojati od slova engleskog alfabeta i brojeva</html>");
 		this.korisnickoIme = korisnickoIme;
 	}
 
