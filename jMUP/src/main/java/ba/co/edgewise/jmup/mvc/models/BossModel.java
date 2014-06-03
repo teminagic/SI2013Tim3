@@ -25,8 +25,8 @@ public class BossModel {
 		_voziloDAO = new VoziloDAO();
 		_osobaDAO = new OsobaDAO();
 		_motorDAO = new MotorDAO();
-		PdfWriter.
-		Document document = new Document();
+	//	PdfWriter.
+	//	Document document = new Document();
 	}
 	
 	public ArrayList<Vozilo> pretragaVozilo( String parametar, String kriterij ) {
