@@ -155,6 +155,7 @@ public class SalterskiRadnikController {
 					}
 				});
 					
+					
 				JButton potvrdaOvjereRegistracije= this.view.getGodisnjaOvjera().getDatum().getRegistrationDate().getBtAzuriranje().getBtnModify();
 				potvrdaOvjereRegistracije.addMouseListener(new MouseAdapter() {
 				@Override
@@ -274,8 +275,16 @@ public class SalterskiRadnikController {
 					}
 				});
 				
+				// Ptvrda datuma o registraciji
+				JButton potvrdiDatumReg = this.view.getRegistracija().getPodaci().getDatumVazenja().getBtAzuriranje().getBtnModify();
 				// dodavanje registracije
-				
+				potvrdiDatumReg.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						provjeriPopunjenostDatumaZaUnosRegistracije(); 
+							
+					}
+				});
 				JButton dodavanjeRegistracije = this.view.getRegistracija().getBtnPrihvati();
 				dodavanjeRegistracije.addMouseListener(new MouseAdapter() {
 					@Override
@@ -684,7 +693,14 @@ public class SalterskiRadnikController {
 	public boolean provjeriPopunjenostDatumaZaOvjeruRegistracije() {
 		java.util.Date odKad = (java.util.Date) this.view.getGodisnjaOvjera().getDatum().getRegistrationDate().getDatePickerOdKad().getModel().getValue();
 		java.util.Date doKad = (java.util.Date) this.view.getGodisnjaOvjera().getDatum().getRegistrationDate().getDatePickerDoKad().getModel().getValue();
-		if((odKad.getYear()-doKad.getYear())!=1)
+		if(odKad.getYear()>=doKad.getYear()){
+			JOptionPane.showOptionDialog(view, "Neispravan datum.",
+					"Godi\u0161nja Ovjera registracije", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			return false;
+		}
+		else if((doKad.getYear()-odKad.getYear())!=1)
 		{
 			JOptionPane.showOptionDialog(view, "Razmak između datuma mora biti minimalno godina dana.",
 					"Godi\u0161nja Ovjera registracije", JOptionPane.OK_OPTION,
@@ -692,8 +708,33 @@ public class SalterskiRadnikController {
 					new String[] { "Uredu" }, "default");
 			return false;
 		}
-		else
+		else{
 			return true;
+			}
+	}
+	public boolean provjeriPopunjenostDatumaZaUnosRegistracije() {
+		java.util.Date oodKad = (java.util.Date) view.getRegistracija().getPodaci().getDatumVazenja().getDatePickerOdKad().getModel().getValue();
+		java.util.Date dooKad = (java.util.Date) view.getRegistracija().getPodaci().getDatumVazenja().getDatePickerDoKad().getModel().getValue();
+		
+		if(oodKad.getYear()>=dooKad.getYear()){
+			JOptionPane.showOptionDialog(view, "Neispravan datum.",
+					"Godi\u0161nja Ovjera registracije", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			return false;
+		}
+		else if((dooKad.getYear()-oodKad.getYear())!=1)
+		{
+			JOptionPane.showOptionDialog(view, "Razmak između datuma mora biti minimalno godina dana.",
+					"Godi\u0161nja Ovjera registracije", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			return false;
+		}
+		else{
+			return true;
+			}
+		
 	}
 	public boolean provjeriPopunjenostRegistracije(){
 		return true;
