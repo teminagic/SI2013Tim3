@@ -158,7 +158,7 @@ public class BossModel {
 			}
 			return (vl1 == null) ? null : vl1;
 
-			// vraca Array i ako ima samo 1 result zbog povratnog tipa metode
+	    // vraca Array i ako ima samo 1 result zbog povratnog tipa metode
 		case "Registarska oznaka":
 			Vozilo vt = _voziloDAO.getByReg(parametar);
 			ArrayList<Vlasnicka> vl2 = new ArrayList<>();
@@ -176,15 +176,21 @@ public class BossModel {
 			vl4.add(_vlasnickaDAO.get(parametar));
 			return (vl4 == null) ? null : vl4;
 		}
-
+		
 		return null;
 	}
 
+
+	
 	public Motor getMotorByVozilo(Integer id) {
 		Vozilo temp = _voziloDAO.get(id);
 		return (temp == null) ? null : temp.getMotor();
 	}
 
+	
+	
+	
+	
 	@SuppressWarnings("deprecation")
 	public boolean ekstraktToPDF(ArrayList<String> podaci, String path) {
 		try { 

@@ -120,7 +120,7 @@ public class Izvjestaji extends JPanel {
 	public void panelSet() {
 
 		panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Izrada Izvje\u0161taja", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Izrada Izvještaja", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
