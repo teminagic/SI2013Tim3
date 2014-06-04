@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ba.co.edgewise.components.helpers.ModifikacijaVozila;
+import ba.co.edgewise.components.helpers.TableModelVozilo;
 import ba.co.edgewise.jmup.components.GodisnjaOvjera;
 import ba.co.edgewise.jmup.components.Izvjestaji;
 import ba.co.edgewise.jmup.components.MeniSalter;
@@ -23,7 +25,13 @@ import ba.co.edgewise.jmup.components.SalterskaPretraga;
 import ba.co.edgewise.jmup.components.VozacDodavanje;
 import ba.co.edgewise.jmup.components.VoziloDodavanje;
 import ba.co.edgewise.jmup.components.VoziloModifikacija;
+import ba.co.edgewise.jmup.daldao.daos.BojeVozilaDAO;
+import ba.co.edgewise.jmup.klase.BojaVozila;
+import ba.co.edgewise.jmup.klase.Vozilo;
 import ba.co.edgewise.jmup.mvc.controllers.LoginController;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SalterskiRadnikView extends JFrame {
 
@@ -55,7 +63,7 @@ public class SalterskiRadnikView extends JFrame {
 	 */
 	public SalterskiRadnikView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 809, 590);
+		setBounds(100, 100, 977, 590);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -93,6 +101,11 @@ public class SalterskiRadnikView extends JFrame {
 		sadrzaj.getPanelSadrzaj().add(strana3, "Dodavanje vozila");
 		
 		strana6 = new SalterskaPretraga();
+		strana6.getBtn_modifikuj().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pozoviModifikacijuVozila();
+			}
+		});
 		sadrzaj.getPanelSadrzaj().add(strana6, "Pretraga");
 		
 		strana4Registracija = new RegistracijaUnos();
@@ -110,7 +123,12 @@ public class SalterskiRadnikView extends JFrame {
 		strana9 = new Izvjestaji();
 		sadrzaj.getPanelSadrzaj().add(strana9, "Izrada izvje\u0161taja");
 		
-		strana10 = new VoziloModifikacija();
+		strana10 = new VoziloModifikacija(null, null);
+		strana10.getBtn_modifikuj().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pozoviModifikacijuVozila();
+			}
+		});
 		sadrzaj.getPanelSadrzaj().add(strana10, "Modifikacija vozila");
 		
 		contentPane.add(sadrzaj, gbc_naslov);
@@ -118,6 +136,11 @@ public class SalterskiRadnikView extends JFrame {
 	}
 
 
+	public void pozoviModifikacijuVozila()
+	{
+		ModifikacijaVozila nova = new ModifikacijaVozila(this);
+		nova.modificirajVozilo();
+	}
 	public SalterskaPretraga getStrana6() {
 		return strana6;
 	}	
@@ -173,13 +196,27 @@ public class SalterskiRadnikView extends JFrame {
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Izrada izvje\u0161taja");
 	}
+	
 	public void prikaziModifikacijuVozila()
 	{
 		frejm.getSadrzaj().getNaslov().postaviNaslov("Modifikacija vozila");
+		
+		int selektovano = this.getStrana6().getPanel_vozilo().getTable().getSelectedRow();
+		TableModelVozilo modelTabele = this.getStrana6().getPanel_vozilo().getModel();
+		Vozilo v = modelTabele.getData().get(selektovano);
+		
+		this.strana10.setVozilo(v);
+		
+		BojaVozila boja = (new BojeVozilaDAO()).get(v.getId());
+		this.strana10.setBoja(boja);
+		
+		strana10.postaviVrijednosti();
+		
 		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Modifikacija vozila");
 	}
+	
 	public JPanel getContentPane() {
 		return contentPane;///
 	}

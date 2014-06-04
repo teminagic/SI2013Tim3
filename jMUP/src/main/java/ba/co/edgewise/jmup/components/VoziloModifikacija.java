@@ -1,6 +1,10 @@
 package ba.co.edgewise.jmup.components;
-import ba.co.edgewise.jmup.daldao.daos.MotorDAO;
+import ba.co.edgewise.components.helpers.ModifikacijaVozila;
+import ba.co.edgewise.jmup.daldao.daos.BojeVozilaDAO;
+import ba.co.edgewise.jmup.daldao.daos.VoziloDAO;
 import ba.co.edgewise.jmup.enums.*;
+import ba.co.edgewise.jmup.klase.BojaVozila;
+import ba.co.edgewise.jmup.klase.Motor;
 import ba.co.edgewise.jmup.klase.Vozilo;
 
 import javax.swing.JPanel;
@@ -14,10 +18,10 @@ import java.awt.GridBagConstraints;
 import javax.swing.border.TitledBorder;
 
 import java.awt.Insets;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -26,6 +30,14 @@ import javax.swing.UIManager;
 import javax.swing.JRadioButton;
 import javax.swing.DefaultComboBoxModel;
 
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+@SuppressWarnings("rawtypes")
 public class VoziloModifikacija extends JPanel {
 
 	private static final long serialVersionUID = 2259547713349336656L;
@@ -47,7 +59,7 @@ public class VoziloModifikacija extends JPanel {
 	private JTextField tb_maxMasa;
 	private JTextField tb_masa;
 	private JTextField tb_nosivost;
-	private JTextField tb_bojaVozila;
+	private JComboBox cb_bojaVozila;
 	private JButton btn_modifikuj;
 	private JButton btn_ponisti;
 	private GridBagLayout gridBagLayout;
@@ -91,10 +103,18 @@ public class VoziloModifikacija extends JPanel {
 	private JComboBox cb_vrstaBoje;
 	private JRadioButton rb_katalizator_da;
 	private JRadioButton rb_katalizator_ne;
+	
+	private UtilDateModel modelDatumPregleda;
+	private JDatePanelImpl datePanelDatumPregleda;
+	private JDatePickerImpl dpDatumPregleda;
+	
 	private Vozilo vozilo;
+	private BojaVozila boja;
 
-	public VoziloModifikacija() {
+	public VoziloModifikacija(Vozilo vozilo, BojaVozila boja) {
 		// calling methods for seting layout
+		this.vozilo = vozilo;
+		this.boja = boja;
 		layoutSet();
 		framePanelSet();
 		dataPanelSet();
@@ -575,23 +595,17 @@ public class VoziloModifikacija extends JPanel {
 		gbc_tf_karoserija.gridy = 6;
 		detaljniPodaci.add(tf_karoserija, gbc_tf_karoserija);
 
-		tf_datumPregleda = new JTextField();
-		tf_datumPregleda.setColumns(10);
+		//tf_datumPregleda = new JTextField();
+		//tf_datumPregleda.setColumns(10);
+		modelDatumPregleda = new UtilDateModel();
+		datePanelDatumPregleda = new JDatePanelImpl(modelDatumPregleda);
+		dpDatumPregleda = new JDatePickerImpl(datePanelDatumPregleda);
 		GridBagConstraints gbc_tf_datumPregleda = new GridBagConstraints();
 		gbc_tf_datumPregleda.gridwidth = 2;
 		gbc_tf_datumPregleda.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tf_datumPregleda.gridx = 1;
 		gbc_tf_datumPregleda.gridy = 7;
-		detaljniPodaci.add(tf_datumPregleda, gbc_tf_datumPregleda);
-
-		tb_bojaVozila = new JTextField();
-		GridBagConstraints gbc_tb_bojaVozila = new GridBagConstraints();
-		gbc_tb_bojaVozila.insets = new Insets(0, 0, 5, 0);
-		gbc_tb_bojaVozila.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tb_bojaVozila.gridx = 1;
-		gbc_tb_bojaVozila.gridy = 0;
-		bojaMasaVozila.add(tb_bojaVozila, gbc_tb_bojaVozila);
-		tb_bojaVozila.setColumns(10);
+		detaljniPodaci.add(dpDatumPregleda, gbc_tf_datumPregleda);
 
 		tb_maxMasa = new JTextField();
 		tb_maxMasa.setColumns(10);
@@ -620,7 +634,17 @@ public class VoziloModifikacija extends JPanel {
 		bojaMasaVozila.add(tb_nosivost, gbc_tb_nosivost);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void componentSet() {
+		cb_bojaVozila = new JComboBox();
+		cb_bojaVozila.setModel(new DefaultComboBoxModel(Boja.values()));
+		GridBagConstraints gbc_cb_bojaVozila = new GridBagConstraints();
+		gbc_cb_bojaVozila.insets = new Insets(0, 0, 5, 0);
+		gbc_cb_bojaVozila.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cb_bojaVozila.gridx = 1;
+		gbc_cb_bojaVozila.gridy = 0;
+		bojaMasaVozila.add(cb_bojaVozila, gbc_cb_bojaVozila);
+		
 		cb_vrstaVozila = new JComboBox();
 		cb_vrstaVozila.setModel(new DefaultComboBoxModel(VrstaVozila.values()));
 		GridBagConstraints gbc_cb_vrstaVozila = new GridBagConstraints();
@@ -631,7 +655,7 @@ public class VoziloModifikacija extends JPanel {
 		osnovniPodaci.add(cb_vrstaVozila, gbc_cb_vrstaVozila);
 
 		cb_gorivo = new JComboBox();
-		cb_gorivo.setModel(new DefaultComboBoxModel(new String[] {"Benzin", "Benzin/LPG", "Benzin/CNG", "Benzin/elektri\\u010Dni", "Dizel", "Dizel/CNG", "Dizel/elektri\\u010Dni", "Elektri\\u010Dni pogon", "Biodizel", "Etanol", "Metanol", "Hidrogen(vodonik)", "LPG", "CNG"}));
+		cb_gorivo.setModel(new DefaultComboBoxModel(VrstaGoriva.values()));
 		GridBagConstraints gbc_cb_gorivo = new GridBagConstraints();
 		gbc_cb_gorivo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cb_gorivo.insets = new Insets(0, 0, 5, 0);
@@ -640,7 +664,7 @@ public class VoziloModifikacija extends JPanel {
 		motorPodaci.add(cb_gorivo, gbc_cb_gorivo);
 
 		cb_vrstaMotora = new JComboBox();
-		cb_vrstaMotora.setModel(new DefaultComboBoxModel(new String[] {"OTTO", "DIESEL", "WANKEL", "Elektromotor", "Kombinovani pogon"}));
+		cb_vrstaMotora.setModel(new DefaultComboBoxModel(VrstaMotora.values()));
 		GridBagConstraints gbc_cb_vrstaMotora = new GridBagConstraints();
 		gbc_cb_vrstaMotora.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cb_vrstaMotora.gridx = 1;
@@ -703,6 +727,11 @@ public class VoziloModifikacija extends JPanel {
 		buttonPanel.add(btn_modifikuj, gbc_btn_modifikuj);
 
 		btn_ponisti = new JButton("Poni\u0161ti");
+		btn_ponisti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				postaviVrijednosti();
+			}
+		});
 		GridBagConstraints gbc_btn_ponisti = new GridBagConstraints();
 		gbc_btn_ponisti.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btn_ponisti.gridx = 5;
@@ -780,9 +809,6 @@ public class VoziloModifikacija extends JPanel {
 	public JComboBox getCb_vrstaMotora() {
 		return cb_vrstaMotora;
 	}
-	public JTextField getTb_bojaVozila() {
-		return tb_bojaVozila;
-	}
 	public JComboBox getCb_nijansa() {
 		return cb_nijansa;
 	}
@@ -806,61 +832,79 @@ public class VoziloModifikacija extends JPanel {
 	}
 
 	public void postaviVrijednosti() {
-		/*cb_vrstaVozila.setSelectedItem(vozilo.getVrsta());
+		cb_vrstaVozila.setSelectedItem(vozilo.getVrsta());
 		tf_tipVozila.setText(vozilo.getTip()); 
 		tf_modelVozila.setText(vozilo.getModel()); 
 		tf_markaVozila.setText(vozilo.getMarka());
-		tf_godProizvodnje.setText(vozilo.getGodinaProizvodnje());
-		//	REGISTARSKE DODATI U KONSTRUKTOR
-		//Neiskoristeno: 
+		tf_godProizvodnje.setText(Integer.toString(vozilo.getGodinaProizvodnje()));
 		tf_regOznaka.setText(vozilo.getRegOznaka());
-		tf_odnos.setText(vozilo.getOdnosSnageIMase());
-		tf_sjedenje.setText(vozilo.getBrojMjestaZaSjedenje());
-		tf_stajanje.setText(vozilo.getBrojMjestaZaStajanje()); 
-		tf_lezanje.setText(vozilo.getBrojMjestaZaLezanje()); 
+		
+		tf_odnos.setText(Double.toString(vozilo.getOdnosSnageIMase()));
+		tf_sjedenje.setText(vozilo.getBrojMjestaZaSjedenje().toString());
+		tf_stajanje.setText(vozilo.getBrojMjestaZaStajanje().toString()); 
+		tf_lezanje.setText(vozilo.getBrojMjestaZaLezanje().toString()); 
 		cb_ekoKarakteristike.setSelectedItem(vozilo.getEkoKarakteristika());
-		rb_katalizator_da.isSelected();
+		rb_katalizator_da.setSelected(vozilo.getKatalizator());
+		rb_katalizator_ne.setSelected(!vozilo.getKatalizator());
 		tf_karoserija.setText(vozilo.getOblikKaroserije());
-		tf_datumPregleda.setText(vozilo.getDatumPregleda());
+		modelDatumPregleda.setValue(vozilo.getDatumPregleda());
+		modelDatumPregleda.setSelected(true);
 		
-		tf_brojSasije().setText();
-		tb_maxMasa().setText());
-		tb_masa().setText());
-		tb_nosivost().setText());
-		// Motor
-		tf_zapremina().setText());
-		tf_maxSnaga().setText());
-		cb_gorivo().setSelectedItem();
-		tf_brojMotora().setText();
-		cb_vrstaMotora().setSelectedItem();
-			*/
+		tf_brojSasije.setText(vozilo.getBrojSasije());
+		tb_maxMasa.setText(Integer.toString(vozilo.getMaxTehnickaDozvoljenaMasa()));
+		tb_masa.setText(Integer.toString(vozilo.getMasaVozila()));
+		tb_nosivost.setText(Integer.toString(vozilo.getDopustenaNosivost()));
 		
+		//Motor
+		Motor tmp = vozilo.getMotor();
+		tf_zapremina.setText(tmp.getZapreminaMotora().toString());
+		tf_maxSnaga.setText(tmp.getMaxSnaga().toString());
+		cb_gorivo.setSelectedItem(VrstaGoriva.getVrstaGoriva(tmp.getVrstaGoriva()));
+		tf_brojMotora.setText(tmp.getBrojMotora());
+		cb_vrstaMotora.setSelectedItem(VrstaMotora.getMotor(tmp.getVrstaMotora()));
+		
+		//Boja vozila
+		cb_bojaVozila.setSelectedItem(boja.getBoja());
+		cb_nijansa.setSelectedItem(boja.getNijansa());
+		cb_vrstaBoje.setSelectedItem(boja.getVrsta());
 	}
-	public void postaviVozilo(Vozilo vozilo) {
-	//	this.getVozilo().setId(qResult.getInt("IDVozila"));
-	/*	this.getVozilo().setVrsta( (VrstaVozila) getCb_vrstaVozila().getSelectedItem());
-		this.getVozilo().setMarka(getTf_markaVozila().getText());
-		this.getVozilo().setTip(getTf_tipVozila().getText());
-		this.getVozilo().setModel(getTf_modelVozila().getText());
-		this.getVozilo().setBrojSasije(getTf_brojSasije().getText());
-		this.getVozilo().setOblikKaroserije(getTf_karoserija().getText());
-		this.getVozilo().setGodinaProizvodnje(Integer.parseInt(getTf_godProizvodnje().getText()));
-		this.getVozilo().setMaxTehnickaDozvoljenaMasa(Integer.parseInt(getTb_maxMasa().getText()));
-		this.getVozilo().setMasaVozila(Integer.parseInt(getTb_masa().getText()));
-		this.getVozilo().setDopustenaNosivost(Integer.parseInt(getTb_nosivost().getText()));
-				
-		MotorDAO motorDAO = new MotorDAO();
-		this.getVozilo().setMotor(motorDAO.get(qResult.getInt("Motor")));
+	public void postaviVozilo() {
+		Vozilo tmp1 = getVozilo();
 		
-		this.getVozilo().setOdnosSnageIMase(Double.parseDouble(getTf_odnos().getText()));
-		this.getVozilo().setBrojMjestaZaSjedenje(Integer.parseInt(view.getVoziloDodavanje().getTf_sjedenje().getText());
-		this.getVozilo().setBrojMjestaZaStajanje( Integer.parseInt(view.getVoziloDodavanje().getTf_stajanje().getText()); 
-		this.getVozilo().setBrojMjestaZaLezanje(Integer.parseInt(view.getVoziloDodavanje().getTf_lezanje().getText()); 
-		this.getVozilo().setEkoKarakteristika((EkoKarakteristike)view.getVoziloDodavanje().getCb_ekoKarakteristike().getSelectedItem();
-		this.getVozilo().setKatalizator(getRb_katalizator_da().isSelected();
-		this.getVozilo().setDatumPregleda(new SimpleDateFormat("yyyy-MM-dd").parse(view.getVoziloDodavanje().getTf_datumPregleda().getText());
-		this.getVozilo().setRegOznaka((String)view.getVoziloDodavanje().getTf_regOznaka().getText();
-	*/
+		tmp1.setVrsta((VrstaVozila)cb_vrstaVozila.getSelectedItem());
+		tmp1.setTip(tf_tipVozila.getText());
+		tmp1.setModel(tf_modelVozila.getText());
+		tmp1.setMarka(tf_markaVozila.getText());
+		tmp1.setGodinaProizvodnje(Integer.parseInt(tf_godProizvodnje.getText()));
+		tmp1.setRegOznaka(tf_regOznaka.getText());
+		
+		tmp1.setOdnosSnageIMase(Double.parseDouble(tf_odnos.getText()));
+		tmp1.setBrojMjestaZaSjedenje(Integer.parseInt(tf_sjedenje.getText()));
+		tmp1.setBrojMjestaZaStajanje(Integer.parseInt(tf_stajanje.getText()));
+		tmp1.setBrojMjestaZaLezanje(Integer.parseInt(tf_lezanje.getText()));
+		tmp1.setEkoKarakteristika((EkoKarakteristike)cb_ekoKarakteristike.getSelectedItem());
+		tmp1.setKatalizator(rb_katalizator_da.isSelected());
+		tmp1.setOblikKaroserije(tf_karoserija.getText());
+		tmp1.setDatumPregleda((Date)dpDatumPregleda.getModel().getValue());
+		
+		tmp1.setBrojSasije(tf_brojSasije.getText());
+		tmp1.setMaxTehnickaDozvoljenaMasa(Integer.parseInt(tb_maxMasa.getText()));
+		tmp1.setMasaVozila(Integer.parseInt(tb_masa.getText()));
+		tmp1.setDopustenaNosivost(Integer.parseInt(tb_nosivost.getText()));
+		
+		Motor tmp2 = vozilo.getMotor();
+		tmp2.setZapreminaMotora(Integer.parseInt(tf_zapremina.getText()));
+		tmp2.setMaxSnaga(Integer.parseInt(tf_maxSnaga.getText()));
+		tmp2.setVrstaGoriva(cb_gorivo.getSelectedItem().toString());
+		tmp2.setBrojMotora(tf_brojMotora.getText());
+		tmp2.setVrstaGoriva(cb_vrstaMotora.getSelectedItem().toString());
+		
+		boja.setBoja((Boja)cb_bojaVozila.getSelectedItem());
+		boja.setNijansa((NijansaBoje)cb_nijansa.getSelectedItem());
+		boja.setVrsta((VrstaBoje)cb_vrstaBoje.getSelectedItem());
+		boja.setVozilo(vozilo);
+		boja.setTip("Osnovna");
+		
 	}
 	public Vozilo getVozilo() {
 		return vozilo;
@@ -868,5 +912,16 @@ public class VoziloModifikacija extends JPanel {
 
 	public void setVozilo(Vozilo vozilo) {
 		this.vozilo = vozilo;
+	}
+
+	public BojaVozila getBoja() {
+		return boja;
+	}
+
+	public void setBoja(BojaVozila boja) {
+		this.boja = boja;
+	}
+	public JComboBox getCb_bojaVozila() {
+		return cb_bojaVozila;
 	}
 }

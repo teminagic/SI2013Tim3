@@ -86,6 +86,7 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 				
 				VoziloDAO vDAO = new VoziloDAO();
 				Vozilo v = vDAO.get(qResult.getInt("Vozilo"));
+				result.setId(qResult.getInt("IDBojeVozila"));
 				result.setVozilo(v);
 				result.setNijansa((NijansaBoje.getNijansaBoje(qResult
 						.getString("Nijansa"))));
@@ -123,6 +124,8 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 			// Dobavljanje rezultata
 			while (qResult.next()) {
 				BojaVozila temp = new BojaVozila();
+				
+				temp.setId(qResult.getInt("IDBojeVozila"));
 				
 				BojaDAO bDAO = new BojaDAO();
 				Boja boja = bDAO.get(qResult.getInt("Boja"));				
@@ -162,9 +165,7 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 		BojaDAO bDAO = new BojaDAO();
 		Integer boja = bDAO.getID(bv.getBoja());
 		
-		VoziloDAO vDAO = new VoziloDAO();
-		Vozilo v = vDAO.get(bv.getVozilo().getId());
-		Integer vozilo = v.getId();
+		Integer vozilo = bv.getVozilo().getId();
 		
 		String tip = bv.getTip();
 
@@ -175,14 +176,15 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 		try {
 			PreparedStatement statement = connection
 					.prepareStatement("UPDATE `BojeVozila`"
-							+ " SET Nijansa = ?, Vrsta= ? , Boja= ? , Tip= ?"
-							+ " WHERE Vozilo = ?");
+							+ " SET Nijansa = ?, Vrsta= ? , Boja= ? , Tip= ?, Vozilo= ?"
+							+ " WHERE IDBojeVozila = ?");
 
 			statement.setString(1, nijansa.toString());
 			statement.setString(2, vrsta.toString());
 			statement.setInt(3, boja);
 			statement.setString(4, tip);
 			statement.setInt(5, vozilo);
+			statement.setInt(6, id);
 
 			statement.executeUpdate();
 			success = true;
@@ -219,19 +221,6 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 			ConnectionManager.closeConnection(connection);
 		}
 		return success;
-
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		VoziloDAO vdao = new VoziloDAO();
-		Vozilo vozilo=vdao.get(1);
-		
-		BojeVozilaDAO b=new BojeVozilaDAO();
-		BojaVozila bv=new BojaVozila(Boja.CRNA, vozilo, NijansaBoje.STANDARDNA, VrstaBoje.METALIK, "tip" );
-		//Boja boja, Vozilo vozilo, NijansaBoje nijansa,
-		//VrstaBoje vrsta, String tip
-		b.create(bv);
 
 	}
 
