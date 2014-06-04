@@ -11,6 +11,7 @@ public class Main {
 	/**
 	 * Launch the application.
 	 */
+	//main
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
