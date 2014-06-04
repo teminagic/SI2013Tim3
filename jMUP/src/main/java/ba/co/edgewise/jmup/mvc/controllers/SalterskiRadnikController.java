@@ -1,27 +1,19 @@
 package ba.co.edgewise.jmup.mvc.controllers;
 
-import java.awt.CardLayout;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import ba.co.edgewise.jmup.components.OpcijaSadrzaj;
-import ba.co.edgewise.jmup.components.VoziloDodavanje;
 import ba.co.edgewise.jmup.daldao.daos.OsobaDAO;
 import ba.co.edgewise.jmup.daldao.daos.VlasnickaDAO;
 import ba.co.edgewise.jmup.enums.EkoKarakteristike;
@@ -32,12 +24,13 @@ import ba.co.edgewise.jmup.enums.VoziloPretraga;
 import ba.co.edgewise.jmup.enums.VrstaVozila;
 import ba.co.edgewise.jmup.klase.Osoba;
 import ba.co.edgewise.jmup.klase.Vlasnicka;
-import ba.co.edgewise.jmup.klase.Vozilo;
 import ba.co.edgewise.jmup.mvc.models.LoginModel;
 import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModel;
 import ba.co.edgewise.jmup.mvc.views.Login;
 import ba.co.edgewise.jmup.mvc.views.SalterskiRadnikView;
 
+
+@SuppressWarnings({ "unchecked", "rawtypes", "deprecation" })
 public class SalterskiRadnikController {
 
 	private SalterskiRadnikModel model;
@@ -425,6 +418,7 @@ public class SalterskiRadnikController {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						prikaziPanelPretraga();
+						view.getStrana6().getBtn_modifikuj().setEnabled(false);
 					};
 					
 				});
@@ -434,6 +428,7 @@ public class SalterskiRadnikController {
 					public void actionPerformed(ActionEvent arg0) {
 						if(rbVozilo.isSelected()) {
 							prikaziPanelPretragaVozila();
+							view.getStrana6().getBtn_modifikuj().setEnabled(false);
 						}
 					};
 				});
@@ -443,6 +438,7 @@ public class SalterskiRadnikController {
 					public void actionPerformed(ActionEvent arg0) {
 						if(rbVozac.isSelected()) {
 							prikaziPanelPretragaVozaca();
+							view.getStrana6().getBtn_modifikuj().setEnabled(false);
 						}
 					};
 				});
@@ -452,6 +448,7 @@ public class SalterskiRadnikController {
 					public void actionPerformed(ActionEvent arg0) {
 						if(rbSaobracajna.isSelected()) {
 							prikaziPanelPretragaSaobracajnih();
+							view.getStrana6().getBtn_modifikuj().setEnabled(false);
 						}
 					};
 				});
@@ -464,9 +461,9 @@ public class SalterskiRadnikController {
 						}
 					};
 				});
-				//??
-				JTable table = view.getStrana6().getPanel_vozilo().getTable();
-				table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+				//Pretraga - Tabela Vozilo - omogucavanje buttona Modifikacija 
+				JTable tableVozilo = view.getStrana6().getPanel_vozilo().getTable();
+				tableVozilo.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 					@Override
 						public void valueChanged(ListSelectionEvent e) {
 							ListSelectionModel lsm = (ListSelectionModel)e.getSource();
@@ -474,6 +471,18 @@ public class SalterskiRadnikController {
 						//	view.getStrana6().getBtnIzbrisiKorisnika().setEnabled(!lsm.isSelectionEmpty());
 						}
 					});
+				
+				//Pretraga - Tabela Vozac - omogucavanje buttona Modifikacija 
+				JTable tableVozac = view.getStrana6().getPanel_vozac().getTable();
+				tableVozac.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+					@Override
+						public void valueChanged(ListSelectionEvent e) {
+							ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+							view.getStrana6().getBtn_modifikuj().setEnabled(!lsm.isSelectionEmpty());
+						//	view.getStrana6().getBtnIzbrisiKorisnika().setEnabled(!lsm.isSelectionEmpty());
+						}
+					});
+				
 				// Klik na button Pretrazi
 				JButton pretrazi = view.getStrana6().getBtnPretrazi();
 				pretrazi.addMouseListener(new MouseAdapter() {
@@ -690,6 +699,7 @@ public class SalterskiRadnikController {
 	public boolean provjeriPopunjenostUnosVozila() {
 		return true;
 	}
+	
 	public boolean provjeriPopunjenostDatumaZaOvjeruRegistracije() {
 		java.util.Date odKad = (java.util.Date) this.view.getGodisnjaOvjera().getDatum().getRegistrationDate().getDatePickerOdKad().getModel().getValue();
 		java.util.Date doKad = (java.util.Date) this.view.getGodisnjaOvjera().getDatum().getRegistrationDate().getDatePickerDoKad().getModel().getValue();
@@ -810,6 +820,7 @@ public class SalterskiRadnikController {
 			//Defaultni - Vozila
 			prikaziPanelPretragaVozila();
 		}
+		
 		void prikaziPanelPretragaVozila() {
 			//Baza
 			view.getStrana6().getPanel_vozilo().getModel().clearAll();
@@ -905,18 +916,11 @@ public class SalterskiRadnikController {
 			else if(rbVlasnicka.isSelected()) modifikujVlasnicku();
 		}
 		void modifikujVozilo(){
-			int rowSelected = view.getStrana6().getPanel_vozilo().getTable().getSelectedRow();
-			Vozilo temp = view.getStrana6().getPanel_vozilo().getModel().getData().get(rowSelected);
-			view.getVoziloModifikacija().setVozilo(temp);
-			//Ovo treba doraditi...
-			/*try {
-				updateVozila();
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}*/
 			view.prikaziModifikacijuVozila();
 		}
-		void modifikujVozaca(){}
+		void modifikujVozaca(){
+			view.prikaziModifikacijuVozaca();
+		}
 		void modifikujSaobracajnu(){}
 		void modifikujVlasnicku(){}
 		
