@@ -52,9 +52,6 @@ public class Vlasnicka{
 	
 	//UBACITI PARAMETRE
 	public Object[] toObjectArray() {
-		return new Object[]{ };
+		return new Object[]{this.brojDozvole, this.vozilo.getRegOznaka(), this.vlasnik.getIme(), this.vlasnik.getJmbg_Id() };
 	}	
-	//public enum VlasnickaPretraga { Broj_potvrde("Broj potvrde"), Registarska_oznaka(""), Ime_prezime("Ime i prezime"), JMBG_vlasnika("JMBG vlasnika") ; 
-
-	
 }

@@ -42,9 +42,6 @@ public class Saobracajna{
 	}
 	//UBACITI PARAMETRE
 	public Object[] toObjectArray() {
-		return new Object[]{ };
+	return new Object[]{this.brojDozvole, this.vozilo.getRegOznaka(), this.korisnik.getIme()+" "+this.korisnik.getPrezime(), this.korisnik.getJmbg_Id() };
 	}	
-	//public enum VlasnickaPretraga { Broj_potvrde("Broj potvrde"), Registarska_oznaka(""), Ime_prezime("Ime i prezime"), JMBG_vlasnika("JMBG vlasnika") ; 
-
-	
 }
