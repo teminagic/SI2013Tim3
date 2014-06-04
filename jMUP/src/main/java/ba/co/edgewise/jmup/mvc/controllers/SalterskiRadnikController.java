@@ -519,6 +519,26 @@ public class SalterskiRadnikController {
 					}
 				});
 				
+				// Klik na radio button pravno - Modifikacija
+				view.getStrana11().getPravno().addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						view.getStrana11().getTfJMBG().setEnabled(false);
+						view.getStrana11().getTfJMBG().setEditable(false);
+						view.getStrana11().getTfIdBroj().setEnabled(true);
+						view.getStrana11().getTfIdBroj().setEditable(true);
+					}
+				});
+				// Klik na radio button fizicko - Modifikacija
+				view.getStrana11().getFizicko().addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						view.getStrana11().getTfJMBG().setEnabled(true);
+						view.getStrana11().getTfJMBG().setEditable(true);
+						view.getStrana11().getTfIdBroj().setEnabled(false);
+						view.getStrana11().getTfIdBroj().setEditable(false);
+						
+					}
+				});
+				
 	}
 	
 	Boolean promijeniVlasnika(){
