@@ -5,6 +5,7 @@ import java.awt.CardLayout;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -65,30 +66,28 @@ public class SalterskiRadnikView extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 977, 590);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(contentPane);
 		
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{200};
-		gridBagLayout.rowHeights = new int[]{0};
-		gridBagLayout.columnWeights = new double[]{0.0};
-		gridBagLayout.rowWeights = new double[]{Double.MIN_VALUE};
-		contentPane.setLayout(gridBagLayout);
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[]{0};
+		gbl_contentPane.rowHeights = new int[]{0};
+		gbl_contentPane.columnWeights = new double[]{0.0, 1.0};
+		gbl_contentPane.rowWeights = new double[]{1.0};
+		contentPane.setLayout(gbl_contentPane);
+		
 		this.setVisible(true);
 		
-		meni =  new MeniSalter();
-		GridBagLayout gridBagLayout_1 = (GridBagLayout) meni.getLayout();
-		gridBagLayout_1.columnWidths = new int[]{133};
-		gbc_meni = new GridBagConstraints();
-		gbc_meni.anchor = GridBagConstraints.NORTH;
-		gbc_meni.fill = GridBagConstraints.HORIZONTAL;
+		meni = new MeniSalter();
+		GridBagConstraints gbc_meni = new GridBagConstraints();
+		gbc_meni.fill = GridBagConstraints.VERTICAL;
+		gbc_meni.insets = new Insets(0, 5, 0, 5);
 		contentPane.add(meni, gbc_meni);
 		
 		sadrzaj = new OpcijaSadrzaj("Početna");
-		gbc_naslov = new GridBagConstraints();
-		gbc_naslov.anchor = GridBagConstraints.NORTH;
-		gbc_naslov.fill = GridBagConstraints.HORIZONTAL;
+		GridBagConstraints gbc_sadrzaj = new GridBagConstraints();
+		gbc_sadrzaj.fill = GridBagConstraints.BOTH;
+		gbc_sadrzaj.insets = new Insets(0, 0, 0, 5);
 		
 		//Ovdje dodajmo sve card-ove
 		strana1 = new NaslovnaSalterski();
@@ -101,11 +100,6 @@ public class SalterskiRadnikView extends JFrame {
 		sadrzaj.getPanelSadrzaj().add(strana3, "Dodavanje vozila");
 		
 		strana6 = new SalterskaPretraga();
-		strana6.getBtn_modifikuj().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pozoviModifikacijuVozila();
-			}
-		});
 		sadrzaj.getPanelSadrzaj().add(strana6, "Pretraga");
 		
 		strana4Registracija = new RegistracijaUnos();
@@ -131,7 +125,8 @@ public class SalterskiRadnikView extends JFrame {
 		});
 		sadrzaj.getPanelSadrzaj().add(strana10, "Modifikacija vozila");
 		
-		contentPane.add(sadrzaj, gbc_naslov);
+		contentPane.add(sadrzaj, gbc_sadrzaj);
+		
 
 	}
 
