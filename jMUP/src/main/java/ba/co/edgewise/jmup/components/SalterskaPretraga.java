@@ -10,7 +10,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
-
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
@@ -21,8 +20,10 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+
 //import ba.co.edgewise.jmup.components.SalterskaPretraga.VoziloPretraga;
 import java.awt.CardLayout;
+
 import ba.co.edgewise.jmup.enums.VrstaVozila;
 
 
@@ -36,7 +37,6 @@ public class SalterskaPretraga extends JPanel{
 	JRadioButton rbVlasnicka; 
 	JRadioButton rbVozilo;
 	private JButton btn_modifikuj;
-	private JButton btnProfil;
 	
 	private final SalterskaPretraga frejm = this;
 	
@@ -46,7 +46,6 @@ public class SalterskaPretraga extends JPanel{
 	SalterskaPretragaVozac panel_vozac;
 	SalterskaPretragaSaobracajna panel_saobracajna;
 	SalterskaPretragaVlasnicka panel_vlasnicka;
-	private JButton btnIzlaz;
 	private JComboBox cb_parametri;
 	private JButton btnPretrazi;
 	
@@ -184,13 +183,6 @@ public class SalterskaPretraga extends JPanel{
 		okvirPanel.add(panel_pretraga, gbc_panel_pretraga);
 		panel_pretraga.setLayout(new CardLayout(0, 0));
 		
-		btnProfil = new JButton("Profil");
-		btnProfil.setEnabled(false);
-		GridBagConstraints gbc_btnProfil = new GridBagConstraints();
-		gbc_btnProfil.insets = new Insets(0, 0, 0, 5);
-		gbc_btnProfil.gridx = 7;
-		gbc_btnProfil.gridy = 3;
-		okvirPanel.add(btnProfil, gbc_btnProfil);
 		
 		btn_modifikuj = new JButton("Modifikuj");
 		btn_modifikuj.setEnabled(false);
@@ -200,12 +192,6 @@ public class SalterskaPretraga extends JPanel{
 		gbc_btn_modifikuj.gridy = 3;
 		okvirPanel.add(btn_modifikuj, gbc_btn_modifikuj);
 		
-		btnIzlaz = new JButton("Izlaz");
-		GridBagConstraints gbc_btnIzlaz = new GridBagConstraints();
-		gbc_btnIzlaz.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnIzlaz.gridx = 9;
-		gbc_btnIzlaz.gridy = 3;
-		okvirPanel.add(btnIzlaz, gbc_btnIzlaz);
 		
 		panel_vozilo = new SalterskaPretragaVozilo();
 		panel_vozac = new SalterskaPretragaVozac();
@@ -275,16 +261,11 @@ public class SalterskaPretraga extends JPanel{
 		this.rbVozilo = rbVozilo;
 	}
 
-	public JButton getBtnProfil() {
-		return btnProfil;
-	}
 	public JButton getBtn_modifikuj() {
 		return btn_modifikuj;
 	}
-	public JButton getBtnIzlaz() {
-		return btnIzlaz;
-	}
 
+	@SuppressWarnings("rawtypes")
 	public JComboBox getCb_parametri() {
 		return cb_parametri;
 	}

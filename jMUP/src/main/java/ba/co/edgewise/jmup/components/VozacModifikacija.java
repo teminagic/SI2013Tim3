@@ -13,7 +13,11 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.JButton;
 
-public class VozacDodavanje extends JPanel {
+import ba.co.edgewise.jmup.klase.Osoba;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class VozacModifikacija extends JPanel {
 
 	private static final long serialVersionUID = -6732800841205500794L;
 	private JTextField tfIme;
@@ -24,7 +28,7 @@ public class VozacDodavanje extends JPanel {
 	private ButtonGroup tipLica;
 	private JTextField tfJMBG;
 	private JTextField tfIdBroj;
-	private JButton btnPrihvati;
+	private JButton btnModifikuj;
 	private GridBagLayout gridBagLayout;
 	private JPanel panelPodaci;
 	private JLabel lblIme;
@@ -38,9 +42,11 @@ public class VozacDodavanje extends JPanel {
 	private JRadioButton pravno;
 	private JRadioButton fizicko;
 	private JButton btnPonisti;
+	
+	private Osoba vozac;
 
 
-	public VozacDodavanje() {
+	public VozacModifikacija(Osoba vozac) {
 		// methods for setting layout
 		setLayout();
 		setPanel();
@@ -48,11 +54,12 @@ public class VozacDodavanje extends JPanel {
 		setLabel();
 		setInput();
 		setComponents();
+		this.vozac = vozac;
 	}
 
 	public void setLayout() {
 		gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 0, 266, 75, 75, 0, 0 };
+		gridBagLayout.columnWidths = new int[] { 0, 266, 120, 120, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 1.0,
 				Double.MIN_VALUE };
@@ -258,15 +265,20 @@ public class VozacDodavanje extends JPanel {
 		radioGroup.add(pravno);
 		radioGroup.add(fizicko);
 
-		btnPrihvati = new JButton("Prihvati");
-		GridBagConstraints gbc_btnPrihvati = new GridBagConstraints();
-		gbc_btnPrihvati.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnPrihvati.insets = new Insets(0, 0, 5, 5);
-		gbc_btnPrihvati.gridx = 2;
-		gbc_btnPrihvati.gridy = 2;
-		add(btnPrihvati, gbc_btnPrihvati);
+		btnModifikuj = new JButton("Spasi modifikacije");
+		GridBagConstraints gbc_btnModifikuj = new GridBagConstraints();
+		gbc_btnModifikuj.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnModifikuj.insets = new Insets(0, 0, 5, 5);
+		gbc_btnModifikuj.gridx = 2;
+		gbc_btnModifikuj.gridy = 2;
+		add(btnModifikuj, gbc_btnModifikuj);
 
 		btnPonisti = new JButton("Poništi");
+		btnPonisti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				postaviVrijednosti();
+			}
+		});
 		GridBagConstraints gbc_btnPonisti = new GridBagConstraints();
 		gbc_btnPonisti.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnPonisti.insets = new Insets(0, 0, 5, 5);
@@ -275,8 +287,41 @@ public class VozacDodavanje extends JPanel {
 		add(btnPonisti, gbc_btnPonisti);
 	}
 
+	public void postaviVrijednosti(){
+		getTfIme().setText(vozac.getIme());
+		getTfPrezime().setText(vozac.getPrezime());
+		String[] prebivaliste = vozac.getPrebivaliste().split(" ");
+		getTfAdresa().setText(prebivaliste[0]);
+		getTfMjesto().setText(prebivaliste[1]);
+		getTfOpcina().setText(prebivaliste[2]);
+		getPravno().setSelected(vozac.isPravnoLice());
+		getFizicko().setSelected(!vozac.isPravnoLice());
+		if (vozac.isPravnoLice()) {
+			getTfIdBroj().setText(vozac.getJmbg_Id());
+		} else
+		{
+			getTfJMBG().setText(vozac.getJmbg_Id());
+		}
+	}
+	
+	public void postaviVozaca(){
+		vozac.setIme(getTfIme().getText());
+		vozac.setPrezime(getTfPrezime().getText());
+		String prebivaliste = getTfAdresa().getText() + " "
+				+ getTfMjesto().getText() + " "
+				+ getTfOpcina().getText();
+		vozac.setPrebivaliste(prebivaliste);
+		vozac.setPravnoLice(getPravno().isSelected());
+		if (vozac.isPravnoLice()) {
+			vozac.setJmbg_Id(getTfIdBroj().getText());
+		} else
+		{
+			vozac.setJmbg_Id(getTfJMBG().getText());
+		}
+	}
+	
 	public JButton getBtnPrihvati() {
-		return btnPrihvati;
+		return btnModifikuj;
 	}
 
 	public JButton getBtnPonisti() {
@@ -321,4 +366,13 @@ public class VozacDodavanje extends JPanel {
 	public JRadioButton getFizicko() {
 		return fizicko;
 	}
+
+	public Osoba getVozac() {
+		return vozac;
+	}
+
+	public void setVozac(Osoba vozac) {
+		this.vozac = vozac;
+	}
+	
 }

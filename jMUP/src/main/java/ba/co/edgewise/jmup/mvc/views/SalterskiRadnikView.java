@@ -1,41 +1,41 @@
 package ba.co.edgewise.jmup.mvc.views;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ba.co.edgewise.components.helpers.ModifikacijaVozaca;
 import ba.co.edgewise.components.helpers.ModifikacijaVozila;
+import ba.co.edgewise.components.helpers.TableModelVozac;
 import ba.co.edgewise.components.helpers.TableModelVozilo;
 import ba.co.edgewise.jmup.components.GodisnjaOvjera;
 import ba.co.edgewise.jmup.components.Izvjestaji;
 import ba.co.edgewise.jmup.components.MeniSalter;
-import ba.co.edgewise.jmup.components.MeniSalterOpcije;
 import ba.co.edgewise.jmup.components.NaslovnaSalterski;
 import ba.co.edgewise.jmup.components.OpcijaSadrzaj;
 import ba.co.edgewise.jmup.components.PromjenaVlasnikaVozila;
 import ba.co.edgewise.jmup.components.RegistracijaUnos;
 import ba.co.edgewise.jmup.components.SalterskaPretraga;
 import ba.co.edgewise.jmup.components.VozacDodavanje;
+import ba.co.edgewise.jmup.components.VozacModifikacija;
 import ba.co.edgewise.jmup.components.VoziloDodavanje;
 import ba.co.edgewise.jmup.components.VoziloModifikacija;
 import ba.co.edgewise.jmup.daldao.daos.BojeVozilaDAO;
 import ba.co.edgewise.jmup.klase.BojaVozila;
+import ba.co.edgewise.jmup.klase.Osoba;
 import ba.co.edgewise.jmup.klase.Vozilo;
-import ba.co.edgewise.jmup.mvc.controllers.LoginController;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class SalterskiRadnikView extends JFrame {
 
+	private static final long serialVersionUID = 6876342957773384416L;
+	
 	private JPanel contentPane;
 	private MeniSalter meni;
 	private NaslovnaSalterski strana1; // bit ce ih vise zavisno od buttona
@@ -52,6 +52,7 @@ public class SalterskiRadnikView extends JFrame {
 	private Izvjestaji strana9;
 	private PromjenaVlasnikaVozila strana8;
 	private VoziloModifikacija strana10;
+	private VozacModifikacija strana11;
 	
 	private final SalterskiRadnikView frejm = this;
 	/**
@@ -125,6 +126,14 @@ public class SalterskiRadnikView extends JFrame {
 		});
 		sadrzaj.getPanelSadrzaj().add(strana10, "Modifikacija vozila");
 		
+		strana11 = new VozacModifikacija(null);
+		strana11.getBtnPrihvati().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pozoviModifkacijuVozaca();
+			}
+		});
+		sadrzaj.getPanelSadrzaj().add(strana11, "Modifikacija vozaca");
+		
 		contentPane.add(sadrzaj, gbc_sadrzaj);
 		
 
@@ -136,6 +145,13 @@ public class SalterskiRadnikView extends JFrame {
 		ModifikacijaVozila nova = new ModifikacijaVozila(this);
 		nova.modificirajVozilo();
 	}
+	
+	public void pozoviModifkacijuVozaca()
+	{
+		ModifikacijaVozaca nova = new ModifikacijaVozaca(this);
+		nova.modificirajVozaca();
+	}
+	
 	public SalterskaPretraga getStrana6() {
 		return strana6;
 	}	
@@ -212,6 +228,23 @@ public class SalterskiRadnikView extends JFrame {
 		tmp.show(cards, "Modifikacija vozila");
 	}
 	
+	public void prikaziModifikacijuVozaca()
+	{
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Modifikacija vozača");
+		
+		int selektovano = this.getStrana6().getPanel_vozac().getTable().getSelectedRowCount();
+		TableModelVozac modelTabele = this.getStrana6().getPanel_vozac().getModel();
+		Osoba o = modelTabele.getData().get(selektovano);
+		
+		this.strana11.setVozac(o);
+		
+		strana11.postaviVrijednosti();
+		
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Modifikacija vozaca");
+	}
+	
 	public JPanel getContentPane() {
 		return contentPane;///
 	}
@@ -266,5 +299,8 @@ public class SalterskiRadnikView extends JFrame {
 
 	public PromjenaVlasnikaVozila getPromjenaVlasnika() {
 		return strana8;
+	}
+	public VozacModifikacija getStrana11() {
+		return strana11;
 	}
 }

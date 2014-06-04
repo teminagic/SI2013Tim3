@@ -1,7 +1,5 @@
 package ba.co.edgewise.jmup.components;
-import ba.co.edgewise.components.helpers.ModifikacijaVozila;
-import ba.co.edgewise.jmup.daldao.daos.BojeVozilaDAO;
-import ba.co.edgewise.jmup.daldao.daos.VoziloDAO;
+
 import ba.co.edgewise.jmup.enums.*;
 import ba.co.edgewise.jmup.klase.BojaVozila;
 import ba.co.edgewise.jmup.klase.Motor;
@@ -21,7 +19,6 @@ import java.awt.Insets;
 import java.util.Date;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
