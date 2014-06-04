@@ -84,12 +84,12 @@ public class SalterskiRadnikModel {
 	
 		return rDAO.create(registracija);
 	}
-	public Boolean DodajVozaca(String ime, String prezime, String adresa, String mjesto, String opcina, boolean pravno, String jmbg, String id)
+	public Boolean DodajVozaca(String ime, String prezime, String adresa, String mjesto, String opcina, boolean pravno, String jmbg_id)
 	{
 		String prebivaliste = adresa + " " + mjesto + " " + opcina;
 		
-		Osoba osoba = new Osoba(0, jmbg, prezime, ime, prebivaliste, pravno);
-		System.out.println(jmbg + " " + prezime + " " + ime + " " +prebivaliste + " " +pravno);
+		Osoba osoba = new Osoba(0, jmbg_id, prezime, ime, prebivaliste, pravno);
+		//System.out.println(jmbg + " " + prezime + " " + ime + " " +prebivaliste + " " +pravno);
 		OsobaDAO oDAO = new OsobaDAO();
 		return oDAO.create(osoba);
 	}

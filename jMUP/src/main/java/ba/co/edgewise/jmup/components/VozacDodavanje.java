@@ -12,6 +12,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VozacDodavanje extends JPanel {
 
@@ -209,6 +211,8 @@ public class VozacDodavanje extends JPanel {
 		tfOpcina.setColumns(10);
 
 		tfJMBG = new JTextField();
+		tfJMBG.setEditable(false);
+		tfJMBG.setEnabled(false);
 		GridBagConstraints gbc_tfJMBG = new GridBagConstraints();
 		gbc_tfJMBG.gridwidth = 2;
 		gbc_tfJMBG.insets = new Insets(0, 0, 5, 5);
@@ -236,6 +240,7 @@ public class VozacDodavanje extends JPanel {
 		tipLica = new ButtonGroup();
 
 		pravno = new JRadioButton("pravno");
+		pravno.setSelected(true);
 		GridBagConstraints gbc_pravno = new GridBagConstraints();
 		gbc_pravno.insets = new Insets(0, 0, 5, 5);
 		gbc_pravno.gridx = 1;

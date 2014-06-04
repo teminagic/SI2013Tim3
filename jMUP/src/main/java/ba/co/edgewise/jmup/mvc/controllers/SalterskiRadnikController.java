@@ -1,6 +1,7 @@
 package ba.co.edgewise.jmup.mvc.controllers;
 
 import java.awt.CardLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -88,7 +89,6 @@ public class SalterskiRadnikController {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						if(provjeriPopunjenostVozaca()){							
-								
 								if (dodajVozaca()) {
 									JOptionPane.showOptionDialog(view, "Voza\u010D uspje\u0161no dodan.",
 											"Unos voza\u010Da", JOptionPane.OK_OPTION,
@@ -115,7 +115,7 @@ public class SalterskiRadnikController {
 								
 						} 
 						else{//
-							JOptionPane.showMessageDialog(null, "Neispravno popunjena polja!");
+							//JOptionPane.showMessageDialog(null, "Neispravno popunjena polja!");
 						};
 					}
 				});
@@ -480,6 +480,25 @@ public class SalterskiRadnikController {
 						modifikuj();
 					}
 				});
+				// Klik na radio button pravno
+				view.getStrana2().getPravno().addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						view.getStrana2().getTfJMBG().setEnabled(false);
+						view.getStrana2().getTfJMBG().setEditable(false);
+						view.getStrana2().getTfIdBroj().setEnabled(true);
+						view.getStrana2().getTfIdBroj().setEditable(true);
+					}
+				});
+				// Klik na radio button fizicko
+				view.getStrana2().getFizicko().addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						view.getStrana2().getTfJMBG().setEnabled(true);
+						view.getStrana2().getTfJMBG().setEditable(true);
+						view.getStrana2().getTfIdBroj().setEnabled(false);
+						view.getStrana2().getTfIdBroj().setEditable(false);
+						
+					}
+				});
 				
 	}
 	
@@ -565,16 +584,16 @@ public class SalterskiRadnikController {
 		String adresa = view.getStrana2().getTfAdresa().getText();
 		String mjesto = view.getStrana2().getTfMjesto().getText();
 		String opcina = view.getStrana2().getTfOpcina().getText();
-		if(view.getStrana2().getPravno().isSelected())
+		if(view.getStrana2().getPravno().isSelected()==true){
 			pravno = true;
-		else
+			String idBroj = view.getStrana2().getTfIdBroj().getText();
+			return model.DodajVozaca(ime, prezime, adresa, mjesto, opcina, pravno, idBroj);
+		}
+		else{
 			pravno = false;
-			
-		String jmbg = view.getStrana2().getTfJMBG().getText();
-		// Nek unese nizasta ne sluzi :D
-		String idBroj = view.getStrana2().getTfIdBroj().getText();
-		
-		return model.DodajVozaca(ime, prezime, adresa, mjesto, opcina, pravno, jmbg, idBroj);
+			String jmbg = view.getStrana2().getTfJMBG().getText();
+			return model.DodajVozaca(ime, prezime, adresa, mjesto, opcina, pravno, jmbg);
+		}
 	}
 	public Boolean dodajRegistracijuIVlasnicku() throws ParseException 
 	{
@@ -602,7 +621,34 @@ public class SalterskiRadnikController {
 		return model.DodajRegistracijuISaobracajnu(brojPotvrde, registracija, jmbgKorisnika, oodKad, dooKad);
 	}
 	public boolean provjeriPopunjenostVozaca() {
-		return true;
+		String ip="^[A-z]+$";
+		if(!view.getStrana2().getTfIme().getText().matches(ip) || !view.getStrana2().getTfPrezime().getText().matches(ip) ||
+				!view.getStrana2().getTfAdresa().getText().matches("^[a-zA-Z0-9]+\\s?[a-zA-Z0-9]+$") || !view.getStrana2().getTfOpcina().getText().matches(ip) ||
+				!view.getStrana2().getTfMjesto().getText().matches(ip)){
+					JOptionPane.showOptionDialog(view, "Morate ispravno popuniti sve podatke.",
+					"Unos voza\u010Da", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+				return false;
+		}
+		if(view.getStrana2().getFizicko().isSelected()==true && 
+				!view.getStrana2().getTfJMBG().getText().matches("^(\\d{13})$")){ 
+			JOptionPane.showOptionDialog(view, "JMBG se mora sastojati od 13 cifara",
+					"Unos voza\u010Da", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			return false;
+		}
+		if(view.getStrana2().getPravno().isSelected()==true && 
+				!view.getStrana2().getTfIdBroj().getText().matches("^\\d+$")){ 
+			JOptionPane.showOptionDialog(view, "ID se mora sastojati od cifara",
+					"Unos voza\u010Da", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			return false;
+		}
+		else return true;
+		
 	}
 	void prikaziPanelIzvjestaji()
 	{
