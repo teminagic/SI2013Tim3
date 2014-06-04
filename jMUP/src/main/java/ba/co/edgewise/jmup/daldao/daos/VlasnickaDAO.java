@@ -8,7 +8,11 @@ import java.sql.SQLException;
 
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
+import ba.co.edgewise.jmup.enums.EkoKarakteristike;
+import ba.co.edgewise.jmup.enums.VrstaVozila;
+import ba.co.edgewise.jmup.klase.Motor;
 import ba.co.edgewise.jmup.klase.Vlasnicka;
+import ba.co.edgewise.jmup.klase.Vozilo;
 
 public class VlasnickaDAO implements IGenericDAO<Vlasnicka, String> {
 
@@ -212,7 +216,7 @@ public Vlasnicka getByVozilo(Integer id){
 		try {
 			PreparedStatement statement = 	connection.prepareStatement(
 					"SELECT * "+ 
-					"FROM Saobracajna "
+					"FROM Vlasnicka "
 					);
 			
 			qResult = statement.executeQuery();
@@ -301,6 +305,14 @@ public Vlasnicka getByVozilo(Integer id){
 		}
 		
 		return success;
+		
+	}
+	
+	public static void main(String[] args) {
+	 
+		VlasnickaDAO vd = new VlasnickaDAO();
+		ArrayList<Vlasnicka> v = new ArrayList<Vlasnicka>();
+		v = vd.getAll();
 		
 	}
 	
