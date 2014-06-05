@@ -4,9 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -903,7 +903,7 @@ public class SalterskiRadnikController {
 					new String[] { "Uredu" }, "default");
 			return false;
 		}
-	
+
 		Date d=new Date();
 		if (Integer.parseInt(view.getVoziloDodavanje().getTf_godProizvodnje().getText())<=1900 &&
 				Integer.parseInt(view.getVoziloDodavanje().getTf_godProizvodnje().getText())>=d.getYear()){
