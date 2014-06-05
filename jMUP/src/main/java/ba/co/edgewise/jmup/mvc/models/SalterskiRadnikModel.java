@@ -93,7 +93,7 @@ public class SalterskiRadnikModel {
 		OsobaDAO oDAO = new OsobaDAO();
 		return oDAO.create(osoba);
 	}
-	public void dodajVozilo(String registarske, VrstaVozila vrsta, String marka, String tip,
+	public boolean dodajVozilo(String registarske, VrstaVozila vrsta, String marka, String tip,
 			String model, String brojSasije, String oblikKaroserije,
 			int godinaProizvodnje, int maxTehnickaDozvoljenaMasa,
 			int masaVozila, int dopustenaNosivost,Double odnosSnageIMase, Integer brojMjestaZaSjedenje,
@@ -122,7 +122,7 @@ public class SalterskiRadnikModel {
 			datumPregleda);
 		VoziloDAO vDAO = new VoziloDAO();
 		//Kreiraj vozilo
-		vDAO.create(vozilo);
+		return vDAO.create(vozilo);
 	}
 	public Boolean provjeriBrojSaobracajne(String brojDozvole)
 	{
