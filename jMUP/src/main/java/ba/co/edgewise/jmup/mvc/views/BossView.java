@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -40,24 +41,22 @@ public class BossView extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 809, 590);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{200};
-		gridBagLayout.rowHeights = new int[]{0};
-		gridBagLayout.columnWeights = new double[]{0.0};
-		gridBagLayout.rowWeights = new double[]{Double.MIN_VALUE};
-		contentPane.setLayout(gridBagLayout);
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[]{0};
+		gbl_contentPane.rowHeights = new int[]{0};
+		gbl_contentPane.columnWeights = new double[]{0.0, 1.0};
+		gbl_contentPane.rowWeights = new double[]{1.0};
+		contentPane.setLayout(gbl_contentPane);
 		this.setVisible(true);
 		
 		meni =  new MeniBoss();
-		GridBagLayout gridBagLayout_1 = (GridBagLayout) meni.getLayout();
-		gridBagLayout_1.columnWidths = new int[]{107};
-		gbc_meni = new GridBagConstraints();
-		gbc_meni.anchor = GridBagConstraints.NORTH;
-		gbc_meni.fill = GridBagConstraints.HORIZONTAL;
+		GridBagConstraints gbc_meni = new GridBagConstraints();
+		gbc_meni.fill = GridBagConstraints.VERTICAL;
+		gbc_meni.insets = new Insets(0, 5, 0, 5);
 		contentPane.add(meni, gbc_meni);
 		
 		sadrzaj = new OpcijaSadrzaj("Početna");
