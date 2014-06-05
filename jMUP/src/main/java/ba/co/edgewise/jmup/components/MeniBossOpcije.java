@@ -29,9 +29,9 @@ public class MeniBossOpcije extends JPanel {
 	public void layoutSet(){
 		gridBagLayoutMeniBossOpcije = new GridBagLayout();
 		gridBagLayoutMeniBossOpcije.columnWidths = new int[]{0, 0};
-		gridBagLayoutMeniBossOpcije.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gridBagLayoutMeniBossOpcije.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayoutMeniBossOpcije.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayoutMeniBossOpcije.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayoutMeniBossOpcije.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayoutMeniBossOpcije);
 	}
 	public void btnSet(){
@@ -71,7 +71,7 @@ public class MeniBossOpcije extends JPanel {
 		gbc_btnOdjava.insets = new Insets(0, 0, 5, 0);
 		gbc_btnOdjava.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnOdjava.gridx = 0;
-		gbc_btnOdjava.gridy = 4;
+		gbc_btnOdjava.gridy = 5;
 		add(btnOdjava, gbc_btnOdjava);
 	}
 	public void panelSet(){

@@ -66,26 +66,27 @@ public class BossView extends JFrame {
 		gbc_naslov.fill = GridBagConstraints.HORIZONTAL;
 		
 		strana1 = new NaslovnaMenadzer();
-		sadrzaj.getPanelSadrzaj().add(strana1, "Početna");
+		strana1.getLblDobrodoslice().setText("Dobrodo\u0161ao/la!");
+		sadrzaj.getPanelSadrzaj().add(strana1, "Po\u010Detna");
 		
 		strana2 = new SalterskaPretraga();
 		sadrzaj.getPanelSadrzaj().add(strana2, "Pretraga");
 		
 		strana3 = new Izvjestaji();
-		sadrzaj.getPanelSadrzaj().add(strana3, "Izvještaji");
+		sadrzaj.getPanelSadrzaj().add(strana3, "Izvje\u0161taji");
 		
 		strana5 = new PregledLogova();
 		sadrzaj.getPanelSadrzaj().add(strana5, "Pregled historije promjena");
 		
 		izvjestaji = new Izvjestaji();
-		sadrzaj.getPanelSadrzaj().add(izvjestaji, "Izrada izvještaja");
+		sadrzaj.getPanelSadrzaj().add(izvjestaji, "Izrada izvje\u0161taja");
 		
 		contentPane.add(sadrzaj, gbc_naslov);
 
 	}
 
 	public void prikaziPocetnu(){
-		frejm.getSadrzaj().getNaslov().postaviNaslov("Početna");
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Po\u010Detna");
 		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Početna");
@@ -98,7 +99,7 @@ public class BossView extends JFrame {
 	}
 	
 	public void prikaziIzvjestaje(){
-		frejm.getSadrzaj().getNaslov().postaviNaslov("Izvještaji");
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Izvje\u0161taji");
 		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Izvještaji");

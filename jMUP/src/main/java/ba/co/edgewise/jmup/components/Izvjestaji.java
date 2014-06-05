@@ -52,7 +52,7 @@ public class Izvjestaji extends JPanel {
 	}
 
 	public void labelSet() {
-		label_1 = new JLabel("Kreiranje izvještaja o broju i tipu izdatih dozvola:");
+		label_1 = new JLabel("Kreiranje izvje\u0161taja o broju i tipu izdatih dozvola:");
 		GridBagConstraints gbc_label_1 = new GridBagConstraints();
 		gbc_label_1.anchor = GridBagConstraints.EAST;
 		gbc_label_1.insets = new Insets(0, 0, 0, 5);
@@ -60,7 +60,7 @@ public class Izvjestaji extends JPanel {
 		gbc_label_1.gridy = 1;
 		panel_1.add(label_1, gbc_label_1);
 
-		label = new JLabel("Kreiranje izvještaja o isteklim registracijama:");
+		label = new JLabel("Kreiranje izvje\u0161taja o isteklim registracijama:");
 		GridBagConstraints gbc_label = new GridBagConstraints();
 		gbc_label.anchor = GridBagConstraints.EAST;
 		gbc_label.insets = new Insets(0, 0, 5, 5);
@@ -71,7 +71,7 @@ public class Izvjestaji extends JPanel {
 
 	public void buttonSet() {
 
-		btnKreiranjeIzvjestaja1 = new JButton("Kreiraj Izvještaj");
+		btnKreiranjeIzvjestaja1 = new JButton("Kreiraj Izvje\u0161taj");
 		GridBagConstraints gbc_button = new GridBagConstraints();
 		gbc_button.anchor = GridBagConstraints.NORTH;
 		gbc_button.fill = GridBagConstraints.HORIZONTAL;
@@ -80,7 +80,7 @@ public class Izvjestaji extends JPanel {
 		gbc_button.gridy = 0;
 		panel_1.add(btnKreiranjeIzvjestaja1, gbc_button);
 
-		btnKreiranjeIzvjestaja2 = new JButton("Kreiraj Izvještaj");
+		btnKreiranjeIzvjestaja2 = new JButton("Kreiraj Izvje\u0161taj");
 		GridBagConstraints gbc_button_1 = new GridBagConstraints();
 		gbc_button_1.anchor = GridBagConstraints.NORTH;
 		gbc_button_1.fill = GridBagConstraints.HORIZONTAL;
@@ -92,7 +92,7 @@ public class Izvjestaji extends JPanel {
 		btnKreiranjeIzvjestaja1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ShowDialogInput dialog = new ShowDialogInput("Unesite lokaciju za spremanje izvještaja:", 1);
+					ShowDialogInput dialog = new ShowDialogInput("Unesite lokaciju za spremanje izvje\u0161taja:", 1);
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -103,7 +103,7 @@ public class Izvjestaji extends JPanel {
 		btnKreiranjeIzvjestaja2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ShowDialogInput dialog = new ShowDialogInput("Unesite lokaciju za spremanje izvještaja:", 2);
+					ShowDialogInput dialog = new ShowDialogInput("Unesite lokaciju za spremanje izvje\u0161taja:", 2);
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -120,7 +120,7 @@ public class Izvjestaji extends JPanel {
 	public void panelSet() {
 
 		panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Izrada Izvještaja", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Izrada Izvje\u0161taja", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
