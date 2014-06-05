@@ -68,6 +68,20 @@ public class SalterskiRadnikModel {
 	
 		return rDAO.create(registracija);
 	}
+	
+	public Boolean DodajSaobracajnu(String brojDozvole, String regOznaka, String jmbg)
+	{
+		SaobracajnaDAO sDAO = new SaobracajnaDAO();
+		OsobaDAO oDAO = new OsobaDAO();
+		VoziloDAO vDAO = new VoziloDAO();
+		
+		Osoba o = oDAO.getByJMBG(jmbg);
+		Vozilo vozilica = vDAO.getByReg(regOznaka);
+		Saobracajna s = new Saobracajna(brojDozvole,vozilica,o);
+		
+		return sDAO.create(s);
+	}
+	
 	public Boolean DodajRegistracijuIVlasnicku(String brojDozvole, String regOznaka, String jmbg, Date odKad, Date doKad)
 	{
 		VlasnickaDAO sDAO = new VlasnickaDAO();
@@ -83,6 +97,18 @@ public class SalterskiRadnikModel {
 		RegistracijaDAO rDAO = new RegistracijaDAO();
 	
 		return rDAO.create(registracija);
+	}
+	public Boolean DodajVlasnicku(String brojDozvole, String regOznaka, String jmbg)
+	{
+		VlasnickaDAO sDAO = new VlasnickaDAO();
+		OsobaDAO oDAO = new OsobaDAO();
+		VoziloDAO vDAO = new VoziloDAO();
+		
+		Osoba o = oDAO.getByJMBG(jmbg);
+		Vozilo vozilica = vDAO.getByReg(regOznaka);
+		Vlasnicka s = new Vlasnicka(brojDozvole,vozilica,o);
+		
+		return sDAO.create(s);
 	}
 	public Boolean DodajVozaca(String ime, String prezime, String adresa, String mjesto, String opcina, boolean pravno, String jmbg_id)
 	{
