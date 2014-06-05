@@ -298,9 +298,17 @@ public class VozacModifikacija extends JPanel {
 		getFizicko().setSelected(!vozac.isPravnoLice());
 		if (vozac.isPravnoLice()) {
 			getTfIdBroj().setText(vozac.getJmbg_Id());
+			getTfIdBroj().setEditable(true);
+			getTfIdBroj().setEditable(true);
+			getTfJMBG().setEditable(false);
+			getTfJMBG().setEnabled(false);
 		} else
 		{
 			getTfJMBG().setText(vozac.getJmbg_Id());
+			getTfIdBroj().setEditable(false);
+			getTfIdBroj().setEditable(false);
+			getTfJMBG().setEditable(true);
+			getTfJMBG().setEnabled(true);
 		}
 	}
 	
