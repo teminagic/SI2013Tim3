@@ -4,7 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
 import java.text.ParseException;
+import java.util.ArrayList;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -26,6 +29,7 @@ import ba.co.edgewise.jmup.enums.VoziloPretraga;
 import ba.co.edgewise.jmup.enums.VrstaVozila;
 import ba.co.edgewise.jmup.klase.Osoba;
 import ba.co.edgewise.jmup.klase.Vlasnicka;
+import ba.co.edgewise.jmup.klase.Vozilo;
 import ba.co.edgewise.jmup.mvc.models.LoginModel;
 import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModel;
 import ba.co.edgewise.jmup.mvc.views.Login;
@@ -899,7 +903,7 @@ public class SalterskiRadnikController {
 					new String[] { "Uredu" }, "default");
 			return false;
 		}
-	
+
 		Date d=new Date();
 		if (Integer.parseInt(view.getVoziloDodavanje().getTf_godProizvodnje().getText())<=1900 &&
 				Integer.parseInt(view.getVoziloDodavanje().getTf_godProizvodnje().getText())>=d.getYear()){

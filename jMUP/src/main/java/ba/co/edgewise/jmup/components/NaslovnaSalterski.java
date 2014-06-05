@@ -29,7 +29,7 @@ public class NaslovnaSalterski extends JPanel {
 		btnSet();		
 	}
 	public void layoutGlavniSet(){
-		setBorder(new TitledBorder(null, "Šalter", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setBorder(new TitledBorder(null, "\u0160alter", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{54, 36, 0, 0, 0, 0, 25, 0, 7, 0, 51, 84, 27, 0};
 		gridBagLayout.rowHeights = new int[]{77, 0, 70, 70, 70, 15, 20, 0, 0};
@@ -39,7 +39,7 @@ public class NaslovnaSalterski extends JPanel {
 	}
 	public void panelSet(){
 		
-		lblDobrodoslice = new JLabel("Dobrodošao/la!");
+		lblDobrodoslice = new JLabel("Dobrodo\u0161ao/la!");
 		lblDobrodoslice.setFont(new Font("Tahoma", Font.BOLD, 32));
 		GridBagConstraints gbc_lblDobrodoslice = new GridBagConstraints();
 		gbc_lblDobrodoslice.gridwidth = 6;
