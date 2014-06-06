@@ -209,6 +209,67 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 		return result;
 	}
 	
+	public Vozilo getBySasija(String reg) {
+
+		Vozilo result = new Vozilo();
+
+		// Konekcija:
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+
+		ResultSet qResult = null;
+
+		try {
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT * " + "FROM Vozilo "
+							+ "WHERE BrojSasije  = ?");
+
+			statement.setString(1, reg);
+			qResult = statement.executeQuery();
+
+			// Dobavljanje rezultata
+			if (qResult.next()) {
+				result.setId(qResult.getInt("IDVozila"));
+				result.setVrsta(VrstaVozila.getVrstaVozila(qResult.getString("Vrsta")));
+				result.setMarka(qResult.getString("Marka"));
+				result.setTip(qResult.getString("Tip"));
+				result.setModel(qResult.getString("Model"));
+				result.setBrojSasije(qResult.getString("BrojSasije"));
+				result.setOblikKaroserije(qResult.getString("OblikKaroserije"));
+				result.setGodinaProizvodnje(qResult.getInt("GodinaProizvodnje"));
+				result.setMaxTehnickaDozvoljenaMasa(qResult.getInt("MaxTehnickaDozvoljenaMasa"));
+				result.setMasaVozila(qResult.getInt("MasaVozila"));
+				result.setDopustenaNosivost(qResult.getInt("DopustenaNosivost"));
+				
+				MotorDAO motorDAO = new MotorDAO();
+				result.setMotor(motorDAO.get(qResult.getInt("Motor")));
+				
+				result.setOdnosSnageIMase(qResult.getDouble("OdnosSnageIMase"));
+				result.setBrojMjestaZaSjedenje(qResult.getInt("BrojMjestaZaSjedenje"));
+				result.setBrojMjestaZaStajanje(qResult.getInt("BrojMjestaZaStajanje"));
+				result.setBrojMjestaZaLezanje(qResult.getInt("BrojMjestaZaLezanje"));
+				result.setEkoKarakteristika(EkoKarakteristike.getEkoKarakteristike
+						(qResult.getString("EkoKarakteristikaVozila")));
+				result.setKatalizator(qResult.getBoolean("Katalizator"));
+				result.setDatumPregleda(qResult.getDate("DatumPregleda"));
+				result.setRegOznaka(qResult.getString("RegOznaka"));
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return null;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+
+		return result;
+	}
+	
+	
 	public ArrayList<Vozilo> getByDate(Integer date) {
 
 		ArrayList<Vozilo> result = new ArrayList<Vozilo>();

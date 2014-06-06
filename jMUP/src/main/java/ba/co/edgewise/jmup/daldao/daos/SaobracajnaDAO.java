@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import ba.co.edgewise.jmup.klase.Osoba;
+import ba.co.edgewise.jmup.klase.Vlasnicka;
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
 import ba.co.edgewise.jmup.klase.Saobracajna;
@@ -365,5 +366,44 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 		return success;
 		
 	}
+public Saobracajna getByVozac(Integer id){
+		
+	Saobracajna result = new Saobracajna();
+		
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+
+		ResultSet qResult = null;
+		
+		try {
+			PreparedStatement statement = 	connection.prepareStatement(
+					"SELECT * "+ 
+					"FROM Saobracajna "+
+					"WHERE Vlasnik = ?"
+					);
+			
+			statement.setInt(1, id);
+			qResult = statement.executeQuery();
+			
+			if (qResult.next())
+			{
+				result.setBrojDozvole(qResult.getString("BrojDozvole"));
+				
+				VoziloDAO vDAO = new VoziloDAO();
+				result.setVozilo(vDAO.get(qResult.getInt("Vozilo")));
+				
+				OsobaDAO oDAO = new OsobaDAO();
+				result.setKorisnik(oDAO.get(qResult.getInt("Vlasnik")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+		
+		return result;
+		
+	} 
 	
 }

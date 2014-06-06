@@ -176,7 +176,13 @@ public class SalterskiRadnikController {
 								// logika za: unos vlasnicke ili saobracajne posto se
 								// ovaj panel pojavljuje :D
 								if (isUnosVDozvole() == true) {
-									
+									if (view.getStrana2().getPravno().isSelected() == true) {
+										String idBroj = view.getStrana2().getTfIdBroj().getText();
+										setIdOsobaVlasnickaUnos(idBroj);
+									} else {
+										String jmbg = view.getStrana2().getTfJMBG().getText();
+										setIdOsobaVlasnickaUnos(jmbg);
+									}
 									prikaziPanelUnosVozila();
 								}
 								if (isUnosSDozvole() == true) {
@@ -382,10 +388,20 @@ public class SalterskiRadnikController {
 									JOptionPane.INFORMATION_MESSAGE, null,
 									new String[] { "Uredu" }, "default");
 
-							if (isUnosSDozvole() == true)
+							if (isUnosSDozvole() == true){
+								String reg= view.getVoziloDodavanje().getTf_regOznaka().getText();
+								VoziloDAO vDAO = new VoziloDAO();
+								Vozilo v = vDAO.getByReg(reg);
+								setIdVoziloSaobracajnaUnos(v.getId());
 								prikaziPanelUnosRegistracije();
-							if (isUnosVDozvole() == true)
+							}
+							else if (isUnosVDozvole() == true){
+								String reg= view.getVoziloDodavanje().getTf_regOznaka().getText();
+								VoziloDAO vDAO = new VoziloDAO();
+								Vozilo v = vDAO.getByReg(reg);
+								setIdVoziloVlasnickaUnos(v.getId());
 								prikaziPanelUnosRegistracije();
+							}
 						} else {
 							view.getGodisnjaOvjera().getPretraga().getTxtId()
 									.setText("");
@@ -1379,8 +1395,16 @@ public class SalterskiRadnikController {
 			{
 				OsobaDAO oDAO = new OsobaDAO();
 				// Isti ID je kao i onaj u bazi
-				Osoba osoba = oDAO.getByJMBG(view.getStrana2().getTfIdBroj().getText());
-				if(osoba.getJmbg_Id()!=null){
+				if(oDAO.getByJMBG(view.getStrana2().getTfIdBroj().getText())==null){
+					JOptionPane.showOptionDialog(view,
+							"Osoba sa unesenim podacima ne postoji u bazi podataka.", "Unos voza\u010Da",
+							JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
+							null, new String[] { "Uredu" }, "default");
+						view.getStrana2().getTfIdBroj().setText("");
+					return false;
+				}
+				else{
+					Osoba osoba = oDAO.getByJMBG(view.getStrana2().getTfIdBroj().getText());
 					if (JOptionPane.showOptionDialog(view,
 							"Osoba ve\u0107 postoji u bazi. "
 									+ "\nDa - Tu osobu tražim. \nNe - Želim unijeti novu osobu.",
@@ -1397,14 +1421,7 @@ public class SalterskiRadnikController {
 					}
 
 				}
-				else{
-					JOptionPane.showOptionDialog(view,
-							"Osoba sa unesenim podacima ne postoji u bazi podataka.", "Unos voza\u010Da",
-							JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
-							null, new String[] { "Uredu" }, "default");
-						view.getStrana2().getTfIdBroj().setText("");
-					return false;
-				}
+				
 			}
 		}
 		else if (view.getStrana2().getFizicko().isSelected() == true){
@@ -1452,6 +1469,7 @@ public class SalterskiRadnikController {
 	
 	public Boolean provjeriVozilaUBazi(){
 		String brojSasije = view.getVoziloDodavanje().getTf_brojSasije().getText();
+		VoziloDAO vDAO = new VoziloDAO();
 		if(brojSasije.isEmpty()){
 			JOptionPane.showOptionDialog(view,
 					"Niste unijeli broj \u0161asije.",
@@ -1460,59 +1478,106 @@ public class SalterskiRadnikController {
 					new String[] { "Uredu" }, "default");
 			return false;
 		}
-		VoziloDAO vDAO = new VoziloDAO();
-		ArrayList<Vozilo> vozila = vDAO.getAll();
-		for (Vozilo v : vozila) {
-			
-			if (v.getBrojSasije().equals(brojSasije)) {
-				if(JOptionPane.showOptionDialog(view,
-						"Vozilo ve\u0107 postoji u bazi. "
-								+ "\nDa - To vozilo tražim. \nNe - Želim unijeti novo vozilo.",
-						"Unos vozila", JOptionPane.OK_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, new String[] {
-								"Da", "Ne" }, "default") == JOptionPane.OK_OPTION){
-					
-					OsobaDAO osobaDAO = new OsobaDAO();
-					if(isUnosVDozvole() == true){
-						VlasnickaDAO vlasnickaDAO = new VlasnickaDAO();
-						OsobaDAO oDAO = new OsobaDAO();						
-						Osoba vlasnik = oDAO.getByJMBG(getIdOsobaVlasnickaUnos());
-						Vlasnicka vlasnicka = vlasnickaDAO.getByVlasnik(vlasnik.getId());						
-						Vozilo vozilo = vlasnicka.getVozilo();
-						if(vozilo.getBrojSasije().equals(brojSasije))
-						{
-							JOptionPane.showOptionDialog(view,
-									"Uneseno vozilo ve\u0107 ima vlasnika. "
-											+ "Molimo vas da poku\u0161ate ponovo",
-									"Unos vozila", JOptionPane.OK_OPTION,
-									JOptionPane.ERROR_MESSAGE, null,
-									new String[] { "Uredu" }, "default");
-							return false;
-						}
-					}
-					else if(isUnosSDozvole() == true){
-						SaobracajnaDAO saobracajnaDAO = new SaobracajnaDAO();
-						if(saobracajnaDAO.getByName(osobaDAO.getByJMBG(idOsobaVlasnickaUnos).getId()).getVozilo().getBrojSasije() == brojSasije)
-						{
-							JOptionPane.showOptionDialog(view,
-									"Uneseno vozilo je ve\u0107 evidentirano u drugoj saobra\u107ajnoj dozvoli. "
-											+ "Molimo vas da poku\u0161ate ponovo",
-									"Unos vozila", JOptionPane.OK_OPTION,
-									JOptionPane.ERROR_MESSAGE, null,
-									new String[] { "Uredu" }, "default");
-							return false;
-						}
-					}
-					if(isUnosVDozvole() == true){
-						setIdVoziloVlasnickaUnos(v.getId());
-					}
-					if(isUnosSDozvole() == true)
-						setIdVoziloSaobracajnaUnos(v.getId());
-					postaviPoljaVozilo(v);
-					return true;
+		else if(vDAO.getBySasija(brojSasije)==null){
+			JOptionPane.showOptionDialog(view,
+					"Uneseno vozilo ne postoji u bazi. ",
+					"Unos vozila", JOptionPane.OK_OPTION,
+					JOptionPane.ERROR_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			return false;
+		}
+		else{
+			Vozilo v = vDAO.getBySasija(brojSasije);
+			if(JOptionPane.showOptionDialog(view,
+					"Vozilo ve\u0107 postoji u bazi. "
+							+ "\nDa - To vozilo tražim. \nNe - Želim unijeti novo vozilo.",
+					"Unos vozila", JOptionPane.OK_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE, null, new String[] {
+							"Da", "Ne" }, "default") == JOptionPane.OK_OPTION){
+				
+				if(isUnosVDozvole() == true){
+					setIdVoziloVlasnickaUnos(v.getId());
 				}
+				if(isUnosSDozvole() == true)
+					setIdVoziloSaobracajnaUnos(v.getId());
+				postaviPoljaVozilo(v);
+				return true;
 			}
 		}
+		/*ArrayList<Vozilo> vozila = vDAO.getAll();
+		for (Vozilo v : vozila) {
+				if (v.getBrojSasije().equals(brojSasije)) {
+					if(JOptionPane.showOptionDialog(view,
+							"Vozilo ve\u0107 postoji u bazi. "
+									+ "\nDa - To vozilo tražim. \nNe - Želim unijeti novo vozilo.",
+							"Unos vozila", JOptionPane.OK_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, new String[] {
+									"Da", "Ne" }, "default") == JOptionPane.OK_OPTION){
+						
+						OsobaDAO osobaDAO = new OsobaDAO();
+						if(isUnosVDozvole() == true){
+							VlasnickaDAO vlasnickaDAO = new VlasnickaDAO();
+							OsobaDAO oDAO = new OsobaDAO();						
+							Osoba vlasnik = oDAO.getByJMBG(getIdOsobaVlasnickaUnos());
+							
+							Vlasnicka vlasnicka = vlasnickaDAO.getByVlasnik(vlasnik.getId());						
+							
+							Vozilo vozilo = vlasnicka.getVozilo();
+							if(vozilo.getBrojSasije()==null){
+								JOptionPane.showOptionDialog(view,
+										"Uneseno vozilo ne postoji u bazi. ",
+										"Unos vozila", JOptionPane.OK_OPTION,
+										JOptionPane.ERROR_MESSAGE, null,
+										new String[] { "Uredu" }, "default");
+								return false;
+							}
+							else if(vozilo.getBrojSasije().equals(brojSasije))
+							{
+								JOptionPane.showOptionDialog(view,
+										"Uneseno vozilo ve\u0107 ima vlasnika. "
+												+ "Molimo vas da poku\u0161ate ponovo",
+										"Unos vozila", JOptionPane.OK_OPTION,
+										JOptionPane.ERROR_MESSAGE, null,
+										new String[] { "Uredu" }, "default");
+								return false;
+							}
+						}
+						else if(isUnosSDozvole() == true){
+							SaobracajnaDAO saobracajnaDAO = new SaobracajnaDAO();
+							OsobaDAO oDAO = new OsobaDAO();						
+							Osoba vlasnik = oDAO.getByJMBG(getIdOsobaVlasnickaUnos());
+							Saobracajna saobracajna = saobracajnaDAO.getByVozac(vlasnik.getId());						
+							Vozilo vozilo = saobracajna.getVozilo();
+							
+							if(vozilo.getBrojSasije()==null){
+								JOptionPane.showOptionDialog(view,
+										"Uneseno vozilo ne postoji u bazi. ",
+										"Unos vozila", JOptionPane.OK_OPTION,
+										JOptionPane.ERROR_MESSAGE, null,
+										new String[] { "Uredu" }, "default");
+								return false;
+							}
+							else if(vozilo.getBrojSasije() == brojSasije)
+							{
+								JOptionPane.showOptionDialog(view,
+										"Uneseno vozilo je ve\u0107 evidentirano u drugoj saobra\u107ajnoj dozvoli. "
+												+ "Molimo vas da poku\u0161ate ponovo",
+										"Unos vozila", JOptionPane.OK_OPTION,
+										JOptionPane.ERROR_MESSAGE, null,
+										new String[] { "Uredu" }, "default");
+								return false;
+							}
+						}
+						if(isUnosVDozvole() == true){
+							setIdVoziloVlasnickaUnos(v.getId());
+						}
+						if(isUnosSDozvole() == true)
+							setIdVoziloSaobracajnaUnos(v.getId());
+						postaviPoljaVozilo(v);
+						return true;
+					}
+			}
+		}*/
 		return false;
 		
 	}
