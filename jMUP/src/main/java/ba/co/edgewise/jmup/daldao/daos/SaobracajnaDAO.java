@@ -5,12 +5,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import ba.co.edgewise.jmup.klase.Osoba;
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
 import ba.co.edgewise.jmup.klase.Saobracajna;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+import javax.swing.JOptionPane;
 
 public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 
@@ -200,6 +204,11 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 					temp.setKorisnik(oDAO.get(qResult.getInt("Korisnik")));
 					
 					result.add(temp);
+				}
+				if(!qResult.next())
+				{
+					JOptionPane.showMessageDialog(null, "Nema rezultata");
+					return null;
 				}
 				
 				

@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
 import ba.co.edgewise.jmup.enums.EkoKarakteristike;
@@ -77,6 +79,11 @@ public class VlasnickaDAO implements IGenericDAO<Vlasnicka, String> {
 				
 				OsobaDAO oDAO = new OsobaDAO();
 				result.setVlasnik(oDAO.get(qResult.getInt("Vlasnik")));
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return null;
 			}
 			
 		} catch (SQLException e) {
@@ -312,7 +319,7 @@ public Vlasnicka getByVozilo(Integer id){
 	 
 		VlasnickaDAO vd = new VlasnickaDAO();
 		ArrayList<Vlasnicka> v = new ArrayList<Vlasnicka>();
-		v = vd.getAll();
+		
 		
 	}
 	
