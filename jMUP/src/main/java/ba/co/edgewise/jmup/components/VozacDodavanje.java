@@ -12,6 +12,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -40,6 +41,7 @@ public class VozacDodavanje extends JPanel {
 	private JRadioButton pravno;
 	private JRadioButton fizicko;
 	private JButton btnPonisti;
+	private JButton btnProvjeri;
 
 
 	public VozacDodavanje() {
@@ -75,7 +77,7 @@ public class VozacDodavanje extends JPanel {
 		gbc_panelPodaci.gridy = 1;
 		add(panelPodaci, gbc_panelPodaci);
 		GridBagLayout gbl_panelPodaci = new GridBagLayout();
-		gbl_panelPodaci.columnWidths = new int[] { 120, 0, 0, 0 };
+		gbl_panelPodaci.columnWidths = new int[] { 120, 151, 0, 0 };
 		gbl_panelPodaci.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0 };
 		gbl_panelPodaci.columnWeights = new double[] { 0.0, 1.0, 1.0,
 				Double.MIN_VALUE };
@@ -153,6 +155,14 @@ public class VozacDodavanje extends JPanel {
 		gbc_lblJmbg.gridx = 0;
 		gbc_lblJmbg.gridy = 4;
 		panelPodaci.add(lblJmbg, gbc_lblJmbg);
+		
+		btnProvjeri = new JButton("Provjeri postojanje");
+		GridBagConstraints gbc_btnProvjeri = new GridBagConstraints();
+		gbc_btnProvjeri.gridheight = 2;
+		gbc_btnProvjeri.fill = GridBagConstraints.BOTH;
+		gbc_btnProvjeri.gridx = 2;
+		gbc_btnProvjeri.gridy = 4;
+		panelPodaci.add(btnProvjeri, gbc_btnProvjeri);
 
 		lblIdBroj = new JLabel("ID broj");
 		GridBagConstraints gbc_lblIdBroj = new GridBagConstraints();
@@ -167,7 +177,7 @@ public class VozacDodavanje extends JPanel {
 		tfIme = new JTextField();
 		GridBagConstraints gbc_tfIme = new GridBagConstraints();
 		gbc_tfIme.gridwidth = 2;
-		gbc_tfIme.insets = new Insets(0, 0, 5, 5);
+		gbc_tfIme.insets = new Insets(0, 0, 5, 0);
 		gbc_tfIme.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfIme.gridx = 1;
 		gbc_tfIme.gridy = 0;
@@ -177,7 +187,7 @@ public class VozacDodavanje extends JPanel {
 		tfPrezime = new JTextField();
 		GridBagConstraints gbc_tfPrezime = new GridBagConstraints();
 		gbc_tfPrezime.gridwidth = 2;
-		gbc_tfPrezime.insets = new Insets(0, 0, 5, 5);
+		gbc_tfPrezime.insets = new Insets(0, 0, 5, 0);
 		gbc_tfPrezime.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfPrezime.gridx = 1;
 		gbc_tfPrezime.gridy = 1;
@@ -214,23 +224,12 @@ public class VozacDodavanje extends JPanel {
 		tfJMBG.setEditable(false);
 		tfJMBG.setEnabled(false);
 		GridBagConstraints gbc_tfJMBG = new GridBagConstraints();
-		gbc_tfJMBG.gridwidth = 2;
 		gbc_tfJMBG.insets = new Insets(0, 0, 5, 5);
 		gbc_tfJMBG.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfJMBG.gridx = 1;
 		gbc_tfJMBG.gridy = 4;
 		panelPodaci.add(tfJMBG, gbc_tfJMBG);
 		tfJMBG.setColumns(10);
-
-		tfIdBroj = new JTextField();
-		GridBagConstraints gbc_tfIdBroj = new GridBagConstraints();
-		gbc_tfIdBroj.gridwidth = 2;
-		gbc_tfIdBroj.insets = new Insets(0, 0, 5, 5);
-		gbc_tfIdBroj.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tfIdBroj.gridx = 1;
-		gbc_tfIdBroj.gridy = 5;
-		panelPodaci.add(tfIdBroj, gbc_tfIdBroj);
-		tfIdBroj.setColumns(10);
 
 	}
 
@@ -250,7 +249,7 @@ public class VozacDodavanje extends JPanel {
 
 		fizicko = new JRadioButton("fizičko");
 		GridBagConstraints gbc_fizicko = new GridBagConstraints();
-		gbc_fizicko.insets = new Insets(0, 0, 5, 5);
+		gbc_fizicko.insets = new Insets(0, 0, 5, 0);
 		gbc_fizicko.gridx = 2;
 		gbc_fizicko.gridy = 3;
 		panelPodaci.add(fizicko, gbc_fizicko);
@@ -259,6 +258,15 @@ public class VozacDodavanje extends JPanel {
 		ButtonGroup radioGroup = new ButtonGroup();
 		radioGroup.add(pravno);
 		radioGroup.add(fizicko);
+		
+				tfIdBroj = new JTextField();
+				GridBagConstraints gbc_tfIdBroj = new GridBagConstraints();
+				gbc_tfIdBroj.insets = new Insets(0, 0, 0, 5);
+				gbc_tfIdBroj.fill = GridBagConstraints.HORIZONTAL;
+				gbc_tfIdBroj.gridx = 1;
+				gbc_tfIdBroj.gridy = 5;
+				panelPodaci.add(tfIdBroj, gbc_tfIdBroj);
+				tfIdBroj.setColumns(10);
 
 		btnPrihvati = new JButton("Prihvati");
 		GridBagConstraints gbc_btnPrihvati = new GridBagConstraints();
@@ -323,4 +331,9 @@ public class VozacDodavanje extends JPanel {
 	public JRadioButton getFizicko() {
 		return fizicko;
 	}
+
+	public JButton getBtnProvjeri() {
+		return btnProvjeri;
+	}
+	
 }

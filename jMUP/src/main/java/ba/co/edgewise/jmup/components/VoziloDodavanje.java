@@ -94,6 +94,7 @@ public class VoziloDodavanje extends JPanel {
 	private UtilDateModel modelDatumPregleda;
 	private JDatePanelImpl datePanelDatumPregleda;
 	private JDatePickerImpl datePickerDatumPregleda;
+	private JButton btnProvjeriPostojanje;
 
 	public VoziloDodavanje() {
 		// calling methods for seting layout
@@ -168,9 +169,9 @@ public class VoziloDodavanje extends JPanel {
 		gbc_motorPodaci.gridy = 0;
 		okvirPanel.add(motorPodaci, gbc_motorPodaci);
 		GridBagLayout gbl_motorPodaci = new GridBagLayout();
-		gbl_motorPodaci.columnWidths = new int[] { 120, 0, 0 };
+		gbl_motorPodaci.columnWidths = new int[] { 120, 73, 0, 28, 0, 0 };
 		gbl_motorPodaci.rowHeights = new int[] { 0, 0, 0, 0, 0, -7, 0 };
-		gbl_motorPodaci.columnWeights = new double[] { 0.0, 1.0,
+		gbl_motorPodaci.columnWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 0.0,
 				Double.MIN_VALUE };
 		gbl_motorPodaci.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, Double.MIN_VALUE };
@@ -291,6 +292,14 @@ public class VoziloDodavanje extends JPanel {
 		gbc_lbl_sasija.gridx = 0;
 		gbc_lbl_sasija.gridy = 0;
 		motorPodaci.add(lbl_sasija, gbc_lbl_sasija);
+		
+		btnProvjeriPostojanje = new JButton("Provjeri");
+		GridBagConstraints gbc_btnProvjeriPostojanje = new GridBagConstraints();
+		gbc_btnProvjeriPostojanje.gridwidth = 2;
+		gbc_btnProvjeriPostojanje.insets = new Insets(0, 0, 5, 0);
+		gbc_btnProvjeriPostojanje.gridx = 3;
+		gbc_btnProvjeriPostojanje.gridy = 0;
+		motorPodaci.add(btnProvjeriPostojanje, gbc_btnProvjeriPostojanje);
 
 		lbl_zapremina = new JLabel("Zapremina motora");
 		GridBagConstraints gbc_lbl_zapremina = new GridBagConstraints();
@@ -494,8 +503,9 @@ public class VoziloDodavanje extends JPanel {
 		tf_brojSasije = new JTextField();
 		tf_brojSasije.setColumns(10);
 		GridBagConstraints gbc_tf_brojSasije = new GridBagConstraints();
+		gbc_tf_brojSasije.gridwidth = 2;
 		gbc_tf_brojSasije.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tf_brojSasije.insets = new Insets(0, 0, 5, 0);
+		gbc_tf_brojSasije.insets = new Insets(0, 0, 5, 5);
 		gbc_tf_brojSasije.gridx = 1;
 		gbc_tf_brojSasije.gridy = 0;
 		motorPodaci.add(tf_brojSasije, gbc_tf_brojSasije);
@@ -503,6 +513,7 @@ public class VoziloDodavanje extends JPanel {
 		tf_zapremina = new JTextField();
 		tf_zapremina.setColumns(10);
 		GridBagConstraints gbc_tf_zapremina = new GridBagConstraints();
+		gbc_tf_zapremina.gridwidth = 4;
 		gbc_tf_zapremina.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tf_zapremina.insets = new Insets(0, 0, 5, 0);
 		gbc_tf_zapremina.gridx = 1;
@@ -512,6 +523,7 @@ public class VoziloDodavanje extends JPanel {
 		tf_maxSnaga = new JTextField();
 		tf_maxSnaga.setColumns(10);
 		GridBagConstraints gbc_tf_maxSnaga = new GridBagConstraints();
+		gbc_tf_maxSnaga.gridwidth = 4;
 		gbc_tf_maxSnaga.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tf_maxSnaga.insets = new Insets(0, 0, 5, 0);
 		gbc_tf_maxSnaga.gridx = 1;
@@ -521,6 +533,7 @@ public class VoziloDodavanje extends JPanel {
 		tf_brojMotora = new JTextField();
 		tf_brojMotora.setColumns(10);
 		GridBagConstraints gbc_tf_brojMotora = new GridBagConstraints();
+		gbc_tf_brojMotora.gridwidth = 4;
 		gbc_tf_brojMotora.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tf_brojMotora.insets = new Insets(0, 0, 5, 0);
 		gbc_tf_brojMotora.gridx = 1;
@@ -638,6 +651,7 @@ public class VoziloDodavanje extends JPanel {
 		cb_gorivo = new JComboBox();
 		cb_gorivo.setModel(new DefaultComboBoxModel(new String[] {"Benzin", "Benzin/LPG", "Benzin/CNG", "Benzin/elektri\\u010Dni", "Dizel", "Dizel/CNG", "Dizel/elektri\\u010Dni", "Elektri\\u010Dni pogon", "Biodizel", "Etanol", "Metanol", "Hidrogen(vodonik)", "LPG", "CNG"}));
 		GridBagConstraints gbc_cb_gorivo = new GridBagConstraints();
+		gbc_cb_gorivo.gridwidth = 4;
 		gbc_cb_gorivo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cb_gorivo.insets = new Insets(0, 0, 5, 0);
 		gbc_cb_gorivo.gridx = 1;
@@ -647,6 +661,7 @@ public class VoziloDodavanje extends JPanel {
 		cb_vrstaMotora = new JComboBox();
 		cb_vrstaMotora.setModel(new DefaultComboBoxModel(new String[] {"OTTO", "DIESEL", "WANKEL", "Elektromotor", "Kombinovani pogon"}));
 		GridBagConstraints gbc_cb_vrstaMotora = new GridBagConstraints();
+		gbc_cb_vrstaMotora.gridwidth = 4;
 		gbc_cb_vrstaMotora.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cb_vrstaMotora.gridx = 1;
 		gbc_cb_vrstaMotora.gridy = 5;
@@ -813,5 +828,9 @@ public class VoziloDodavanje extends JPanel {
 	}
 	public JDatePickerImpl getDatePickerDatumPregleda() {
 		return datePickerDatumPregleda;
+	}
+
+	public JButton getBtnProvjeriPostojanje() {
+		return btnProvjeriPostojanje;
 	}
 }

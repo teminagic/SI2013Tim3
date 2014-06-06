@@ -56,7 +56,12 @@ public class SalterskiRadnikController {
 	private boolean unosVDozvole;
 	private boolean odjavaSaltera;
 	private boolean OKSaobracajnaZaOvjeruRegistracije;
-
+	// Kada se redno unosi saobracajna ili vlascnicka, moraju se pamtiti vrijednosti ID_jmbg-eva
+	private String idOsobaSaobracajnaUnos;
+	private String idOsobaVlasnickaUnos;
+	
+	private int idVoziloSaobracajnaUnos;
+	private int idVoziloVlasnickaUnos;
 	public SalterskiRadnikController(SalterskiRadnikView view,
 			SalterskiRadnikModel model) {
 		super();
@@ -66,6 +71,12 @@ public class SalterskiRadnikController {
 		unosVDozvole = false;
 		odjavaSaltera = false;
 		OKSaobracajnaZaOvjeruRegistracije = false;
+		
+		// Ako nisu settovani bit ce na -1
+		idOsobaSaobracajnaUnos = "-1";
+		idOsobaVlasnickaUnos = "-1";
+		idVoziloSaobracajnaUnos = -1;
+		idVoziloVlasnickaUnos = -1;
 	}
 
 	public void control() {
@@ -76,6 +87,10 @@ public class SalterskiRadnikController {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				prikaziPanelPocetnu();
+				setIdOsobaVlasnickaUnos("-1");
+				setIdOsobaSaobracajnaUnos("-1");
+				setIdVoziloVlasnickaUnos(-1);
+				setIdVoziloSaobracajnaUnos(-1);
 			};
 
 		});
@@ -84,49 +99,100 @@ public class SalterskiRadnikController {
 		unosVozaca.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				pocistiPoljaVozac();
 				prikaziPanelUnosVozaca();
+				
 			};
 
 		});
+		
+		// Listener za provjeru postojanja vozaca
+		JButton provjeraPostojanjaVozaca = this.view.getStrana2().getBtnProvjeri();
+		provjeraPostojanjaVozaca.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				provjeriVozacaUBazi();
+			};
 
+		});
+		// Listener za provjeru postojanja vozaca
+				JButton provjeraPostojanjaVozila= this.view.getVoziloDodavanje().getBtnProvjeriPostojanje();
+				provjeraPostojanjaVozila.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						provjeriVozilaUBazi();
+					};
+
+				});
+		
 		// Listener za dodavanjeVozaca
 		JButton dodavanjeVozaca = this.view.getStrana2().getBtnPrihvati();
 		dodavanjeVozaca.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (provjeriPopunjenostVozaca()) {
-					if (dodajVozaca()) {
+					if(getIdOsobaSaobracajnaUnos() != "-1" || getIdOsobaVlasnickaUnos() != "-1"){
 						JOptionPane.showOptionDialog(view,
-								"Voza\u010D uspje\u0161no dodan.",
+								"Voza\u010D uspje\u0161no prihva\u0107en.",
 								"Unos voza\u010Da", JOptionPane.OK_OPTION,
 								JOptionPane.INFORMATION_MESSAGE, null,
 								new String[] { "Uredu" }, "default");
 						pocistiPoljaVozac();
-						// logika za: unos vlasnicke ili saobracajne posto se
-						// ovaj panel pojavljuje :D
 						if (isUnosVDozvole() == true) {
 							prikaziPanelUnosVozila();
 						}
 						if (isUnosSDozvole() == true) {
 							prikaziPanelUnosVozila();
 						}
-					} else {
-						JOptionPane.showOptionDialog(view,
-								"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
-										+ "Molimo vas da poku\u0161ate ponovo",
-								"Unos voza\u010Da", JOptionPane.OK_OPTION,
-								JOptionPane.ERROR_MESSAGE, null,
-								new String[] { "Uredu" }, "default");
 					}
-					;
-
-				} else {//
-						// JOptionPane.showMessageDialog(null,
-						// "Neispravno popunjena polja!");
-				}
-				;
-			}
-		});
+					else {
+						OsobaDAO oDAO = new OsobaDAO();
+						if(view.getStrana2().getFizicko().isSelected()){
+								if(oDAO.getByJMBG(view.getStrana2().getTfJMBG().getText()) != null) {
+								JOptionPane.showOptionDialog(view,
+									"Osoba postoji u bazi podataka.",
+									"Unos voza\u010D", JOptionPane.OK_OPTION,
+									JOptionPane.INFORMATION_MESSAGE, null,
+									new String[] { "Uredu" }, "default");
+						}
+						else{
+							if(oDAO.getByJMBG(view.getStrana2().getTfIdBroj().getText()) != null){
+								JOptionPane.showOptionDialog(view,
+										"Osoba postoji u bazi podataka.",
+										"Unos voza\u010D", JOptionPane.OK_OPTION,
+										JOptionPane.INFORMATION_MESSAGE, null,
+										new String[] { "Uredu" }, "default");
+							}
+						}
+															
+						}
+						else if(dodajVozaca()){
+								JOptionPane.showOptionDialog(view,
+										"Voza\u010D uspje\u0161no dodan.",
+										"Unos voza\u010Da", JOptionPane.OK_OPTION,
+										JOptionPane.INFORMATION_MESSAGE, null,
+										new String[] { "Uredu" }, "default");
+								
+								// logika za: unos vlasnicke ili saobracajne posto se
+								// ovaj panel pojavljuje :D
+								if (isUnosVDozvole() == true) {
+									
+									prikaziPanelUnosVozila();
+								}
+								if (isUnosSDozvole() == true) {
+									prikaziPanelUnosVozila();
+								}
+								pocistiPoljaVozac();
+							} else {
+								JOptionPane.showOptionDialog(view,
+										"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
+												+ "Molimo vas da poku\u0161ate ponovo",
+										"Unos voza\u010Da", JOptionPane.OK_OPTION,
+										JOptionPane.ERROR_MESSAGE, null,
+										new String[] { "Uredu" }, "default");
+							}
+					}
+			}}});
 
 		JButton ponistiDodavanjeVozaca = this.view.getStrana2().getBtnPonisti();
 		ponistiDodavanjeVozaca.addMouseListener(new MouseAdapter() {
@@ -139,7 +205,17 @@ public class SalterskiRadnikController {
 						new String[] { "Uredu" }, "default");
 			}
 		});
-
+		JButton ponistiDodavanjeVozila = this.view.getVoziloDodavanje().getBtn_ponisti();
+		ponistiDodavanjeVozila.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				pocistiPoljaVozilo();
+				JOptionPane.showOptionDialog(view, "Unos poni\u0161ten.",
+						"Unos voza\u010Da", JOptionPane.OK_OPTION,
+						JOptionPane.INFORMATION_MESSAGE, null,
+						new String[] { "Uredu" }, "default");
+			}
+		});
 		JButton potvrdaBrojaSaobracajne = this.view.getGodisnjaOvjera()
 				.getPretraga().getModifyPanel().getBtnModify();
 		potvrdaBrojaSaobracajne.addMouseListener(new MouseAdapter() {
@@ -286,7 +362,18 @@ public class SalterskiRadnikController {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					if (provjeriPopunjenostUnosVozila()) {
+					if(getIdVoziloVlasnickaUnos()!=-1 || getIdVoziloSaobracajnaUnos()!=-1){
+						JOptionPane.showOptionDialog(view,
+								"Vozilo je uspje\u0161no prihva\u0107eno.",
+								"Unos vozila", JOptionPane.OK_OPTION,
+								JOptionPane.INFORMATION_MESSAGE, null,
+								new String[] { "Uredu" }, "default");
+						if (isUnosSDozvole() == true)
+							prikaziPanelUnosRegistracije();
+						if (isUnosVDozvole() == true)
+							prikaziPanelUnosRegistracije();
+					}
+					else if (provjeriPopunjenostUnosVozila()) {
 						if (dodajVozilo()) {
 							// amra
 							JOptionPane.showOptionDialog(view,
@@ -623,8 +710,7 @@ public class SalterskiRadnikController {
 		});
 
 	}
-
-	Boolean promijeniVlasnika() {
+		Boolean promijeniVlasnika() {
 		return model.PromijeniVlasnika(view.getPromjenaVlasnika()
 				.getTfBrojVlasnickeDozvole().getText(), view
 				.getPromjenaVlasnika().getTfJMBGNovogVlasnika().getText());
@@ -695,7 +781,19 @@ public class SalterskiRadnikController {
 		view.getStrana2().getPravno().setSelected(false);
 		view.getStrana2().getFizicko().setSelected(false);
 	}
-
+	public void postaviPoljaVozac(Osoba osoba){
+		view.getStrana2().getTfIme().setText(osoba.getIme());
+		view.getStrana2().getTfPrezime().setText(osoba.getPrezime());
+		view.getStrana2().getTfAdresa().setText(osoba.getPrebivaliste());
+		view.getStrana2().getTfMjesto().setText(osoba.getPrebivaliste());
+		view.getStrana2().getTfOpcina().setText(osoba.getPrebivaliste());
+		if(view.getStrana2().getFizicko().isSelected())
+			view.getStrana2().getTfJMBG().setText(osoba.getJmbg_Id());
+		else
+			view.getStrana2().getTfIdBroj().setText(osoba.getJmbg_Id());
+		view.getStrana2().getPravno().setSelected(false);
+		view.getStrana2().getFizicko().setSelected(false);
+	}
 	public void pocistiPoljaRegistracija() {
 		view.getRegistracija().getPodaci().getTxtRegistrationString()
 				.setText("");
@@ -904,41 +1002,7 @@ public class SalterskiRadnikController {
 		}
 	}
 
-	public boolean provjeriPopunjenostVozaca() {
-		String ip = "^[A-z]+$";
-		if (!view.getStrana2().getTfIme().getText().matches(ip)
-				|| !view.getStrana2().getTfPrezime().getText().matches(ip)
-				|| !view.getStrana2().getTfAdresa().getText()
-						.matches("^[a-zA-Z0-9]+\\s?[a-zA-Z0-9]+$")
-				|| !view.getStrana2().getTfOpcina().getText().matches(ip)
-				|| !view.getStrana2().getTfMjesto().getText().matches(ip)) {
-			JOptionPane.showOptionDialog(view,
-					"Morate ispravno popuniti sve podatke.",
-					"Unos voza\u010Da", JOptionPane.OK_OPTION,
-					JOptionPane.INFORMATION_MESSAGE, null,
-					new String[] { "Uredu" }, "default");
-			return false;
-		}
-		if (view.getStrana2().getFizicko().isSelected() == true
-				&& !view.getStrana2().getTfJMBG().getText()
-						.matches("^(\\d{13})$")) {
-			JOptionPane.showOptionDialog(view,
-					"JMBG se mora sastojati od 13 cifara", "Unos voza\u010Da",
-					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
-					null, new String[] { "Uredu" }, "default");
-			return false;
-		}
-		if (view.getStrana2().getPravno().isSelected() == true
-				&& !view.getStrana2().getTfIdBroj().getText().matches("^\\d+$")) {
-			JOptionPane.showOptionDialog(view,
-					"ID se mora sastojati od cifara", "Unos voza\u010Da",
-					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
-					null, new String[] { "Uredu" }, "default");
-			return false;
-		} else
-			return true;
-
-	}
+	
 
 	void prikaziPanelIzvjestaji() {
 		view.prikaziIzvjestaje();
@@ -973,28 +1037,28 @@ public class SalterskiRadnikController {
 
 		if (!view.getVoziloDodavanje().getTf_tipVozila().getText().matches(ip)) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli tip vozila.", "Unos vozila",
+					"Pogre\u0161no ste unijeli tip vozila.", "Unos vozila",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
 					null, new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTf_modelVozila().getText()
 				.matches(ip)) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli model vozila.", "Unos vozila",
+					"Pogre\u0161no ste unijeli model vozila.", "Unos vozila",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
 					null, new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTf_markaVozila().getText()
 				.matches(ip)) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli marku vozila.", "Unos vozila",
+					"Pogre\u0161no ste unijeli marku vozila.", "Unos vozila",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
 					null, new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTf_godProizvodnje().getText()
 				.matches("^(\\d{4})$")) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli godinu proizvodnje vozila.",
+					"Pogre\u0161no ste unijeli godinu proizvodnje vozila.",
 					"Unos vozila", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
@@ -1002,7 +1066,7 @@ public class SalterskiRadnikController {
 		} else if (!view.getVoziloDodavanje().getTf_odnos().getText()
 				.matches(no)) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli odnos snage i mase vozila.",
+					"Pogre\u0161no ste unijeli odnos snage i mase vozila.",
 					"Unos vozila", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
@@ -1010,7 +1074,7 @@ public class SalterskiRadnikController {
 		} else if (!view.getVoziloDodavanje().getTf_sjedenje().getText()
 				.matches(no)) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli broj mjesta za sjedenje.",
+					"Pogre\u0161no ste unijeli broj mjesta za sjedenje.",
 					"Unos vozila", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
@@ -1018,7 +1082,7 @@ public class SalterskiRadnikController {
 		} else if (!view.getVoziloDodavanje().getTf_stajanje().getText()
 				.matches(no)) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli broj mjesta za stajanje.",
+					"Pogre\u0161no ste unijeli broj mjesta za stajanje.",
 					"Unos vozila", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
@@ -1026,7 +1090,7 @@ public class SalterskiRadnikController {
 		} else if (!view.getVoziloDodavanje().getTf_lezanje().getText()
 				.matches(no)) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli broj mjesta za lezanje.",
+					"Pogre\u0161no ste unijeli broj mjesta za lezanje.",
 					"Unos vozila", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
@@ -1034,7 +1098,7 @@ public class SalterskiRadnikController {
 		} else if (!view.getVoziloDodavanje().getTf_karoserija().getText()
 				.matches(ip)) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli karoseriju za vozilo.",
+					"Pogre\u0161no ste unijeli karoseriju za vozilo.",
 					"Unos vozila", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
@@ -1042,42 +1106,42 @@ public class SalterskiRadnikController {
 		} else if (!view.getVoziloDodavanje().getTf_brojSasije().getText()
 				.matches("^[a-zA-Z0-9]+$")) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli broj sasije vozila.", "Unos vozila",
+					"Pogre\u0161no ste unijeli broj  \u0161asije vozila.", "Unos vozila",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
 					null, new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTf_zapremina().getText()
 				.matches(no)) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli zapreminu motora.", "Unos vozila",
+					"Pogre \u0161no ste unijeli zapreminu motora.", "Unos vozila",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
 					null, new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTf_maxSnaga().getText()
 				.matches(no)) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli max snagu motora.", "Unos vozila",
+					"Pogre\u0161no ste unijeli max snagu motora.", "Unos vozila",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
 					null, new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTf_brojMotora().getText()
 				.matches("^[a-zA-Z0-9]+$")) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli broj motora.", "Unos vozila",
+					"Pogre\u0161no ste unijeli broj motora.", "Unos vozila",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
 					null, new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTb_bojaVozila().getText()
 				.matches(ip)) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli boju vozila.", "Unos vozila",
+					"Pogre\u0161no ste unijeli boju vozila.", "Unos vozila",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
 					null, new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTb_maxMasa().getText()
 				.matches(no)) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli max dozvoljenu masu vozila.",
+					"Pogre\u0161no ste unijeli max dozvoljenu masu vozila.",
 					"Unos vozila", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
@@ -1085,14 +1149,14 @@ public class SalterskiRadnikController {
 		} else if (!view.getVoziloDodavanje().getTb_masa().getText()
 				.matches(no)) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli masu vozila.", "Unos vozila",
+					"Pogre\u0161no ste unijeli masu vozila.", "Unos vozila",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
 					null, new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTb_nosivost().getText()
 				.matches(no)) {
 			JOptionPane.showOptionDialog(view,
-					"Pogresno ste unijeli dopustivu nosivost za vozilo.",
+					"Pogre\u0161no ste unijeli dopustivu nosivost za vozilo.",
 					"Unos vozila", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
@@ -1180,7 +1244,7 @@ public class SalterskiRadnikController {
 			return false;
 		} else if (razlika < 365) {
 			JOptionPane.showOptionDialog(view,
-					"Razmak izmeÄ‘u datuma mora biti minimalno godina dana.",
+					"Razmak izme\u0111u datuma mora biti minimalno godina dana.",
 					"Godi\u0161nja Ovjera registracije", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
@@ -1230,7 +1294,285 @@ public class SalterskiRadnikController {
 		} else
 			return true;
 	}
+	public boolean provjeriPopunjenostVozaca() {
+		String ip = "^[A-z]+$";
+		if (!view.getStrana2().getTfIme().getText().matches(ip)){
+			JOptionPane.showOptionDialog(view,
+					"Ime se mora sastojati samo od slova.",
+					"Unos voza\u010Da", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			return false;
+		}
+		if(!view.getStrana2().getTfPrezime().getText().matches(ip)){
+			JOptionPane.showOptionDialog(view,
+					"Prezime se mora sastojati samo od slova.",
+					"Unos voza\u010Da", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			return false;
+		}
+		if(!view.getStrana2().getTfOpcina().getText().matches(ip)){
+			JOptionPane.showOptionDialog(view,
+					"Općina se mora sastojati samo od slova.",
+					"Unos voza\u010Da", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			return false;
+		}
+		if(!view.getStrana2().getTfMjesto().getText().matches(ip)) {
+			JOptionPane.showOptionDialog(view,
+					"Mjesto se mora sastojati samo od slova.",
+					"Unos voza\u010Da", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			return false;
+		}
+		if(!view.getStrana2().getTfAdresa().getText()
+				.matches("^[a-zA-Z0-9]+\\s?[a-zA-Z0-9]+$")){
+			JOptionPane.showOptionDialog(view,
+					"Neispravna adresa. Primjer unosa: \"Adresa 54\".",
+					"Unos voza\u010Da", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			return false;
+		}
+		if (view.getStrana2().getFizicko().isSelected() == true
+				&& !view.getStrana2().getTfJMBG().getText()
+						.matches("^(\\d{13})$")) {
+			JOptionPane.showOptionDialog(view,
+					"JMBG se mora sastojati od 13 cifara", "Unos voza\u010Da",
+					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
+					null, new String[] { "Uredu" }, "default");
+			return false;
+		}
+		if (view.getStrana2().getPravno().isSelected() == true
+				&& !view.getStrana2().getTfIdBroj().getText().matches("^\\d+$")) {
+			JOptionPane.showOptionDialog(view,
+					"ID se mora sastojati od cifara", "Unos voza\u010Da",
+					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
+					null, new String[] { "Uredu" }, "default");
+			return false;
+		} else
+			return true;
 
+	}
+	Boolean provjeriVozacaUBazi(){
+		if (view.getStrana2().getPravno().isSelected() == true){
+			if(view.getStrana2().getTfIdBroj().getText().isEmpty()){
+				JOptionPane.showOptionDialog(view,
+						"Morate unijeti ID.",
+						"Unos voza\u010Da", JOptionPane.OK_OPTION,
+						JOptionPane.INFORMATION_MESSAGE, null,
+						new String[] { "Uredu" }, "default");
+				return false;
+			}
+			else if(!view.getStrana2().getTfIdBroj().getText().matches("^\\d+$")) {
+				JOptionPane.showOptionDialog(view,
+						"ID se mora sastojati od cifara", "Unos voza\u010Da",
+						JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
+						null, new String[] { "Uredu" }, "default");
+					view.getStrana2().getTfIdBroj().setText("");
+				return false;
+			}
+			else
+			{
+				OsobaDAO oDAO = new OsobaDAO();
+				// Isti ID je kao i onaj u bazi
+				Osoba osoba = oDAO.getByJMBG(view.getStrana2().getTfIdBroj().getText());
+				if(osoba.getJmbg_Id()!=null){
+					if (JOptionPane.showOptionDialog(view,
+							"Osoba ve\u0107 postoji u bazi. "
+									+ "\nDa - Tu osobu tražim. \nNe - Želim unijeti novu osobu.",
+							"Potvrda odjave", JOptionPane.OK_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, new String[] {
+									"Da", "Ne" }, "default") == JOptionPane.OK_OPTION){
+						if(isUnosVDozvole() == true){
+							setIdOsobaVlasnickaUnos(osoba.getJmbg_Id());
+						}
+						if(isUnosSDozvole() == true)
+							setIdOsobaSaobracajnaUnos(osoba.getJmbg_Id());
+						postaviPoljaVozac(osoba);
+						return true;
+					}
+
+				}
+				else{
+					JOptionPane.showOptionDialog(view,
+							"Osoba sa unesenim podacima ne postoji u bazi podataka.", "Unos voza\u010Da",
+							JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
+							null, new String[] { "Uredu" }, "default");
+						view.getStrana2().getTfIdBroj().setText("");
+					return false;
+				}
+			}
+		}
+		else if (view.getStrana2().getFizicko().isSelected() == true){
+			if(view.getStrana2().getTfJMBG().getText().isEmpty()){
+				JOptionPane.showOptionDialog(view,
+						"Morate unijeti JMBG.",
+						"Unos voza\u010Da", JOptionPane.OK_OPTION,
+						JOptionPane.INFORMATION_MESSAGE, null,
+						new String[] { "Uredu" }, "default");
+				return false;
+			}
+			else if (view.getStrana2().getFizicko().isSelected() == true
+					&& !view.getStrana2().getTfJMBG().getText()
+								.matches("^(\\d{13})$")) {
+					JOptionPane.showOptionDialog(view,
+							"JMBG se mora sastojati od 13 cifara", "Unos voza\u010Da",
+							JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
+							null, new String[] { "Uredu" }, "default");
+					return false;
+			}
+			else
+			{
+				OsobaDAO oDAO = new OsobaDAO();
+				// Isti ID je kao i onaj u bazi
+				Osoba osoba = oDAO.getByJMBG(view.getStrana2().getTfJMBG().getText());
+				if (JOptionPane.showOptionDialog(view,
+						"Osoba ve\u0107 postoji u bazi. "
+								+ "\nDa - Tu osobu tražim. \nNe - Želim unijeti novu osobu.",
+						"Potvrda odjave", JOptionPane.OK_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, new String[] {
+								"Da", "Ne" }, "default") == JOptionPane.OK_OPTION){
+					if(isUnosVDozvole() == true){
+						setIdOsobaVlasnickaUnos(osoba.getJmbg_Id());
+					}
+					if(isUnosSDozvole() == true)
+						setIdOsobaSaobracajnaUnos(osoba.getJmbg_Id());
+					postaviPoljaVozac(osoba);
+					return true;
+				}
+			}	
+		}
+		return false;
+	}
+
+	
+	public Boolean provjeriVozilaUBazi(){
+		String brojSasije = view.getVoziloDodavanje().getTf_brojSasije().getText();
+		if(brojSasije.isEmpty()){
+			JOptionPane.showOptionDialog(view,
+					"Niste unijeli broj \u0161asije.",
+					"Unos vozila", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			return false;
+		}
+		VoziloDAO vDAO = new VoziloDAO();
+		ArrayList<Vozilo> vozila = vDAO.getAll();
+		for (Vozilo v : vozila) {
+			
+			if (v.getBrojSasije().equals(brojSasije)) {
+				if(JOptionPane.showOptionDialog(view,
+						"Vozilo ve\u0107 postoji u bazi. "
+								+ "\nDa - To vozilo tražim. \nNe - Želim unijeti novo vozilo.",
+						"Unos vozila", JOptionPane.OK_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, new String[] {
+								"Da", "Ne" }, "default") == JOptionPane.OK_OPTION){
+					
+					OsobaDAO osobaDAO = new OsobaDAO();
+					if(isUnosVDozvole() == true){
+						VlasnickaDAO vlasnickaDAO = new VlasnickaDAO();
+						OsobaDAO oDAO = new OsobaDAO();						
+						Osoba vlasnik = oDAO.getByJMBG(getIdOsobaVlasnickaUnos());
+						Vlasnicka vlasnicka = vlasnickaDAO.getByVlasnik(vlasnik.getId());						
+						Vozilo vozilo = vlasnicka.getVozilo();
+						if(vozilo.getBrojSasije().equals(brojSasije))
+						{
+							JOptionPane.showOptionDialog(view,
+									"Uneseno vozilo ve\u0107 ima vlasnika. "
+											+ "Molimo vas da poku\u0161ate ponovo",
+									"Unos vozila", JOptionPane.OK_OPTION,
+									JOptionPane.ERROR_MESSAGE, null,
+									new String[] { "Uredu" }, "default");
+							return false;
+						}
+					}
+					else if(isUnosSDozvole() == true){
+						SaobracajnaDAO saobracajnaDAO = new SaobracajnaDAO();
+						if(saobracajnaDAO.getByName(osobaDAO.getByJMBG(idOsobaVlasnickaUnos).getId()).getVozilo().getBrojSasije() == brojSasije)
+						{
+							JOptionPane.showOptionDialog(view,
+									"Uneseno vozilo je ve\u0107 evidentirano u drugoj saobra\u107ajnoj dozvoli. "
+											+ "Molimo vas da poku\u0161ate ponovo",
+									"Unos vozila", JOptionPane.OK_OPTION,
+									JOptionPane.ERROR_MESSAGE, null,
+									new String[] { "Uredu" }, "default");
+							return false;
+						}
+					}
+					if(isUnosVDozvole() == true){
+						setIdVoziloVlasnickaUnos(v.getId());
+					}
+					if(isUnosSDozvole() == true)
+						setIdVoziloSaobracajnaUnos(v.getId());
+					postaviPoljaVozilo(v);
+					return true;
+				}
+			}
+		}
+		return false;
+		
+	}
+	public void postaviPoljaVozilo(Vozilo v){
+		view.getVoziloDodavanje().getCb_vrstaVozila().setSelectedItem(v.getVrsta());
+		view.getVoziloDodavanje().getTf_tipVozila().setText(v.getTip());
+		view.getVoziloDodavanje().getTf_modelVozila().setText(v.getModel());
+		view.getVoziloDodavanje().getTf_markaVozila().setText(v.getMarka());
+		view.getVoziloDodavanje().getTf_godProizvodnje().setText( String.valueOf(v.getGodinaProizvodnje()));
+		
+	    view.getVoziloDodavanje().getTf_regOznaka().setText(v.getRegOznaka());
+		view.getVoziloDodavanje().getTf_odnos().setText(String.valueOf(v.getOdnosSnageIMase()));
+		view.getVoziloDodavanje().getTf_sjedenje().setText(String.valueOf(v.getBrojMjestaZaSjedenje()));
+		view.getVoziloDodavanje().getTf_stajanje().setText(String.valueOf(v.getBrojMjestaZaStajanje()));
+		view.getVoziloDodavanje().getTf_lezanje().setText(String.valueOf(v.getBrojMjestaZaLezanje()));
+		view.getVoziloDodavanje().getCb_ekoKarakteristike().setSelectedItem(String.valueOf(v.getEkoKarakteristika()));
+		view.getVoziloDodavanje().getRb_katalizator_da().setSelected(v.getKatalizator());
+		view.getVoziloDodavanje().getTf_karoserija().setText(String.valueOf(v.getOblikKaroserije()));
+		view.getVoziloDodavanje().getTb_bojaVozila().setText("Zelena");
+		view.getVoziloDodavanje().getDatePickerDatumPregleda().getModel().setDate(v.getDatumPregleda().getYear(), 
+				v.getDatumPregleda().getMonth(), v.getDatumPregleda().getDay());
+		view.getVoziloDodavanje().getTf_brojSasije().setText(v.getBrojSasije());
+		view.getVoziloDodavanje().getTb_maxMasa().setText(String.valueOf(v.getMaxTehnickaDozvoljenaMasa()));
+		view.getVoziloDodavanje().getTb_masa().setText(String.valueOf(v.getMasaVozila()));
+		view.getVoziloDodavanje().getTb_nosivost().setText(String.valueOf(v.getDopustenaNosivost()));
+		// Motor
+		view.getVoziloDodavanje().getTf_zapremina().setText(String.valueOf(v.getMotor().getZapreminaMotora())); 
+		view.getVoziloDodavanje().getTf_maxSnaga().setText(String.valueOf(v.getMotor().getMaxSnaga())); 
+		view.getVoziloDodavanje().getCb_gorivo().setSelectedItem(v.getMotor().getVrstaGoriva());
+		view.getVoziloDodavanje().getTf_brojMotora().setText(v.getMotor().getBrojMotora());
+		view.getVoziloDodavanje().getCb_vrstaMotora().setSelectedItem(v.getMotor().getVrstaMotora());
+	}
+	public void pocistiPoljaVozilo(){
+		view.getVoziloDodavanje().getCb_vrstaVozila().setSelectedItem("");
+		view.getVoziloDodavanje().getTf_tipVozila().setText("");
+		view.getVoziloDodavanje().getTf_modelVozila().setText("");
+		view.getVoziloDodavanje().getTf_markaVozila().setText("");
+		view.getVoziloDodavanje().getTf_godProizvodnje().setText( "");
+		
+	    view.getVoziloDodavanje().getTf_regOznaka().setText("");
+		view.getVoziloDodavanje().getTf_odnos().setText("");
+		view.getVoziloDodavanje().getTf_sjedenje().setText("");
+		view.getVoziloDodavanje().getTf_stajanje().setText("");
+		view.getVoziloDodavanje().getTf_lezanje().setText("");
+		view.getVoziloDodavanje().getCb_ekoKarakteristike().setSelectedItem("");
+		view.getVoziloDodavanje().getRb_katalizator_da().setSelected(false);
+		view.getVoziloDodavanje().getTf_karoserija().setText("");
+		view.getVoziloDodavanje().getTb_bojaVozila().setText("");
+		
+		view.getVoziloDodavanje().getTf_brojSasije().setText("");
+		view.getVoziloDodavanje().getTb_maxMasa().setText("");
+		view.getVoziloDodavanje().getTb_masa().setText("");
+		view.getVoziloDodavanje().getTb_nosivost().setText("");
+		// Motor
+		view.getVoziloDodavanje().getTf_zapremina().setText(""); 
+		view.getVoziloDodavanje().getTf_maxSnaga().setText(""); 
+		view.getVoziloDodavanje().getCb_gorivo().setSelectedItem("");
+		view.getVoziloDodavanje().getTf_brojMotora().setText("");
+		view.getVoziloDodavanje().getCb_vrstaMotora().setSelectedItem("");
+	}
 	public boolean dodajVozilo() throws ParseException {
 		VrstaVozila vrsta = (VrstaVozila) view.getVoziloDodavanje()
 				.getCb_vrstaVozila().getSelectedItem();
@@ -1589,5 +1931,37 @@ public class SalterskiRadnikController {
 		 * brojMjestaZaLezanje, ekoKarakteristika, katalizator, datumPregleda,
 		 * zapreminaMotora, maxSnaga,gorivo, brojMotora, vrstaMotora);
 		 */}
+
+	public String getIdOsobaSaobracajnaUnos() {
+		return idOsobaSaobracajnaUnos;
+	}
+
+	public void setIdOsobaSaobracajnaUnos(String idOsobaSaobracajnaUnos) {
+		this.idOsobaSaobracajnaUnos = idOsobaSaobracajnaUnos;
+	}
+
+	public String getIdOsobaVlasnickaUnos() {
+		return idOsobaVlasnickaUnos;
+	}
+
+	public void setIdOsobaVlasnickaUnos(String idOsobaVlasnickaUnos) {
+		this.idOsobaVlasnickaUnos = idOsobaVlasnickaUnos;
+	}
+
+	public int getIdVoziloSaobracajnaUnos() {
+		return idVoziloSaobracajnaUnos;
+	}
+
+	public void setIdVoziloSaobracajnaUnos(int idVoziloSaobracajnaUnos) {
+		this.idVoziloSaobracajnaUnos = idVoziloSaobracajnaUnos;
+	}
+
+	public int getIdVoziloVlasnickaUnos() {
+		return idVoziloVlasnickaUnos;
+	}
+
+	public void setIdVoziloVlasnickaUnos(int idVoziloVlasnickaUnos) {
+		this.idVoziloVlasnickaUnos = idVoziloVlasnickaUnos;
+	}
 
 }
