@@ -341,9 +341,14 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 	}
 	public static void main(String[] args) {
 		//Osoba o = new Osoba(1,"b","b","b","b",true);
-		OsobaDAO oDao = new OsobaDAO();
+		OsobaDAO oDAO = new OsobaDAO();
+		// Isti ID je kao i onaj u bazi
+		Osoba osoba = oDAO.get(4);
+		
+		/*OsobaDAO oDao = new OsobaDAO();
 		List<Osoba> osobe = new ArrayList<Osoba>();
 		osobe = oDao.getAll();
 		for(Osoba o:osobe) System.out.println(o.getIme()+","+o.getPrezime()+","+o.getJmbg_Id());
+	*/
 	}
 }
