@@ -232,7 +232,7 @@ public class SalterskiRadnikModel {
 			s2.add(_saobracajnaDAO.getByReg(vt.getId()));
 			return (s2 == null) ? null : s2;
 		
-		case "JMBG vozača":
+		case "JMBG vozaÄ�a":
 			Osoba o = _osobaDAO.getByJMBG(parametar);
 			ArrayList<Saobracajna> s3 = new ArrayList<>();
 			s3.add(_saobracajnaDAO.getByName(o.getId()));	

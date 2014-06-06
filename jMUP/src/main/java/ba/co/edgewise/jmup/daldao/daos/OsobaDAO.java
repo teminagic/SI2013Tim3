@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
 import ba.co.edgewise.jmup.enums.EkoKarakteristike;
@@ -157,6 +159,11 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 					osoba.setPravnoLice(false);
 				result.add(osoba);
 			}
+			if(!qResult.next())
+			{
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return null;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -194,6 +201,11 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				else
 					osoba.setPravnoLice(false);
 				result.add(osoba);
+			}
+			if(!qResult.next())
+			{
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return null;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -234,6 +246,11 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 					osoba.setPravnoLice(false);
 				result.add(osoba);
 			}
+			if(!qResult.next())
+			{
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return null;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -266,6 +283,11 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 					result.setIme(qResult.getString("Ime"));
 					result.setPrebivaliste(qResult.getString("Prebivaliste"));
 					result.setPravnoLice(qResult.getBoolean("PravnoLice"));
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return null;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -343,8 +365,8 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 		//Osoba o = new Osoba(1,"b","b","b","b",true);
 		OsobaDAO oDAO = new OsobaDAO();
 		// Isti ID je kao i onaj u bazi
-		Osoba osoba = oDAO.get(4);
-		
+		//Osoba osoba = oDAO.get(4);
+	  oDAO.getByJMBG("burek");
 		/*OsobaDAO oDao = new OsobaDAO();
 		List<Osoba> osobe = new ArrayList<Osoba>();
 		osobe = oDao.getAll();

@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
 import ba.co.edgewise.jmup.enums.EkoKarakteristike;
@@ -192,6 +194,11 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 				result.setDatumPregleda(qResult.getDate("DatumPregleda"));
 				result.setRegOznaka(qResult.getString("RegOznaka"));
 			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return null;
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -247,6 +254,11 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 				temp.setDatumPregleda(qResult.getDate("DatumPregleda"));
 				temp.setRegOznaka(qResult.getString("RegOznaka"));
 				result.add(temp);
+			}
+			if(!qResult.next())
+			{
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return null;
 			}
 
 		} catch (SQLException e) {
@@ -305,6 +317,11 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 				temp.setRegOznaka(qResult.getString("RegOznaka"));
 				result.add(temp);
 			}
+			if(!qResult.next())
+			{
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return null;
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -360,6 +377,11 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 				temp.setDatumPregleda(qResult.getDate("DatumPregleda"));
 				temp.setRegOznaka(qResult.getString("RegOznaka"));
 				result.add(temp);
+			}
+			if(!qResult.next())
+			{
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return null;
 			}
 
 		} catch (SQLException e) {
