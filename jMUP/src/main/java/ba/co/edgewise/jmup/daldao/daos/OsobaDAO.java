@@ -160,9 +160,9 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				result.add(osoba);
 			}
 			if(!qResult.next())
-			{
+		
 				result = null;
-			}
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -202,7 +202,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				result.add(osoba);
 			}
 			if(!qResult.next())
-				result = null;
+						result = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -243,7 +243,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				result.add(osoba);
 			}
 			if(!qResult.next())
-				result = null;
+							result = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -255,7 +255,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 	
 	public Osoba getByJMBG(String jmbg) {
 		Osoba result = new Osoba();
-      
+
 		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
@@ -279,7 +279,10 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 			}
 			else
 				result = null;
+			{
 		
+				return null;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
