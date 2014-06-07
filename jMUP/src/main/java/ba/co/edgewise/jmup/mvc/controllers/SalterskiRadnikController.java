@@ -368,20 +368,32 @@ public class SalterskiRadnikController {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					if(getIdVoziloVlasnickaUnos()!=-1 || getIdVoziloSaobracajnaUnos()!=-1){
-						JOptionPane.showOptionDialog(view,
-								"Vozilo je uspje\u0161no prihva\u0107eno.",
-								"Unos vozila", JOptionPane.OK_OPTION,
-								JOptionPane.INFORMATION_MESSAGE, null,
-								new String[] { "Uredu" }, "default");
-						if (isUnosSDozvole() == true)
-							prikaziPanelUnosRegistracije();
-						if (isUnosVDozvole() == true)
-							prikaziPanelUnosRegistracije();
+					if(getIdVoziloVlasnickaUnos()!=-1 || getIdVoziloSaobracajnaUnos()!=-1)
+					{
+						if (isUnosVDozvole() == true){
+							if(provjeriPostojanjeVlasnicke()==false){
+								JOptionPane.showOptionDialog(view,
+										"Vozilo je uspje\u0161no prihva\u0107eno.",
+										"Unos vozila", JOptionPane.OK_OPTION,
+										JOptionPane.INFORMATION_MESSAGE, null,
+										new String[] { "Uredu" }, "default");
+									
+								prikaziPanelUnosRegistracije();
+							}
+						}
+						else if (isUnosSDozvole() == true){
+							if(provjeriPostojanjeSaobracajne()==false){
+								JOptionPane.showOptionDialog(view,
+										"Vozilo je uspje\u0161no prihva\u0107eno.",
+										"Unos vozila", JOptionPane.OK_OPTION,
+										JOptionPane.INFORMATION_MESSAGE, null,
+										new String[] { "Uredu" }, "default");
+									prikaziPanelUnosRegistracije();
+							}
+						}
 					}
 					else if (provjeriPopunjenostUnosVozila()) {
 						if (dodajVozilo()) {
-							// amra
 							JOptionPane.showOptionDialog(view,
 									"Vozilo uspje\u0161no dodano.",
 									"Unos voza\u010Da", JOptionPane.OK_OPTION,
@@ -402,9 +414,8 @@ public class SalterskiRadnikController {
 								setIdVoziloVlasnickaUnos(v.getId());
 								prikaziPanelUnosRegistracije();
 							}
-						} else {
-							view.getGodisnjaOvjera().getPretraga().getTxtId()
-									.setText("");
+						} 
+						else {
 							JOptionPane.showOptionDialog(view,
 									"Gre\u0161ka prilikom upisa u bazu.",
 									"Godi\u0161nja ovjera registracije",
@@ -1234,7 +1245,7 @@ public class SalterskiRadnikController {
 			return false;
 		} else if (razlika < 365) {
 			JOptionPane.showOptionDialog(view,
-					"Razmak izmeÄ‘u datuma mora biti minimalno godina dana.",
+					"Razmak izme\u0111u datuma mora biti minimalno godina dana.",
 					"Godi\u0161nja Ovjera registracije", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
@@ -1397,10 +1408,16 @@ public class SalterskiRadnikController {
 				// Isti ID je kao i onaj u bazi
 				if(oDAO.getByJMBG(view.getStrana2().getTfIdBroj().getText())==null){
 					JOptionPane.showOptionDialog(view,
-							"Osoba sa unesenim podacima ne postoji u bazi podataka.", "Unos voza\u010Da",
+							"Pravno lice sa unesenim podacima ne postoji u bazi podataka.", "Unos voza\u010Da",
 							JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
 							null, new String[] { "Uredu" }, "default");
-						view.getStrana2().getTfIdBroj().setText("");
+					return false;
+				}
+				else if(oDAO.getByJMBG(view.getStrana2().getTfIdBroj().getText()).isPravnoLice()==false){
+					JOptionPane.showOptionDialog(view,
+							"Pravno lice sa unesenim ID-om ne postoji u bazi podataka.", "Unos voza\u010Da",
+							JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
+							null, new String[] { "Uredu" }, "default");
 					return false;
 				}
 				else{
@@ -1446,20 +1463,36 @@ public class SalterskiRadnikController {
 			{
 				OsobaDAO oDAO = new OsobaDAO();
 				// Isti ID je kao i onaj u bazi
-				Osoba osoba = oDAO.getByJMBG(view.getStrana2().getTfJMBG().getText());
-				if (JOptionPane.showOptionDialog(view,
-						"Osoba ve\u0107 postoji u bazi. "
-								+ "\nDa - Tu osobu tražim. \nNe - Želim unijeti novu osobu.",
-						"Potvrda odjave", JOptionPane.OK_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, new String[] {
-								"Da", "Ne" }, "default") == JOptionPane.OK_OPTION){
-					if(isUnosVDozvole() == true){
-						setIdOsobaVlasnickaUnos(osoba.getJmbg_Id());
+				if(oDAO.getByJMBG(view.getStrana2().getTfJMBG().getText())==null){
+					JOptionPane.showOptionDialog(view,
+							"Osoba sa unesenim podacima ne postoji u bazi podataka.", "Unos voza\u010Da",
+							JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
+							null, new String[] { "Uredu" }, "default");
+					return false;
+				}
+				else if(oDAO.getByJMBG(view.getStrana2().getTfJMBG().getText()).isPravnoLice()==true){
+					JOptionPane.showOptionDialog(view,
+							"Osoba sa unesenim JMBG-om ne postoji u bazi podataka.", "Unos voza\u010Da",
+							JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
+							null, new String[] { "Uredu" }, "default");
+					return false;				}
+				else
+				{
+					Osoba osoba = oDAO.getByJMBG(view.getStrana2().getTfJMBG().getText());
+					if (JOptionPane.showOptionDialog(view,
+							"Osoba ve\u0107 postoji u bazi. "
+									+ "\nDa - Tu osobu tražim. \nNe - Želim unijeti novu osobu.",
+							"Potvrda odjave", JOptionPane.OK_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, new String[] {
+									"Da", "Ne" }, "default") == JOptionPane.OK_OPTION){
+						if(isUnosVDozvole() == true){
+							setIdOsobaVlasnickaUnos(osoba.getJmbg_Id());
+						}
+						if(isUnosSDozvole() == true)
+							setIdOsobaSaobracajnaUnos(osoba.getJmbg_Id());
+						postaviPoljaVozac(osoba);
+						return true;
 					}
-					if(isUnosSDozvole() == true)
-						setIdOsobaSaobracajnaUnos(osoba.getJmbg_Id());
-					postaviPoljaVozac(osoba);
-					return true;
 				}
 			}	
 		}
@@ -1484,6 +1517,7 @@ public class SalterskiRadnikController {
 					"Unos vozila", JOptionPane.OK_OPTION,
 					JOptionPane.ERROR_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
+			pocistiPoljaVozilo();
 			return false;
 		}
 		else{
@@ -1580,6 +1614,57 @@ public class SalterskiRadnikController {
 		}*/
 		return false;
 		
+	}
+	public Boolean provjeriPostojanjeVlasnicke(){
+		String brojSasije = view.getVoziloDodavanje().getTf_brojSasije().getText();
+		VlasnickaDAO vlasnickaDAO = new VlasnickaDAO();
+		
+		ArrayList<Vlasnicka> vlasnicke = vlasnickaDAO.getAll();
+		for (Vlasnicka vlasnicka : vlasnicke) {
+			if((vlasnicka.getVozilo()).getBrojSasije() == brojSasije){
+				JOptionPane.showOptionDialog(view,
+						"Uneseno vozilo ima vlasnika.",
+						"Unos vozila", JOptionPane.OK_OPTION,
+						JOptionPane.ERROR_MESSAGE, null,
+						new String[] { "Uredu" }, "default");
+				return true;
+			}
+			if((vlasnicka.getVlasnik()).getJmbg_Id()== getIdOsobaVlasnickaUnos()){
+				JOptionPane.showOptionDialog(view,
+						"Prethodno unesena osoba je vlasnik ovog vozila.",
+						"Unos vozila", JOptionPane.OK_OPTION,
+						JOptionPane.ERROR_MESSAGE, null,
+						new String[] { "Uredu" }, "default");
+				return true;
+			}			
+		}
+		return false;
+	}
+	public Boolean provjeriPostojanjeSaobracajne(){
+		String brojSasije = view.getVoziloDodavanje().getTf_brojSasije().getText();
+		SaobracajnaDAO saobracajnaDAO = new SaobracajnaDAO();
+		OsobaDAO oDAO = new OsobaDAO();		
+		
+		ArrayList<Saobracajna> saobracajne = saobracajnaDAO.getAll();
+		for (Saobracajna saobracajna : saobracajne) {
+			if(saobracajna.getKorisnik().getJmbg_Id()== getIdOsobaSaobracajnaUnos()){
+				JOptionPane.showOptionDialog(view,
+						"Prethodno unesena osoba je evidentirana u saobra\u0107ajnoj dozvoli kao korisnik ovog vozila.",
+						"Unos vozila", JOptionPane.OK_OPTION,
+						JOptionPane.ERROR_MESSAGE, null,
+						new String[] { "Uredu" }, "default");
+				return true;
+			}
+			if(saobracajna.getVozilo().getBrojSasije() == brojSasije){
+				JOptionPane.showOptionDialog(view,
+						"Uneseno vozilo je evidentirano u drugoj saobra\u0107ajnoj dozvoli.",
+						"Unos vozila", JOptionPane.OK_OPTION,
+						JOptionPane.ERROR_MESSAGE, null,
+						new String[] { "Uredu" }, "default");
+				return true;
+			}
+		}
+		return false;
 	}
 	public void postaviPoljaVozilo(Vozilo v){
 		view.getVoziloDodavanje().getCb_vrstaVozila().setSelectedItem(v.getVrsta());
