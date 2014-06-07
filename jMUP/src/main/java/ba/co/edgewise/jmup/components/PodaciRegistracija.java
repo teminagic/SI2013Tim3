@@ -17,7 +17,6 @@ public class PodaciRegistracija extends JPanel {
 	private static final long serialVersionUID = 5824498274241469343L;
 	private GridBagLayout gridBagLayout;
 	private DatumVazenja date;
-	private DatumPrveRegistracije prva;
 	private JLabel lblRegistrationString;
 	private JLabel lblId;
 	private JLabel lblConfirmationNumber;
@@ -69,7 +68,7 @@ public class PodaciRegistracija extends JPanel {
 		gbc_lblId.gridy = 1;
 		add(lblId, gbc_lblId);
 
-		lblConfirmationNumber = new JLabel("Broj potvrde");
+		lblConfirmationNumber = new JLabel("Broj dozvole:");
 		GridBagConstraints gbc_lblConfirmationNumber = new GridBagConstraints();
 		gbc_lblConfirmationNumber.insets = new Insets(0, 5, 5, 5);
 		gbc_lblConfirmationNumber.anchor = GridBagConstraints.EAST;
@@ -124,15 +123,6 @@ public class PodaciRegistracija extends JPanel {
 		gbc_date.gridx = 1;
 		gbc_date.gridy = 3;
 		add(date, gbc_date);
-
-		prva = new DatumPrveRegistracije();
-		GridBagConstraints gbc_prva = new GridBagConstraints();
-		gbc_prva.fill = GridBagConstraints.HORIZONTAL;
-		gbc_prva.insets = new Insets(0, 0, 0, 5);
-		gbc_prva.gridwidth = 2;
-		gbc_prva.gridx = 1;
-		gbc_prva.gridy = 3;
-		add(prva, gbc_prva);
 
 	}
 

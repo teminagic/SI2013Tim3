@@ -286,7 +286,6 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 			}
 			else
 			{
-				JOptionPane.showMessageDialog(null, "Nema rezultata");
 				return null;
 			}
 		} catch (SQLException e) {
