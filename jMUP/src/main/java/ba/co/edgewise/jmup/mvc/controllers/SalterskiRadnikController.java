@@ -130,7 +130,8 @@ public class SalterskiRadnikController {
 		dodavanjeVozaca.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (provjeriPopunjenostVozaca()) {
+				if (provjeriPopunjenostVozaca()) 
+				{
 					if(getIdOsobaSaobracajnaUnos() != "-1" || getIdOsobaVlasnickaUnos() != "-1"){
 						JOptionPane.showOptionDialog(view,
 								"Voza\u010D uspje\u0161no prihva\u0107en.",
@@ -145,30 +146,34 @@ public class SalterskiRadnikController {
 							prikaziPanelUnosVozila();
 						}
 					}
-					else {
+					else if(view.getStrana2().getTfIdBroj().getText()=="")
+					{
 						OsobaDAO oDAO = new OsobaDAO();
-						if(view.getStrana2().getFizicko().isSelected()){
-								if(oDAO.getByJMBG(view.getStrana2().getTfJMBG().getText()) != null) {
-								JOptionPane.showOptionDialog(view,
-									"Osoba postoji u bazi podataka.",
-									"Unos voza\u010D", JOptionPane.OK_OPTION,
+						if(oDAO.getByJMBG(view.getStrana2().getTfJMBG().getText())!=null)
+						{
+							JOptionPane.showOptionDialog(view,
+									"Osoba ve\u0107 postoji u bazi",
+									"Unos voza\u010Da", JOptionPane.OK_OPTION,
 									JOptionPane.INFORMATION_MESSAGE, null,
 									new String[] { "Uredu" }, "default");
-									return;
 						}
-						else{
-							if(oDAO.getByJMBG(view.getStrana2().getTfIdBroj().getText()) != null){
-								JOptionPane.showOptionDialog(view,
-										"Osoba postoji u bazi podataka.",
-										"Unos voza\u010D", JOptionPane.OK_OPTION,
-										JOptionPane.INFORMATION_MESSAGE, null,
-										new String[] { "Uredu" }, "default");
-									return;
-							}
+						
+					}
+					else if(view.getStrana2().getTfJMBG().getText()=="")
+					{
+						OsobaDAO oDAO = new OsobaDAO();
+						if(oDAO.getByJMBG(view.getStrana2().getTfIdBroj().getText())!=null)
+						{
+							
+							JOptionPane.showOptionDialog(view,
+									"Osoba ve\u0107 postoji u bazi",
+									"Unos voza\u010Da", JOptionPane.OK_OPTION,
+									JOptionPane.INFORMATION_MESSAGE, null,
+									new String[] { "Uredu" }, "default");
 						}
-															
-						}
-						if(dodajVozaca()){
+					}
+					else if(dodajVozaca())
+						{
 								JOptionPane.showOptionDialog(view,
 										"Voza\u010D uspje\u0161no dodan.",
 										"Unos voza\u010Da", JOptionPane.OK_OPTION,
@@ -177,11 +182,13 @@ public class SalterskiRadnikController {
 								
 								// logika za: unos vlasnicke ili saobracajne posto se
 								// ovaj panel pojavljuje :D
-								if (isUnosVDozvole() == true) {
+								if (isUnosVDozvole() == true) 
+								{
 									if (view.getStrana2().getPravno().isSelected() == true) {
 										String idBroj = view.getStrana2().getTfIdBroj().getText();
 										setIdOsobaVlasnickaUnos(idBroj);
-									} else {
+									} 
+									else {
 										String jmbg = view.getStrana2().getTfJMBG().getText();
 										setIdOsobaVlasnickaUnos(jmbg);
 									}
@@ -191,16 +198,18 @@ public class SalterskiRadnikController {
 									prikaziPanelUnosVozila();
 								}
 								pocistiPoljaVozac();
-							} else {
-								JOptionPane.showOptionDialog(view,
-										"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
-												+ "Molimo vas da poku\u0161ate ponovo",
-										"Unos voza\u010Da", JOptionPane.OK_OPTION,
-										JOptionPane.ERROR_MESSAGE, null,
-										new String[] { "Uredu" }, "default");
-							}
+						} 
+						else 
+						{
+							JOptionPane.showOptionDialog(view,
+									"Do\u0161lo je do gre\u0161ke prilikom upisivanja u bazu. "
+											+ "Molimo vas da poku\u0161ate ponovo",
+									"Unos voza\u010Da", JOptionPane.OK_OPTION,
+									JOptionPane.ERROR_MESSAGE, null,
+									new String[] { "Uredu" }, "default");
+						}
 					}
-			}}});
+			}});
 
 		JButton ponistiDodavanjeVozaca = this.view.getStrana2().getBtnPonisti();
 		ponistiDodavanjeVozaca.addMouseListener(new MouseAdapter() {
@@ -381,7 +390,15 @@ public class SalterskiRadnikController {
 										new String[] { "Uredu" }, "default");
 									
 								prikaziPanelUnosRegistracije();
-							}
+								VoziloDAO vDAO = new VoziloDAO();
+								Vozilo v = vDAO.get(getIdVoziloVlasnickaUnos());
+								view.getRegistracija().getPodaci().getTxtRegistrationString().setText(v.getRegOznaka());
+								view.getRegistracija().getPodaci().getTxtRegistrationString().setEnabled(false);
+								view.getRegistracija().getPodaci().getTxtRegistrationString().setEditable(false);
+								view.getRegistracija().getPodaci().getTxtId().setText(getIdOsobaVlasnickaUnos());
+								view.getRegistracija().getPodaci().getTxtId().setEnabled(false);
+								view.getRegistracija().getPodaci().getTxtId().setEditable(false);
+								}
 						}
 						else if (isUnosSDozvole() == true){
 							if(provjeriPostojanjeSaobracajne()==false){
@@ -391,6 +408,16 @@ public class SalterskiRadnikController {
 										JOptionPane.INFORMATION_MESSAGE, null,
 										new String[] { "Uredu" }, "default");
 									prikaziPanelUnosRegistracije();
+									prikaziPanelUnosRegistracije();
+									VoziloDAO vDAO = new VoziloDAO();
+									Vozilo v = vDAO.get(getIdVoziloSaobracajnaUnos());
+									view.getRegistracija().getPodaci().getTxtRegistrationString().setText(v.getRegOznaka());
+									view.getRegistracija().getPodaci().getTxtRegistrationString().setEnabled(false);
+									view.getRegistracija().getPodaci().getTxtRegistrationString().setEditable(false);
+									view.getRegistracija().getPodaci().getTxtId().setText(getIdOsobaSaobracajnaUnos());
+									view.getRegistracija().getPodaci().getTxtId().setEnabled(false);
+									view.getRegistracija().getPodaci().getTxtId().setEditable(false);
+									view.getRegistracija().getPodaci().getDatumVazenja().setVisible(false);
 							}
 						}
 					}
@@ -452,7 +479,7 @@ public class SalterskiRadnikController {
 					if (provjeriPopunjenostRegistracije()) {
 						if (isUnosSDozvole() == true)//
 						{
-							if (dodajRegistracijuISaobracajnu()) {
+							if (dodajRegistracijuISaobracajnu()==true) {
 								JOptionPane
 										.showOptionDialog(
 												view,
@@ -467,6 +494,10 @@ public class SalterskiRadnikController {
 
 								setUnosVDozvole(false);
 								setUnosSDozvole(false);
+								setIdOsobaSaobracajnaUnos("-1");
+								setIdOsobaVlasnickaUnos("-1");
+								setIdVoziloSaobracajnaUnos(-1);
+								setIdVoziloVlasnickaUnos (-1);
 							} else {
 								JOptionPane
 										.showOptionDialog(
@@ -496,6 +527,10 @@ public class SalterskiRadnikController {
 
 								setUnosSDozvole(false);
 								setUnosVDozvole(false);
+								setIdOsobaSaobracajnaUnos("-1");
+								setIdOsobaVlasnickaUnos("-1");
+								setIdVoziloSaobracajnaUnos(-1);
+								setIdVoziloVlasnickaUnos (-1);
 							} else {
 								JOptionPane
 										.showOptionDialog(
@@ -541,6 +576,12 @@ public class SalterskiRadnikController {
 		unosVlasnicke.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				pocistiPoljaVozac();
+				pocistiPoljaVozilo();
+				setIdOsobaSaobracajnaUnos("-1");
+				setIdOsobaVlasnickaUnos("-1");
+				setIdVoziloSaobracajnaUnos(-1);
+				setIdVoziloVlasnickaUnos (-1);
 				setUnosVDozvole(true);
 				prikaziPanelUnosVozaca();
 			};
@@ -553,6 +594,12 @@ public class SalterskiRadnikController {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setUnosSDozvole(true);
+				pocistiPoljaVozac();
+				pocistiPoljaVozilo();
+				setIdOsobaSaobracajnaUnos("-1");
+				setIdOsobaVlasnickaUnos("-1");
+				setIdVoziloSaobracajnaUnos(-1);
+				setIdVoziloVlasnickaUnos (-1);
 				prikaziPanelUnosVozaca();
 			};
 		});
@@ -897,7 +944,6 @@ public class SalterskiRadnikController {
 					"Dodavanje registracije", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
-			pocistiPoljaZaPromjenuVlasnika();
 			return false;
 		}
 
@@ -906,8 +952,7 @@ public class SalterskiRadnikController {
 					"Unesena registracija ne postoji u bazi podataka.",
 					"Dodavanje registracije", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
-					new String[] { "Uredu" }, "default");
-			pocistiPoljaZaPromjenuVlasnika();
+					new String[] { "Uredu" }, "default");;
 			return false;
 		} else {
 			
@@ -923,7 +968,6 @@ public class SalterskiRadnikController {
 												JOptionPane.OK_OPTION,
 												JOptionPane.INFORMATION_MESSAGE, null,
 												new String[] { "Uredu" }, "default");
-								pocistiPoljaZaPromjenuVlasnika();
 								return false;
 							}
 						}
@@ -939,7 +983,6 @@ public class SalterskiRadnikController {
 					 * JOptionPane.INFORMATION_MESSAGE, null, new String[] {
 					 * "Uredu" }, "default");
 					 */
-					pocistiPoljaZaPromjenuVlasnika();
 					return model.DodajVlasnicku(brojPotvrde, registracija,
 							jmbgKorisnika);
 				}
@@ -958,77 +1001,30 @@ public class SalterskiRadnikController {
 				.getText();
 		String brojPotvrde = view.getRegistracija().getPodaci()
 				.getTxtConfirmationNumber().getText();
-		java.util.Date oodKad = (java.util.Date) view.getRegistracija()
-				.getPodaci().getDatumVazenja().getDatePickerOdKad().getModel()
-				.getValue();
-		java.util.Date dooKad = (java.util.Date) view.getRegistracija()
-				.getPodaci().getDatumVazenja().getDatePickerDoKad().getModel()
-				.getValue();
+		
 		OsobaDAO oDAO = new OsobaDAO();
-		Osoba o = oDAO.getByJMBG(view.getRegistracija().getPodaci().getTxtId()
-				.getText());
+		Osoba o = oDAO.getByJMBG(getIdOsobaSaobracajnaUnos());
 		VoziloDAO vDAO = new VoziloDAO();
-		Vozilo v = vDAO.getByReg(registracija);
-		RegistracijaDAO rDAO = new RegistracijaDAO();
+		Vozilo v = vDAO.get(getIdVoziloSaobracajnaUnos());
 		SaobracajnaDAO sDAO = new SaobracajnaDAO();
-
-		if (o.getJmbg_Id() == null) {
-			JOptionPane.showOptionDialog(view,
-					"Uneseni JMBG ne postoji u bazi podataka.",
-					"Dodavanje registracije", JOptionPane.OK_OPTION,
-					JOptionPane.INFORMATION_MESSAGE, null,
-					new String[] { "Uredu" }, "default");
-			pocistiPoljaZaPromjenuVlasnika();
-			return false;
-		}
-
-		else if (v.getId() == null) {
-			JOptionPane.showOptionDialog(view,
-					"Unesena registracija ne postoji u bazi podataka.",
-					"Dodavanje registracije", JOptionPane.OK_OPTION,
-					JOptionPane.INFORMATION_MESSAGE, null,
-					new String[] { "Uredu" }, "default");
-			pocistiPoljaZaPromjenuVlasnika();
-			return false;
-		} else {
-			
-			// za da postoji jedna saobracajna
-						ArrayList<Saobracajna> saobracajne = sDAO.getAll();
-						for (Saobracajna s : saobracajne) {
-							if (s.getVozilo().getRegOznaka().equals(registracija)) {
-								JOptionPane
-										.showOptionDialog(
-												view,
-												"Saobracajna za ovo vozilo vec postoji u bazi podataka.",
-												"Dodavanje vlasnicke",
-												JOptionPane.OK_OPTION,
-												JOptionPane.INFORMATION_MESSAGE, null,
-												new String[] { "Uredu" }, "default");
-								pocistiPoljaZaPromjenuVlasnika();
-								return false;
-							}
-						}
-			
-			ArrayList<Registracija> registracije = rDAO.getAll();
-			for (Registracija r : registracije) {
-				if (r.getOsoba().getJmbg_Id().equals(jmbgKorisnika)
-						&& r.getRegistarskaOznaka().equals(registracija)) {
-					/*
-					 * JOptionPane.showOptionDialog(view,
-					 * "Unesena registracija vec postoji u bazi podataka.",
-					 * "Dodavanje registracije", JOptionPane.OK_OPTION,
-					 * JOptionPane.INFORMATION_MESSAGE, null, new String[] {
-					 * "Uredu" }, "default");
-					 */
-					pocistiPoljaZaPromjenuVlasnika();
-					return model.DodajSaobracajnu(brojPotvrde, registracija,
-							jmbgKorisnika);
-				}
+		
+		// za da postoji jedna saobracajna
+		ArrayList<Saobracajna> saobracajne = sDAO.getAll();
+		for (Saobracajna s : saobracajne) {
+			if (s.getVozilo().getRegOznaka().equals(v.getRegOznaka())) {
+				JOptionPane
+						.showOptionDialog(
+								view,
+								"Saobra\u0107ajna za ovo vozilo vec postoji u bazi podataka.",
+								"Dodavanje sabra\u0107ajne",
+								JOptionPane.OK_OPTION,
+								JOptionPane.INFORMATION_MESSAGE, null,
+								new String[] { "Uredu" }, "default");
+				return false;
 			}
-
-			return model.DodajRegistracijuISaobracajnu(brojPotvrde,
-					registracija, jmbgKorisnika, oodKad, dooKad);
 		}
+		Saobracajna saobracajna = new Saobracajna(brojPotvrde,v,o);
+		return sDAO.create(saobracajna);
 	}
 
 	
@@ -1308,14 +1304,6 @@ public class SalterskiRadnikController {
 								"^[AEJKMTO]{1}\\d{2}[-]{1}[AEJKMTO]{1}[-]{1}\\d{3}$")) {
 			JOptionPane.showOptionDialog(view,
 					"Morate unijeti validnu registraciju.",
-					"Unos registracije", JOptionPane.OK_OPTION,
-					JOptionPane.INFORMATION_MESSAGE, null,
-					new String[] { "Uredu" }, "default");
-			return false;
-		} else if (!view.getRegistracija().getPodaci()
-				.getTxtConfirmationNumber().getText().matches("^\\d+$")) {
-			JOptionPane.showOptionDialog(view,
-					"Broj potvrde se mora sastojati od cifara",
 					"Unos registracije", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
@@ -1780,7 +1768,7 @@ public class SalterskiRadnikController {
 		// Nisu iskoristeni: getTb_bojaVozila(), getCb_nijansa() ,
 		// getCb_vrstaBoje()
 		VoziloDAO vDAO = new VoziloDAO();
-		if (vDAO.getByReg(registarske) != null) {
+		if (vDAO.getByReg(registarske).getRegOznaka() != null) {
 			JOptionPane.showOptionDialog(view,
 					"Registracija postoji u bazi podataka.",
 					"Unos registracije", JOptionPane.OK_OPTION,
