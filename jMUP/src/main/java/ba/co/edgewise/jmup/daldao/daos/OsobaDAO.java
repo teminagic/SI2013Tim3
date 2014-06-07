@@ -161,8 +161,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 			}
 			if(!qResult.next())
 			{
-				JOptionPane.showMessageDialog(null, "Nema rezultata");
-				return null;
+				result = null;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -203,10 +202,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				result.add(osoba);
 			}
 			if(!qResult.next())
-			{
-				JOptionPane.showMessageDialog(null, "Nema rezultata");
-				return null;
-			}
+				result = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -247,10 +243,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				result.add(osoba);
 			}
 			if(!qResult.next())
-			{
-				JOptionPane.showMessageDialog(null, "Nema rezultata");
-				return null;
-			}
+				result = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -262,7 +255,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 	
 	public Osoba getByJMBG(String jmbg) {
 		Osoba result = new Osoba();
-
+      
 		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
@@ -285,10 +278,8 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 					result.setPravnoLice(qResult.getBoolean("PravnoLice"));
 			}
 			else
-			{
-				JOptionPane.showMessageDialog(null, "Nema rezultata");
-				return null;
-			}
+				result = null;
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

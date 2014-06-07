@@ -207,10 +207,7 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 					result.add(temp);
 				}
 				if(!qResult.next())
-				{
-					JOptionPane.showMessageDialog(null, "Nema rezultata");
-					return null;
-				}
+					result = null;
 				
 				
 			} catch (SQLException e) {

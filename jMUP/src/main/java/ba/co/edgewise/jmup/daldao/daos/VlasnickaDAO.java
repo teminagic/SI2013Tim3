@@ -81,10 +81,7 @@ public class VlasnickaDAO implements IGenericDAO<Vlasnicka, String> {
 				result.setVlasnik(oDAO.get(qResult.getInt("Vlasnik")));
 			}
 			else
-			{
-				JOptionPane.showMessageDialog(null, "Nema rezultata");
-				return null;
-			}
+				result = null;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

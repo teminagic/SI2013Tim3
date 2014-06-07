@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import ba.co.edgewise.jmup.daldao.daos.MotorDAO;
 import ba.co.edgewise.jmup.daldao.daos.OsobaDAO;
 import ba.co.edgewise.jmup.daldao.daos.RegistracijaDAO;
@@ -175,18 +177,26 @@ public class SalterskiRadnikModel {
 		
 		switch (kriterij){
 			case "Registarska oznaka":
-				ArrayList<Vozilo> v = new ArrayList<Vozilo>();
+				ArrayList<Vozilo> v = new ArrayList<Vozilo>();;
 				Vozilo v1 = _voziloDAO.getByReg(parametar);
+				if(v1 == null)
+					JOptionPane.showMessageDialog(null, "Nema rezultata");
 				v.add(v1);
 				return (v == null) ? null : v;
 			case "Godina proizvodnje":
 				ArrayList<Vozilo> v2 = _voziloDAO.getByDate(Integer.parseInt(parametar));
+				if(v2.get(0) == null)
+					JOptionPane.showMessageDialog(null, "Nema rezultata");
 				return (v2 == null) ? null : v2;
 			case "Vrsta vozila":
 				ArrayList<Vozilo> v3 = _voziloDAO.getByType(parametar);
+				if(v3.get(0) == null)
+					JOptionPane.showMessageDialog(null, "Nema rezultata");
 				return (v3 == null) ? null : v3;
 			case "Marka vozila":
 				ArrayList<Vozilo> v4 = _voziloDAO.getByMark(parametar);
+				if(v4.get(0) == null)
+					JOptionPane.showMessageDialog(null, "Nema rezultata");
 				return (v4 == null) ? null : v4;
 			}
 		
@@ -198,14 +208,20 @@ public class SalterskiRadnikModel {
 		switch(kriterij){
 			case "Ime":
 				ArrayList<Osoba> o = _osobaDAO.getByIme(parametar);
+				if(o.get(0) == null)
+					JOptionPane.showMessageDialog(null, "Nema rezultata");
 				return (o == null) ? null : o;
 			case "Prezime":
 				ArrayList<Osoba> o1 = _osobaDAO.getByPrezime(parametar);
+				if(o1.get(0) == null)
+					JOptionPane.showMessageDialog(null, "Nema rezultata");
 				return (o1 == null) ? null : o1;
 			case "JMBG":
 				// iako dobijam samo 1 osobu zbog povratne vrijednosti metode vracam listu (da sve svedem na jednu metodu)
 				ArrayList<Osoba> o2 = new ArrayList<>(); 
 				o2.add(_osobaDAO.getByJMBG(parametar));
+				if(o2.get(0) == null)
+					JOptionPane.showMessageDialog(null, "Nema rezultata");
 				return (o2 == null) ? null : o2;
 			}
 		return null;
@@ -219,6 +235,8 @@ public class SalterskiRadnikModel {
 		case "Ime i prezime":
 			String [] ip = parametar.split(" ");
 			ArrayList<Osoba> temp = _osobaDAO.getByImeiPrezime(ip[0], ip[1]);
+			if(temp == null)
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
 			ArrayList<Saobracajna> s1 = new ArrayList<>();
 			for (Osoba osoba : temp) {
 				s1.add(_saobracajnaDAO.getByName(osoba.getId()));
@@ -228,18 +246,24 @@ public class SalterskiRadnikModel {
 			//vraca Array i ako ima samo 1 result zbog povratnog tipa metode
 		case "Registarska oznaka":
 			Vozilo vt = _voziloDAO.getByReg(parametar);
+			if(vt == null)
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
 			ArrayList<Saobracajna> s2 = new ArrayList<>();
 			s2.add(_saobracajnaDAO.getByReg(vt.getId()));
 			return (s2 == null) ? null : s2;
 		
 		case "JMBG vozaÄ�a":
 			Osoba o = _osobaDAO.getByJMBG(parametar);
+			if(o == null)
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
 			ArrayList<Saobracajna> s3 = new ArrayList<>();
 			s3.add(_saobracajnaDAO.getByName(o.getId()));	
 			return (s3 == null) ? null : s3;
 			
 		case "Broj potvrde":
 			ArrayList<Saobracajna> s4 = _saobracajnaDAO.getByPotvrda(parametar);
+			if(s4 == null)
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
 			return (s4 == null) ? null : s4;
 		}
 				
@@ -254,6 +278,8 @@ public class SalterskiRadnikModel {
 		case "Ime i prezime":
 		String [] ip = parametar.split(" ");
 		ArrayList<Osoba> temp = _osobaDAO.getByImeiPrezime(ip[0], ip[1]);
+		if(temp == null)
+			JOptionPane.showMessageDialog(null, "Nema rezultata");
 		ArrayList<Vlasnicka> vl1 = new ArrayList<>();
 		for (Osoba osoba : temp) {
 			vl1.add(_vlasnickaDAO.getByVlasnik(osoba.getId()));
@@ -263,12 +289,16 @@ public class SalterskiRadnikModel {
 		//vraca Array i ako ima samo 1 result zbog povratnog tipa metode
 		case "Registarska oznaka":
 		Vozilo vt = _voziloDAO.getByReg(parametar);
+		if(vt == null)
+			JOptionPane.showMessageDialog(null, "Nema rezultata");
 		ArrayList<Vlasnicka> vl2 = new ArrayList<>();
 		vl2.add(_vlasnickaDAO.getByVozilo(vt.getId()));
 		return (vl2 == null) ? null : vl2;
 		
 		case "JMBG vlasnika":
 		Osoba o = _osobaDAO.getByJMBG(parametar);
+		if(o == null)
+			JOptionPane.showMessageDialog(null, "Nema rezultata");
 		ArrayList<Vlasnicka> vl3 = new ArrayList<>();
 		vl3.add(_vlasnickaDAO.getByVlasnik(o.getId()));	
 		return (vl3 == null) ? null : vl3;
@@ -276,6 +306,9 @@ public class SalterskiRadnikModel {
 		case "Broj potvrde":
 		ArrayList<Vlasnicka> vl4 = new ArrayList<>();
 		vl4.add(_vlasnickaDAO.get(parametar));
+		vl4.add(_vlasnickaDAO.get(parametar));
+		if(vl4.get(0) == null)
+			JOptionPane.showMessageDialog(null, "Nema rezultata");
 		return (vl4 == null) ? null : vl4;
 		}
 				

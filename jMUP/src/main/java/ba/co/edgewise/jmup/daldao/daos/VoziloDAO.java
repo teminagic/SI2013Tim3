@@ -195,10 +195,8 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 				result.setRegOznaka(qResult.getString("RegOznaka"));
 			}
 			else
-			{
-				JOptionPane.showMessageDialog(null, "Nema rezultata");
-				return null;
-			}
+				result = null;
+		
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -254,11 +252,8 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 				result.setDatumPregleda(qResult.getDate("DatumPregleda"));
 				result.setRegOznaka(qResult.getString("RegOznaka"));
 			}
-			else
-			{
-				JOptionPane.showMessageDialog(null, "Nema rezultata");
-				return null;
-			}
+			else result = null;
+		
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -317,10 +312,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 				result.add(temp);
 			}
 			if(!qResult.next())
-			{
-				JOptionPane.showMessageDialog(null, "Nema rezultata");
-				return null;
-			}
+				result = null;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -379,10 +371,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 				result.add(temp);
 			}
 			if(!qResult.next())
-			{
-				JOptionPane.showMessageDialog(null, "Nema rezultata");
-				return null;
-			}
+				result = null;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -440,10 +429,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 				result.add(temp);
 			}
 			if(!qResult.next())
-			{
-				JOptionPane.showMessageDialog(null, "Nema rezultata");
-				return null;
-			}
+				result=null;
 
 		} catch (SQLException e) {
 			e.printStackTrace();

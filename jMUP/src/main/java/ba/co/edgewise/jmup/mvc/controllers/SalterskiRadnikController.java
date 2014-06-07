@@ -154,6 +154,7 @@ public class SalterskiRadnikController {
 									"Unos voza\u010D", JOptionPane.OK_OPTION,
 									JOptionPane.INFORMATION_MESSAGE, null,
 									new String[] { "Uredu" }, "default");
+									return;
 						}
 						else{
 							if(oDAO.getByJMBG(view.getStrana2().getTfIdBroj().getText()) != null){
@@ -162,11 +163,12 @@ public class SalterskiRadnikController {
 										"Unos voza\u010D", JOptionPane.OK_OPTION,
 										JOptionPane.INFORMATION_MESSAGE, null,
 										new String[] { "Uredu" }, "default");
+									return;
 							}
 						}
 															
 						}
-						else if(dodajVozaca()){
+						if(dodajVozaca()){
 								JOptionPane.showOptionDialog(view,
 										"Voza\u010D uspje\u0161no dodan.",
 										"Unos voza\u010Da", JOptionPane.OK_OPTION,
@@ -1778,7 +1780,7 @@ public class SalterskiRadnikController {
 		// Nisu iskoristeni: getTb_bojaVozila(), getCb_nijansa() ,
 		// getCb_vrstaBoje()
 		VoziloDAO vDAO = new VoziloDAO();
-		if (vDAO.getByReg(registarske).getRegOznaka() != null) {
+		if (vDAO.getByReg(registarske) != null) {
 			JOptionPane.showOptionDialog(view,
 					"Registracija postoji u bazi podataka.",
 					"Unos registracije", JOptionPane.OK_OPTION,
