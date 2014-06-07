@@ -279,10 +279,6 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 			}
 			else
 				result = null;
-			{
-		
-				return null;
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
