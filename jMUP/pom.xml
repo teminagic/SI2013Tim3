@@ -20,7 +20,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>ba.co.edgewise.jmup.daldao.ConnectionManager</mainClass>
+							<mainClass>ba.co.edgewise.jmup.main.Main</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
