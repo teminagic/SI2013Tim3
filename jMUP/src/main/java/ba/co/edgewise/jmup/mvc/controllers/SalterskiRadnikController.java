@@ -240,6 +240,7 @@ public class SalterskiRadnikController {
 			public void mouseClicked(MouseEvent e) {
 				String brojDozvole = view.getGodisnjaOvjera().getPretraga()
 						.getTxtId().getText();
+				
 				if (provjeriUneseniBrojSaobracajne(brojDozvole) == true) {
 					setOKSaobracajnaZaOvjeruRegistracije(true);
 					JOptionPane.showOptionDialog(view,
@@ -270,6 +271,7 @@ public class SalterskiRadnikController {
 			public void mouseClicked(MouseEvent e) {
 				String brojDozvole = view.getGodisnjaOvjera().getPretraga()
 						.getTxtId().getText();
+				
 				if (provjeriUneseniBrojSaobracajne(brojDozvole) == true)
 					setOKSaobracajnaZaOvjeruRegistracije(true);
 				if (isOKSaobracajnaZaOvjeruRegistracije() == true
@@ -282,6 +284,8 @@ public class SalterskiRadnikController {
 								JOptionPane.OK_OPTION,
 								JOptionPane.INFORMATION_MESSAGE, null,
 								new String[] { "Uredu" }, "default");
+						view.getGodisnjaOvjera().getPretraga().getTxtId()
+						.setText("");
 
 					} else {
 						view.getGodisnjaOvjera().getPretraga().getTxtId()
@@ -293,7 +297,7 @@ public class SalterskiRadnikController {
 								JOptionPane.INFORMATION_MESSAGE, null,
 								new String[] { "Uredu" }, "default");//
 					}
-				} else {
+				} else if(isOKSaobracajnaZaOvjeruRegistracije() == false){
 					view.getGodisnjaOvjera().getPretraga().getTxtId()
 							.setText("");
 					JOptionPane.showOptionDialog(view,
@@ -303,7 +307,6 @@ public class SalterskiRadnikController {
 							JOptionPane.INFORMATION_MESSAGE, null,
 							new String[] { "Uredu" }, "default");
 				}
-
 			}
 		});
 
@@ -830,6 +833,9 @@ public class SalterskiRadnikController {
 	}
 
 	Boolean provjeriUneseniBrojSaobracajne(String brojDozvole) {
+		if(brojDozvole.equals("") || !brojDozvole.matches("^[a-zA-Z0-9]+$")){
+			return false;
+		}
 		return model.provjeriBrojSaobracajne(brojDozvole);
 	}
 
@@ -860,9 +866,11 @@ public class SalterskiRadnikController {
 	public void postaviPoljaVozac(Osoba osoba){
 		view.getStrana2().getTfIme().setText(osoba.getIme());
 		view.getStrana2().getTfPrezime().setText(osoba.getPrezime());
-		view.getStrana2().getTfAdresa().setText(osoba.getPrebivaliste());
-		view.getStrana2().getTfMjesto().setText(osoba.getPrebivaliste());
-		view.getStrana2().getTfOpcina().setText(osoba.getPrebivaliste());
+		String osobaPreb=osoba.getPrebivaliste();
+		String[] part = osobaPreb.split(" ");
+		view.getStrana2().getTfAdresa().setText(part[0]);
+		view.getStrana2().getTfMjesto().setText(part[1]);
+		view.getStrana2().getTfOpcina().setText(part[2]);
 		if(view.getStrana2().getFizicko().isSelected())
 			view.getStrana2().getTfJMBG().setText(osoba.getJmbg_Id());
 		else
@@ -919,6 +927,15 @@ public class SalterskiRadnikController {
 		// nek ga samo uzme
 		String brojPotvrde = view.getRegistracija().getPodaci()
 				.getTxtConfirmationNumber().getText();
+		//amra
+		if(brojPotvrde.equals("") || !brojPotvrde.matches("^[a-zA-Z0-9]+$")){
+			JOptionPane.showOptionDialog(view,
+					"Broj potvrde moze sadrzavati samo brojeve i slova.",
+					"Dodavanje vlasnicke", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			return false;
+		}
 		// dodati date time pickere
 		// java.sql.Date selectedDate = (java.sql.Date)
 		// datePicker.getModel().getValue();
@@ -1001,7 +1018,15 @@ public class SalterskiRadnikController {
 				.getText();
 		String brojPotvrde = view.getRegistracija().getPodaci()
 				.getTxtConfirmationNumber().getText();
-		
+		//amra
+				if(brojPotvrde.equals("") || !brojPotvrde.matches("^[a-zA-Z0-9]+$")){
+					JOptionPane.showOptionDialog(view,
+							"Broj potvrde moze sadrzavati samo brojeve i slova.",
+							"Dodavanje saobracajne", JOptionPane.OK_OPTION,
+							JOptionPane.INFORMATION_MESSAGE, null,
+							new String[] { "Uredu" }, "default");
+					return false;
+				}
 		OsobaDAO oDAO = new OsobaDAO();
 		Osoba o = oDAO.getByJMBG(getIdOsobaSaobracajnaUnos());
 		VoziloDAO vDAO = new VoziloDAO();
@@ -1234,6 +1259,12 @@ public class SalterskiRadnikController {
 		java.util.Date doKad = (java.util.Date) this.view.getGodisnjaOvjera()
 				.getDatum().getRegistrationDate().getDatePickerDoKad()
 				.getModel().getValue();
+		if(odKad==null || doKad==null) {
+			JOptionPane.showOptionDialog(view, "Unesite datum(e).",
+					"Godi\u0161nja Ovjera registracije", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			return false;}
 		int razlika = (int) ((doKad.getTime() - odKad.getTime()) / (1000 * 60 * 60 * 24));
 		if (odKad.after(doKad)) {
 			JOptionPane.showOptionDialog(view, "Neispravan datum.",
@@ -1768,7 +1799,8 @@ public class SalterskiRadnikController {
 		// Nisu iskoristeni: getTb_bojaVozila(), getCb_nijansa() ,
 		// getCb_vrstaBoje()
 		VoziloDAO vDAO = new VoziloDAO();
-		if (vDAO.getByReg(registarske).getRegOznaka() != null) {
+		if (vDAO.getByReg(registarske)!=null) {
+			System.out.println("null");
 			JOptionPane.showOptionDialog(view,
 					"Registracija postoji u bazi podataka.",
 					"Unos registracije", JOptionPane.OK_OPTION,

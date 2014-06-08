@@ -155,10 +155,9 @@ public class SalterskiRadnikModel {
 	public Boolean provjeriBrojSaobracajne(String brojDozvole)
 	{
 		SaobracajnaDAO s = new SaobracajnaDAO();
-		ArrayList<Saobracajna> saobracajne = s.getByPotvrda(brojDozvole);
-		if(saobracajne.size()!=0)
-			return true;
-		return false;
+		Saobracajna sa = s.get(brojDozvole);
+		if(sa.getKorisnik()!=null) return true;
+		else return false;
 	}
 	//PRETRAGA
 	public ArrayList<Vozilo> dohvatiSvaVozila() {
