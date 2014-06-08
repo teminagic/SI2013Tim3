@@ -6,15 +6,19 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.Date;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import ba.co.edgewise.jmup.components.KorisnikKreiranje;
 import ba.co.edgewise.jmup.daldao.daos.LogDAO;
@@ -62,6 +66,25 @@ public class AdminController {
 		};
 		this.view.addWindowListener(windowControler);
 
+		JButton izradiBackup = view.getStrana6().getBtnIzradaBackupa();
+		izradiBackup.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				//TODO: implement
+				izradiBackup();
+			}
+		});
+		
+		JButton restoreBackup = view.getStrana6().getBtnRestoreBackupa();
+		restoreBackup.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				//TODO: implement
+				restoreBackupa();
+			}
+		});
+
+		
 		JButton spasiKorisnika = view.getStrana2().getBtSpasiKorisnika();
 		spasiKorisnika.addMouseListener(new MouseAdapter() {
 			@Override
@@ -115,6 +138,15 @@ public class AdminController {
 	}
 
 	private void meniControl() {
+		
+		JButton backup = view.getMeni().getOpcije().getBtnIzradaBackupa();
+		backup.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mouseClicked(MouseEvent arg0){
+				nextBackup();
+			}
+		});
+		
 		JButton pocetna = view.getMeni().getOpcije().getBtnPocetna();
 		pocetna.addMouseListener(new MouseAdapter() {
 			@Override
@@ -206,6 +238,13 @@ public class AdminController {
 		JPanel cards = view.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout) cards.getLayout();
 		tmp.show(cards, "Pregled historije promjena");
+	}
+	
+	private void nextBackup() {
+		view.getSadrzaj().getNaslov().postaviNaslov("Backup");
+		JPanel cards = view.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout) cards.getLayout();
+		tmp.show(cards, "Backup");
 	}
 	
 	private void nextPocetna() {
@@ -354,5 +393,116 @@ public class AdminController {
 			view.getStrana3().getModel().addAll(
 					model.dohvatiUserePretraga(kriterij, tip));
 		}
+	}
+	
+	private void izradiBackup() {
+		JFileChooser saveFile = new JFileChooser();
+    	FileFilter filter = new FileNameExtensionFilter("SQL skripta", new String[]{"sql"});
+    	saveFile.setFileFilter(filter);
+    	saveFile.addChoosableFileFilter(filter);
+    	saveFile.setAcceptAllFileFilterUsed(false);
+        saveFile.showSaveDialog(view);
+        String filepath = new String();
+        if (saveFile.getSelectedFile() != null){
+        	filepath = saveFile.getSelectedFile().getAbsolutePath();
+        	int begin = filepath.length() - 4;
+        	if (!filepath.substring(begin).equals(".sql"))
+        		filepath += ".sql";
+        }
+        
+        String dbHost = "localhost";
+        String dbName = "sql339553";
+        String dbUser = "root";
+        String dbPass = "root";
+        
+        String executeCmd = "mysqldump --single-transaction --host=" + dbHost + " --user=" + dbUser
+        		+ " --password=" + dbPass + " " + dbName + " --ignore-table="+ dbName + ".logovi"+ " > " + filepath;
+        
+        String[] cmd = {"cmd", "/c", executeCmd};
+        
+        try {
+        	Process runtimeProcess = Runtime.getRuntime().exec(cmd);
+            int processComplete = runtimeProcess.waitFor();
+            
+            if (processComplete == 0) {
+            	JOptionPane.showOptionDialog(view,
+    					"Backup je uspješno kreiran",
+    					"Kreiranje backup-a", JOptionPane.OK_OPTION,
+    					JOptionPane.INFORMATION_MESSAGE, null, new String[] { "Uredu" },
+    					"default");
+            } else {
+            	JOptionPane.showOptionDialog(view,
+    					"Došlo je do greške prilikom izrade backupa. Molimo Vas da pokušate ponovo.",
+    					"Kreiranje backup-a", JOptionPane.OK_OPTION,
+    					JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+    					"default");
+            }
+            
+        } catch (IOException | InterruptedException ex)
+        {
+        	ex.printStackTrace();
+        }
+        
+        LogDAO lDAO = new LogDAO();
+		Log log = new Log(0, user.getKorisnickoIme(), new Date(),
+				"Kreiranje backup-a", "Korisnik: " + user.getKorisnickoIme());
+		lDAO.create(log);
+	}
+	
+	public void restoreBackupa() {
+		JFileChooser saveFile = new JFileChooser();
+    	FileFilter filter = new FileNameExtensionFilter("SQL skripta", new String[]{"sql"});
+    	saveFile.setFileFilter(filter);
+    	saveFile.addChoosableFileFilter(filter);
+    	saveFile.setAcceptAllFileFilterUsed(false);
+        saveFile.showOpenDialog(view);
+        String filepath = new String();
+        
+        if (saveFile.getSelectedFile() != null){
+        	filepath = saveFile.getSelectedFile().getAbsolutePath();
+        	int begin = filepath.length() - 4;
+        	if (!filepath.substring(begin).equals(".sql"))
+        		filepath += ".sql";
+        }
+                
+        String dbHost = "localhost";
+        String dbName = "sql339553";
+        String dbUser = "root";
+        String dbPass = "root";
+        
+        String executeCmd = "mysql --host=" + dbHost + " --user=" + dbUser
+        		+ " --password=" + dbPass + " " + dbName + " < " + filepath;
+        
+        
+        String[] cmd = {"cmd", "/c", executeCmd};
+        System.out.println(executeCmd);
+        
+        try {
+        	Process runtimeProcess = Runtime.getRuntime().exec(cmd);
+            int processComplete = runtimeProcess.waitFor();
+            
+            if (processComplete == 0) {
+            	JOptionPane.showOptionDialog(view,
+    					"Uspješan povratak na predhodno stanje",
+    					"Povratak na backup", JOptionPane.OK_OPTION,
+    					JOptionPane.INFORMATION_MESSAGE, null, new String[] { "Uredu" },
+    					"default");
+            } else {
+            	JOptionPane.showOptionDialog(view,
+    					"Došlo je do greške prilikom povratak na backup. Molimo Vas da pokušate ponovo.",
+    					"Kreiranje backup-a", JOptionPane.OK_OPTION,
+    					JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+    					"default");
+            }
+            
+        } catch (IOException | InterruptedException ex)
+        {
+        	ex.printStackTrace();
+        }
+        
+        LogDAO lDAO = new LogDAO();
+		Log log = new Log(0, user.getKorisnickoIme(), new Date(),
+				"Restore backup-a", "Korisnik: " + user.getKorisnickoIme());
+		lDAO.create(log);
 	}
 }

@@ -15,7 +15,7 @@ import org.apache.commons.pool.impl.GenericObjectPool;;
 
 public class ConnectionManager {
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://localhost:3306/sql339553";
+	private static final String URL = "jdbc:mysql://localhost/sql339553";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "root";
 	private PoolingDataSource dataSource = null;
@@ -97,6 +97,7 @@ public class ConnectionManager {
 	
 	public static void main(String[] args) throws SQLException
 	{
+		@SuppressWarnings("unused")
 		ConnectionManager manager = new ConnectionManager();
 		
 		//Connection connection = manager.getConnection();
@@ -104,13 +105,13 @@ public class ConnectionManager {
 		System.out.println(connection);
 		Statement stmt = null;
 		ResultSet rs = null;
-		String querry = "SELECT username FROM m_users";
+		String querry = "SELECT Prezime FROM osoba";
 		try{
 			stmt = connection.createStatement();
 			rs = stmt.executeQuery(querry);
 			while (rs.next())
 			{
-				System.out.println(rs.getString("username"));
+				System.out.println(rs.getString("Prezime"));
 			}
 		} catch(SQLException e)
 		{

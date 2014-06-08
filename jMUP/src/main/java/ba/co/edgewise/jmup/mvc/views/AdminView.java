@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ba.co.edgewise.jmup.components.Backup;
 import ba.co.edgewise.jmup.components.KorisnikKreiranje;
 import ba.co.edgewise.jmup.components.KorisnikModificiranje;
 import ba.co.edgewise.jmup.components.KorisnikPretraga;
@@ -31,6 +32,7 @@ public class AdminView extends JFrame {
 	private KorisnikPretraga strana3;
 	private KorisnikModificiranje strana4;
 	private PregledLogova strana5;
+	private Backup strana6;
 
 	public AdminView() {
 		initialize();
@@ -64,6 +66,9 @@ public class AdminView extends JFrame {
 		
 		strana5 = new PregledLogova();
 		sadrzaj.getPanelSadrzaj().add(strana5, "Pregled historije promjena");
+		
+		strana6 = new Backup();
+		sadrzaj.getPanelSadrzaj().add(strana6, "Backup");
 		
 		contentPane.add(sadrzaj, gbc_sadrzaj);	
 	}
@@ -105,5 +110,8 @@ public class AdminView extends JFrame {
 	}
 	public PregledLogova getStrana5() {
 		return strana5;
+	}
+	public Backup getStrana6() {
+		return strana6;
 	}
 }
