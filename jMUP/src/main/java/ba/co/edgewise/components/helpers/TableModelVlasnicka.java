@@ -76,8 +76,12 @@ public class TableModelVlasnicka extends AbstractTableModel {
 	}
 	
 	public void addAll(ArrayList<Vlasnicka> novi){
+		if(novi == null)
+			return;
 		int rowCount = this.getRowCount();
 		for(Vlasnicka u : novi){
+			if(u==null)
+				return;
 			data.add(u);
 		}
 		this.fireTableRowsInserted(rowCount, rowCount + novi.size());

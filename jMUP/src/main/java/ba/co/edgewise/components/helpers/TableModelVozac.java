@@ -70,8 +70,12 @@ public class TableModelVozac extends AbstractTableModel {
 	}
 	
 	public void addAll(ArrayList<Osoba> novi){
+		if(novi == null)
+			return;
 		int rowCount = this.getRowCount();
 		for(Osoba u : novi){
+			if(u==null)
+				return;
 			data.add(u);
 		}
 		this.fireTableRowsInserted(rowCount, rowCount + novi.size());

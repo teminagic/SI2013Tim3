@@ -1,10 +1,14 @@
 package ba.co.edgewise.components.helpers;
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.ListIterator;
+
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
+
 import ba.co.edgewise.jmup.klase.Vozilo;
 
 public class TableModelVozilo extends AbstractTableModel {
@@ -59,7 +63,7 @@ public class TableModelVozilo extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return (Object) (data.get(rowIndex).toObjectArray())[columnIndex];
+		return  (Object) (data.get(rowIndex).toObjectArray())[columnIndex];
 	}
 
 	@Override
@@ -76,7 +80,11 @@ public class TableModelVozilo extends AbstractTableModel {
 	
 	public void addAll(ArrayList<Vozilo> novi){
 		int rowCount = this.getRowCount();
+		if(novi == null)
+			return;
 		for(Vozilo u : novi){
+			if(u==null)
+				return;
 			data.add(u);
 		}
 		this.fireTableRowsInserted(rowCount, rowCount + novi.size());

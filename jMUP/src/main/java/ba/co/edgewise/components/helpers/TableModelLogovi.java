@@ -73,8 +73,12 @@ public class TableModelLogovi extends AbstractTableModel {
 	}
 	
 	public void addAll(ArrayList<Log> novi){
+		if(novi == null)
+			return;
 		int rowCount = this.getRowCount();
 		for(Log u : novi){
+			if(u==null)
+				return;
 			data.add(u);
 		}
 		this.fireTableRowsInserted(rowCount, rowCount + novi.size());
