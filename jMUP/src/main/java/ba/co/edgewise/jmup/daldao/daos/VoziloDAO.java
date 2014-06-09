@@ -311,8 +311,8 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 				temp.setRegOznaka(qResult.getString("RegOznaka"));
 				result.add(temp);
 			}
-			if(!qResult.next())
-				result = null;
+			if(result.size()==0) result = null;
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -370,8 +370,8 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 				temp.setRegOznaka(qResult.getString("RegOznaka"));
 				result.add(temp);
 			}
-			if(!qResult.next())
-				result = null;
+			if(result.size()==0) result = null;
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -428,8 +428,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 				temp.setRegOznaka(qResult.getString("RegOznaka"));
 				result.add(temp);
 			}
-			if(!qResult.next())
-				result=null;
+			if(result.size()==0) result = null;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -486,6 +485,7 @@ public class VoziloDAO implements IGenericDAO<Vozilo, Integer> {
 				temp.setRegOznaka(qResult.getString("RegOznaka"));
 				result.add(temp);
 			}
+			if(result.size()==0) result = null;
 
 		} catch (SQLException e) {
 			e.printStackTrace();

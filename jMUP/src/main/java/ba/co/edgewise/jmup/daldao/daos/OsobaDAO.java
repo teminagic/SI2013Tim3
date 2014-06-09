@@ -81,6 +81,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 				result.setPrebivaliste(qResult.getString("Prebivaliste"));
 				result.setPravnoLice(qResult.getBoolean("PravnoLice"));
 			}
+			else result = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -120,6 +121,8 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 					osoba.setPravnoLice(false);
 				result.add(osoba);
 			}
+			if(result.size()==0) result = null;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

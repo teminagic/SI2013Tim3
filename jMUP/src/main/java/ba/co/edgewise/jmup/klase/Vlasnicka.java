@@ -52,6 +52,6 @@ public class Vlasnicka{
 	
 	//UBACITI PARAMETRE
 	public Object[] toObjectArray() {
-		return new Object[]{this.brojDozvole, this.vozilo.getRegOznaka(), this.vlasnik.getIme(), this.vlasnik.getJmbg_Id() };
+		return new Object[]{this.brojDozvole, this.vozilo.getRegOznaka(), this.vlasnik.getIme()+" "+this.vlasnik.getPrezime(), this.vlasnik.getJmbg_Id() };
 	}	
 }
