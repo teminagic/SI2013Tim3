@@ -5,9 +5,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+
 import javax.swing.*;
+
 import java.awt.event.*;
+
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -28,6 +34,25 @@ public class LoginController {
 		this.view = view;
 		this.model = model;
 	}
+	public static String getMD5(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger number = new BigInteger(1, messageDigest);
+            String hashtext = number.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        }
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
+ 
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        System.out.println(getMD5("Javarmi.com"));
+    }
 
 	public void control(){
 		//Dialog za izlaz
@@ -63,6 +88,7 @@ public class LoginController {
 		String username = this.view.getUnos().getTfKorisnickoIme().getText();
 		char[] password = this.view.getUnos().getPwfSifra().getPassword();
 		return model.provjeriPodatke(username, new String(password));
+		//return model.provjeriPodatke(username, getMD5(new String(password)));
 	}
 	
 	private void getNext()

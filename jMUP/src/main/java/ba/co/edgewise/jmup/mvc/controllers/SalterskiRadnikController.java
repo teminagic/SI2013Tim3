@@ -1092,7 +1092,7 @@ public class SalterskiRadnikController {
 					null, new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTf_modelVozila().getText()
-				.matches(ip)) {
+				.matches("^[a-zA-Z0-9]+$")) {
 			JOptionPane.showOptionDialog(view,
 					"Pogre\u0161no ste unijeli model vozila.", "Unos vozila",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,

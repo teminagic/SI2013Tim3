@@ -23,7 +23,7 @@ public class KorisnikModificiranje extends JPanel {
 	private JTextField tfKorisnickoIme;
 	private JTextField tfSlika;
 	private JTextField tfPrezime;
-	private JTextField tfSifra;
+	private JPasswordField tfSifra;
 	private JButton btnPronadji;
 	private JButton btnSpasiuposlenika;
 	@SuppressWarnings("rawtypes")
@@ -177,7 +177,7 @@ public class KorisnikModificiranje extends JPanel {
 		gbc_tfSlika.gridy = 2;
 		panel.add(tfSlika, gbc_tfSlika);
 		
-		tfSifra = new JTextField();
+		tfSifra = new JPasswordField();
 		tfSifra.setColumns(10);
 		GridBagConstraints gbc_tfSifra = new GridBagConstraints();
 		gbc_tfSifra.gridwidth = 2;
@@ -235,7 +235,7 @@ public class KorisnikModificiranje extends JPanel {
 		this.tfIme.setText(this.getUposlenik().getIme());
 		this.tfPrezime.setText(this.getUposlenik().getPrezime());
 		this.tfKorisnickoIme.setText(this.getUposlenik().getKorisnickoIme());
-		this.tfSifra.setText(this.getUposlenik().getPassword());
+		this.tfSifra.setText(new String(this.getUposlenik().getPassword()));
 		this.cbTipKorisnickogRacuna.setSelectedItem(this.getUposlenik().getTip());
 		this.cbStatusKorisnickogRacuna.setSelectedItem(this.getUposlenik().getStatus());
 	}
