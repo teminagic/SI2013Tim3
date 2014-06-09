@@ -293,7 +293,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 	public boolean update(Integer id, Osoba o) {
 		boolean success = false;
 		String jmbg_id = o.getJmbg_Id();
-		String prezime = o.getIme();
+		String prezime = o.getPrezime();
 		String ime = o.getIme();
 		String prebivaliste = o.getPrebivaliste();
 		boolean pravnoLice = o.isPravnoLice();
