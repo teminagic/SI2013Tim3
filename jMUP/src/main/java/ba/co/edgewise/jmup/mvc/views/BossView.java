@@ -72,13 +72,13 @@ public class BossView extends JFrame {
 		sadrzaj.getPanelSadrzaj().add(strana2, "Pretraga");
 		
 		strana3 = new Izvjestaji();
-		sadrzaj.getPanelSadrzaj().add(strana3, "Izvje\u0161taji");
+		sadrzaj.getPanelSadrzaj().add(strana3, "Izvještaji");
 		
 		strana5 = new PregledLogova();
 		sadrzaj.getPanelSadrzaj().add(strana5, "Pregled historije promjena");
 		
 		izvjestaji = new Izvjestaji();
-		sadrzaj.getPanelSadrzaj().add(izvjestaji, "Izrada izvje\u0161taja");
+		sadrzaj.getPanelSadrzaj().add(izvjestaji, "Izrada izvještaja");
 		
 		contentPane.add(sadrzaj, gbc_naslov);
 
@@ -88,7 +88,7 @@ public class BossView extends JFrame {
 		frejm.getSadrzaj().getNaslov().postaviNaslov("Po\u010Detna");
 		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout)cards.getLayout();
-		tmp.show(cards, "Početna");
+		tmp.show(cards, "PoÄ�etna");
 	}
 	public void prikaziPretragu() {
 		frejm.getSadrzaj().getNaslov().postaviNaslov("Pretraga");
@@ -98,7 +98,7 @@ public class BossView extends JFrame {
 	}
 	
 	public void prikaziIzvjestaje(){
-		frejm.getSadrzaj().getNaslov().postaviNaslov("Izvje\u0161taji");
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Izvještaji");
 		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Izvještaji");

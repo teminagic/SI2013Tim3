@@ -12,6 +12,8 @@ import ba.co.edgewise.jmup.daldao.daos.*;
 
 import java.awt.Color;
 
+import javax.swing.JOptionPane;
+
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.*;
 import com.lowagie.text.pdf.codec.Base64.OutputStream;
@@ -62,121 +64,160 @@ public class BossModel {
 		return _voziloDAO.delete(vozilo.getId());
 	}
 
-	//pretraga
-	public ArrayList<Vozilo> pretragaVozilo(String parametar, String kriterij) {
-
-		switch (kriterij) {
-		case "Registarska oznaka":
-			ArrayList<Vozilo> v = new ArrayList<Vozilo>();
-			Vozilo v1 = _voziloDAO.getByReg(parametar);
-			v.add(v1);
-			return (v == null) ? null : v;
-		case "Godina proizvodnje":
-			ArrayList<Vozilo> v2 = _voziloDAO.getByDate(Integer
-					.parseInt(parametar));
-			return (v2 == null) ? null : v2;
-		case "Vrsta vozila":
-			ArrayList<Vozilo> v3 = _voziloDAO.getByType(parametar);
-			return (v3 == null) ? null : v3;
-		case "Marka vozila":
-			ArrayList<Vozilo> v4 = _voziloDAO.getByMark(parametar);
-			return (v4 == null) ? null : v4;
-		}
-
+public ArrayList<Vozilo> pretragaVozilo( String parametar, String kriterij ) {
+		
+		switch (kriterij){
+			case "Registarska oznaka":
+				ArrayList<Vozilo> v = new ArrayList<Vozilo>();;
+				Vozilo v1 = _voziloDAO.getByReg(parametar);
+				if(v1 == null)
+					JOptionPane.showMessageDialog(null, "Nema rezultata");
+				v.add(v1);
+				return (v == null) ? null : v;
+			case "Godina proizvodnje":
+				ArrayList<Vozilo> v2 = _voziloDAO.getByDate(Integer.parseInt(parametar));
+				if(v2 == null)
+					JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return (v2 == null) ? null : v2;
+			case "Vrsta vozila":
+				ArrayList<Vozilo> v3 = _voziloDAO.getByType(parametar);
+				if(v3 == null)
+					JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return (v3 == null) ? null : v3;
+			case "Marka vozila":
+				ArrayList<Vozilo> v4 = _voziloDAO.getByMark(parametar);
+				if(v4 == null)
+					JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return (v4 == null) ? null : v4;
+			}
+		
 		return null;
 	}
-
-	public ArrayList<Osoba> pretragaVozac(String parametar, String kriterij) {
-
-		switch (kriterij) {
-		case "Ime":
-			ArrayList<Osoba> o = _osobaDAO.getByIme(parametar);
-			return (o == null) ? null : o;
-		case "Prezime":
-			ArrayList<Osoba> o1 = _osobaDAO.getByPrezime(parametar);
-			return (o1 == null) ? null : o1;
-		case "JMBG":
-			// iako dobijam samo 1 osobu zbog povratne vrijednosti metode vracam
-			// listu (da sve svedem na jednu metodu)
-			ArrayList<Osoba> o2 = new ArrayList<>();
-			o2.add(_osobaDAO.getByJMBG(parametar));
-			return (o2 == null) ? null : o2;
-		}
+	
+	public ArrayList<Osoba> pretragaVozac( String parametar, String kriterij ) {
+		
+		switch(kriterij){
+			case "Ime":
+				ArrayList<Osoba> o = _osobaDAO.getByIme(parametar);
+				if(o == null)
+					JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return (o == null) ? null : o;
+			case "Prezime":
+				ArrayList<Osoba> o1 = _osobaDAO.getByPrezime(parametar);
+				if(o1 == null)
+					JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return (o1 == null) ? null : o1;
+			case "JMBG":
+				// iako dobijam samo 1 osobu zbog povratne vrijednosti metode vracam listu (da sve svedem na jednu metodu)
+				ArrayList<Osoba> o2 = new ArrayList<>(); 
+				o2.add(_osobaDAO.getByJMBG(parametar));
+				if(o2.get(0) == null)
+					JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return (o2 == null) ? null : o2;
+			}
 		return null;
 	}
-
-	public ArrayList<Saobracajna> pretragaSaobracajna(String parametar,
-			String kriterij) {
-
-		switch (kriterij) {
-		// fejlat ce ako se ukuca prezime pa ime ali nemam vremena da to
-		// optimizujem
-		// logika je lose uradena ali nemma vremena za pametnije
+	
+	public ArrayList<Saobracajna> pretragaSaobracajna ( String parametar, String kriterij ) {
+		
+		switch(kriterij){
+		//fejlat ce ako se ukuca prezime pa ime ali nemam vremena da to optimizujem
+		//logika je lose uradena ali nemma vremena za pametnije
 		case "Ime i prezime":
-			String[] ip = parametar.split(" ");
+			String [] ip = parametar.split(" ");
 			ArrayList<Osoba> temp = _osobaDAO.getByImeiPrezime(ip[0], ip[1]);
+			if(temp == null){
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return null;
+			}
 			ArrayList<Saobracajna> s1 = new ArrayList<>();
 			for (Osoba osoba : temp) {
 				s1.add(_saobracajnaDAO.getByName(osoba.getId()));
 			}
 			return (s1 == null) ? null : s1;
-
-			// vraca Array i ako ima samo 1 result zbog povratnog tipa metode
+	
+			//vraca Array i ako ima samo 1 result zbog povratnog tipa metode
 		case "Registarska oznaka":
 			Vozilo vt = _voziloDAO.getByReg(parametar);
+			if(vt == null){
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return null;
+			}
 			ArrayList<Saobracajna> s2 = new ArrayList<>();
 			s2.add(_saobracajnaDAO.getByReg(vt.getId()));
 			return (s2 == null) ? null : s2;
-
-		case "JMBG":
+		
+		case "JMBG vozača":
 			Osoba o = _osobaDAO.getByJMBG(parametar);
+			if(o == null)
+			{
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
+				return null;
+			}
 			ArrayList<Saobracajna> s3 = new ArrayList<>();
-			s3.add(_saobracajnaDAO.getByName(o.getId()));
+			s3.add(_saobracajnaDAO.getByName(o.getId()));	
 			return (s3 == null) ? null : s3;
-
+			
 		case "Broj potvrde":
 			ArrayList<Saobracajna> s4 = _saobracajnaDAO.getByPotvrda(parametar);
+			if(s4 == null)
+				JOptionPane.showMessageDialog(null, "Nema rezultata");
 			return (s4 == null) ? null : s4;
 		}
-
+				
 		return null;
 	}
-
-	public ArrayList<Vlasnicka> pretragaVlasnicka(String parametar,
-			String kriterij) {
-
-		switch (kriterij) {
-		// fejlat ce ako se ukuca prezime pa ime ali nemam vremena da to
-		// optimizujem
-		// logika je lose uradena ali nemma vremena za pametnije
-		case "Ime i prezime":
-			String[] ip = parametar.split(" ");
-			ArrayList<Osoba> temp = _osobaDAO.getByImeiPrezime(ip[0], ip[1]);
-			ArrayList<Vlasnicka> vl1 = new ArrayList<>();
-			for (Osoba osoba : temp) {
-				vl1.add(_vlasnickaDAO.getByVlasnik(osoba.getId()));
-			}
-			return (vl1 == null) ? null : vl1;
-
-	    // vraca Array i ako ima samo 1 result zbog povratnog tipa metode
-		case "Registarska oznaka":
-			Vozilo vt = _voziloDAO.getByReg(parametar);
-			ArrayList<Vlasnicka> vl2 = new ArrayList<>();
-			vl2.add(_vlasnickaDAO.getByVozilo(vt.getId()));
-			return (vl2 == null) ? null : vl2;
-
-		case "JMBG":
-			Osoba o = _osobaDAO.getByJMBG(parametar);
-			ArrayList<Vlasnicka> vl3 = new ArrayList<>();
-			vl3.add(_vlasnickaDAO.getByVlasnik(o.getId()));
-			return (vl3 == null) ? null : vl3;
-
-		case "Broj potvrde":
-			ArrayList<Vlasnicka> vl4 = new ArrayList<>();
-			vl4.add(_vlasnickaDAO.get(parametar));
-			return (vl4 == null) ? null : vl4;
-		}
+	
+	public ArrayList<Vlasnicka> pretragaVlasnicka ( String parametar, String kriterij ) {
 		
+		switch(kriterij){
+		//fejlat ce ako se ukuca prezime pa ime ali nemam vremena da to optimizujem
+		//logika je lose uradena ali nemma vremena za pametnije
+		case "Ime i prezime":
+		String [] ip = parametar.split(" ");
+		ArrayList<Osoba> temp = _osobaDAO.getByImeiPrezime(ip[0], ip[1]);
+		if(temp == null){
+			JOptionPane.showMessageDialog(null, "Nema rezultata");
+			return null;
+		}
+		ArrayList<Vlasnicka> vl1 = new ArrayList<>();
+		for (Osoba osoba : temp) {
+			vl1.add(_vlasnickaDAO.getByVlasnik(osoba.getId()));
+		}
+		return (vl1 == null) ? null : vl1;
+
+		//vraca Array i ako ima samo 1 result zbog povratnog tipa metode
+		case "Registarska oznaka":
+		Vozilo vt = _voziloDAO.getByReg(parametar);
+		if(vt == null)
+		{
+			JOptionPane.showMessageDialog(null, "Nema rezultata");
+			return null;
+		}
+		ArrayList<Vlasnicka> vl2 = new ArrayList<>();
+		vl2.add(_vlasnickaDAO.getByVozilo(vt.getId()));
+		return (vl2 == null) ? null : vl2;
+		
+		case "JMBG vlasnika":
+		Osoba o = _osobaDAO.getByJMBG(parametar);
+		if(o == null)
+		{
+			JOptionPane.showMessageDialog(null, "Nema rezultata");
+			return null;
+		}
+		ArrayList<Vlasnicka> vl3 = new ArrayList<>();
+		vl3.add(_vlasnickaDAO.getByVlasnik(o.getId()));	
+		return (vl3 == null) ? null : vl3;
+		
+		case "Broj potvrde":
+		ArrayList<Vlasnicka> vl4 = new ArrayList<>();
+		vl4.add(_vlasnickaDAO.get(parametar));
+		vl4.add(_vlasnickaDAO.get(parametar));
+		if(vl4.get(0) == null)
+			JOptionPane.showMessageDialog(null, "Nema rezultata");
+		return (vl4 == null) ? null : vl4;
+		}
+				
 		return null;
 	}
 
@@ -192,7 +233,7 @@ public class BossModel {
 	
 	
 	@SuppressWarnings("deprecation")
-	public boolean ekstraktToPDF(ArrayList<String> podaci, String path) {
+	public boolean ekstraktToPDF(ArrayList<String> podaci, String path, String poruka) {
 		try { 
 			@SuppressWarnings("deprecation")
 
@@ -203,15 +244,16 @@ public class BossModel {
  
             document.open();
             document.addTitle("JMUP");
-            document.addSubject("Izvje\u0161taj");
-            document.addKeywords("Izvje\u0161taj JMUP");
+            document.addSubject("Izvještaj");
+            document.addKeywords("Izvještaj JMUP");
             
             
-            
-            document.add(new Paragraph("Izvjestaj " +  new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getYear()));
+        	document.add(new Paragraph("JMUP"));
+            document.add(new Paragraph("Izvjestaj kreiran: " +  new Date().getDate() + "." + new Date().getMonth() + "."));
+            document.add(new Paragraph(poruka));
             if(podaci.size() == 0)
             {
-            	document.add(new Paragraph("Nema neva\u017Ee\u0107ih tablica"));
+            	document.add(new Paragraph("Nema nevažečih tablica"));
             }
             else
             {
@@ -260,11 +302,14 @@ public class BossModel {
 
 		ArrayList<String> temp = new ArrayList<>();
 		temp.add(_saobracajnaDAO.getBrojSaobracajnih());
+		temp.add("Broj izdatih vlasnickih: ");
 		temp.add(_vlasnickaDAO.getBrojVlasnickih());
 
 		return temp;
 
 	}
+	
+
 
 	public ArrayList<Log> dohvatiLogove(){
 		return _logDAO.getAll();

@@ -39,7 +39,7 @@ public class ShowDialogInput {
 	          b = new BossModel();
 	          boolean success;
 	 		  try {
-				success = b.ekstraktToPDF(b.getIstekleRegistracije(), path);
+				success = b.ekstraktToPDF(b.getIstekleRegistracije(), path, "Ne vazece registracije su: ");
 				if(success)
 		 			  JOptionPane.showMessageDialog(null, "Izvje\u0161taj je kreiran ", "jMUP", 1);
 		 		  else
@@ -68,7 +68,7 @@ public class ShowDialogInput {
 	          String path =selectedFile.getAbsolutePath() + ".pdf";
 	          b = new BossModel();
 	          boolean success;
-	 		  success = b.ekstraktToPDF(b.getBrojDozvola(), path);
+	 		  success = b.ekstraktToPDF(b.getBrojDozvola(), path, "Broj izdatih saobracajnih: ");
 	 		  if(success)
 				  JOptionPane.showMessageDialog(null, "Izvje\u0161taj je kreiran ", "jMUP", 1);
 			  else
