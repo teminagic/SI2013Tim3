@@ -1,7 +1,6 @@
 package ba.co.edgewise.jmup.daldao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,16 +14,16 @@ import org.apache.commons.pool.impl.GenericObjectPool;;
 
 public class ConnectionManager {
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://localhost/sql339553";
-	private static final String USERNAME = "root";
-	private static final String PASSWORD = "root";
+	private static final String URL = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql339553?useUnicode=true&characterEncoding=utf-8";
+	private static final String USERNAME = "sql339553";
+	private static final String PASSWORD = "mJ2!wY8%";
+
 	private PoolingDataSource dataSource = null;
 	
 	public ConnectionManager()
 	{
 		try {
 			Class.forName(DRIVER);
-			//Connection con = DriverManager.getConnection(URL,USERNAME, PASSWORD);
 		} catch (ClassNotFoundException e)
 		{
 			e.printStackTrace();
@@ -95,23 +94,21 @@ public class ConnectionManager {
 
 	}
 	
-	public static void main(String[] args) throws SQLException
+	public static void main(String[] args)
 	{
-		@SuppressWarnings("unused")
 		ConnectionManager manager = new ConnectionManager();
 		
-		//Connection connection = manager.getConnection();
-		Connection connection = DriverManager.getConnection(URL,USERNAME, PASSWORD);
+		Connection connection = manager.getConnection();
 		System.out.println(connection);
 		Statement stmt = null;
 		ResultSet rs = null;
-		String querry = "SELECT Prezime FROM osoba";
+		String querry = "SELECT username FROM m_users";
 		try{
 			stmt = connection.createStatement();
 			rs = stmt.executeQuery(querry);
 			while (rs.next())
 			{
-				System.out.println(rs.getString("Prezime"));
+				System.out.println(rs.getString("username"));
 			}
 		} catch(SQLException e)
 		{
