@@ -1,10 +1,14 @@
 package ba.co.edgewise.jmup.daldao.daos;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 
 import java.awt.image.BufferedImage;
@@ -14,6 +18,26 @@ import ba.co.edgewise.jmup.enums.Status;
 import ba.co.edgewise.jmup.klase.Uposlenik;
 
 public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
+	//hesiranje
+	public static String getMD5(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger number = new BigInteger(1, messageDigest);
+            String hashtext = number.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        }
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
+ 
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        System.out.println(getMD5("Javarmi.com"));
+    }
 	@Override
 	public boolean create(Uposlenik uposlenik) {
 		boolean success = false;
@@ -22,7 +46,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 		@SuppressWarnings("unused")
 		BufferedImage slikaKorisnika = uposlenik.getSlikaKorisnika();
 		String korisnickoIme = uposlenik.getKorisnickoIme();
-		String password = uposlenik.getPassword();
+		String password = getMD5(uposlenik.getPassword());
 		Status status = uposlenik.getStatus();
 
 		TipUposlenikaDAO tuDAO = new TipUposlenikaDAO();
@@ -230,7 +254,7 @@ public class UposlenikDAO implements IGenericDAO<Uposlenik, Integer> {
 		String prezime = uposlenik.getPrezime();
 		// BufferedImage slikaKorisnika=uposlenik.getSlikaKorisnika();
 		String korisnickoIme = uposlenik.getKorisnickoIme();
-		String password = uposlenik.getPassword();
+		String password = getMD5(uposlenik.getPassword());
 		Status status = uposlenik.getStatus();
 
 		TipUposlenikaDAO tuDAO = new TipUposlenikaDAO();
