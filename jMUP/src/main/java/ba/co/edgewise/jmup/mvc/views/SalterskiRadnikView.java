@@ -9,8 +9,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ba.co.edgewise.components.helpers.ModifikacijaSaobracajne;
+import ba.co.edgewise.components.helpers.ModifikacijaVlasnicke;
 import ba.co.edgewise.components.helpers.ModifikacijaVozaca;
 import ba.co.edgewise.components.helpers.ModifikacijaVozila;
+import ba.co.edgewise.components.helpers.TableModelSaobracajna;
+import ba.co.edgewise.components.helpers.TableModelVlasnicka;
 import ba.co.edgewise.components.helpers.TableModelVozac;
 import ba.co.edgewise.components.helpers.TableModelVozilo;
 import ba.co.edgewise.jmup.components.GodisnjaOvjera;
@@ -28,6 +32,8 @@ import ba.co.edgewise.jmup.components.VoziloModifikacija;
 import ba.co.edgewise.jmup.daldao.daos.BojeVozilaDAO;
 import ba.co.edgewise.jmup.klase.BojaVozila;
 import ba.co.edgewise.jmup.klase.Osoba;
+import ba.co.edgewise.jmup.klase.Saobracajna;
+import ba.co.edgewise.jmup.klase.Vlasnicka;
 import ba.co.edgewise.jmup.klase.Vozilo;
 
 import java.awt.event.ActionListener;
@@ -56,8 +62,13 @@ public class SalterskiRadnikView extends JFrame {
 	private VozacModifikacija strana11;
 	private VoziloModifikacija strana13;
 	private VozacModifikacija strana12;
+	private VoziloModifikacija strana15;
+	private VozacModifikacija strana14;
 	
 	private final SalterskiRadnikView frejm = this;
+	
+	private ModifikacijaSaobracajne novaS;
+	private ModifikacijaVlasnicke novaV;
 	/**
 	 * Launch the application.
 	 */
@@ -138,14 +149,52 @@ public class SalterskiRadnikView extends JFrame {
 		sadrzaj.getPanelSadrzaj().add(strana11, "Modifikacija voza\u010Da");
 		
 		strana12 = new VozacModifikacija(null);
-		sadrzaj.getPanelSadrzaj().add(strana12, "Modifikacija voza\u010Da");
+		strana12.getBtnPrihvati().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				prikaziModifikacijuVozilaSaobracajna();
+			}
+		});
+		sadrzaj.getPanelSadrzaj().add(strana12, "Modifikacija voza\u010Da saobracajna");
+		
+		strana13 = new VoziloModifikacija(null, null);
+		strana13.getBtn_modifikuj().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				pozoviModifikacijuSaobracajne();
+			}
+		});
+		sadrzaj.getPanelSadrzaj().add(strana13, "Modifikacija vozila saobracajna");
+		
+		strana14 = new VozacModifikacija(null);
+		strana14.getBtnPrihvati().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				prikaziModifikacijuVozilaVlasnicka();
+			}
+		});
+		sadrzaj.getPanelSadrzaj().add(strana14, "Modifikacija voza\u010Da vlasnicka");
+		
+		strana15 = new VoziloModifikacija(null, null);
+		strana15.getBtn_modifikuj().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				pozoviModifikacijuVlasnicke();
+			}
+		});
+		sadrzaj.getPanelSadrzaj().add(strana15, "Modifikacija vozila vlasnicka");
+		
 		
 		contentPane.add(sadrzaj, gbc_sadrzaj);
 		
 
 	}
-
-
+	
+	public void pozoviModifikacijuVlasnicke(){
+		novaV.modificirajVlasnicku();
+	}
+	
+	public void pozoviModifikacijuSaobracajne()
+	{
+		 novaS.modificirajSaobracajnu();
+	}
+	
 	public void pozoviModifikacijuVozila()
 	{
 		ModifikacijaVozila nova = new ModifikacijaVozila(this);
@@ -201,6 +250,7 @@ public class SalterskiRadnikView extends JFrame {
 	
 	public void prikaziPretragu() {
 		frejm.getSadrzaj().getNaslov().postaviNaslov("Pretraga");
+		frejm.getStrana6().getRbVozilo().setSelected(true);
 		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Pretraga");
@@ -253,6 +303,72 @@ public class SalterskiRadnikView extends JFrame {
 		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout)cards.getLayout();
 		tmp.show(cards, "Modifikacija voza\u010Da");
+	}
+	
+	public void prikaziModifikacijuSaobracajne()
+	{
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Modifikacija voza\u010Da");
+		
+		int selektovano = this.getStrana6().getPanel_saobracajna().getTable().getSelectedRow();
+		TableModelSaobracajna modelTabele = this.getStrana6().getPanel_saobracajna().getModel();
+		Saobracajna s = modelTabele.getData().get(selektovano);
+		
+		novaS = new ModifikacijaSaobracajne(this);
+		novaS.setSaobracajna(s); 
+		
+		this.strana12.setVozac(s.getKorisnik());
+		strana12.postaviVrijednosti();
+		strana12.getBtnPrihvati().setText("Dalje");
+		
+		this.strana13.setVozilo(s.getVozilo());
+		BojaVozila boja = (new BojeVozilaDAO()).get(s.getVozilo().getId());
+		this.strana13.setBoja(boja);
+		strana13.postaviVrijednosti();
+		
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Modifikacija voza\u010Da saobracajna");
+	}
+	
+	public void prikaziModifikacijuVozilaSaobracajna()
+	{
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Modifikacija vozila");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Modifikacija vozila saobracajna");
+	}
+	
+	public void prikaziModifikacijuVlasnicke()
+	{
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Modifikacija voza\u010Da");
+		
+		int selektovano = this.getStrana6().getPanel_vlasnicka().getTable().getSelectedRow();
+		TableModelVlasnicka modelTabele = this.getStrana6().getPanel_vlasnicka().getModel();
+		Vlasnicka v = modelTabele.getData().get(selektovano);
+		
+		novaV = new ModifikacijaVlasnicke(this);
+		novaV.setVlasnicka(v); 
+		
+		this.strana14.setVozac(v.getVlasnik());
+		strana14.postaviVrijednosti();
+		strana14.getBtnPrihvati().setText("Dalje");
+		
+		this.strana15.setVozilo(v.getVozilo());
+		BojaVozila boja = (new BojeVozilaDAO()).get(v.getVozilo().getId());
+		this.strana15.setBoja(boja);
+		strana15.postaviVrijednosti();
+		
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Modifikacija voza\u010Da vlasnicka");
+	}
+	
+	public void prikaziModifikacijuVozilaVlasnicka()
+	{
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Modifikacija vozila");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Modifikacija vozila vlasnicka");
 	}
 	
 	public JPanel getContentPane() {
@@ -312,5 +428,17 @@ public class SalterskiRadnikView extends JFrame {
 	}
 	public VozacModifikacija getStrana11() {
 		return strana11;
+	}
+	public VozacModifikacija getStrana12() {
+		return strana12;
+	}
+	public VoziloModifikacija getStrana13() {
+		return strana13;
+	}
+	public VozacModifikacija getStrana14() {
+		return strana14;
+	}
+	public VoziloModifikacija getStrana15() {
+		return strana15;
 	}
 }

@@ -756,6 +756,32 @@ public class SalterskiRadnikController {
 						// view.getStrana6().getBtnIzbrisiKorisnika().setEnabled(!lsm.isSelectionEmpty());
 					}
 				});
+		
+		JTable tableSaobracajna = view.getStrana6().getPanel_saobracajna().getTable();
+		tableSaobracajna.getSelectionModel().addListSelectionListener(
+				new ListSelectionListener() {
+					@Override
+					public void valueChanged(ListSelectionEvent e) {
+						ListSelectionModel lsm = (ListSelectionModel) e
+								.getSource();
+						view.getStrana6().getBtn_modifikuj()
+								.setEnabled(!lsm.isSelectionEmpty());
+						// view.getStrana6().getBtnIzbrisiKorisnika().setEnabled(!lsm.isSelectionEmpty());
+					}
+				});
+		
+		JTable tableVlasnicka = view.getStrana6().getPanel_vlasnicka().getTable();
+		tableVlasnicka.getSelectionModel().addListSelectionListener(
+				new ListSelectionListener() {
+					@Override
+					public void valueChanged(ListSelectionEvent e) {
+						ListSelectionModel lsm = (ListSelectionModel) e
+								.getSource();
+						view.getStrana6().getBtn_modifikuj()
+								.setEnabled(!lsm.isSelectionEmpty());
+						// view.getStrana6().getBtnIzbrisiKorisnika().setEnabled(!lsm.isSelectionEmpty());
+					}
+				});
 
 		// Klik na button Pretrazi
 		JButton pretrazi = view.getStrana6().getBtnPretrazi();
@@ -2317,9 +2343,11 @@ public class SalterskiRadnikController {
 	}
 
 	void modifikujSaobracajnu() {
+		view.prikaziModifikacijuSaobracajne();
 	}
 
 	void modifikujVlasnicku() {
+		view.prikaziModifikacijuVlasnicke();
 	}
 
 	void updateVozila() throws ParseException {
