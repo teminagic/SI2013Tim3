@@ -214,8 +214,8 @@ public class SalterskaPretraga extends JPanel{
 			
 		panel_pretraga.add(panel_vozilo, "Vozilo");
 		panel_pretraga.add(panel_vozac, "Vozac");
-		panel_pretraga.add(panel_saobracajna, "Saobra\u0107ajna");
-		panel_pretraga.add(panel_vlasnicka, "Vlasni\u010Dka");
+		panel_pretraga.add(panel_saobracajna, "Saobracajna");
+		panel_pretraga.add(panel_vlasnicka, "Vlasnicka");
 
 	}
 
