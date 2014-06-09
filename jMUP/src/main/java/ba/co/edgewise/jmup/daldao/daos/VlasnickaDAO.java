@@ -153,7 +153,7 @@ public class VlasnickaDAO implements IGenericDAO<Vlasnicka, String> {
 				
 				OsobaDAO oDAO = new OsobaDAO();
 				result.setVlasnik(oDAO.get(qResult.getInt("Vlasnik")));
-			}
+			} else result = null;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -193,7 +193,7 @@ public Vlasnicka getByVozilo(Integer id){
 				
 				OsobaDAO oDAO = new OsobaDAO();
 				result.setVlasnik(oDAO.get(qResult.getInt("Vlasnik")));
-			}
+			} else result = null;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -238,7 +238,9 @@ public Vlasnicka getByVozilo(Integer id){
 				temp.setVlasnik(oDAO.get(qResult.getInt("Vlasnik")));
 				
 				result.add(temp);
-			}
+			} 			
+			if(result.size()==0) result = null;
+
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

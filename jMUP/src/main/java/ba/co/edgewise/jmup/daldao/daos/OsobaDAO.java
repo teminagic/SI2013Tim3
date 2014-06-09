@@ -162,9 +162,8 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 					osoba.setPravnoLice(false);
 				result.add(osoba);
 			}
-			if(!qResult.next())
-		
-				result = null;
+			if(result.size()==0) result = null;
+
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -204,8 +203,8 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 					osoba.setPravnoLice(false);
 				result.add(osoba);
 			}
-			if(!qResult.next())
-						result = null;
+			if(result.size()==0) result = null;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -245,8 +244,8 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 					osoba.setPravnoLice(false);
 				result.add(osoba);
 			}
-			if(!qResult.next())
-							result = null;
+			if(result.size()==0) result = null;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

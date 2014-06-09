@@ -112,7 +112,7 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 				OsobaDAO oDAO = new OsobaDAO();
 				result.setKorisnik(oDAO.get(qResult.getInt("Korisnik")));
 			}
-			
+			else result = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -159,8 +159,8 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 			}
 			
 			//ako je prazno da se baci exception
-			if(result.size() == 0)
-				throw new EmptyStackException();
+			if(result.size()==0) result = null;
+
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -206,8 +206,7 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 					
 					result.add(temp);
 				}
-				if(!qResult.next())
-					result = null;
+				if(result.size()==0) result = null;
 				
 				
 			} catch (SQLException e) {
@@ -291,6 +290,7 @@ public class SaobracajnaDAO implements IGenericDAO<Saobracajna, String> {
 					OsobaDAO oDAO = new OsobaDAO();
 					result.setKorisnik(oDAO.get(qResult.getInt("Korisnik")));
 				}
+				else result = null;
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -392,6 +392,7 @@ public Saobracajna getByVozac(Integer id){
 				OsobaDAO oDAO = new OsobaDAO();
 				result.setKorisnik(oDAO.get(qResult.getInt("Vlasnik")));
 			}
+			else result = null;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

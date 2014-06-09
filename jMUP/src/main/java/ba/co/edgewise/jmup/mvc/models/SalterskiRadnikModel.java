@@ -255,7 +255,7 @@ public class SalterskiRadnikModel {
 			s2.add(_saobracajnaDAO.getByReg(vt.getId()));
 			return (s2 == null) ? null : s2;
 		
-		case "JMBG vozaÄ�a":
+		case "JMBG vozača":
 			Osoba o = _osobaDAO.getByJMBG(parametar);
 			if(o == null){
 				JOptionPane.showMessageDialog(null, "Nema rezultata");
