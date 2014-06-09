@@ -8,8 +8,6 @@ import java.sql.SQLException;
 
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
-import ba.co.edgewise.jmup.enums.VrstaGoriva;
-import ba.co.edgewise.jmup.enums.VrstaMotora;
 import ba.co.edgewise.jmup.klase.Motor;
 
 public class MotorDAO implements IGenericDAO<Motor, Integer> {
@@ -20,11 +18,17 @@ public class MotorDAO implements IGenericDAO<Motor, Integer> {
 		boolean success = false;
 		Integer zapremina = m.getZapreminaMotora();
 		Integer maxSnaga = m.getMaxSnaga();
-		VrstaGoriva vrstaGoriva = m.getVrstaGoriva();
-		VrstaMotora vrstaMotora = m.getVrstaMotora();
+		String vrstaGoriva = m.getVrstaGoriva();
+		String vrstaMotora = m.getVrstaMotora();
 		String brojMotora = m.getBrojMotora();
 
-		
+		// primjer za test
+		/*
+		 * Integer zapremina = 200; Integer maxSnaga = 300; String vrstaGoriva =
+		 * "dizel"; String vrstaMotora= "dizel"; String brojMotora = "aaaa4444";
+		 */
+
+		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
@@ -35,9 +39,9 @@ public class MotorDAO implements IGenericDAO<Motor, Integer> {
 
 			statement.setInt(1, zapremina);
 			statement.setInt(2, maxSnaga);
-			statement.setString(3, vrstaGoriva.toString());
+			statement.setString(3, vrstaGoriva);
 			statement.setString(4, brojMotora);
-			statement.setString(5, vrstaMotora.toString());
+			statement.setString(5, vrstaMotora);
 
 			statement.executeUpdate();
 			success = true;
@@ -77,9 +81,9 @@ public class MotorDAO implements IGenericDAO<Motor, Integer> {
 			if (qResult.next()) {
 				result.setId(qResult.getInt("IDMotora"));
 				result.setMaxSnaga(qResult.getInt("MaksimalnaSnaga"));
-				result.setVrstaGoriva(VrstaGoriva.getVrstaGoriva(qResult.getString("VrstaGoriva")));
+				result.setVrstaGoriva(qResult.getString("VrstaGoriva"));
 				result.setBrojMotora(qResult.getString("BrojMotora"));
-				result.setVrstaMotora(VrstaMotora.getMotor(qResult.getString("VrstaMotora")));
+				result.setVrstaMotora(qResult.getString("VrstaMotora"));
 				result.setZapreminaMotora(qResult.getInt("ZapreminaMotora"));
 			}
 
@@ -94,14 +98,14 @@ public class MotorDAO implements IGenericDAO<Motor, Integer> {
 	}
 
 	@Override
-	public List<Motor> getAll() {
-		List<Motor> result = new ArrayList<Motor>();
+	public ArrayList<Motor> getAll() {
+		ArrayList<Motor> result = new ArrayList<Motor>();
 
 		// Dobavljanje konekcije
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Po�etak pripreme upita
+		// Pocetak pripreme upita
 		ResultSet qResult = null;
 
 		try {
@@ -114,9 +118,9 @@ public class MotorDAO implements IGenericDAO<Motor, Integer> {
 				Motor temp = new Motor();
 				temp.setId(qResult.getInt("IDMotora"));
 				temp.setMaxSnaga(qResult.getInt("MaksimalnaSnaga"));
-				temp.setVrstaGoriva(VrstaGoriva.getVrstaGoriva(qResult.getString("VrstaGoriva")));
+				temp.setVrstaGoriva(qResult.getString("VrstaGoriva"));
 				temp.setBrojMotora(qResult.getString("BrojMotora"));
-				temp.setVrstaMotora(VrstaMotora.getMotor(qResult.getString("VrstaMotora")));
+				temp.setVrstaMotora(qResult.getString("VrstaMotora"));
 				temp.setZapreminaMotora(qResult.getInt("ZapreminaMotora"));
 				result.add(temp);
 			}
@@ -139,8 +143,8 @@ public class MotorDAO implements IGenericDAO<Motor, Integer> {
 		boolean success = false;
 		Integer zapremina = m.getZapreminaMotora();
 		Integer maxSnaga = m.getMaxSnaga();
-		String vrstaGoriva = m.getVrstaGoriva().toString();
-		String vrstaMotora = m.getVrstaMotora().toString();
+		String vrstaGoriva = m.getVrstaGoriva();
+		String vrstaMotora = m.getVrstaMotora();
 		String brojMotora = m.getBrojMotora();
 
 		// Dobavljanje konekcije
@@ -198,6 +202,31 @@ public class MotorDAO implements IGenericDAO<Motor, Integer> {
 		}
 
 		return success;
+
+	}
+
+	public static void main(String[] args) {
+
+		Motor m = new Motor();
+		MotorDAO d = new MotorDAO();
+		m = d.get(5);
+		m.setBrojMotora("haj promjeni");
+		d.update(5, m);
+
+		// novi = new Motor(0, 650, 200,
+		// "LPG", "la", "la");
+		// d.create(novi);
+
+		// d.create(m);
+		// m = d.get("aaaa3333");
+		// System.out.println(m.get_brojMotora());
+
+		List<Motor> motori = new ArrayList<Motor>();
+		motori = d.getAll();
+		for (Motor mot : motori) {
+			System.out.println(mot.getVrstaMotora());
+		}
+		// System.out.println(motori.size());
 
 	}
 

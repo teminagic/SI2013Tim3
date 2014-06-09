@@ -10,7 +10,7 @@ import ba.co.edgewise.jmup.daldao.interfaces.IGenericEnumDAO;
 import ba.co.edgewise.jmup.enums.Boja;
 
 public class BojaDAO implements IGenericEnumDAO<Boja, Integer> {
-	//Vraceno na staro
+	
 	@Override
 	public Boja get(Integer i) {
 		Boja result = null;

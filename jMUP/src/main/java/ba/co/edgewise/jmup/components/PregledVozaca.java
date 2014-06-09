@@ -36,7 +36,7 @@ public class PregledVozaca extends JPanel {
 
 	public void setLayout(){
 		TitledBorder naslov;
-		naslov = BorderFactory.createTitledBorder("Podaci o vozaču");
+		naslov = BorderFactory.createTitledBorder("Podaci o voza\u010Du");
 		this.setBorder(naslov);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{18, 66, 138, 0, 59, 0};

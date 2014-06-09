@@ -5,19 +5,16 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
+import java.util.Date;
+import javax.swing.*;
+import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import ba.co.edgewise.jmup.mvc.models.AdminModel;
-import ba.co.edgewise.jmup.mvc.models.BossModel;
-import ba.co.edgewise.jmup.mvc.models.LoginModel;
-import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModel;
-import ba.co.edgewise.jmup.mvc.models.SalterskiRadnikModelIrma;
-import ba.co.edgewise.jmup.mvc.views.Administrator;
-import ba.co.edgewise.jmup.mvc.views.BossView;
-import ba.co.edgewise.jmup.mvc.views.Login;
-import ba.co.edgewise.jmup.mvc.views.SalterskiRadnikView;
+import ba.co.edgewise.jmup.daldao.daos.LogDAO;
+import ba.co.edgewise.jmup.klase.Log;
+import ba.co.edgewise.jmup.mvc.models.*;
+import ba.co.edgewise.jmup.mvc.views.*;
 
 public class LoginController {
 	
@@ -56,7 +53,7 @@ public class LoginController {
 				if(provjeriCredentials()){
 					getNext();
 				} else{
-					JOptionPane.showMessageDialog(null, "Progrešan Username/Password!");
+					JOptionPane.showMessageDialog(null, "Progre\u0161an Username/Password!");
 				};
 			}
 		});
@@ -75,10 +72,15 @@ public class LoginController {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						Administrator noviView = new Administrator();
+						AdminView noviView = new AdminView();
 						AdminModel noviModel = new AdminModel();
-						AdminController noviController = new AdminController(noviView,noviModel);
+						AdminController noviController = new AdminController(noviView,noviModel,
+								model.getUposlenik());
 						noviController.control();
+						LogDAO lDAO = new LogDAO();
+						Log log = new Log(0, model.getUposlenik().getKorisnickoIme(), new Date(),
+								"Prijava na sistem", "Korisnik: " + model.getUposlenik().getKorisnickoIme());
+						lDAO.create(log);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -92,8 +94,12 @@ public class LoginController {
 					try {
 						BossView noviView = new BossView();
 						BossModel noviModel = new BossModel();
-						BossController noviController = new BossController(noviView,noviModel);						
+						BossControler noviController = new BossControler(noviView,noviModel);
 						noviController.control();
+						LogDAO lDAO = new LogDAO();
+						Log log = new Log(0, model.getUposlenik().getKorisnickoIme(), new Date(),
+								"Prijava na sistem", "Korisnik: " + model.getUposlenik().getKorisnickoIme());
+						lDAO.create(log);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -108,15 +114,18 @@ public class LoginController {
 						SalterskiRadnikView noviView = new SalterskiRadnikView();
 						SalterskiRadnikModel noviModel = new SalterskiRadnikModel();
 						SalterskiRadnikController noviController = new SalterskiRadnikController(noviView,noviModel);						
-					//	SalterskiRadnikModelIrma noviModel = new SalterskiRadnikModelIrma();
-						//SalterskiRadnikControllerIrma noviController = new SalterskiRadnikControllerIrma(noviView,noviModel);									
-	//					SalterskiRadnikModelAmra noviModel = new SalterskiRadnikModelAmra();
-		//				SalterskiRadnikControllerAmra noviController = new SalterskiRadnikControllerAmra(noviView,noviModel);						
+						//SalterskiRadnikModelIrma noviModel = new SalterskiRadnikModelIrma();
+						//SalterskiRadnikControllerIrma noviController = new SalterskiRadnikControllerIrma(noviView,noviModel);						
 					
 	//					SalterskiRadnikModelAmra noviModel = new SalterskiRadnikModelAmra();
 		//				SalterskiRadnikControllerAmra noviController = new SalterskiRadnikControllerAmra(noviView,noviModel);						
 					
 						noviController.control();
+						
+						LogDAO lDAO = new LogDAO();
+						Log log = new Log(0, model.getUposlenik().getKorisnickoIme(), new Date(),
+								"Prijava na sistem", "Korisnik: " + model.getUposlenik().getKorisnickoIme());
+						lDAO.create(log);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

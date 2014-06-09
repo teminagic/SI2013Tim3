@@ -72,8 +72,12 @@ public class TableModelKorisnik extends AbstractTableModel {
 	}
 	
 	public void addAll(ArrayList<Uposlenik> novi){
+		if(novi == null)
+			return;
 		int rowCount = this.getRowCount();
 		for(Uposlenik u : novi){
+			if(u==null)
+				return;
 			data.add(u);
 		}
 		this.fireTableRowsInserted(rowCount, rowCount + novi.size());

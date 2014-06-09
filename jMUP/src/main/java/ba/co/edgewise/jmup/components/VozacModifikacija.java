@@ -1,5 +1,5 @@
 package ba.co.edgewise.jmup.components;
-//s
+
 import javax.swing.JPanel;
 
 import java.awt.GridBagLayout;
@@ -13,10 +13,11 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.JButton;
 
+import ba.co.edgewise.jmup.klase.Osoba;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class VozacDodavanje extends JPanel {
+public class VozacModifikacija extends JPanel {
 
 	private static final long serialVersionUID = -6732800841205500794L;
 	private JTextField tfIme;
@@ -27,7 +28,7 @@ public class VozacDodavanje extends JPanel {
 	private ButtonGroup tipLica;
 	private JTextField tfJMBG;
 	private JTextField tfIdBroj;
-	private JButton btnPrihvati;
+	private JButton btnModifikuj;
 	private GridBagLayout gridBagLayout;
 	private JPanel panelPodaci;
 	private JLabel lblIme;
@@ -41,10 +42,11 @@ public class VozacDodavanje extends JPanel {
 	private JRadioButton pravno;
 	private JRadioButton fizicko;
 	private JButton btnPonisti;
-	private JButton btnProvjeri;
+	
+	private Osoba vozac;
 
 
-	public VozacDodavanje() {
+	public VozacModifikacija(Osoba vozac) {
 		// methods for setting layout
 		setLayout();
 		setPanel();
@@ -52,11 +54,12 @@ public class VozacDodavanje extends JPanel {
 		setLabel();
 		setInput();
 		setComponents();
+		this.vozac = vozac;
 	}
 
 	public void setLayout() {
 		gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 0, 266, 75, 75, 0, 0 };
+		gridBagLayout.columnWidths = new int[] { 0, 266, 120, 120, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 1.0,
 				Double.MIN_VALUE };
@@ -77,7 +80,7 @@ public class VozacDodavanje extends JPanel {
 		gbc_panelPodaci.gridy = 1;
 		add(panelPodaci, gbc_panelPodaci);
 		GridBagLayout gbl_panelPodaci = new GridBagLayout();
-		gbl_panelPodaci.columnWidths = new int[] { 120, 151, 0, 0 };
+		gbl_panelPodaci.columnWidths = new int[] { 120, 0, 0, 0 };
 		gbl_panelPodaci.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0 };
 		gbl_panelPodaci.columnWeights = new double[] { 0.0, 1.0, 1.0,
 				Double.MIN_VALUE };
@@ -155,14 +158,6 @@ public class VozacDodavanje extends JPanel {
 		gbc_lblJmbg.gridx = 0;
 		gbc_lblJmbg.gridy = 4;
 		panelPodaci.add(lblJmbg, gbc_lblJmbg);
-		
-		btnProvjeri = new JButton("Provjeri postojanje");
-		GridBagConstraints gbc_btnProvjeri = new GridBagConstraints();
-		gbc_btnProvjeri.gridheight = 2;
-		gbc_btnProvjeri.fill = GridBagConstraints.BOTH;
-		gbc_btnProvjeri.gridx = 2;
-		gbc_btnProvjeri.gridy = 4;
-		panelPodaci.add(btnProvjeri, gbc_btnProvjeri);
 
 		lblIdBroj = new JLabel("ID broj");
 		GridBagConstraints gbc_lblIdBroj = new GridBagConstraints();
@@ -177,7 +172,7 @@ public class VozacDodavanje extends JPanel {
 		tfIme = new JTextField();
 		GridBagConstraints gbc_tfIme = new GridBagConstraints();
 		gbc_tfIme.gridwidth = 2;
-		gbc_tfIme.insets = new Insets(0, 0, 5, 0);
+		gbc_tfIme.insets = new Insets(0, 0, 5, 5);
 		gbc_tfIme.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfIme.gridx = 1;
 		gbc_tfIme.gridy = 0;
@@ -187,7 +182,7 @@ public class VozacDodavanje extends JPanel {
 		tfPrezime = new JTextField();
 		GridBagConstraints gbc_tfPrezime = new GridBagConstraints();
 		gbc_tfPrezime.gridwidth = 2;
-		gbc_tfPrezime.insets = new Insets(0, 0, 5, 0);
+		gbc_tfPrezime.insets = new Insets(0, 0, 5, 5);
 		gbc_tfPrezime.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfPrezime.gridx = 1;
 		gbc_tfPrezime.gridy = 1;
@@ -224,12 +219,23 @@ public class VozacDodavanje extends JPanel {
 		tfJMBG.setEditable(false);
 		tfJMBG.setEnabled(false);
 		GridBagConstraints gbc_tfJMBG = new GridBagConstraints();
+		gbc_tfJMBG.gridwidth = 2;
 		gbc_tfJMBG.insets = new Insets(0, 0, 5, 5);
 		gbc_tfJMBG.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfJMBG.gridx = 1;
 		gbc_tfJMBG.gridy = 4;
 		panelPodaci.add(tfJMBG, gbc_tfJMBG);
 		tfJMBG.setColumns(10);
+
+		tfIdBroj = new JTextField();
+		GridBagConstraints gbc_tfIdBroj = new GridBagConstraints();
+		gbc_tfIdBroj.gridwidth = 2;
+		gbc_tfIdBroj.insets = new Insets(0, 0, 5, 5);
+		gbc_tfIdBroj.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tfIdBroj.gridx = 1;
+		gbc_tfIdBroj.gridy = 5;
+		panelPodaci.add(tfIdBroj, gbc_tfIdBroj);
+		tfIdBroj.setColumns(10);
 
 	}
 
@@ -249,7 +255,7 @@ public class VozacDodavanje extends JPanel {
 
 		fizicko = new JRadioButton("fizi\u010Dko");
 		GridBagConstraints gbc_fizicko = new GridBagConstraints();
-		gbc_fizicko.insets = new Insets(0, 0, 5, 0);
+		gbc_fizicko.insets = new Insets(0, 0, 5, 5);
 		gbc_fizicko.gridx = 2;
 		gbc_fizicko.gridy = 3;
 		panelPodaci.add(fizicko, gbc_fizicko);
@@ -258,25 +264,21 @@ public class VozacDodavanje extends JPanel {
 		ButtonGroup radioGroup = new ButtonGroup();
 		radioGroup.add(pravno);
 		radioGroup.add(fizicko);
-		
-				tfIdBroj = new JTextField();
-				GridBagConstraints gbc_tfIdBroj = new GridBagConstraints();
-				gbc_tfIdBroj.insets = new Insets(0, 0, 0, 5);
-				gbc_tfIdBroj.fill = GridBagConstraints.HORIZONTAL;
-				gbc_tfIdBroj.gridx = 1;
-				gbc_tfIdBroj.gridy = 5;
-				panelPodaci.add(tfIdBroj, gbc_tfIdBroj);
-				tfIdBroj.setColumns(10);
 
-		btnPrihvati = new JButton("Prihvati");
-		GridBagConstraints gbc_btnPrihvati = new GridBagConstraints();
-		gbc_btnPrihvati.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnPrihvati.insets = new Insets(0, 0, 5, 5);
-		gbc_btnPrihvati.gridx = 2;
-		gbc_btnPrihvati.gridy = 2;
-		add(btnPrihvati, gbc_btnPrihvati);
+		btnModifikuj = new JButton("Spasi modifikacije");
+		GridBagConstraints gbc_btnModifikuj = new GridBagConstraints();
+		gbc_btnModifikuj.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnModifikuj.insets = new Insets(0, 0, 5, 5);
+		gbc_btnModifikuj.gridx = 2;
+		gbc_btnModifikuj.gridy = 2;
+		add(btnModifikuj, gbc_btnModifikuj);
 
 		btnPonisti = new JButton("Poni\u0161ti");
+		btnPonisti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				postaviVrijednosti();
+			}
+		});
 		GridBagConstraints gbc_btnPonisti = new GridBagConstraints();
 		gbc_btnPonisti.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnPonisti.insets = new Insets(0, 0, 5, 5);
@@ -285,8 +287,49 @@ public class VozacDodavanje extends JPanel {
 		add(btnPonisti, gbc_btnPonisti);
 	}
 
+	public void postaviVrijednosti(){
+		getTfIme().setText(vozac.getIme());
+		getTfPrezime().setText(vozac.getPrezime());
+		String[] prebivaliste = vozac.getPrebivaliste().split(" ");
+		getTfAdresa().setText(prebivaliste[0]);
+		getTfMjesto().setText(prebivaliste[1]);
+		getTfOpcina().setText(prebivaliste[2]);
+		getPravno().setSelected(vozac.isPravnoLice());
+		getFizicko().setSelected(!vozac.isPravnoLice());
+		if (vozac.isPravnoLice()) {
+			getTfIdBroj().setText(vozac.getJmbg_Id());
+			getTfIdBroj().setEditable(true);
+			getTfIdBroj().setEditable(true);
+			getTfJMBG().setEditable(false);
+			getTfJMBG().setEnabled(false);
+		} else
+		{
+			getTfJMBG().setText(vozac.getJmbg_Id());
+			getTfIdBroj().setEditable(false);
+			getTfIdBroj().setEditable(false);
+			getTfJMBG().setEditable(true);
+			getTfJMBG().setEnabled(true);
+		}
+	}
+	
+	public void postaviVozaca(){
+		vozac.setIme(getTfIme().getText());
+		vozac.setPrezime(getTfPrezime().getText());
+		String prebivaliste = getTfAdresa().getText() + " "
+				+ getTfMjesto().getText() + " "
+				+ getTfOpcina().getText();
+		vozac.setPrebivaliste(prebivaliste);
+		vozac.setPravnoLice(getPravno().isSelected());
+		if (vozac.isPravnoLice()) {
+			vozac.setJmbg_Id(getTfIdBroj().getText());
+		} else
+		{
+			vozac.setJmbg_Id(getTfJMBG().getText());
+		}
+	}
+	
 	public JButton getBtnPrihvati() {
-		return btnPrihvati;
+		return btnModifikuj;
 	}
 
 	public JButton getBtnPonisti() {
@@ -332,8 +375,12 @@ public class VozacDodavanje extends JPanel {
 		return fizicko;
 	}
 
-	public JButton getBtnProvjeri() {
-		return btnProvjeri;
+	public Osoba getVozac() {
+		return vozac;
+	}
+
+	public void setVozac(Osoba vozac) {
+		this.vozac = vozac;
 	}
 	
 }

@@ -40,12 +40,8 @@ public class Saobracajna{
 	public void setKorisnik(Osoba korisnik) {
 		this.korisnik = korisnik;
 	}
-	
+	//UBACITI PARAMETRE
 	public Object[] toObjectArray() {
-		return new Object[]{ 			
-		this.brojDozvole, this.vozilo.getRegistarskaOznaka(), this.korisnik.getIme()+" "+this.korisnik.getPrezime(), this.korisnik.getJmbg_Id()
-		};
-	//public enum VlasnickaPretraga { Broj_potvrde("Broj potvrde"), Registarska_oznaka(""), Ime_prezime("Ime i prezime"), JMBG_vlasnika("JMBG vlasnika") ; 
-	}
-	
+	return new Object[]{this.brojDozvole, this.vozilo.getRegOznaka(), this.korisnik.getIme()+" "+this.korisnik.getPrezime(), this.korisnik.getJmbg_Id() };
+	}	
 }

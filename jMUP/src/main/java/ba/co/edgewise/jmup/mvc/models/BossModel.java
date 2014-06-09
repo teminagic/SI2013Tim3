@@ -24,6 +24,8 @@ public class BossModel {
 	private VoziloDAO _voziloDAO;
 	private OsobaDAO _osobaDAO;
 	private MotorDAO _motorDAO;
+	private RegistracijaDAO _regDao;
+	private LogDAO _logDAO = new LogDAO();
 
 	public BossModel() {
 		_vlasnickaDAO = new VlasnickaDAO();
@@ -31,6 +33,7 @@ public class BossModel {
 		_voziloDAO = new VoziloDAO();
 		_osobaDAO = new OsobaDAO();
 		_motorDAO = new MotorDAO();
+		_regDao = new RegistracijaDAO();
 	}
 	public ArrayList<Vozilo> dohvatiSvaVozila() {
 		return (ArrayList<Vozilo>) _voziloDAO.getAll();
@@ -44,7 +47,7 @@ public class BossModel {
 	public ArrayList<Vlasnicka> dohvatiSveVlasnicke() {
 		return (ArrayList<Vlasnicka>) _vlasnickaDAO.getAll();
 	}
-	
+
 	// deaktivacija
 	public Boolean brisanjeVozila(Vozilo vozilo){
 		return _voziloDAO.delete(vozilo.getId());
@@ -58,7 +61,7 @@ public class BossModel {
 	public Boolean brisanjeS(Vozilo vozilo){
 		return _voziloDAO.delete(vozilo.getId());
 	}
-	
+
 	//pretraga
 	public ArrayList<Vozilo> pretragaVozilo(String parametar, String kriterij) {
 
@@ -155,7 +158,7 @@ public class BossModel {
 			}
 			return (vl1 == null) ? null : vl1;
 
-			// vraca Array i ako ima samo 1 result zbog povratnog tipa metode
+	    // vraca Array i ako ima samo 1 result zbog povratnog tipa metode
 		case "Registarska oznaka":
 			Vozilo vt = _voziloDAO.getByReg(parametar);
 			ArrayList<Vlasnicka> vl2 = new ArrayList<>();
@@ -173,42 +176,56 @@ public class BossModel {
 			vl4.add(_vlasnickaDAO.get(parametar));
 			return (vl4 == null) ? null : vl4;
 		}
-
+		
 		return null;
 	}
 
+
+	
 	public Motor getMotorByVozilo(Integer id) {
 		Vozilo temp = _voziloDAO.get(id);
 		return (temp == null) ? null : temp.getMotor();
 	}
+
+	
+	
+	
 	
 	@SuppressWarnings("deprecation")
-	public void ekstraktToPDF(ArrayList<String> podaci, String path) {
+	public boolean ekstraktToPDF(ArrayList<String> podaci, String path) {
 		try { 
 			@SuppressWarnings("deprecation")
-			
+
 			FileOutputStream file = new FileOutputStream(new File(path));
-			 
+
             Document document = new Document();
             PdfWriter.getInstance(document, file);
  
             document.open();
             document.addTitle("JMUP");
-            document.addSubject("Izvjestaj");
-            document.addKeywords("Izvještaj JMUP");
+            document.addSubject("Izvje\u0161taj");
+            document.addKeywords("Izvje\u0161taj JMUP");
             
             
             
             document.add(new Paragraph("Izvjestaj " +  new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getYear()));
+            if(podaci.size() == 0)
+            {
+            	document.add(new Paragraph("Nema neva\u017Ee\u0107ih tablica"));
+            }
+            else
+            {
             for ( String s : podaci) {
             	document.add(new Paragraph(s.toString()));
 			}
-          
+            }
             document.close();
             file.close();
+            return true;
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 	//modifikacija
@@ -216,39 +233,43 @@ public class BossModel {
 	{
 		return _voziloDAO.update(id, v);
 	}
-	
+
 	public boolean modifikacijaOsoba(Integer id, Osoba o)
 	{
 		return _osobaDAO.update(id, o);
 	}
-	
+
 	public boolean modifikacijaVlasnicka(String brojDozvole, Vlasnicka v)
 	{
 		return _vlasnickaDAO.update(brojDozvole, v);
 	}
-	
+
 	public boolean modifikacijaSaobracajna(String brojDozvole, Saobracajna s)
 	{
 		return _saobracajnaDAO.update(brojDozvole, s);
 	}
-	
+
 	//za izvjestaj podaci
 	public ArrayList<String> getIstekleRegistracije() throws ParseException
 	{
-		return _voziloDAO.getAllRegistracijeDeaktivirane() ;
+		//return _voziloDAO.getAllRegistracijeDeaktivirane() ;
+		return _regDao.getAllRegistracijeIstekle();
 	}
-	
+
 	public ArrayList<String> getBrojDozvola(){
-		
+
 		ArrayList<String> temp = new ArrayList<>();
 		temp.add(_saobracajnaDAO.getBrojSaobracajnih());
 		temp.add(_vlasnickaDAO.getBrojVlasnickih());
-		
+
 		return temp;
-		
+
+	}
+
+	public ArrayList<Log> dohvatiLogove(){
+		return _logDAO.getAll();
 	}
 	
-
 	public static void main(String[] args) {
 
 		BossModel b = new BossModel();

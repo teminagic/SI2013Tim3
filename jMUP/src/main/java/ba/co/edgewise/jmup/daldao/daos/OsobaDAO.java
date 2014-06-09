@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
-import ba.co.edgewise.jmup.daldao.daos.SaobracajnaDAO;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
 import ba.co.edgewise.jmup.enums.EkoKarakteristike;
 import ba.co.edgewise.jmup.enums.VrstaVozila;
@@ -97,7 +98,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Po�etak pripreme upita
+		// Pocetak pripreme upita
 		ResultSet qResult = null;
 
 		try {
@@ -136,7 +137,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Po�etak pripreme upita
+		// Pocetak pripreme upita
 		ResultSet qResult = null;
 
 		try {
@@ -158,6 +159,10 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 					osoba.setPravnoLice(false);
 				result.add(osoba);
 			}
+			if(!qResult.next())
+		
+				result = null;
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -174,7 +179,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Po�etak pripreme upita
+		// Pocetak pripreme upita
 		ResultSet qResult = null;
 
 		try {
@@ -196,6 +201,8 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 					osoba.setPravnoLice(false);
 				result.add(osoba);
 			}
+			if(!qResult.next())
+						result = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -212,7 +219,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Po�etak pripreme upita
+		// Pocetak pripreme upita
 		ResultSet qResult = null;
 
 		try {
@@ -235,6 +242,8 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 					osoba.setPravnoLice(false);
 				result.add(osoba);
 			}
+			if(!qResult.next())
+							result = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -251,7 +260,7 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Po�etak pripreme upita
+		// Pocetak pripreme upita
 		ResultSet qResult = null;
 
 		try {
@@ -268,6 +277,8 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 					result.setPrebivaliste(qResult.getString("Prebivaliste"));
 					result.setPravnoLice(qResult.getBoolean("PravnoLice"));
 			}
+			else
+				result = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -277,16 +288,6 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 		return result;
 	}
 	
-	public boolean testSaobracajna(String jmbg)
-	{
-		SaobracajnaDAO s = new SaobracajnaDAO(); 
-		Osoba o = getByJMBG(jmbg);
-		
-		if(s.getByName(o.getId()) != null)
-		  return true;
-		
-		return false;
-	}
 	
 	
 	public boolean update(Integer id, Osoba o) {
@@ -352,11 +353,14 @@ public class OsobaDAO implements IGenericDAO<Osoba, Integer> {
 	}
 	public static void main(String[] args) {
 		//Osoba o = new Osoba(1,"b","b","b","b",true);
-		OsobaDAO oDao = new OsobaDAO();
-		/*List<Osoba> osobe = new ArrayList<Osoba>();
+		OsobaDAO oDAO = new OsobaDAO();
+		// Isti ID je kao i onaj u bazi
+		//Osoba osoba = oDAO.get(4);
+	  oDAO.getByJMBG("burek");
+		/*OsobaDAO oDao = new OsobaDAO();
+		List<Osoba> osobe = new ArrayList<Osoba>();
 		osobe = oDao.getAll();
-		for(Osoba o:osobe) System.out.println(o.getIme()+","+o.getPrezime()+","+o.getJmbg_Id());*/
-		
-		oDao.testSaobracajna("1234567890123");
+		for(Osoba o:osobe) System.out.println(o.getIme()+","+o.getPrezime()+","+o.getJmbg_Id());
+	*/
 	}
 }

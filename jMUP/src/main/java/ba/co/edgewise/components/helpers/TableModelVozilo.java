@@ -1,13 +1,14 @@
 package ba.co.edgewise.components.helpers;
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.ListIterator;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 
-import ba.co.edgewise.jmup.klase.Uposlenik;
 import ba.co.edgewise.jmup.klase.Vozilo;
 
 public class TableModelVozilo extends AbstractTableModel {
@@ -18,8 +19,7 @@ public class TableModelVozilo extends AbstractTableModel {
 			"Registarska oznaka", 
 			"Godina proizvodnje", 
 			"Vrsta vozila",
-			"Marka vozila",
-			"Status"
+			"Marka vozila"
 			};
 	private ArrayList<Vozilo> data;
 
@@ -57,15 +57,19 @@ public class TableModelVozilo extends AbstractTableModel {
 	}
 
 	@Override
+	public int getColumnCount() {
+		return columnNames.length;
+	}
+
+	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return (Object) (data.get(rowIndex).toObjectArray())[columnIndex];
+		return  (Object) (data.get(rowIndex).toObjectArray())[columnIndex];
 	}
 
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		return getValueAt(0, columnIndex).getClass();
 	}
-	
 	
 	public void clearAll()
 	{
@@ -76,15 +80,14 @@ public class TableModelVozilo extends AbstractTableModel {
 	
 	public void addAll(ArrayList<Vozilo> novi){
 		int rowCount = this.getRowCount();
+		if(novi == null)
+			return;
 		for(Vozilo u : novi){
+			if(u==null)
+				return;
 			data.add(u);
 		}
 		this.fireTableRowsInserted(rowCount, rowCount + novi.size());
-	}
-
-	@Override
-	public int getColumnCount() {
-		return columnNames.length;
 	}
 
 

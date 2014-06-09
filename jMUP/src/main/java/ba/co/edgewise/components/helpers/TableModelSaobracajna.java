@@ -15,7 +15,7 @@ public class TableModelSaobracajna extends AbstractTableModel {
 			"Broj potvrde",
 			"Registarska oznaka", 
 			"Ime i prezime", 
-			"JMBG vozača"
+			"JMBG voza\u010Da"
 			};
 	private ArrayList<Saobracajna> data;
 
@@ -75,8 +75,12 @@ public class TableModelSaobracajna extends AbstractTableModel {
 	}
 	
 	public void addAll(ArrayList<Saobracajna> novi){
+		if(novi == null)
+			return;
 		int rowCount = this.getRowCount();
 		for(Saobracajna u : novi){
+			if(u==null)
+				return;
 			data.add(u);
 		}
 		this.fireTableRowsInserted(rowCount, rowCount + novi.size());

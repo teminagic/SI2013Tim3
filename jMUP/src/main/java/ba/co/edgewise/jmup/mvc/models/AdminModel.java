@@ -2,13 +2,16 @@ package ba.co.edgewise.jmup.mvc.models;
 
 import java.util.ArrayList;
 
+import ba.co.edgewise.jmup.daldao.daos.LogDAO;
 import ba.co.edgewise.jmup.daldao.daos.UposlenikDAO;
 import ba.co.edgewise.jmup.enums.TipPretrageUposlenika;
+import ba.co.edgewise.jmup.klase.Log;
 import ba.co.edgewise.jmup.klase.Uposlenik;
 
 public class AdminModel {
 	private Uposlenik uposlenik;
 	private UposlenikDAO uDAO = new UposlenikDAO();
+	private LogDAO lDAO = new LogDAO();
 	
 	public Boolean kreiranjeKorisnika(){
 		return uDAO.create(uposlenik);
@@ -40,6 +43,10 @@ public class AdminModel {
 			return result;
 		}
 		return result;
+	}
+	
+	public ArrayList<Log> dohvatiLogove(){
+		return lDAO.getAll();
 	}
 	
 	public Uposlenik getUposlenik() {

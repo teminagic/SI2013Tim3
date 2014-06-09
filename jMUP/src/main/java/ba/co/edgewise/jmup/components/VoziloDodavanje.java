@@ -25,14 +25,9 @@ import javax.swing.DefaultComboBoxModel;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
-<<<<<<< HEAD
 
 public class VoziloDodavanje extends JPanel {
-=======
->>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
-public class VoziloDodavanje extends JPanel {
 	private static final long serialVersionUID = 2259547713349336656L;
 	private JTextField tf_tipVozila;
 	private JTextField tf_modelVozila;
@@ -48,9 +43,11 @@ public class VoziloDodavanje extends JPanel {
 	private JTextField tf_stajanje;
 	private JTextField tf_lezanje;
 	private JTextField tf_karoserija;
+	private JTextField tf_datumPregleda;
 	private JTextField tb_maxMasa;
 	private JTextField tb_masa;
 	private JTextField tb_nosivost;
+	private JTextField tb_bojaVozila;
 	private JButton btn_prihvati;
 	private JButton btn_ponisti;
 	private GridBagLayout gridBagLayout;
@@ -94,20 +91,10 @@ public class VoziloDodavanje extends JPanel {
 	private JComboBox cb_vrstaBoje;
 	private JRadioButton rb_katalizator_da;
 	private JRadioButton rb_katalizator_ne;
-<<<<<<< HEAD
-	private UtilDateModel modelPrva;
-	private JDatePanelImpl datePanelPrva;
-	private JDatePickerImpl datePickerPrva_1;
-	private UtilDateModel modelGodina;
-	private JDatePanelImpl datePanelGodina;
-	private JDatePickerImpl datePickerGodina;
-=======
-	
 	private UtilDateModel modelDatumPregleda;
-	private JDatePanelImpl dpanelDatumPregleda;
-	private JDatePickerImpl dpDatumPregleda;
-	private JComboBox cbBoja;
->>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
+	private JDatePanelImpl datePanelDatumPregleda;
+	private JDatePickerImpl datePickerDatumPregleda;
+	private JButton btnProvjeriPostojanje;
 
 	public VoziloDodavanje() {
 		// calling methods for seting layout
@@ -182,9 +169,9 @@ public class VoziloDodavanje extends JPanel {
 		gbc_motorPodaci.gridy = 0;
 		okvirPanel.add(motorPodaci, gbc_motorPodaci);
 		GridBagLayout gbl_motorPodaci = new GridBagLayout();
-		gbl_motorPodaci.columnWidths = new int[] { 120, 0, 0 };
+		gbl_motorPodaci.columnWidths = new int[] { 120, 73, 0, 28, 0, 0 };
 		gbl_motorPodaci.rowHeights = new int[] { 0, 0, 0, 0, 0, -7, 0 };
-		gbl_motorPodaci.columnWeights = new double[] { 0.0, 1.0,
+		gbl_motorPodaci.columnWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 0.0,
 				Double.MIN_VALUE };
 		gbl_motorPodaci.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, Double.MIN_VALUE };
@@ -305,6 +292,14 @@ public class VoziloDodavanje extends JPanel {
 		gbc_lbl_sasija.gridx = 0;
 		gbc_lbl_sasija.gridy = 0;
 		motorPodaci.add(lbl_sasija, gbc_lbl_sasija);
+		
+		btnProvjeriPostojanje = new JButton("Provjeri");
+		GridBagConstraints gbc_btnProvjeriPostojanje = new GridBagConstraints();
+		gbc_btnProvjeriPostojanje.gridwidth = 2;
+		gbc_btnProvjeriPostojanje.insets = new Insets(0, 0, 5, 0);
+		gbc_btnProvjeriPostojanje.gridx = 3;
+		gbc_btnProvjeriPostojanje.gridy = 0;
+		motorPodaci.add(btnProvjeriPostojanje, gbc_btnProvjeriPostojanje);
 
 		lbl_zapremina = new JLabel("Zapremina motora");
 		GridBagConstraints gbc_lbl_zapremina = new GridBagConstraints();
@@ -460,14 +455,6 @@ public class VoziloDodavanje extends JPanel {
 	}
 
 	public void inputSet() {
-		modelPrva = new UtilDateModel();
-		datePanelPrva= new JDatePanelImpl(modelPrva);
-		datePickerPrva_1 = new JDatePickerImpl(datePanelPrva);
-		
-		modelGodina = new UtilDateModel();
-		datePanelGodina= new JDatePanelImpl(modelGodina);
-		datePickerGodina = new JDatePickerImpl(datePanelGodina);
-		
 		tf_tipVozila = new JTextField();
 		tf_tipVozila.setColumns(10);
 		GridBagConstraints gbc_tf_tipVozila = new GridBagConstraints();
@@ -495,13 +482,15 @@ public class VoziloDodavanje extends JPanel {
 		gbc_tf_markaVozila.gridy = 3;
 		osnovniPodaci.add(tf_markaVozila, gbc_tf_markaVozila);
 
+		tf_godProizvodnje = new JTextField();
+		tf_godProizvodnje.setColumns(10);
 		GridBagConstraints gbc_tf_godProizvodnje = new GridBagConstraints();
 		gbc_tf_godProizvodnje.anchor = GridBagConstraints.NORTH;
 		gbc_tf_godProizvodnje.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tf_godProizvodnje.insets = new Insets(0, 0, 5, 0);
 		gbc_tf_godProizvodnje.gridx = 1;
 		gbc_tf_godProizvodnje.gridy = 4;
-		osnovniPodaci.add(datePickerGodina, gbc_tf_godProizvodnje);
+		osnovniPodaci.add(tf_godProizvodnje, gbc_tf_godProizvodnje);
 
 		tf_regOznaka = new JTextField();
 		tf_regOznaka.setColumns(10);
@@ -514,8 +503,9 @@ public class VoziloDodavanje extends JPanel {
 		tf_brojSasije = new JTextField();
 		tf_brojSasije.setColumns(10);
 		GridBagConstraints gbc_tf_brojSasije = new GridBagConstraints();
+		gbc_tf_brojSasije.gridwidth = 2;
 		gbc_tf_brojSasije.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tf_brojSasije.insets = new Insets(0, 0, 5, 0);
+		gbc_tf_brojSasije.insets = new Insets(0, 0, 5, 5);
 		gbc_tf_brojSasije.gridx = 1;
 		gbc_tf_brojSasije.gridy = 0;
 		motorPodaci.add(tf_brojSasije, gbc_tf_brojSasije);
@@ -523,6 +513,7 @@ public class VoziloDodavanje extends JPanel {
 		tf_zapremina = new JTextField();
 		tf_zapremina.setColumns(10);
 		GridBagConstraints gbc_tf_zapremina = new GridBagConstraints();
+		gbc_tf_zapremina.gridwidth = 4;
 		gbc_tf_zapremina.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tf_zapremina.insets = new Insets(0, 0, 5, 0);
 		gbc_tf_zapremina.gridx = 1;
@@ -532,6 +523,7 @@ public class VoziloDodavanje extends JPanel {
 		tf_maxSnaga = new JTextField();
 		tf_maxSnaga.setColumns(10);
 		GridBagConstraints gbc_tf_maxSnaga = new GridBagConstraints();
+		gbc_tf_maxSnaga.gridwidth = 4;
 		gbc_tf_maxSnaga.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tf_maxSnaga.insets = new Insets(0, 0, 5, 0);
 		gbc_tf_maxSnaga.gridx = 1;
@@ -541,6 +533,7 @@ public class VoziloDodavanje extends JPanel {
 		tf_brojMotora = new JTextField();
 		tf_brojMotora.setColumns(10);
 		GridBagConstraints gbc_tf_brojMotora = new GridBagConstraints();
+		gbc_tf_brojMotora.gridwidth = 4;
 		gbc_tf_brojMotora.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tf_brojMotora.insets = new Insets(0, 0, 5, 0);
 		gbc_tf_brojMotora.gridx = 1;
@@ -597,7 +590,18 @@ public class VoziloDodavanje extends JPanel {
 		gbc_tf_karoserija.gridy = 6;
 		detaljniPodaci.add(tf_karoserija, gbc_tf_karoserija);
 
-<<<<<<< HEAD
+	//	tf_datumPregleda = new JTextField();
+	//	tf_datumPregleda.setColumns(10);
+		modelDatumPregleda = new UtilDateModel();
+		datePanelDatumPregleda = new JDatePanelImpl(modelDatumPregleda);
+		datePickerDatumPregleda = new JDatePickerImpl(datePanelDatumPregleda);
+		GridBagConstraints gbc_tf_datumPregleda = new GridBagConstraints();
+		gbc_tf_datumPregleda.gridwidth = 2;
+		gbc_tf_datumPregleda.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tf_datumPregleda.gridx = 1;
+		gbc_tf_datumPregleda.gridy = 7;
+		detaljniPodaci.add(datePickerDatumPregleda, gbc_tf_datumPregleda);
+
 		tb_bojaVozila = new JTextField();
 		GridBagConstraints gbc_tb_bojaVozila = new GridBagConstraints();
 		gbc_tb_bojaVozila.insets = new Insets(0, 0, 5, 0);
@@ -606,18 +610,6 @@ public class VoziloDodavanje extends JPanel {
 		gbc_tb_bojaVozila.gridy = 0;
 		bojaMasaVozila.add(tb_bojaVozila, gbc_tb_bojaVozila);
 		tb_bojaVozila.setColumns(10);
-=======
-		modelDatumPregleda = new UtilDateModel();
-		dpanelDatumPregleda = new JDatePanelImpl(modelDatumPregleda);
-		dpDatumPregleda= new JDatePickerImpl(dpanelDatumPregleda);
-		
-		GridBagConstraints gbc_tf_datumPregleda = new GridBagConstraints();
-		gbc_tf_datumPregleda.gridwidth = 2;
-		gbc_tf_datumPregleda.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tf_datumPregleda.gridx = 1;
-		gbc_tf_datumPregleda.gridy = 7;
-		detaljniPodaci.add(getDpDatumPregleda(), gbc_tf_datumPregleda);
->>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 
 		tb_maxMasa = new JTextField();
 		tb_maxMasa.setColumns(10);
@@ -644,20 +636,9 @@ public class VoziloDodavanje extends JPanel {
 		gbc_tb_nosivost.gridx = 1;
 		gbc_tb_nosivost.gridy = 5;
 		bojaMasaVozila.add(tb_nosivost, gbc_tb_nosivost);
-		
-		//tf_datumPregleda = new JTextField();
-		//tf_datumPregleda.setColumns(10);
-		GridBagConstraints gbc_tf_datumPregleda = new GridBagConstraints();
-		gbc_tf_datumPregleda.gridwidth = 2;
-		gbc_tf_datumPregleda.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tf_datumPregleda.gridx = 1;
-		gbc_tf_datumPregleda.gridy = 7;
-		detaljniPodaci.add(datePickerPrva_1, gbc_tf_datumPregleda);
 	}
 
 	public void componentSet() {
-		
-		
 		cb_vrstaVozila = new JComboBox();
 		cb_vrstaVozila.setModel(new DefaultComboBoxModel(VrstaVozila.values()));
 		GridBagConstraints gbc_cb_vrstaVozila = new GridBagConstraints();
@@ -668,8 +649,9 @@ public class VoziloDodavanje extends JPanel {
 		osnovniPodaci.add(cb_vrstaVozila, gbc_cb_vrstaVozila);
 
 		cb_gorivo = new JComboBox();
-		cb_gorivo.setModel(new DefaultComboBoxModel(VrstaGoriva.values()));
+		cb_gorivo.setModel(new DefaultComboBoxModel(new String[] {"Benzin", "Benzin/LPG", "Benzin/CNG", "Benzin/elektri\\u010Dni", "Dizel", "Dizel/CNG", "Dizel/elektri\\u010Dni", "Elektri\\u010Dni pogon", "Biodizel", "Etanol", "Metanol", "Hidrogen(vodonik)", "LPG", "CNG"}));
 		GridBagConstraints gbc_cb_gorivo = new GridBagConstraints();
+		gbc_cb_gorivo.gridwidth = 4;
 		gbc_cb_gorivo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cb_gorivo.insets = new Insets(0, 0, 5, 0);
 		gbc_cb_gorivo.gridx = 1;
@@ -677,8 +659,9 @@ public class VoziloDodavanje extends JPanel {
 		motorPodaci.add(cb_gorivo, gbc_cb_gorivo);
 
 		cb_vrstaMotora = new JComboBox();
-		cb_vrstaMotora.setModel(new DefaultComboBoxModel(VrstaMotora.values()));
+		cb_vrstaMotora.setModel(new DefaultComboBoxModel(new String[] {"OTTO", "DIESEL", "WANKEL", "Elektromotor", "Kombinovani pogon"}));
 		GridBagConstraints gbc_cb_vrstaMotora = new GridBagConstraints();
+		gbc_cb_vrstaMotora.gridwidth = 4;
 		gbc_cb_vrstaMotora.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cb_vrstaMotora.gridx = 1;
 		gbc_cb_vrstaMotora.gridy = 5;
@@ -746,14 +729,7 @@ public class VoziloDodavanje extends JPanel {
 		gbc_btn_ponisti.gridy = 0;
 		buttonPanel.add(btn_ponisti, gbc_btn_ponisti);
 		
-		cbBoja = new JComboBox();
-		cbBoja.setModel(new DefaultComboBoxModel(Boja.values()));
-		GridBagConstraints gbc_cbBoja = new GridBagConstraints();
-		gbc_cbBoja.insets = new Insets(0, 0, 5, 0);
-		gbc_cbBoja.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbBoja.gridx = 1;
-		gbc_cbBoja.gridy = 0;
-		bojaMasaVozila.add(cbBoja, gbc_cbBoja);
+	
 
 	}
 
@@ -805,6 +781,9 @@ public class VoziloDodavanje extends JPanel {
 	public JTextField getTf_karoserija() {
 		return tf_karoserija;
 	}
+	public JTextField getTf_datumPregleda() {
+		return tf_datumPregleda;
+	}
 	public JTextField getTf_brojSasije() {
 		return tf_brojSasije;
 	}
@@ -822,6 +801,9 @@ public class VoziloDodavanje extends JPanel {
 	}
 	public JComboBox getCb_vrstaMotora() {
 		return cb_vrstaMotora;
+	}
+	public JTextField getTb_bojaVozila() {
+		return tb_bojaVozila;
 	}
 	public JComboBox getCb_nijansa() {
 		return cb_nijansa;
@@ -844,24 +826,11 @@ public class VoziloDodavanje extends JPanel {
 	public JPanel getButtonPanel() {
 		return buttonPanel;
 	}
-<<<<<<< HEAD
 	public JDatePickerImpl getDatePickerDatumPregleda() {
-		return datePickerPrva_1;
+		return datePickerDatumPregleda;
 	}
-	public JDatePickerImpl getDatePickerGodina() {
-		return datePickerGodina;
-	}
-=======
 
-	public JDatePickerImpl getDpDatumPregleda() {
-		return dpDatumPregleda;
+	public JButton getBtnProvjeriPostojanje() {
+		return btnProvjeriPostojanje;
 	}
-	public JPanel getBojaMasaVozila() {
-		return bojaMasaVozila;
-	}
-	public JComboBox getCbBoja() {
-		return cbBoja;
-	}
-	
->>>>>>> 51e3a1408b3686331ef09890a13c6a23301fd13e
 }

@@ -6,9 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
+import ba.co.edgewise.jmup.enums.EkoKarakteristike;
+import ba.co.edgewise.jmup.enums.VrstaVozila;
+import ba.co.edgewise.jmup.klase.Motor;
 import ba.co.edgewise.jmup.klase.Vlasnicka;
+import ba.co.edgewise.jmup.klase.Vozilo;
 
 public class VlasnickaDAO implements IGenericDAO<Vlasnicka, String> {
 
@@ -17,8 +23,8 @@ public class VlasnickaDAO implements IGenericDAO<Vlasnicka, String> {
 	{
 		boolean success = false;
 		
-		Integer vozilo = 65;
-		Integer vlasnik = 1;
+		int vozilo = vlasnicka.getVozilo().getId();
+		int vlasnik = vlasnicka.getVlasnik().getId();
 		
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
@@ -42,37 +48,6 @@ public class VlasnickaDAO implements IGenericDAO<Vlasnicka, String> {
 
 		return success;
 		
-	}
-	
-	public String getBrojVlasnickih()
-	{
-		Integer result = null;
-		
-		//Dobavljanje konekcije
-		ConnectionManager manager = new ConnectionManager();
-		Connection connection = manager.getConnection();
-		
-		//Pocetak pripreme upita
-		ResultSet qResult = null;
-		
-		try {
-			PreparedStatement statement = 	connection.prepareStatement(
-					"SELECT Count(BrojDozvole) "+ 
-					"FROM Vlasnicka "
-					);
-			qResult = statement.executeQuery();
-			//Dobavljanje rezultata
-			if(qResult.next()) {
-				result = qResult.getInt(1);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			ConnectionManager.closeConnection(connection);
-		}
-		
-		return result.toString();
 	}
 
 	@Override
@@ -105,6 +80,8 @@ public class VlasnickaDAO implements IGenericDAO<Vlasnicka, String> {
 				OsobaDAO oDAO = new OsobaDAO();
 				result.setVlasnik(oDAO.get(qResult.getInt("Vlasnik")));
 			}
+			else
+				result = null;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -115,6 +92,38 @@ public class VlasnickaDAO implements IGenericDAO<Vlasnicka, String> {
 		return result;
 		
 	} 
+	
+	public String getBrojVlasnickih()
+	{
+		Integer result = null;
+
+		//Dobavljanje konekcije
+		ConnectionManager manager = new ConnectionManager();
+		Connection connection = manager.getConnection();
+
+		//Pocetak pripreme upita
+		ResultSet qResult = null;
+
+		try {
+			PreparedStatement statement = 	connection.prepareStatement(
+					"SELECT Count(BrojDozvole) "+ 
+					"FROM Vlasnicka "
+					);
+			qResult = statement.executeQuery();
+			//Dobavljanje rezultata
+			if(qResult.next()) {
+				result = qResult.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(connection);
+		}
+
+		return result.toString();
+	}
+	
 	
 	public Vlasnicka getByVlasnik(Integer id){
 		
@@ -251,7 +260,7 @@ public Vlasnicka getByVozilo(Integer id){
 		try {
 			PreparedStatement statement = 	connection.prepareStatement(
 					"UPDATE `Vlasnicka`" +
-					" SET Vozilo = ?, Vlasnik = ? " + 
+					" SET Vozilo = ?, Vlasnik = ? " + //
 					" WHERE BrojDozvole = ? "
 					);
 
@@ -302,10 +311,13 @@ public Vlasnicka getByVozilo(Integer id){
 		return success;
 		
 	}
-	public static void main(String[] args) {
-		VlasnickaDAO v = new VlasnickaDAO();
-		v.getByVlasnik(24);
-		ArrayList<Vlasnicka> v2 = v.getAll();
-	}
-}
 	
+	public static void main(String[] args) {
+	 
+		VlasnickaDAO vd = new VlasnickaDAO();
+		ArrayList<Vlasnicka> v = new ArrayList<Vlasnicka>();
+		
+		
+	}
+	
+}

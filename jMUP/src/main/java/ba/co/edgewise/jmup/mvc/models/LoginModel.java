@@ -1,5 +1,7 @@
 package ba.co.edgewise.jmup.mvc.models;
 
+import javax.swing.JOptionPane;
+
 import ba.co.edgewise.jmup.daldao.daos.UposlenikDAO;
 import ba.co.edgewise.jmup.klase.Uposlenik;
 
@@ -26,12 +28,12 @@ public class LoginModel {
 		uDAO = new UposlenikDAO();
 		uposlenik = uDAO.get(korisnickoIme);
 		
-		if (uposlenik != null)
+		if (uposlenik.getPassword() != null)
 		{
 			if (uposlenik.getPassword().equals(korisnickaSifra))
 				result=true;
 		}
-		
+	
 		return result;
 	}
 }

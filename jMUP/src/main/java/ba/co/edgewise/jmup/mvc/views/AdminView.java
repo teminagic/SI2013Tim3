@@ -4,18 +4,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ba.co.edgewise.jmup.components.FormaBckp;
 import ba.co.edgewise.jmup.components.KorisnikKreiranje;
 import ba.co.edgewise.jmup.components.KorisnikModificiranje;
 import ba.co.edgewise.jmup.components.KorisnikPretraga;
 import ba.co.edgewise.jmup.components.MeniAdmin;
 import ba.co.edgewise.jmup.components.NaslovnaAdministrator;
 import ba.co.edgewise.jmup.components.OpcijaSadrzaj;
+import ba.co.edgewise.jmup.components.PregledLogova;
 
+import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-public class Administrator extends JFrame {
+public class AdminView extends JFrame {
 
 	/**
 	 * 
@@ -27,9 +30,11 @@ public class Administrator extends JFrame {
 	private NaslovnaAdministrator strana1;
 	private KorisnikKreiranje strana2;
 	private KorisnikPretraga strana3;
-	KorisnikModificiranje strana4;
+	private KorisnikModificiranje strana4;
+	private PregledLogova strana5;
+	private FormaBckp strana6;
 
-	public Administrator() {
+	public AdminView() {
 		initialize();
 		
 		meni =  new MeniAdmin();
@@ -59,12 +64,19 @@ public class Administrator extends JFrame {
 		strana4 = new KorisnikModificiranje();
 		sadrzaj.getPanelSadrzaj().add(strana4, "Modificiranje korisnika");
 		
+		strana5 = new PregledLogova();
+		sadrzaj.getPanelSadrzaj().add(strana5, "Pregled historije promjena");
+		
+		strana6 = new FormaBckp();
+		sadrzaj.getPanelSadrzaj().add(strana6, "Backup");
+		
 		contentPane.add(sadrzaj, gbc_sadrzaj);	
 	}
 	
 	public void initialize(){
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("jMUP - Administrator");
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setMinimumSize(new Dimension(800, 600));
 		setBounds(100, 100, 747, 593);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -95,5 +107,11 @@ public class Administrator extends JFrame {
 	}
 	public KorisnikModificiranje getStrana4() {
 		return strana4;
+	}
+	public PregledLogova getStrana5() {
+		return strana5;
+	}
+	public FormaBckp getStrana6() {
+		return strana6;
 	}
 }

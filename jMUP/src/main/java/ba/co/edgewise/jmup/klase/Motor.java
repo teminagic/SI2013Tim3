@@ -1,19 +1,16 @@
 package ba.co.edgewise.jmup.klase;
 
-import ba.co.edgewise.jmup.enums.VrstaGoriva;
-import ba.co.edgewise.jmup.enums.VrstaMotora;
-
 public class Motor {
 	
 	private Integer id;
 	private Integer zapreminaMotora;
 	private Integer maxSnaga;
-	private VrstaGoriva  vrstaGoriva;
+	private String  vrstaGoriva;
 	private String  brojMotora;
-	private VrstaMotora vrstaMotora;
+	private String  vrstaMotora;
 	
 	public Motor(Integer id, Integer zapreminaMotora, Integer maxSnaga,
-			VrstaGoriva vrstaGoriva, String brojMotora, VrstaMotora vrstaMotora) {
+			String vrstaGoriva, String brojMotora, String vrstaMotora) {
 		super();
 		this.setId(id);
 		this.zapreminaMotora = zapreminaMotora;
@@ -53,6 +50,14 @@ public class Motor {
 		this.maxSnaga = maxSnaga;
 	}
 
+	public String getVrstaGoriva() {
+		return vrstaGoriva;
+	}
+
+	public void setVrstaGoriva(String vrstaGoriva) {
+		this.vrstaGoriva = vrstaGoriva;
+	}
+
 	public String getBrojMotora() {
 		return brojMotora;
 	}
@@ -61,19 +66,11 @@ public class Motor {
 		this.brojMotora = brojMotora;
 	}
 
-	public VrstaGoriva getVrstaGoriva() {
-		return vrstaGoriva;
-	}
-
-	public void setVrstaGoriva(VrstaGoriva vrstaGoriva) {
-		this.vrstaGoriva = vrstaGoriva;
-	}
-
-	public VrstaMotora getVrstaMotora() {
+	public String getVrstaMotora() {
 		return vrstaMotora;
 	}
 
-	public void setVrstaMotora(VrstaMotora vrstaMotora) {
+	public void setVrstaMotora(String vrstaMotora) {
 		this.vrstaMotora = vrstaMotora;
 	}
 	

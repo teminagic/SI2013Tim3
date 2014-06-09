@@ -4,7 +4,7 @@ public enum TipPretrageUposlenika {
 
 	IME("Ime korisnika"),
 	PREZIME("Prezime korisnika"),
-	USERNAME("Korisnièko ime")
+	USERNAME("Korisni\u010Dko ime")
 	;
 	
 	TipPretrageUposlenika(String text)

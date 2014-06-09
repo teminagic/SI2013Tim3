@@ -1,37 +1,40 @@
 package ba.co.edgewise.components.helpers;
 
 import java.util.ArrayList;
-import java.util.ListIterator;
-import javax.swing.JTable;
+
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
-import ba.co.edgewise.jmup.klase.Osoba;
 
-public class TableModelVozac extends AbstractTableModel {
+import ba.co.edgewise.jmup.klase.Log;
 
-	private static final long serialVersionUID = -263608234994707920L;
+public class TableModelLogovi extends AbstractTableModel {
 
-	private String[] columnNames = { "Ime", "Prezime", "JMBG" };
-	private ArrayList<Osoba> data;
+	private static final long serialVersionUID = 4383722515943486912L;
+	
+	private String[] columnNames = { "Korisnik", "Datum", "Korisni\u010Dko ime",
+			"Detaljnije"};
+	private ArrayList<Log> data;
 
-	public TableModelVozac() {
+	public TableModelLogovi(){
 		super();
-		this.data = new ArrayList<Osoba>();
+		this.data = new ArrayList<Log>();
 	}
 
-	public TableModelVozac(ArrayList<Osoba> data) {
+	public TableModelLogovi(ArrayList<Log> data) {
 		super();
 		this.data = data;
 	}
+	
+	
 
-	public ArrayList<Osoba> getData() {
+	public ArrayList<Log> getData() {
 		return data;
 	}
 
-	public void setData(ArrayList<Osoba> data) {
+	public void setData(ArrayList<Log> data) {
 		this.data = data;
 	}
-
+	
 	@Override
 	public void fireTableChanged(TableModelEvent e) {
 		super.fireTableChanged(e);
@@ -69,22 +72,16 @@ public class TableModelVozac extends AbstractTableModel {
 		this.fireTableRowsDeleted(0, rowCount);
 	}
 	
-	public void addAll(ArrayList<Osoba> novi){
+	public void addAll(ArrayList<Log> novi){
 		if(novi == null)
 			return;
 		int rowCount = this.getRowCount();
-		for(Osoba u : novi){
+		for(Log u : novi){
 			if(u==null)
 				return;
 			data.add(u);
 		}
 		this.fireTableRowsInserted(rowCount, rowCount + novi.size());
 	}
-
-	public void addTableModelListener(JTable table) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 }

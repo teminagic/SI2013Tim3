@@ -29,7 +29,7 @@ public class MeniBoss extends JPanel {
 		setBorder(new MatteBorder(0, 2, 0, 2, (Color) new Color(0, 0, 0)));
 		gridBagLayoutMeniBoss = new GridBagLayout();
 		gridBagLayoutMeniBoss.columnWidths = new int[]{0};
-		gridBagLayoutMeniBoss.rowHeights = new int[]{0, 0};
+		gridBagLayoutMeniBoss.rowHeights = new int[]{0, 155};
 		gridBagLayoutMeniBoss.columnWeights = new double[]{1.0};
 		gridBagLayoutMeniBoss.rowWeights = new double[]{0.0, 1.0};
 		setLayout(gridBagLayoutMeniBoss);
@@ -46,7 +46,7 @@ public class MeniBoss extends JPanel {
 	}
 	public void opcijeSet(){
 		opcije = new MeniBossOpcije();
-		opcije.getBtnIzradaIzvjestaja().setText("Izrada izvještaja");
+		opcije.getBtnIzradaIzvjetaja().setText("Izrada izvje\u0161taja");
 		opcije.getBtnPocetna().setText("Početna");
 		GridBagConstraints gbc_opcije = new GridBagConstraints();
 		gbc_opcije.anchor = GridBagConstraints.NORTH;

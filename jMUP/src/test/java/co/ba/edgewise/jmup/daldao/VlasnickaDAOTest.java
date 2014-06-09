@@ -22,9 +22,9 @@ public class VlasnickaDAOTest {
 	@Test
 	public void testCreate() {
 		VoziloDAO vd=new VoziloDAO();
-		Vozilo vozilo =vd.get(65);
+		Vozilo vozilo =vd.get(1);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(1352);
+		Osoba osoba=od.get(5);
 		Vlasnicka vl = new Vlasnicka("17", vozilo, osoba);
 		vlDAO.create(vl);
 		assertNotNull(vlDAO.get("17"));
@@ -55,9 +55,9 @@ public class VlasnickaDAOTest {
 	@Test
 	public void testUpdate() {
 		VoziloDAO vd=new VoziloDAO();
-		Vozilo vozilo =vd.get(67);
+		Vozilo vozilo =vd.get(1);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(1352);
+		Osoba osoba=od.get(1);
 		Vlasnicka vl = new Vlasnicka("17", vozilo, osoba);
 		//vlDAO.create(vl);
 		assertTrue(vlDAO.update("17", vl)); 
@@ -66,9 +66,9 @@ public class VlasnickaDAOTest {
 	@Test
 	public void testDelete() {
 		VoziloDAO vd=new VoziloDAO();
-		Vozilo vozilo =vd.get(67);
+		Vozilo vozilo =vd.get(1);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(1352);
+		Osoba osoba=od.get(5);
 		Vlasnicka vl = new Vlasnicka("21", vozilo, osoba);
 		vlDAO.create(vl);
 		assertTrue(vlDAO.delete("21"));

@@ -1,122 +1,306 @@
 package ba.co.edgewise.jmup.mvc.views;
 
+import java.awt.CardLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ba.co.edgewise.components.helpers.ModifikacijaVozaca;
+import ba.co.edgewise.components.helpers.ModifikacijaVozila;
+import ba.co.edgewise.components.helpers.TableModelVozac;
+import ba.co.edgewise.components.helpers.TableModelVozilo;
+import ba.co.edgewise.jmup.components.GodisnjaOvjera;
+import ba.co.edgewise.jmup.components.Izvjestaji;
 import ba.co.edgewise.jmup.components.MeniSalter;
 import ba.co.edgewise.jmup.components.NaslovnaSalterski;
 import ba.co.edgewise.jmup.components.OpcijaSadrzaj;
+import ba.co.edgewise.jmup.components.PromjenaVlasnikaVozila;
 import ba.co.edgewise.jmup.components.RegistracijaUnos;
+import ba.co.edgewise.jmup.components.SalterskaPretraga;
 import ba.co.edgewise.jmup.components.VozacDodavanje;
+import ba.co.edgewise.jmup.components.VozacModifikacija;
 import ba.co.edgewise.jmup.components.VoziloDodavanje;
+import ba.co.edgewise.jmup.components.VoziloModifikacija;
+import ba.co.edgewise.jmup.daldao.daos.BojeVozilaDAO;
+import ba.co.edgewise.jmup.klase.BojaVozila;
+import ba.co.edgewise.jmup.klase.Osoba;
+import ba.co.edgewise.jmup.klase.Vozilo;
 
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SalterskiRadnikView extends JFrame {
 
-	// Private fields
-	private static final long serialVersionUID = -4800877726084719057L;
+	
+	private static final long serialVersionUID = 5718223478027300911L;
 	private JPanel contentPane;
-
 	private MeniSalter meni;
+	private NaslovnaSalterski strana1; // bit ce ih vise zavisno od buttona
 	private OpcijaSadrzaj sadrzaj;
-
-	private NaslovnaSalterski strana1;
+	
+	GridBagConstraints gbc_naslov;
+	GridBagConstraints gbc_meni;
+	
 	private VozacDodavanje strana2;
 	private VoziloDodavanje strana3;
-	private VozacDodavanje strana4;
-	private VoziloDodavanje strana5;
-	private RegistracijaUnos strana6;
+	private SalterskaPretraga strana6;
+	private RegistracijaUnos strana4Registracija;
+	private GodisnjaOvjera strana7;
+	private Izvjestaji strana9;
+	private PromjenaVlasnikaVozila strana8;
+	private VoziloModifikacija strana10;
+	private VozacModifikacija strana11;
+	
+	private final SalterskiRadnikView frejm = this;
+	/**
+	 * Launch the application.
+	 */
+	
 
-	// Constructors
+	/**
+	 * Create the frame.
+	 */
 	public SalterskiRadnikView() {
-		initialize();
-		setPanels();
-	}
-
-	// Private methods
-	private void initialize() {
-		setTitle("jMUP - \u0160alter");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 625, 487);
+		setBounds(100, 100, 977, 590);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(contentPane);
-		this.setVisible(true);
-
+		
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] { 0 };
-		gbl_contentPane.rowHeights = new int[] { 0 };
-		gbl_contentPane.columnWeights = new double[] { 0, 1.0 };
-		gbl_contentPane.rowWeights = new double[] { Double.MIN_VALUE };
+		gbl_contentPane.columnWidths = new int[]{0};
+		gbl_contentPane.rowHeights = new int[]{0};
+		gbl_contentPane.columnWeights = new double[]{0.0, 1.0};
+		gbl_contentPane.rowWeights = new double[]{1.0};
 		contentPane.setLayout(gbl_contentPane);
-	}
-
-	private void setPanels() {
+		
+		this.setVisible(true);
+		
 		meni = new MeniSalter();
 		GridBagConstraints gbc_meni = new GridBagConstraints();
 		gbc_meni.fill = GridBagConstraints.VERTICAL;
 		gbc_meni.insets = new Insets(0, 5, 0, 5);
 		contentPane.add(meni, gbc_meni);
-
-		sadrzaj = new OpcijaSadrzaj("Po\u010Detna");
+		
+		sadrzaj = new OpcijaSadrzaj("Početna");
 		GridBagConstraints gbc_sadrzaj = new GridBagConstraints();
 		gbc_sadrzaj.fill = GridBagConstraints.BOTH;
 		gbc_sadrzaj.insets = new Insets(0, 0, 0, 5);
-		contentPane.add(sadrzaj, gbc_sadrzaj);
-
+		
+		//Ovdje dodajmo sve card-ove
 		strana1 = new NaslovnaSalterski();
 		sadrzaj.getPanelSadrzaj().add(strana1, "Po\u010Detna");
-
+		
 		strana2 = new VozacDodavanje();
-		sadrzaj.getPanelSadrzaj().add(strana2, "Unos voza\u010Da");
-
+		sadrzaj.getPanelSadrzaj().add(strana2, "Dodavanje voza\u010Da");
+		
 		strana3 = new VoziloDodavanje();
-		sadrzaj.getPanelSadrzaj().add(strana3, "Unos vozila");
+		sadrzaj.getPanelSadrzaj().add(strana3, "Dodavanje vozila");
 		
-		strana4 = new VozacDodavanje();
-		sadrzaj.getPanelSadrzaj().add(strana4, "Unos vlasnika - Vlasnička dozvola");
+		strana6 = new SalterskaPretraga();
+		sadrzaj.getPanelSadrzaj().add(strana6, "Pretraga");
 		
-		strana5 = new VoziloDodavanje();
-		sadrzaj.getPanelSadrzaj().add(strana5, "Unos vozila - Vlasnička dozvola");
+		strana4Registracija = new RegistracijaUnos();
+		sadrzaj.getPanelSadrzaj().add(strana4Registracija,"Unos registracije");
 		
-		strana6 = new RegistracijaUnos();
-		sadrzaj.getPanelSadrzaj().add(strana6, "Unos ovjere registracije - Vlasnička dozvola");
+		strana6 = new SalterskaPretraga();
+		sadrzaj.getPanelSadrzaj().add(strana6, "Pretraga");
+		
+		strana7 = new GodisnjaOvjera();
+		sadrzaj.getPanelSadrzaj().add(strana7, "Godi\u0161nja ovjera registracije");
+		
+		strana8 = new PromjenaVlasnikaVozila();
+		sadrzaj.getPanelSadrzaj().add(strana8, "Promjena vlasnika");
+		
+		strana9 = new Izvjestaji();
+		sadrzaj.getPanelSadrzaj().add(strana9, "Izrada izvje\u0161taja");
+		
+		strana10 = new VoziloModifikacija(null, null);
+		strana10.getBtn_modifikuj().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pozoviModifikacijuVozila();
+			}
+		});
+		sadrzaj.getPanelSadrzaj().add(strana10, "Modifikacija vozila");
+		
+		strana11 = new VozacModifikacija(null);
+		strana11.getBtnPrihvati().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pozoviModifikacijuVozaca();
+			}
+		});
+		sadrzaj.getPanelSadrzaj().add(strana11, "Modifikacija voza\u010Da");
+		
+		contentPane.add(sadrzaj, gbc_sadrzaj);
+		
+
 	}
 
-	// public methods
 
-	// Getters
+	public void pozoviModifikacijuVozila()
+	{
+		ModifikacijaVozila nova = new ModifikacijaVozila(this);
+		nova.modificirajVozilo();
+	}
+	public void pozoviModifikacijuVozaca()
+	{
+		ModifikacijaVozaca nova = new ModifikacijaVozaca(this);
+		nova.modificirajVozaca();
+	}
+	
+	public SalterskaPretraga getStrana6() {
+		return strana6;
+	}	
+	public void prikaziPromjenuVlasnika(){
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Promjena vlasnika");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Promjena vlasnika");
+	}
+	public void prikaziPocetnu(){
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Po\u010Detna");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Po\u010Detna");
+	}
+	public void prikaziUnosVozila()
+	{
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Dodavanje vozila");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Dodavanje vozila");
+	}
+	public void prikaziUnosVozaca()
+	{
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Dodavanje voza\u010Da");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Dodavanje voza\u010Da");
+	}
+	
+	public void prikaziUnosRegistracije(){
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Unos registracije");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Unos registracije");
+	}
+	
+	public void prikaziPretragu() {
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Pretraga");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Pretraga");
+	}
+	public void prikaziOvjeruRegistracije() {
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Godi\u0161nja ovjera registracije");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Godi\u0161nja ovjera registracije");
+	}
+	public void prikaziIzvjestaje() {
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Izrada izvje\u0161taja");
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Izrada izvje\u0161taja");
+	}
+	
+	public void prikaziModifikacijuVozila()
+	{
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Modifikacija vozila");
+		
+		int selektovano = this.getStrana6().getPanel_vozilo().getTable().getSelectedRow();
+		TableModelVozilo modelTabele = this.getStrana6().getPanel_vozilo().getModel();
+		Vozilo v = modelTabele.getData().get(selektovano);
+		
+		this.strana10.setVozilo(v);
+		
+		BojaVozila boja = (new BojeVozilaDAO()).get(v.getId());
+		this.strana10.setBoja(boja);
+		
+		strana10.postaviVrijednosti();
+		
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Modifikacija vozila");
+	}
+	
+	public void prikaziModifikacijuVozaca()
+	{
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Modifikacija voza\u010Da");
+		
+		int selektovano = this.getStrana6().getPanel_vozac().getTable().getSelectedRow();
+		TableModelVozac modelTabele = this.getStrana6().getPanel_vozac().getModel();
+		Osoba v = modelTabele.getData().get(selektovano);
+		
+		this.strana11.setVozac(v);;
+		
+		strana11.postaviVrijednosti();
+		
+		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
+		CardLayout tmp = (CardLayout)cards.getLayout();
+		tmp.show(cards, "Modifikacija voza\u010Da");
+	}
+	
+	public JPanel getContentPane() {
+		return contentPane;///
+	}
+
+
 	public MeniSalter getMeni() {
 		return meni;
 	}
 
-	public OpcijaSadrzaj getSadrzaj() {
-		return sadrzaj;
-	}
 
-	public NaslovnaSalterski getStrana1() {
+	public NaslovnaSalterski getPocetna() {
 		return strana1;
 	}
 
+
+	public OpcijaSadrzaj getSadrzaj() {
+		return sadrzaj;
+	}
+	
 	public VozacDodavanje getStrana2() {
 		return strana2;
 	}
-
-	public VoziloDodavanje getStrana3() {
+	public VoziloDodavanje getVoziloDodavanje() {
 		return strana3;
 	}
+	public VoziloModifikacija getVoziloModifikacija() {
+		return strana10;
+	}
+	//public JButton getVoziloDodavanjePrihvatiButton() {
+	//	return voziloDodavanje.getBtn_prihvati();
+	//} 
+	public GridBagConstraints getGbc_naslov() {
+		return gbc_naslov;
+	}
+	public GridBagConstraints getGbc_meni() {
+		return gbc_meni;
+	}
+	public RegistracijaUnos getRegistracija() {
+		return strana4Registracija;
+	}
 
-	public VozacDodavanje getStrana4() {
-		return strana4;
+
+	public GodisnjaOvjera getGodisnjaOvjera() {
+		return strana7;
 	}
-	public VoziloDodavanje getStrana5() {
-		return strana5;
+
+
+	public Izvjestaji getIzvjestaji() {
+		return strana9;
 	}
-	public RegistracijaUnos getStrana6() {
-		return strana6;
+
+
+	public PromjenaVlasnikaVozila getPromjenaVlasnika() {
+		return strana8;
+	}
+	public VozacModifikacija getStrana11() {
+		return strana11;
 	}
 }

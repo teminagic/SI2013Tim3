@@ -60,14 +60,12 @@ public class TableModelVlasnicka extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-	    Object o = (Object) (data.get(rowIndex).toObjectArray())[columnIndex];
-		return o;
+		return (Object) (data.get(rowIndex).toObjectArray())[columnIndex];
 	}
 
-	@Override //bug
+	@Override
 	public Class<?> getColumnClass(int columnIndex) {
-		Object value = getValueAt(0, columnIndex);
-		return value != null ? value.getClass() : String.class;
+		return getValueAt(0, columnIndex).getClass();
 	}
 	
 	public void clearAll()
@@ -78,8 +76,12 @@ public class TableModelVlasnicka extends AbstractTableModel {
 	}
 	
 	public void addAll(ArrayList<Vlasnicka> novi){
+		if(novi == null)
+			return;
 		int rowCount = this.getRowCount();
 		for(Vlasnicka u : novi){
+			if(u==null)
+				return;
 			data.add(u);
 		}
 		this.fireTableRowsInserted(rowCount, rowCount + novi.size());

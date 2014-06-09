@@ -20,10 +20,10 @@ public class RegistracijaDAOTest {
 	@Test
 	public void testCreate() {
 		VoziloDAO vd=new VoziloDAO();
-		Vozilo vozilo =vd.get(65);
+		Vozilo vozilo =vd.get(1);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(1);
-		Registracija r=new Registracija(100, new Date(), new Date(), vozilo.getId(), osoba.getId());
+		Osoba osoba=od.get(5);
+		Registracija r=new Registracija(100, "123a456", new Date(), new Date(), vozilo, osoba);
 		
 		reg.create(r);
 		assertNotNull(reg.get(100));
@@ -41,20 +41,20 @@ public class RegistracijaDAOTest {
 	@Test
 	public void testUpdate(){
 		VoziloDAO vd=new VoziloDAO();
-		Vozilo vozilo =vd.get(65);
+		Vozilo vozilo =vd.get(1);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(1);
-		Registracija r=new Registracija(100, new Date(), new Date(), vozilo.getId(), osoba.getId());
+		Osoba osoba=od.get(5);
+		Registracija r=new Registracija(100, "123b456", new Date(), new Date(), vozilo, osoba);
 		
 		assertTrue(reg.update(100, r));
 	}
 	@Test
 	public void testDelete(){
 		VoziloDAO vd=new VoziloDAO();
-		Vozilo vozilo =vd.get(65);
+		Vozilo vozilo =vd.get(1);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(1);
-		Registracija r=new Registracija(1050, new Date(), new Date(), vozilo.getId(), osoba.getId());
+		Osoba osoba=od.get(5);
+		Registracija r=new Registracija(1050, "123b456", new Date(), new Date(), vozilo, osoba);
 		reg.create(r);
 		
 		assertTrue(reg.delete(1050));

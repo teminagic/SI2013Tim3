@@ -6,6 +6,8 @@ public class Vlasnicka{
 	Vozilo vozilo;
 	Osoba vlasnik;
 	
+	
+
 	public Vlasnicka() {
 		super();
 	}
@@ -16,7 +18,7 @@ public class Vlasnicka{
 		this.brojDozvole = brojDozvole;
 		this.vozilo = vozilo;
 		this.vlasnik = vlasnik;
-	} 
+	}
 
 
 	public String getBrojDozvole() {
@@ -47,13 +49,9 @@ public class Vlasnicka{
 	public void setVlasnik(Osoba vlasnik) {
 		this.vlasnik = vlasnik;
 	}
-
-	public Object[] toObjectArray() {
-		return new Object[]{ this.brojDozvole, this.vozilo.getRegistarskaOznaka(), this.vlasnik.getIme()+" "+this.vlasnik.getPrezime(), this.vlasnik.getJmbg_Id()
-		};
-
-	}	
-	//public enum VlasnickaPretraga { Broj_potvrde("Broj potvrde"), Registarska_oznaka(""), Ime_prezime("Ime i prezime"), JMBG_vlasnika("JMBG vlasnika") ; 
-
 	
+	//UBACITI PARAMETRE
+	public Object[] toObjectArray() {
+		return new Object[]{this.brojDozvole, this.vozilo.getRegOznaka(), this.vlasnik.getIme(), this.vlasnik.getJmbg_Id() };
+	}	
 }

@@ -26,7 +26,6 @@ public class NaslovnaAdministrator extends JPanel {
 		layoutOstaliSet();
 		// Bio sam sve grupisao, ali onda se nisu vidjeli buttoni za detalje
 		lblSet();
-		btnSet();		
 	}
 	public void layoutGlavniSet(){
 		setBorder(new TitledBorder(null, "Administrator", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -44,8 +43,8 @@ public class NaslovnaAdministrator extends JPanel {
 		GridBagConstraints gbc_lblDobrodoslice = new GridBagConstraints();
 		gbc_lblDobrodoslice.gridwidth = 6;
 		gbc_lblDobrodoslice.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDobrodoslice.gridx = 5;
-		gbc_lblDobrodoslice.gridy = 0;
+		gbc_lblDobrodoslice.gridx = 4;
+		gbc_lblDobrodoslice.gridy = 3;
 		add(lblDobrodoslice, gbc_lblDobrodoslice);
 	}
 	public void layoutOstaliSet()
@@ -66,7 +65,14 @@ public class NaslovnaAdministrator extends JPanel {
 	}
 
 	
+	// Getteri paneli
 
+	// Getteri labele
+	public JLabel  getLblDobrodoslice() {
+		return lblDobrodoslice;
+	}
+
+	
 
 
 }

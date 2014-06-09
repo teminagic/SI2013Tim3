@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import ba.co.edgewise.jmup.daldao.ConnectionManager;
 import ba.co.edgewise.jmup.daldao.interfaces.IGenericDAO;
@@ -23,22 +22,25 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 	public boolean create(Registracija registracija) {
 		boolean success = false;
 		
+		String regOznaka = registracija.getRegistarskaOznaka();
 		Date datumRegist = registracija.getDatumRegistrovanja();
 		Date datumIsteka = registracija.getDatumIsteka();
-		int idVozila = registracija.getVozilo();
-		int idOsobe = registracija.getOsoba();
+		int idVozila = registracija.getVozilo().getId();
+		int idOsobe = registracija.getOsoba().getId();
+		int idRegistracije=registracija.getId();
 		
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 		
 		try {
 			PreparedStatement statement = connection
-					.prepareStatement("INSERT INTO Registracija(Od, Do, Vozilo, Osoba) VALUES (?, ?, ?, ?)");
+					.prepareStatement("INSERT INTO Registracija(RegistarskaOznaka, Od, Do, Vozilo, Osoba) VALUES (?, ?, ?, ?, ?)");
 		
-			statement.setDate(1, new java.sql.Date(datumRegist.getTime()));
-			statement.setDate(2, new java.sql.Date(datumIsteka.getTime()));
-			statement.setInt(3, idVozila);
-			statement.setInt(4, idOsobe);
+			statement.setString(1, regOznaka);
+			statement.setDate(2, new java.sql.Date(datumRegist.getTime()));
+			statement.setDate(3, new java.sql.Date(datumIsteka.getTime()));
+			statement.setInt(4, idVozila);
+			statement.setInt(5, idOsobe);
 
 			statement.executeUpdate();
 			success = true;
@@ -73,12 +75,15 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 			
 			if(qResult.next()){
 				result.setId(qResult.getInt("IDRegistracije"));
+				result.setRegistarskaOznaka(qResult.getString("RegistarskaOznaka"));
 				result.setDatumRegistrovanja(qResult.getDate("Od"));
 				result.setDatumIsteka(qResult.getDate("Do"));
 				
-				result.setVozilo(qResult.getInt("Vozilo"));
+				VoziloDAO vDAO = new VoziloDAO();
+				result.setVozilo(vDAO.get(qResult.getInt("Vozilo")));
 				
-				result.setOsoba(qResult.getInt("Osoba"));
+				OsobaDAO oDAO = new OsobaDAO();
+				result.setOsoba(oDAO.get(qResult.getInt("Osoba")));
 			}
 			
 		} catch (SQLException e) {
@@ -114,14 +119,15 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 				Registracija temp = new Registracija();
 				
 				temp.setId(qResult.getInt("IDRegistracije"));
+				temp.setRegistarskaOznaka(qResult.getString("RegistarskaOznaka"));
 				temp.setDatumRegistrovanja(qResult.getDate("Od"));
 				temp.setDatumIsteka(qResult.getDate("Do"));
 				
-
-				temp.setVozilo(qResult.getInt("Vozilo"));
+				VoziloDAO vDAO = new VoziloDAO();
+				temp.setVozilo(vDAO.get(qResult.getInt("Vozilo")));
 				
-
-				temp.setOsoba(qResult.getInt("Osoba"));
+				OsobaDAO oDAO = new OsobaDAO();
+				temp.setOsoba(oDAO.get(qResult.getInt("Osoba")));
 				
 				result.add(temp);
 				} 
@@ -144,16 +150,17 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 		try {
 			PreparedStatement statement = 	connection.prepareStatement(
 					"UPDATE `Registracija`" 
-					+" SET Od = ? , Do = ?, "
+					+" SET RegistarskaOznaka = ?, Od = ? , Do = ?, "
 					+ "Vozilo = ?, Osoba = ?" 
 					+" WHERE IDRegistracije = ? "
 					);
 
-			statement.setDate(1, new java.sql.Date(r.getDatumRegistrovanja().getTime()));
-			statement.setDate(2, new java.sql.Date(r.getDatumIsteka().getTime()));
-			statement.setInt(3, r.getVozilo());
-			statement.setInt(4, r.getOsoba());
-			statement.setInt(5, id);
+			statement.setString(1, r.getRegistarskaOznaka());
+			statement.setDate(2, new java.sql.Date(r.getDatumRegistrovanja().getTime()));
+			statement.setDate(3, new java.sql.Date(r.getDatumIsteka().getTime()));
+			statement.setInt(4, r.getVozilo().getId());
+			statement.setInt(5, r.getOsoba().getId());
+			statement.setInt(6, id);
 			
 			statement.executeUpdate();
 			
@@ -168,6 +175,44 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 		return success;
 	}
 
+	public ArrayList<String> getAllRegistracijeIstekle() throws ParseException
+	 	{
+	 		ArrayList<String> result = new ArrayList<String>();
+	 
+	 		ConnectionManager manager = new ConnectionManager();
+	 		Connection connection = manager.getConnection();
+	 		
+	 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	 		Date d = new Date();
+	 		String date = sdf.format(d);
+	 		
+	 		Date now = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+	 		// Pocetak pripreme upita
+	 		ResultSet qResult = null;
+	 
+	 		try {
+	 			
+	 			PreparedStatement statement = connection
+	 			.prepareStatement("SELECT * " + "FROM `Registracija` " + "WHERE Do < ?");
+	 			statement.setDate(1, new java.sql.Date(now.getTime()));
+	 			qResult = statement.executeQuery();
+	 		// Dobavljanje rezultata
+	 			while (qResult.next()) {
+	 				String temp = qResult.getString("RegistarskaOznaka");
+	 				result.add(temp);
+	 			}
+	 
+	 		} catch (SQLException e) {
+	 			e.printStackTrace();
+	 	} finally {
+	 			ConnectionManager.closeConnection(connection);
+	 		}
+	 
+	 		return result;
+	 	}
+	
+	
+	
 	public boolean updateSaIDVozila(Integer idVozila, Date odKad, Date doKad) {
 		boolean success = false;
 		
@@ -224,59 +269,19 @@ public class RegistracijaDAO implements IGenericDAO<Registracija, Integer> {
 			ConnectionManager.closeConnection(connection);
 		}
 		
-		return success;
+		return success;//
 	}
 	
-	public ArrayList<String> getAllRegistracijeIstekle() throws ParseException
-	{
-		ArrayList<String> result = new ArrayList<String>();
-
-		ConnectionManager manager = new ConnectionManager();
-		Connection connection = manager.getConnection();
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date d = new Date();
-		String date = sdf.format(d);
-		
-		Date now = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-		// Pocetak pripreme upita
-		ResultSet qResult = null;
-
-		try {
-			
-			PreparedStatement statement = connection
-					.prepareStatement("SELECT * " + "FROM `Registracija` " + "WHERE Do < ?");
-			statement.setDate(1, new java.sql.Date(now.getTime()));
-			qResult = statement.executeQuery();
-			// Dobavljanje rezultata
-			while (qResult.next()) {
-				String temp = qResult.getString("Vozilo");
-				result.add(temp);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			ConnectionManager.closeConnection(connection);
-		}
-
-		return result;
-	}
-	
-	
-	public static void main(String[] args) throws ParseException {
+	/*public static void main(String[] args) throws ParseException {
 		RegistracijaDAO rDAO = new RegistracijaDAO();
 		VoziloDAO vDAO = new VoziloDAO();
 		OsobaDAO oDAO = new OsobaDAO();
-		Vozilo v = vDAO.getByReg("1");
-		Osoba o = oDAO.getByJMBG("2");
+		Vozilo v = vDAO.getByReg("87");
+		Osoba o = oDAO.getByJMBG("11111");
 		Date odKad=new SimpleDateFormat("yyyy-MM-dd").parse("1991-2-1");
 		Date doKad=new SimpleDateFormat("yyyy-MM-dd").parse("1992-2-1");
-		ArrayList<String> a = new ArrayList<>();
-		//v.delete(65);
-		a= rDAO.getAllRegistracijeIstekle();
-		//Registracija r = new Registracija(5,odKad, doKad, v,o);
-		//System.out.print(rDAO.create(r));
-	}
+		Registracija r = new Registracija(5, "b-b",odKad, doKad, v,o);
+		System.out.print(rDAO.create(r));
+	}*/
 	
 }

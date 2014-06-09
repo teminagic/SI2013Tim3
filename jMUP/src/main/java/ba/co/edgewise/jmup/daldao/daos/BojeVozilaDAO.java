@@ -25,7 +25,9 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 		BojaDAO bDAO = new BojaDAO();
 		Integer boja = bDAO.getID(bv.getBoja()); 
 
-		Integer v = bv.getVoziloId();
+		VoziloDAO vDAO = new VoziloDAO();
+		Vozilo v = vDAO.get(bv.getVozilo().getId());
+		Integer vozilo = v.getId();
 
 		String tip = bv.getTip();
 
@@ -42,7 +44,7 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 			statement.setString(2, vrsta.toString());
 			statement.setInt(3, boja);
 			statement.setString(4,tip );
-			statement.setInt(5,v);
+			statement.setInt(5,vozilo);
 
 			statement.executeUpdate();
 			success = true;
@@ -64,7 +66,7 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Po�etak pripreme upita
+		// Pocetak pripreme upita
 		ResultSet qResult = null;
 
 		try {
@@ -82,8 +84,10 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 				Boja boja = bDAO.get(qResult.getInt("Boja"));
 				result.setBoja(boja); 
 				
-
-				result.setVoziloId(qResult.getInt("Vozilo"));
+				VoziloDAO vDAO = new VoziloDAO();
+				Vozilo v = vDAO.get(qResult.getInt("Vozilo"));
+				result.setId(qResult.getInt("IDBojeVozila"));
+				result.setVozilo(v);
 				result.setNijansa((NijansaBoje.getNijansaBoje(qResult
 						.getString("Nijansa"))));
 				result.setVrsta((VrstaBoje.getVrstaBoje(qResult
@@ -108,7 +112,7 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Po�etak pripreme upita
+		// Pocetak pripreme upita
 		ResultSet qResult = null;
 
 		try {
@@ -121,11 +125,15 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 			while (qResult.next()) {
 				BojaVozila temp = new BojaVozila();
 				
+				temp.setId(qResult.getInt("IDBojeVozila"));
+				
 				BojaDAO bDAO = new BojaDAO();
 				Boja boja = bDAO.get(qResult.getInt("Boja"));				
 				temp.setBoja(boja);
-
-				temp.setVoziloId(qResult.getInt("Vozilo"));
+				
+				VoziloDAO vDAO = new VoziloDAO();
+				Vozilo v = vDAO.get(qResult.getInt("Vozilo"));
+				temp.setVozilo(v);
 				temp.setNijansa((NijansaBoje.getNijansaBoje(qResult
 						.getString("Nijansa"))));
 				temp.setVrsta((VrstaBoje.getVrstaBoje(qResult
@@ -157,7 +165,7 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 		BojaDAO bDAO = new BojaDAO();
 		Integer boja = bDAO.getID(bv.getBoja());
 		
-		Integer vozilo = bv.getVoziloId();
+		Integer vozilo = bv.getVozilo().getId();
 		
 		String tip = bv.getTip();
 
@@ -168,14 +176,15 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 		try {
 			PreparedStatement statement = connection
 					.prepareStatement("UPDATE `BojeVozila`"
-							+ " SET Nijansa = ?, Vrsta= ? , Boja= ? , Tip= ?"
-							+ " WHERE Vozilo = ?");
+							+ " SET Nijansa = ?, Vrsta= ? , Boja= ? , Tip= ?, Vozilo= ?"
+							+ " WHERE IDBojeVozila = ?");
 
 			statement.setString(1, nijansa.toString());
 			statement.setString(2, vrsta.toString());
 			statement.setInt(3, boja);
 			statement.setString(4, tip);
 			statement.setInt(5, vozilo);
+			statement.setInt(6, id);
 
 			statement.executeUpdate();
 			success = true;
@@ -212,19 +221,6 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 			ConnectionManager.closeConnection(connection);
 		}
 		return success;
-
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		VoziloDAO vdao = new VoziloDAO();
-		Vozilo vozilo=vdao.get(1);
-		
-		BojeVozilaDAO b=new BojeVozilaDAO();
-		BojaVozila bv=new BojaVozila(Boja.CRNA, 67 , NijansaBoje.STANDARDNA, VrstaBoje.METALIK, "tip" );
-		//Boja boja, Vozilo vozilo, NijansaBoje nijansa,
-		//VrstaBoje vrsta, String tip
-		b.getAll();
 
 	}
 

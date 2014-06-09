@@ -14,6 +14,7 @@ public class MeniBossOpcije extends JPanel {
 	private static final long serialVersionUID = 7313645690322305071L;
 	private JButton btnPocetna;
 	private JButton btnOdjava;
+	private JButton btnPregledLogova;
 	private JButton btnPretraga;
 	private JButton btnIzradaIzvjetaja;
 	private GridBagLayout gridBagLayoutMeniBossOpcije;
@@ -34,7 +35,7 @@ public class MeniBossOpcije extends JPanel {
 		setLayout(gridBagLayoutMeniBossOpcije);
 	}
 	public void btnSet(){
-		btnPocetna = new JButton("PoÄ�etna");
+		btnPocetna = new JButton("Po\u010Detna");
 		GridBagConstraints gbc_btnPocetna = new GridBagConstraints();
 		gbc_btnPocetna.insets = new Insets(0, 0, 5, 0);
 		gbc_btnPocetna.fill = GridBagConstraints.HORIZONTAL;
@@ -50,29 +51,30 @@ public class MeniBossOpcije extends JPanel {
 		gbc_btnPretraga.gridy = 1;
 		add(btnPretraga, gbc_btnPretraga);
 		
-		btnIzradaIzvjetaja = new JButton("Izrada izvjeÅ¡taja");
+		btnIzradaIzvjetaja = new JButton("Izrada izvje\u0161taja");
 		GridBagConstraints gbc_btnIzradaIzvjetaja = new GridBagConstraints();
 		gbc_btnIzradaIzvjetaja.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnIzradaIzvjetaja.insets = new Insets(0, 0, 5, 0);
 		gbc_btnIzradaIzvjetaja.gridx = 0;
 		gbc_btnIzradaIzvjetaja.gridy = 2;
 		add(btnIzradaIzvjetaja, gbc_btnIzradaIzvjetaja);
-	}
-	public void panelSet(){
+		
+		btnPregledLogova = new JButton("Pregled historije promjena");
+		GridBagConstraints gbc_btnPregledLogova = new GridBagConstraints();
+		gbc_btnPregledLogova.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnPregledLogova.insets = new Insets(0, 0, 5, 0);
+		gbc_btnPregledLogova.gridx = 0;
+		gbc_btnPregledLogova.gridy = 3;
+		add(btnPregledLogova, gbc_btnPregledLogova);
 		btnOdjava = new JButton("Odjava");
 		GridBagConstraints gbc_btnOdjava = new GridBagConstraints();
 		gbc_btnOdjava.insets = new Insets(0, 0, 5, 0);
 		gbc_btnOdjava.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnOdjava.gridx = 0;
-		gbc_btnOdjava.gridy = 3;
+		gbc_btnOdjava.gridy = 5;
 		add(btnOdjava, gbc_btnOdjava);
-		JPanel panelEmpty = new JPanel();
-		GridBagConstraints gbc_panelEmpty = new GridBagConstraints();
-		gbc_panelEmpty.insets = new Insets(0, 0, 5, 0);
-		gbc_panelEmpty.fill = GridBagConstraints.BOTH;
-		gbc_panelEmpty.gridx = 0;
-		gbc_panelEmpty.gridy = 4;
-		add(panelEmpty, gbc_panelEmpty);
+	}
+	public void panelSet(){
 	}
 	public JButton getBtnPocetna() {
 		return btnPocetna;
@@ -80,7 +82,10 @@ public class MeniBossOpcije extends JPanel {
 	public JButton getBtnOdjava() {
 		return btnOdjava;
 	}
-	public JButton getBtnIzradaIzvjestaja() {
+	public JButton getBtnPregledLogova() {
+		return btnPregledLogova;
+	}
+	public JButton getBtnIzradaIzvjetaja() {
 		return btnIzradaIzvjetaja;
 	}
 	public JButton getBtnPretraga() {
