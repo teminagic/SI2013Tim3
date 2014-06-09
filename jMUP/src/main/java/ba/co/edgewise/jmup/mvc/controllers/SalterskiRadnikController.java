@@ -1136,22 +1136,23 @@ public class SalterskiRadnikController {
 	public boolean provjeriPopunjenostUnosVozila() {
 		String ip = "^[A-z]+$";
 		String no = "^\\d+$";
+		String ipn= "^[A-zÈÆŠÐŽèæšðž]+$";
 
-		if (!view.getVoziloDodavanje().getTf_tipVozila().getText().matches(ip)) {
+		if (!view.getVoziloDodavanje().getTf_tipVozila().getText().matches(ipn)) {
 			JOptionPane.showOptionDialog(view,
 					"Pogre\u0161no ste unijeli tip vozila.", "Unos vozila",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
 					null, new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTf_modelVozila().getText()
-				.matches("^[a-zA-Z0-9]+$")) {
+				.matches("^[a-zA-Z0-9ÈÆŠÐŽèæšðž]+$")) {
 			JOptionPane.showOptionDialog(view,
 					"Pogre\u0161no ste unijeli model vozila.", "Unos vozila",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
 					null, new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTf_markaVozila().getText()
-				.matches(ip)) {
+				.matches(ipn)) {
 			JOptionPane.showOptionDialog(view,
 					"Pogre\u0161no ste unijeli marku vozila.", "Unos vozila",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -1198,7 +1199,7 @@ public class SalterskiRadnikController {
 					new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTf_karoserija().getText()
-				.matches(ip)) {
+				.matches(ipn)) {
 			JOptionPane.showOptionDialog(view,
 					"Pogre\u0161no ste unijeli karoseriju za vozilo.",
 					"Unos vozila", JOptionPane.OK_OPTION,
@@ -1206,7 +1207,7 @@ public class SalterskiRadnikController {
 					new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTf_brojSasije().getText()
-				.matches("^[a-zA-Z0-9]+$")) {
+				.matches("^[a-zA-Z0-9ÈÆŠÐŽèæšðž]+$")) {
 			JOptionPane.showOptionDialog(view,
 					"Pogre\u0161no ste unijeli broj  \u0161asije vozila.",
 					"Unos vozila", JOptionPane.OK_OPTION,
@@ -1237,7 +1238,7 @@ public class SalterskiRadnikController {
 					null, new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTb_bojaVozila().getText()
-				.matches(ip)) {
+				.matches(ipn)) {
 			JOptionPane.showOptionDialog(view,
 					"Pogre\u0161no ste unijeli boju vozila.", "Unos vozila",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -1407,14 +1408,15 @@ public class SalterskiRadnikController {
 
 	public boolean provjeriPopunjenostVozaca() {
 		String ip = "^[A-z]+$";
-		if (!view.getStrana2().getTfIme().getText().matches(ip)) {
+		String ipn="^[A-zÈÆŠÐŽèæšðž]+$";
+		if (!view.getStrana2().getTfIme().getText().matches(ipn)) {
 			JOptionPane.showOptionDialog(view,
 					"Ime se mora sastojati samo od slova.", "Unos voza\u010Da",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
 					null, new String[] { "Uredu" }, "default");
 			return false;
 		}
-		if (!view.getStrana2().getTfPrezime().getText().matches(ip)) {
+		if (!view.getStrana2().getTfPrezime().getText().matches(ipn)) {
 			JOptionPane.showOptionDialog(view,
 					"Prezime se mora sastojati samo od slova.",
 					"Unos voza\u010Da", JOptionPane.OK_OPTION,
@@ -1422,7 +1424,7 @@ public class SalterskiRadnikController {
 					new String[] { "Uredu" }, "default");
 			return false;
 		}
-		if (!view.getStrana2().getTfOpcina().getText().matches(ip)) {
+		if (!view.getStrana2().getTfOpcina().getText().matches(ipn)) {
 			JOptionPane.showOptionDialog(view,
 					"Op\u0107ina se mora sastojati samo od slova.",
 					"Unos voza\u010Da", JOptionPane.OK_OPTION,
@@ -1430,7 +1432,7 @@ public class SalterskiRadnikController {
 					new String[] { "Uredu" }, "default");
 			return false;
 		}
-		if (!view.getStrana2().getTfMjesto().getText().matches(ip)) {
+		if (!view.getStrana2().getTfMjesto().getText().matches(ipn)) {
 			JOptionPane.showOptionDialog(view,
 					"Mjesto se mora sastojati samo od slova.",
 					"Unos voza\u010Da", JOptionPane.OK_OPTION,
@@ -1439,7 +1441,7 @@ public class SalterskiRadnikController {
 			return false;
 		}
 		if (!view.getStrana2().getTfAdresa().getText()
-				.matches("^[a-zA-Z0-9]+\\s?[a-zA-Z0-9]+$")) {
+				.matches("^[a-zA-Z0-9ÈÆŠÐŽèæšðž]+\\s?[a-zA-Z0-9ÈÆŠÐŽèæšðž]+$")) {
 			JOptionPane.showOptionDialog(view,
 					"Neispravna adresa. Primjer unosa: \"Adresa 54\".",
 					"Unos voza\u010Da", JOptionPane.OK_OPTION,

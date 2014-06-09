@@ -206,7 +206,7 @@ public class SalterskiRadnikView extends JFrame {
 		nova.modificirajVozaca();
 	}
 	
-	public void pozoviModifikacijuVozacaSaobraćajna()
+	public void pozoviModifikacijuVozacaSaobracajna()
 	{
 		
 	}
