@@ -54,6 +54,8 @@ public class SalterskiRadnikView extends JFrame {
 	private PromjenaVlasnikaVozila strana8;
 	private VoziloModifikacija strana10;
 	private VozacModifikacija strana11;
+	private VoziloModifikacija strana13;
+	private VozacModifikacija strana12;
 	
 	private final SalterskiRadnikView frejm = this;
 	/**
@@ -135,6 +137,9 @@ public class SalterskiRadnikView extends JFrame {
 		});
 		sadrzaj.getPanelSadrzaj().add(strana11, "Modifikacija voza\u010Da");
 		
+		strana12 = new VozacModifikacija(null);
+		sadrzaj.getPanelSadrzaj().add(strana12, "Modifikacija voza\u010Da");
+		
 		contentPane.add(sadrzaj, gbc_sadrzaj);
 		
 
@@ -150,6 +155,11 @@ public class SalterskiRadnikView extends JFrame {
 	{
 		ModifikacijaVozaca nova = new ModifikacijaVozaca(this);
 		nova.modificirajVozaca();
+	}
+	
+	public void pozoviModifikacijuVozacaSaobraćajna()
+	{
+		
 	}
 	
 	public SalterskaPretraga getStrana6() {
