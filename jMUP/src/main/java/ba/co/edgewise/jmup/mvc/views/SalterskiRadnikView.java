@@ -133,7 +133,7 @@ public class SalterskiRadnikView extends JFrame {
 				pozoviModifikacijuVozaca();
 			}
 		});
-		sadrzaj.getPanelSadrzaj().add(strana11, "Modifikacija vozaca");
+		sadrzaj.getPanelSadrzaj().add(strana11, "Modifikacija voza\u010Da");
 		
 		contentPane.add(sadrzaj, gbc_sadrzaj);
 		
@@ -230,7 +230,7 @@ public class SalterskiRadnikView extends JFrame {
 	
 	public void prikaziModifikacijuVozaca()
 	{
-		frejm.getSadrzaj().getNaslov().postaviNaslov("Modifikacija vozača");
+		frejm.getSadrzaj().getNaslov().postaviNaslov("Modifikacija voza\u010Da");
 		
 		int selektovano = this.getStrana6().getPanel_vozac().getTable().getSelectedRow();
 		TableModelVozac modelTabele = this.getStrana6().getPanel_vozac().getModel();
@@ -242,7 +242,7 @@ public class SalterskiRadnikView extends JFrame {
 		
 		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout)cards.getLayout();
-		tmp.show(cards, "Modifikacija vozaca");
+		tmp.show(cards, "Modifikacija voza\u010Da");
 	}
 	
 	public JPanel getContentPane() {

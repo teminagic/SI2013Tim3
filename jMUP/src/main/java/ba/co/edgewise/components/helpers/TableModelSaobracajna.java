@@ -15,7 +15,7 @@ public class TableModelSaobracajna extends AbstractTableModel {
 			"Broj potvrde",
 			"Registarska oznaka", 
 			"Ime i prezime", 
-			"JMBG vozaÄ�a"
+			"JMBG voza\u010Da"
 			};
 	private ArrayList<Saobracajna> data;
 

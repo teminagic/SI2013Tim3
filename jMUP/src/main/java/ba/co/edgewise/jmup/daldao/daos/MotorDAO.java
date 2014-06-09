@@ -105,7 +105,7 @@ public class MotorDAO implements IGenericDAO<Motor, Integer> {
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Po�etak pripreme upita
+		// Pocetak pripreme upita
 		ResultSet qResult = null;
 
 		try {

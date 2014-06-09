@@ -46,7 +46,7 @@ public class MeniBoss extends JPanel {
 	}
 	public void opcijeSet(){
 		opcije = new MeniBossOpcije();
-		opcije.getBtnIzradaIzvjetaja().setText("Izrada izvještaja");
+		opcije.getBtnIzradaIzvjetaja().setText("Izrada izvje\u0161taja");
 		opcije.getBtnPocetna().setText("Početna");
 		GridBagConstraints gbc_opcije = new GridBagConstraints();
 		gbc_opcije.anchor = GridBagConstraints.NORTH;

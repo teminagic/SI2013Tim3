@@ -61,7 +61,7 @@ public class BossControler {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					if(JOptionPane.showOptionDialog(view, "Eventualne promjene nee biti spa\u0161ene. "
+					if(JOptionPane.showOptionDialog(view, "Eventualne promjene ne\u0107e biti spa\u0161ene. "
 					 		+ "\u017Delite li se odjaviti?",
 							"Potvrda odjave", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
 							null, new String[] {"Da", "Ne"}, "default")== JOptionPane.OK_OPTION)

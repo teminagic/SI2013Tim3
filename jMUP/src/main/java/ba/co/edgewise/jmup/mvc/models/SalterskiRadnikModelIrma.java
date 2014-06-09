@@ -94,7 +94,7 @@ public class SalterskiRadnikModelIrma {
 			s2.add(_saobracajnaDAO.getByReg(vt.getId()));
 			return (s2 == null) ? null : s2;
 		
-		case "JMBG vozača":
+		case "JMBG voza\u010Da":
 			Osoba o = _osobaDAO.getByJMBG(parametar);
 			ArrayList<Saobracajna> s3 = new ArrayList<>();
 			s3.add(_saobracajnaDAO.getByName(o.getId()));	

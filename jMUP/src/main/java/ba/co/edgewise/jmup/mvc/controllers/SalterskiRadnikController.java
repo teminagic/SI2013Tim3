@@ -1362,7 +1362,7 @@ public class SalterskiRadnikController {
 		}
 		if(!view.getStrana2().getTfOpcina().getText().matches(ip)){
 			JOptionPane.showOptionDialog(view,
-					"Općina se mora sastojati samo od slova.",
+					"Op\u0107ina se mora sastojati samo od slova.",
 					"Unos voza\u010Da", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
@@ -1445,7 +1445,7 @@ public class SalterskiRadnikController {
 					Osoba osoba = oDAO.getByJMBG(view.getStrana2().getTfIdBroj().getText());
 					if (JOptionPane.showOptionDialog(view,
 							"Osoba ve\u0107 postoji u bazi. "
-									+ "\nDa - Tu osobu tražim. \nNe - Želim unijeti novu osobu.",
+									+ "\nDa - Tu osobu tra\u017Eim. \nNe - Želim unijeti novu osobu.",
 							"Potvrda odjave", JOptionPane.OK_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, new String[] {
 									"Da", "Ne" }, "default") == JOptionPane.OK_OPTION){
@@ -1502,7 +1502,7 @@ public class SalterskiRadnikController {
 					Osoba osoba = oDAO.getByJMBG(view.getStrana2().getTfJMBG().getText());
 					if (JOptionPane.showOptionDialog(view,
 							"Osoba ve\u0107 postoji u bazi. "
-									+ "\nDa - Tu osobu tražim. \nNe - Želim unijeti novu osobu.",
+									+ "\nDa - Tu osobu tra\u017Eim. \nNe - Želim unijeti novu osobu.",
 							"Potvrda odjave", JOptionPane.OK_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, new String[] {
 									"Da", "Ne" }, "default") == JOptionPane.OK_OPTION){
@@ -1564,7 +1564,7 @@ public class SalterskiRadnikController {
 				if (v.getBrojSasije().equals(brojSasije)) {
 					if(JOptionPane.showOptionDialog(view,
 							"Vozilo ve\u0107 postoji u bazi. "
-									+ "\nDa - To vozilo tražim. \nNe - Želim unijeti novo vozilo.",
+									+ "\nDa - To vozilo tra\u017Eim. \nNe - Želim unijeti novo vozilo.",
 							"Unos vozila", JOptionPane.OK_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, new String[] {
 									"Da", "Ne" }, "default") == JOptionPane.OK_OPTION){

@@ -53,7 +53,7 @@ public class LoginController {
 				if(provjeriCredentials()){
 					getNext();
 				} else{
-					JOptionPane.showMessageDialog(null, "Progre�an Username/Password!");
+					JOptionPane.showMessageDialog(null, "Progre\u0161an Username/Password!");
 				};
 			}
 		});

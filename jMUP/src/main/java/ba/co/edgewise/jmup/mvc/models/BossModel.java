@@ -203,15 +203,15 @@ public class BossModel {
  
             document.open();
             document.addTitle("JMUP");
-            document.addSubject("Izvjestaj");
-            document.addKeywords("Izvještaj JMUP");
+            document.addSubject("Izvje\u0161taj");
+            document.addKeywords("Izvje\u0161taj JMUP");
             
             
             
             document.add(new Paragraph("Izvjestaj " +  new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getYear()));
             if(podaci.size() == 0)
             {
-            	document.add(new Paragraph("Nema ne vazecih tablica"));
+            	document.add(new Paragraph("Nema neva\u017Ee\u0107ih tablica"));
             }
             else
             {

@@ -41,13 +41,13 @@ public class ShowDialogInput {
 	 		  try {
 				success = b.ekstraktToPDF(b.getIstekleRegistracije(), path);
 				if(success)
-		 			  JOptionPane.showMessageDialog(null, "Izvjestaj je kreiran ", "jMUP", 1);
+		 			  JOptionPane.showMessageDialog(null, "Izvje\u0161taj je kreiran ", "jMUP", 1);
 		 		  else
-		 			  JOptionPane.showMessageDialog(null, "Doslo je do greske, provjerite lokaciju za snimanje da nije zasticena", "jMUP", 1);
+		 			  JOptionPane.showMessageDialog(null, "Do\u0161lo je do gre\u0161ke, provjerite lokaciju za snimanje da nije za\u0161ti\u0107ena", "jMUP", 1);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-	 			  JOptionPane.showMessageDialog(null, "Doslo je do greske, provjerite lokaciju za snimanje da nije zasticena", "jMUP", 1);
+	 			  JOptionPane.showMessageDialog(null, "Do\u0161lo je do gre\u0161ke, provjerite lokaciju za snimanje da nije za\u0161ti\u0107ena", "jMUP", 1);
 	 			
 			}
 	 		 
@@ -70,9 +70,9 @@ public class ShowDialogInput {
 	          boolean success;
 	 		  success = b.ekstraktToPDF(b.getBrojDozvola(), path);
 	 		  if(success)
-				  JOptionPane.showMessageDialog(null, "Izvjestaj je kreiran ", "jMUP", 1);
+				  JOptionPane.showMessageDialog(null, "Izvje\u0161taj je kreiran ", "jMUP", 1);
 			  else
-				  JOptionPane.showMessageDialog(null, "Doslo je do greske, provjerite lokaciju za snimanje da nije zasticena", "jMUP", 1);
+				  JOptionPane.showMessageDialog(null, "Do\u0161lo je do gre\u0161ke, provjerite lokaciju za snimanje da nije za\u0161ti\u0107ena", "jMUP", 1);
 	 		  
 
 	        }

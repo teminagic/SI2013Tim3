@@ -59,7 +59,7 @@ public class BossView extends JFrame {
 		gbc_meni.insets = new Insets(0, 5, 0, 5);
 		contentPane.add(meni, gbc_meni);
 		
-		sadrzaj = new OpcijaSadrzaj("Početna");
+		sadrzaj = new OpcijaSadrzaj("Po\u010Detna");
 		gbc_naslov = new GridBagConstraints();
 		gbc_naslov.anchor = GridBagConstraints.NORTH;
 		gbc_naslov.fill = GridBagConstraints.HORIZONTAL;

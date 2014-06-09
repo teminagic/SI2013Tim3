@@ -35,7 +35,7 @@ public class MeniBossOpcije extends JPanel {
 		setLayout(gridBagLayoutMeniBossOpcije);
 	}
 	public void btnSet(){
-		btnPocetna = new JButton("Početna");
+		btnPocetna = new JButton("Po\u010Detna");
 		GridBagConstraints gbc_btnPocetna = new GridBagConstraints();
 		gbc_btnPocetna.insets = new Insets(0, 0, 5, 0);
 		gbc_btnPocetna.fill = GridBagConstraints.HORIZONTAL;
@@ -51,7 +51,7 @@ public class MeniBossOpcije extends JPanel {
 		gbc_btnPretraga.gridy = 1;
 		add(btnPretraga, gbc_btnPretraga);
 		
-		btnIzradaIzvjetaja = new JButton("Izrada izvještaja");
+		btnIzradaIzvjetaja = new JButton("Izrada izvje\u0161taja");
 		GridBagConstraints gbc_btnIzradaIzvjetaja = new GridBagConstraints();
 		gbc_btnIzradaIzvjetaja.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnIzradaIzvjetaja.insets = new Insets(0, 0, 5, 0);

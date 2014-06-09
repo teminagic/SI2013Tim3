@@ -38,7 +38,7 @@ public class GodisnjaOvjeraPretraga extends JPanel {
 	} 
 	
 	public void labelSet(){
-		lblId = new JLabel("Identifikacijski broj saobraćajne dozvole:");
+		lblId = new JLabel("Identifikacijski broj saobra\u0107ajne dozvole:");
 		GridBagConstraints gbc_lblId = new GridBagConstraints();
 		gbc_lblId.insets = new Insets(0, 0, 5, 5);
 		gbc_lblId.gridx = 1;

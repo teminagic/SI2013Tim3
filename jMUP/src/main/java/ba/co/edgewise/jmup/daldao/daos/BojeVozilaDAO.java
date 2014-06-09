@@ -66,7 +66,7 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Po�etak pripreme upita
+		// Pocetak pripreme upita
 		ResultSet qResult = null;
 
 		try {
@@ -112,7 +112,7 @@ public class BojeVozilaDAO implements IGenericDAO<BojaVozila, Integer> {
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Po�etak pripreme upita
+		// Pocetak pripreme upita
 		ResultSet qResult = null;
 
 		try {

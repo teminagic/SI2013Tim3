@@ -45,7 +45,7 @@ public class MeniSalterOpcije extends JPanel {
 		setLayout(gridBagLayoutMeniSalterOpcije);
 	}
 	public void btnSet(){
-		btnPocetna = new JButton("Početna");
+		btnPocetna = new JButton("Po\u010Detna");
 		GridBagConstraints gbc_btnPocetna = new GridBagConstraints();
 		gbc_btnPocetna.insets = new Insets(0, 0, 5, 0);
 		gbc_btnPocetna.fill = GridBagConstraints.BOTH;
@@ -53,7 +53,7 @@ public class MeniSalterOpcije extends JPanel {
 		gbc_btnPocetna.gridy = 0;
 		add(btnPocetna, gbc_btnPocetna);
 		
-		btnUnosVozaca = new JButton("Unos vozača");
+		btnUnosVozaca = new JButton("Unos voza\u010Da");
 		GridBagConstraints gbc_btnUnosVozaca = new GridBagConstraints();
 		gbc_btnUnosVozaca.fill = GridBagConstraints.BOTH;
 		gbc_btnUnosVozaca.insets = new Insets(0, 0, 5, 0);
@@ -69,7 +69,7 @@ public class MeniSalterOpcije extends JPanel {
 		gbc_btnUnosVozila.gridy = 2;
 		add(btnUnosVozila, gbc_btnUnosVozila);
 		
-		btnUnosVlasnicke = new JButton("Unos vlasničke dozvole");
+		btnUnosVlasnicke = new JButton("Unos vlasni\u010Dke dozvole");
 		GridBagConstraints gbc_btnUnosVlasnicke = new GridBagConstraints();
 		gbc_btnUnosVlasnicke.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnUnosVlasnicke.insets = new Insets(0, 0, 5, 0);
@@ -77,7 +77,7 @@ public class MeniSalterOpcije extends JPanel {
 		gbc_btnUnosVlasnicke.gridy = 3;
 		add(btnUnosVlasnicke, gbc_btnUnosVlasnicke);
 		
-		btnUnosSaobracajne = new JButton("Unos saobraćajne dozvole");
+		btnUnosSaobracajne = new JButton("Unos saobra\u0107ajne dozvole");
 		GridBagConstraints gbc_btnUnosSaobracajne = new GridBagConstraints();
 		gbc_btnUnosSaobracajne.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnUnosSaobracajne.insets = new Insets(0, 0, 5, 0);
@@ -93,7 +93,7 @@ public class MeniSalterOpcije extends JPanel {
 		gbc_btnPretraga.gridy = 5;
 		add(btnPretraga, gbc_btnPretraga);
 		
-		btnOvjera = new JButton("Godišnja ovjera registracije");
+		btnOvjera = new JButton("Godi\u0161nja ovjera registracije");
 		GridBagConstraints gbc_btnOvjera = new GridBagConstraints();
 		gbc_btnOvjera.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnOvjera.insets = new Insets(0, 0, 5, 0);
@@ -109,7 +109,7 @@ public class MeniSalterOpcije extends JPanel {
 		gbc_btnPromjenaVlasnika.gridy = 7;
 		add(btnPromjenaVlasnika, gbc_btnPromjenaVlasnika);
 		
-		btnIzvjestaji = new JButton("Izrada izvještaja");
+		btnIzvjestaji = new JButton("Izrada izvje\u0161taja");
 		GridBagConstraints gbc_btnIzvjestaji = new GridBagConstraints();
 		gbc_btnIzvjestaji.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnIzvjestaji.insets = new Insets(0, 0, 5, 0);

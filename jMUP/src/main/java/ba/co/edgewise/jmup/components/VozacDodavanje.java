@@ -140,7 +140,7 @@ public class VozacDodavanje extends JPanel {
 		gbc_lblMjesto.gridy = 1;
 		panelPrebivaliste.add(lblMjesto, gbc_lblMjesto);
 
-		lblOpcina = new JLabel("Općina");
+		lblOpcina = new JLabel("Op\u0107ina");
 		GridBagConstraints gbc_lblOpcina = new GridBagConstraints();
 		gbc_lblOpcina.anchor = GridBagConstraints.EAST;
 		gbc_lblOpcina.insets = new Insets(0, 0, 0, 5);
@@ -247,7 +247,7 @@ public class VozacDodavanje extends JPanel {
 		panelPodaci.add(pravno, gbc_pravno);
 		tipLica.add(pravno);
 
-		fizicko = new JRadioButton("fizičko");
+		fizicko = new JRadioButton("fizi\u010Dko");
 		GridBagConstraints gbc_fizicko = new GridBagConstraints();
 		gbc_fizicko.insets = new Insets(0, 0, 5, 0);
 		gbc_fizicko.gridx = 2;
@@ -276,7 +276,7 @@ public class VozacDodavanje extends JPanel {
 		gbc_btnPrihvati.gridy = 2;
 		add(btnPrihvati, gbc_btnPrihvati);
 
-		btnPonisti = new JButton("Poništi");
+		btnPonisti = new JButton("Poni\u0161ti");
 		GridBagConstraints gbc_btnPonisti = new GridBagConstraints();
 		gbc_btnPonisti.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnPonisti.insets = new Insets(0, 0, 5, 5);

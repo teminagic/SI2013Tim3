@@ -426,13 +426,13 @@ public class AdminController {
             
             if (processComplete == 0) {
             	JOptionPane.showOptionDialog(view,
-    					"Backup je uspješno kreiran",
+    					"Backup je uspje\u0161no kreiran",
     					"Kreiranje backup-a", JOptionPane.OK_OPTION,
     					JOptionPane.INFORMATION_MESSAGE, null, new String[] { "Uredu" },
     					"default");
             } else {
             	JOptionPane.showOptionDialog(view,
-    					"Došlo je do greške prilikom izrade backupa. Molimo Vas da pokušate ponovo.",
+    					"Došlo je do gre\u0161ke prilikom izrade backupa. Molimo Vas da poku\u0161ate ponovo.",
     					"Kreiranje backup-a", JOptionPane.OK_OPTION,
     					JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
     					"default");
@@ -483,13 +483,13 @@ public class AdminController {
             
             if (processComplete == 0) {
             	JOptionPane.showOptionDialog(view,
-    					"Uspješan povratak na predhodno stanje",
+    					"Uspje\u0161an povratak na predhodno stanje",
     					"Povratak na backup", JOptionPane.OK_OPTION,
     					JOptionPane.INFORMATION_MESSAGE, null, new String[] { "Uredu" },
     					"default");
             } else {
             	JOptionPane.showOptionDialog(view,
-    					"Došlo je do greške prilikom povratak na backup. Molimo Vas da pokušate ponovo.",
+    					"Došlo je do gre\u0161ke prilikom povratak na backup. Molimo Vas da poku\u0161ate ponovo.",
     					"Kreiranje backup-a", JOptionPane.OK_OPTION,
     					JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
     					"default");

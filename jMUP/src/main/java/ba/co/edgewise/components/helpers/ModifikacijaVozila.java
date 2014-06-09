@@ -26,7 +26,7 @@ public class ModifikacijaVozila {
 		
 		if (vDAO.update(tmp.getVozilo().getId(), tmp.getVozilo()) && 
 				bvDAO.update(tmp.getBoja().getId(), tmp.getBoja())){
-			JOptionPane.showOptionDialog(view, "Vozilo uspješno modifikovano.",
+			JOptionPane.showOptionDialog(view, "Vozilo uspje\u0161no modifikovano.",
 					"Modifikovanje vozila", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");

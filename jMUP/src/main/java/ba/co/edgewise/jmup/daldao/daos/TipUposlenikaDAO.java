@@ -21,7 +21,7 @@ public class TipUposlenikaDAO implements
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Poèetak pripreme upita
+		// Pocetak pripreme upita
 		ResultSet qResult = null;
 
 		try {
@@ -56,7 +56,7 @@ public class TipUposlenikaDAO implements
 		ConnectionManager manager = new ConnectionManager();
 		Connection connection = manager.getConnection();
 
-		// Poèetak pripreme upita
+		// Pocetak pripreme upita
 		ResultSet qResult = null;
 
 		try {

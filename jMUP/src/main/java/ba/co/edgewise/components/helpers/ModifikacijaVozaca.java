@@ -21,8 +21,8 @@ public class ModifikacijaVozaca {
 		tmp.postaviVozaca();
 		
 		if (oDAO.update(tmp.getVozac().getId(), tmp.getVozac())){
-			JOptionPane.showOptionDialog(view, "Vozač uspješno modifikovan.",
-					"Modifikovanje vozaca", JOptionPane.OK_OPTION,
+			JOptionPane.showOptionDialog(view, "Voza\u010D uspje\u0161no modifikovan.",
+					"Modifikovanje voza\u010Da", JOptionPane.OK_OPTION,
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
 		}

@@ -127,7 +127,7 @@ public class SalterskaPretraga extends JPanel{
 		gbc_cb_parametri.gridy = 0;
 		okvirPanel.add(cb_parametri, gbc_cb_parametri);
 		
-		btnPretrazi = new JButton("Pretraži");
+		btnPretrazi = new JButton("Pretra\u017Ei");
 		GridBagConstraints gbc_btnPretrazi = new GridBagConstraints();
 		gbc_btnPretrazi.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnPretrazi.insets = new Insets(0, 0, 5, 5);
@@ -214,8 +214,8 @@ public class SalterskaPretraga extends JPanel{
 			
 		panel_pretraga.add(panel_vozilo, "Vozilo");
 		panel_pretraga.add(panel_vozac, "Vozac");
-		panel_pretraga.add(panel_saobracajna, "Saobracajna");
-		panel_pretraga.add(panel_vlasnicka, "Vlasnicka");
+		panel_pretraga.add(panel_saobracajna, "Saobra\u0107ajna");
+		panel_pretraga.add(panel_vlasnicka, "Vlasni\u010Dka");
 
 	}
 
