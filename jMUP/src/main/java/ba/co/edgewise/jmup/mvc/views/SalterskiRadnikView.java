@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -178,7 +179,19 @@ public class SalterskiRadnikView extends JFrame {
 		strana15 = new VoziloModifikacija(null, null);
 		strana15.getBtn_modifikuj().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				pozoviModifikacijuVlasnicke();
+				if(pozoviModifikacijuVlasnicke()){
+					/*JOptionPane.showOptionDialog(null, "Vlasnička uspje\u0161no modifikovana.",
+							"Modifikovanje vlasničke", JOptionPane.OK_OPTION,
+							JOptionPane.INFORMATION_MESSAGE, null,
+							new String[] { "Uredu" }, "default");
+							*/
+				}
+				else{
+					JOptionPane.showOptionDialog(null, "Ispravite greske.",
+							"Modifikovanje vlasničke", JOptionPane.OK_OPTION,
+							JOptionPane.INFORMATION_MESSAGE, null,
+							new String[] { "Uredu" }, "default");
+				}
 			}
 		});
 		sadrzaj.getPanelSadrzaj().add(strana15, "Modifikacija vozila vlasnicka");
@@ -189,8 +202,8 @@ public class SalterskiRadnikView extends JFrame {
 
 	}
 	
-	public void pozoviModifikacijuVlasnicke(){
-		novaV.modificirajVlasnicku();
+	public boolean pozoviModifikacijuVlasnicke(){
+		return novaV.modificirajVlasnicku();
 	}
 	
 	public void pozoviModifikacijuSaobracajne()
