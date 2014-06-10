@@ -253,7 +253,7 @@ public ArrayList<Vozilo> pretragaVozilo( String parametar, String kriterij ) {
             document.add(new Paragraph(poruka));
             if(podaci.size() == 0)
             {
-            	document.add(new Paragraph("Nema nevažečih tablica"));
+            	document.add(new Paragraph("Nema nevazecih tablica"));
             }
             else
             {

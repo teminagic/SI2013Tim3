@@ -19,10 +19,10 @@ public class FormaBckp extends JPanel {
 	 */
 	public FormaBckp() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{20, 0, 20, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{20, 324, 20, 0};
+		gridBagLayout.rowHeights = new int[]{21, 0, 0, 30, 0, 0, 30, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel lblZaKreiranjeNovog = new JLabel("Za kreiranje novog backupa pritisnite dugme ispod:");
@@ -55,8 +55,7 @@ public class FormaBckp extends JPanel {
 		gbc_btnRestoreBackupa.gridy = 5;
 		add(btnRestoreBackupa, gbc_btnRestoreBackupa);
 		
-		JLabel lblNapomena = new JLabel("<html><center>Napomena: Da bi ste mogli vratiti na neko od predhodnih stanja, <br/>"
-				+ "prvo morate izraditi backup</center></html>");
+		JLabel lblNapomena = new JLabel("<html><center>Napomena: Da bi ste mogli vratiti na neko od predhodnih stanja, <br/>prvo morate izraditi backup.</center></html>");
 		GridBagConstraints gbc_lblNapomenaDaBi = new GridBagConstraints();
 		gbc_lblNapomenaDaBi.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNapomenaDaBi.gridx = 1;

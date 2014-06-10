@@ -3,6 +3,7 @@ package ba.co.edgewise.jmup.mvc.views;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -38,8 +39,10 @@ public class BossView extends JFrame {
 	 * Create the frame.
 	 */
 	public BossView() {
+		setTitle("jMUP - Menadzer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 809, 590);
+		setBounds(100, 100, 977, 590);
+		setMinimumSize(new Dimension(800, 600));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -65,6 +68,9 @@ public class BossView extends JFrame {
 		gbc_naslov.fill = GridBagConstraints.HORIZONTAL;
 		
 		strana1 = new NaslovnaMenadzer();
+		GridBagLayout gridBagLayout = (GridBagLayout) strana1.getLayout();
+		gridBagLayout.columnWidths = new int[]{0, 8, 0, 7, 0, 0, 0, 0, 0, 121, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 124, 70, 98, 0, 100, 258};
 		strana1.getLblDobrodoslice().setText("Dobrodo\u0161ao/la!");
 		sadrzaj.getPanelSadrzaj().add(strana1, "Po\u010Detna");
 		
@@ -88,7 +94,7 @@ public class BossView extends JFrame {
 		frejm.getSadrzaj().getNaslov().postaviNaslov("Po\u010Detna");
 		JPanel cards = frejm.getSadrzaj().getPanelSadrzaj();
 		CardLayout tmp = (CardLayout)cards.getLayout();
-		tmp.show(cards, "PoÄ�etna");
+		tmp.show(cards, "Po\u010Detna");
 	}
 	public void prikaziPretragu() {
 		frejm.getSadrzaj().getNaslov().postaviNaslov("Pretraga");

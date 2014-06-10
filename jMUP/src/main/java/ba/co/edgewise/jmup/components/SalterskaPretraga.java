@@ -36,7 +36,6 @@ public class SalterskaPretraga extends JPanel{
 	JRadioButton rbVlasnicka; 
 	JRadioButton rbVozilo;
 	private JButton btn_modifikuj;
-	private JButton btnProfil;
 	
 	private final SalterskaPretraga frejm = this;
 	
@@ -46,7 +45,6 @@ public class SalterskaPretraga extends JPanel{
 	SalterskaPretragaVozac panel_vozac;
 	SalterskaPretragaSaobracajna panel_saobracajna;
 	SalterskaPretragaVlasnicka panel_vlasnicka;
-	private JButton btnIzlaz;
 	private JComboBox cb_parametri;
 	private JButton btnPretrazi;
 	
@@ -81,8 +79,8 @@ public class SalterskaPretraga extends JPanel{
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 629, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 374, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		final JPanel okvirPanel = new JPanel();
@@ -94,18 +92,18 @@ public class SalterskaPretraga extends JPanel{
 		gbc_okvirPanel.gridy = 1;
 		add(okvirPanel, gbc_okvirPanel);
 		GridBagLayout gbl_okvirPanel = new GridBagLayout();
-		gbl_okvirPanel.columnWidths = new int[]{24, 23, 38, 46, 43, 113, 97, 53, 66, 39, 0};
-		gbl_okvirPanel.rowHeights = new int[]{26, 0, 261, 38, 0};
-		gbl_okvirPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_okvirPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_okvirPanel.columnWidths = new int[]{24, 63, 46, 43, 113, 97, 28, 66, 39, 0};
+		gbl_okvirPanel.rowHeights = new int[]{0, 26, 0, 261, 38, 0, 0};
+		gbl_okvirPanel.columnWeights = new double[]{1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_okvirPanel.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		okvirPanel.setLayout(gbl_okvirPanel);
 		
 		JLabel lblPodaci = new JLabel("Podaci:");
 		GridBagConstraints gbc_lblPodaci = new GridBagConstraints();
-		gbc_lblPodaci.anchor = GridBagConstraints.EAST;
+		gbc_lblPodaci.anchor = GridBagConstraints.WEST;
 		gbc_lblPodaci.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPodaci.gridx = 2;
-		gbc_lblPodaci.gridy = 0;
+		gbc_lblPodaci.gridx = 1;
+		gbc_lblPodaci.gridy = 1;
 		okvirPanel.add(lblPodaci, gbc_lblPodaci);
 		
 		tb_unosPretrage = new JTextField();
@@ -113,8 +111,8 @@ public class SalterskaPretraga extends JPanel{
 		gbc_tb_unosPretrage.gridwidth = 3;
 		gbc_tb_unosPretrage.insets = new Insets(0, 0, 5, 5);
 		gbc_tb_unosPretrage.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tb_unosPretrage.gridx = 3;
-		gbc_tb_unosPretrage.gridy = 0;
+		gbc_tb_unosPretrage.gridx = 2;
+		gbc_tb_unosPretrage.gridy = 1;
 		okvirPanel.add(tb_unosPretrage, gbc_tb_unosPretrage);
 		tb_unosPretrage.setColumns(10);
 		
@@ -123,16 +121,16 @@ public class SalterskaPretraga extends JPanel{
 		GridBagConstraints gbc_cb_parametri = new GridBagConstraints();
 		gbc_cb_parametri.insets = new Insets(0, 0, 5, 5);
 		gbc_cb_parametri.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cb_parametri.gridx = 6;
-		gbc_cb_parametri.gridy = 0;
+		gbc_cb_parametri.gridx = 5;
+		gbc_cb_parametri.gridy = 1;
 		okvirPanel.add(cb_parametri, gbc_cb_parametri);
 		
 		btnPretrazi = new JButton("Pretra\u017Ei");
 		GridBagConstraints gbc_btnPretrazi = new GridBagConstraints();
 		gbc_btnPretrazi.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnPretrazi.insets = new Insets(0, 0, 5, 5);
-		gbc_btnPretrazi.gridx = 8;
-		gbc_btnPretrazi.gridy = 0;
+		gbc_btnPretrazi.gridx = 7;
+		gbc_btnPretrazi.gridy = 1;
 		okvirPanel.add(btnPretrazi, gbc_btnPretrazi);
 		
 		rbVozilo = new JRadioButton("Vozilo");
@@ -140,32 +138,32 @@ public class SalterskaPretraga extends JPanel{
 		GridBagConstraints gbc_rbVozilo = new GridBagConstraints();
 		gbc_rbVozilo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_rbVozilo.insets = new Insets(0, 0, 5, 5);
-		gbc_rbVozilo.gridx = 3;
-		gbc_rbVozilo.gridy = 1;
+		gbc_rbVozilo.gridx = 2;
+		gbc_rbVozilo.gridy = 2;
 		okvirPanel.add(rbVozilo, gbc_rbVozilo);
 		
 		
 		rbVozac = new JRadioButton("Voza\u010D");
 		GridBagConstraints gbc_rbVozac = new GridBagConstraints();
 		gbc_rbVozac.insets = new Insets(0, 0, 5, 5);
-		gbc_rbVozac.gridx = 4;
-		gbc_rbVozac.gridy = 1;
+		gbc_rbVozac.gridx = 3;
+		gbc_rbVozac.gridy = 2;
 		okvirPanel.add(rbVozac, gbc_rbVozac);
 	
 		rbSaobracajna = new JRadioButton("Saobra\u0107ajna dozvola");
 		GridBagConstraints gbc_rbSaobracajna = new GridBagConstraints();
 		gbc_rbSaobracajna.anchor = GridBagConstraints.EAST;
 		gbc_rbSaobracajna.insets = new Insets(0, 0, 5, 5);
-		gbc_rbSaobracajna.gridx = 5;
-		gbc_rbSaobracajna.gridy = 1;
+		gbc_rbSaobracajna.gridx = 4;
+		gbc_rbSaobracajna.gridy = 2;
 		okvirPanel.add(rbSaobracajna, gbc_rbSaobracajna);
 		
 		rbVlasnicka= new JRadioButton("Vlasni\u010Dka dozvola");
 		GridBagConstraints gbc_rbVlasnicka = new GridBagConstraints();
 		gbc_rbVlasnicka.insets = new Insets(0, 0, 5, 5);
 		gbc_rbVlasnicka.fill = GridBagConstraints.HORIZONTAL;
-		gbc_rbVlasnicka.gridx = 6;
-		gbc_rbVlasnicka.gridy = 1;
+		gbc_rbVlasnicka.gridx = 5;
+		gbc_rbVlasnicka.gridy = 2;
 		okvirPanel.add(rbVlasnicka, gbc_rbVlasnicka);
 		
 		ButtonGroup radioGroup = new ButtonGroup();
@@ -177,37 +175,26 @@ public class SalterskaPretraga extends JPanel{
 		panel_pretraga = new JPanel();
 		final GridBagConstraints gbc_panel_pretraga = new GridBagConstraints();
 		gbc_panel_pretraga.insets = new Insets(0, 0, 5, 5);
-		gbc_panel_pretraga.gridwidth = 8;
+		gbc_panel_pretraga.gridwidth = 7;
 		gbc_panel_pretraga.fill = GridBagConstraints.VERTICAL;
 		gbc_panel_pretraga.gridx = 1;
-		gbc_panel_pretraga.gridy = 2;
+		gbc_panel_pretraga.gridy = 3;
 		okvirPanel.add(panel_pretraga, gbc_panel_pretraga);
 		panel_pretraga.setLayout(new CardLayout(0, 0));
-		
-		btnProfil = new JButton("Profil");
-		btnProfil.setEnabled(false);
-		GridBagConstraints gbc_btnProfil = new GridBagConstraints();
-		gbc_btnProfil.insets = new Insets(0, 0, 0, 5);
-		gbc_btnProfil.gridx = 7;
-		gbc_btnProfil.gridy = 3;
-		okvirPanel.add(btnProfil, gbc_btnProfil);
 		
 		btn_modifikuj = new JButton("Modifikuj");
 		btn_modifikuj.setEnabled(false);
 		GridBagConstraints gbc_btn_modifikuj = new GridBagConstraints();
-		gbc_btn_modifikuj.insets = new Insets(0, 0, 0, 5);
-		gbc_btn_modifikuj.gridx = 8;
-		gbc_btn_modifikuj.gridy = 3;
+		gbc_btn_modifikuj.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btn_modifikuj.insets = new Insets(0, 0, 5, 5);
+		gbc_btn_modifikuj.gridx = 7;
+		gbc_btn_modifikuj.gridy = 4;
 		okvirPanel.add(btn_modifikuj, gbc_btn_modifikuj);
 		
-		btnIzlaz = new JButton("Izlaz");
-		GridBagConstraints gbc_btnIzlaz = new GridBagConstraints();
-		gbc_btnIzlaz.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnIzlaz.gridx = 9;
-		gbc_btnIzlaz.gridy = 3;
-		okvirPanel.add(btnIzlaz, gbc_btnIzlaz);
-		
 		panel_vozilo = new SalterskaPretragaVozilo();
+		GridBagLayout gridBagLayout_1 = (GridBagLayout) panel_vozilo.getLayout();
+		gridBagLayout_1.rowWeights = new double[]{1.0};
+		gridBagLayout_1.columnWeights = new double[]{1.0};
 		panel_vozac = new SalterskaPretragaVozac();
 		panel_saobracajna = new SalterskaPretragaSaobracajna();
 		panel_vlasnicka = new SalterskaPretragaVlasnicka();
@@ -275,15 +262,11 @@ public class SalterskaPretraga extends JPanel{
 		this.rbVozilo = rbVozilo;
 	}
 
-	public JButton getBtnProfil() {
-		return btnProfil;
-	}
+
 	public JButton getBtn_modifikuj() {
 		return btn_modifikuj;
 	}
-	public JButton getBtnIzlaz() {
-		return btnIzlaz;
-	}
+
 
 	public JComboBox getCb_parametri() {
 		return cb_parametri;

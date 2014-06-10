@@ -23,9 +23,9 @@ public class GodisnjaOvjera extends JPanel {
 		
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 278, 0};
-		gridBagLayout.rowHeights = new int[]{0, 147, 29, 0, -68};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0};
-		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0};
+		gridBagLayout.rowHeights = new int[]{0, 147, 248, 19};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0};
+		gridBagLayout.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0};
 		setLayout(gridBagLayout);
 		
 	}
@@ -44,11 +44,13 @@ public class GodisnjaOvjera extends JPanel {
 		add(pretraga, gbc_pretraga);
 		
 		datum = new GOModifikacijaDatum();
+		GridBagLayout gridBagLayout_2 = (GridBagLayout) datum.getLayout();
+		gridBagLayout_2.rowWeights = new double[]{0.0};
 		GridBagConstraints gbc_datum = new GridBagConstraints();
 		gbc_datum.fill = GridBagConstraints.BOTH;
 		gbc_datum.insets = new Insets(0, 0, 5, 5);
 		gbc_datum.gridx = 1;
-		gbc_datum.gridy = 3;
+		gbc_datum.gridy = 2;
 		add(datum, gbc_datum);
 		
 	}

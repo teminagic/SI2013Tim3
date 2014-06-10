@@ -1,6 +1,7 @@
 package ba.co.edgewise.jmup.mvc.views;
 
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -78,8 +79,10 @@ public class SalterskiRadnikView extends JFrame {
 	 * Create the frame.
 	 */
 	public SalterskiRadnikView() {
+		setTitle("jMUP - Salterski radnik");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 977, 590);
+		setMinimumSize(new Dimension(800, 600));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(contentPane);

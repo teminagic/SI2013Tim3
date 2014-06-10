@@ -44,17 +44,17 @@ public class DatumPrveRegistracije extends JPanel {
 		gbc_lblDatePrva.anchor = GridBagConstraints.SOUTH;
 		gbc_lblDatePrva.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblDatePrva.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDatePrva.gridx = 4;
-		gbc_lblDatePrva.gridy = 0;
+		gbc_lblDatePrva.gridx = 1;
+		gbc_lblDatePrva.gridy = 1;
 		add(datePickerPrva, gbc_lblDatePrva);
 	}
 	public void layoutSet(){
 	
 		gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 75, 75, 75, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 	}

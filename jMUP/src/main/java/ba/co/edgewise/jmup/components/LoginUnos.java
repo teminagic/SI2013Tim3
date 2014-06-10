@@ -40,9 +40,9 @@ public class LoginUnos extends JPanel {
 		panel.setBorder(new MatteBorder(2, 0, 2, 0, (Color) new Color(0, 0, 0)));
 		add(panel, BorderLayout.CENTER);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[] { 0, 100, 150, 0, 0 };
+		gbl_panel.columnWidths = new int[] { 0, 100, 60, 120, 0, 0 };
 		gbl_panel.rowHeights = new int[] { 10, 39, 34, 0, 10, 0 };
-		gbl_panel.columnWeights = new double[] { 1.0, 0.0, 0.0, 1.0,
+		gbl_panel.columnWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 1.0,
 				Double.MIN_VALUE };
 		gbl_panel.rowWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 1.0,
 				Double.MIN_VALUE };
@@ -70,6 +70,7 @@ public class LoginUnos extends JPanel {
 	public void inputSet() {
 		tfKorisnickoIme = new JTextField();
 		GridBagConstraints gbc_tfKorisnickoIme = new GridBagConstraints();
+		gbc_tfKorisnickoIme.gridwidth = 2;
 		gbc_tfKorisnickoIme.insets = new Insets(0, 0, 5, 5);
 		gbc_tfKorisnickoIme.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfKorisnickoIme.gridx = 2;
@@ -79,6 +80,7 @@ public class LoginUnos extends JPanel {
 
 		pwfSifra = new JPasswordField();
 		GridBagConstraints gbc_pwfSifra = new GridBagConstraints();
+		gbc_pwfSifra.gridwidth = 2;
 		gbc_pwfSifra.insets = new Insets(0, 0, 5, 5);
 		gbc_pwfSifra.fill = GridBagConstraints.HORIZONTAL;
 		gbc_pwfSifra.gridx = 2;
@@ -89,9 +91,9 @@ public class LoginUnos extends JPanel {
 	public void buttonSet() {
 		btnPrijava = new JButton("Prijava");
 		GridBagConstraints gbc_btnPrijava = new GridBagConstraints();
-		gbc_btnPrijava.anchor = GridBagConstraints.EAST;
+		gbc_btnPrijava.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnPrijava.insets = new Insets(0, 0, 5, 5);
-		gbc_btnPrijava.gridx = 2;
+		gbc_btnPrijava.gridx = 3;
 		gbc_btnPrijava.gridy = 3;
 		panel.add(btnPrijava, gbc_btnPrijava);
 	}

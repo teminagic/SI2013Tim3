@@ -43,9 +43,9 @@ public class PodaciRegistracija extends JPanel {
 
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 109, 305, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 34, 34, 34, 151, 77, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
+		gridBagLayout.rowHeights = new int[] { 0, 34, 34, 34, 151, 77, 0 };
+		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 0.0, 1.0,
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 	}
@@ -57,7 +57,7 @@ public class PodaciRegistracija extends JPanel {
 		gbc_lblRegistrationString.anchor = GridBagConstraints.EAST;
 		gbc_lblRegistrationString.insets = new Insets(15, 5, 5, 5);
 		gbc_lblRegistrationString.gridx = 1;
-		gbc_lblRegistrationString.gridy = 0;
+		gbc_lblRegistrationString.gridy = 1;
 		add(lblRegistrationString, gbc_lblRegistrationString);
 
 		lblId = new JLabel("JMBG/ID");
@@ -65,7 +65,7 @@ public class PodaciRegistracija extends JPanel {
 		gbc_lblId.anchor = GridBagConstraints.EAST;
 		gbc_lblId.insets = new Insets(3, 5, 5, 5);
 		gbc_lblId.gridx = 1;
-		gbc_lblId.gridy = 1;
+		gbc_lblId.gridy = 2;
 		add(lblId, gbc_lblId);
 
 		lblConfirmationNumber = new JLabel("Broj dozvole:");
@@ -73,7 +73,7 @@ public class PodaciRegistracija extends JPanel {
 		gbc_lblConfirmationNumber.insets = new Insets(0, 5, 5, 5);
 		gbc_lblConfirmationNumber.anchor = GridBagConstraints.EAST;
 		gbc_lblConfirmationNumber.gridx = 1;
-		gbc_lblConfirmationNumber.gridy = 2;
+		gbc_lblConfirmationNumber.gridy = 3;
 		add(lblConfirmationNumber, gbc_lblConfirmationNumber);
 
 	}
@@ -85,7 +85,7 @@ public class PodaciRegistracija extends JPanel {
 		gbc_txtRegistrationString.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtRegistrationString.insets = new Insets(15, 0, 5, 5);
 		gbc_txtRegistrationString.gridx = 2;
-		gbc_txtRegistrationString.gridy = 0;
+		gbc_txtRegistrationString.gridy = 1;
 		add(txtRegistrationString, gbc_txtRegistrationString);
 		txtRegistrationString.setColumns(10);
 
@@ -94,7 +94,7 @@ public class PodaciRegistracija extends JPanel {
 		gbc_txtId.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtId.insets = new Insets(5, 0, 5, 5);
 		gbc_txtId.gridx = 2;
-		gbc_txtId.gridy = 1;
+		gbc_txtId.gridy = 2;
 		add(txtId, gbc_txtId);
 		txtId.setColumns(10);
 
@@ -104,7 +104,7 @@ public class PodaciRegistracija extends JPanel {
 		gbc_txtConfirmationNumber.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtConfirmationNumber.insets = new Insets(0, 0, 5, 5);
 		gbc_txtConfirmationNumber.gridx = 2;
-		gbc_txtConfirmationNumber.gridy = 2;
+		gbc_txtConfirmationNumber.gridy = 3;
 		add(txtConfirmationNumber, gbc_txtConfirmationNumber);
 		txtConfirmationNumber.setColumns(10);
 
@@ -121,7 +121,7 @@ public class PodaciRegistracija extends JPanel {
 		gbc_date.gridwidth = 2;
 		gbc_date.insets = new Insets(17, 5, 5, 5);
 		gbc_date.gridx = 1;
-		gbc_date.gridy = 3;
+		gbc_date.gridy = 4;
 		add(date, gbc_date);
 
 	}

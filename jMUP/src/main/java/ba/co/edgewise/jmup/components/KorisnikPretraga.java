@@ -49,7 +49,7 @@ public class KorisnikPretraga extends JPanel {
 			gridBagLayout = new GridBagLayout();
 			gridBagLayout.columnWidths = new int[]{0, 300, 100, 100, 0, 0};
 			gridBagLayout.rowHeights = new int[]{0, 0, 0, 5, 0};
-			gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+			gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 			gridBagLayout.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 			setLayout(gridBagLayout);
 		
@@ -67,10 +67,10 @@ public class KorisnikPretraga extends JPanel {
 			gbc_panel.gridy = 1;
 			add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[]{60, 109, 111, 0, 0};
-			gbl_panel.rowHeights = new int[]{0, 0, 0};
-			gbl_panel.columnWeights = new double[]{1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-			gbl_panel.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+			gbl_panel.columnWidths = new int[]{0, 60, 109, 111, 0, 0, 0, 0};
+			gbl_panel.rowHeights = new int[]{0, 112, 16, 0};
+			gbl_panel.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
+			gbl_panel.rowWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
 		}
 		
@@ -80,7 +80,7 @@ public class KorisnikPretraga extends JPanel {
 			GridBagConstraints gbc_lblPodaci = new GridBagConstraints();
 			gbc_lblPodaci.insets = new Insets(0, 0, 5, 5);
 			gbc_lblPodaci.anchor = GridBagConstraints.EAST;
-			gbc_lblPodaci.gridx = 0;
+			gbc_lblPodaci.gridx = 1;
 			gbc_lblPodaci.gridy = 0;
 			panel.add(lblPodaci, gbc_lblPodaci);
 		}
@@ -91,7 +91,7 @@ public class KorisnikPretraga extends JPanel {
 			GridBagConstraints gbc_tfPodaci = new GridBagConstraints();
 			gbc_tfPodaci.insets = new Insets(0, 0, 5, 5);
 			gbc_tfPodaci.fill = GridBagConstraints.HORIZONTAL;
-			gbc_tfPodaci.gridx = 1;
+			gbc_tfPodaci.gridx = 2;
 			gbc_tfPodaci.gridy = 0;
 			panel.add(tfPodaci, gbc_tfPodaci);
 			tfPodaci.setColumns(10);
@@ -105,16 +105,16 @@ public class KorisnikPretraga extends JPanel {
 			GridBagConstraints gbc_cbPoljePretrage = new GridBagConstraints();
 			gbc_cbPoljePretrage.fill = GridBagConstraints.HORIZONTAL;
 			gbc_cbPoljePretrage.insets = new Insets(0, 0, 5, 5);
-			gbc_cbPoljePretrage.gridx = 2;
+			gbc_cbPoljePretrage.gridx = 3;
 			gbc_cbPoljePretrage.gridy = 0;
 			panel.add(cbPoljePretrage, gbc_cbPoljePretrage);
 			
 			tablePane = new JScrollPane();
 			GridBagConstraints gbc_tablePane = new GridBagConstraints();
-			gbc_tablePane.gridwidth = 4;
-			gbc_tablePane.insets = new Insets(0, 0, 0, 5);
+			gbc_tablePane.insets = new Insets(0, 0, 5, 5);
+			gbc_tablePane.gridwidth = 5;
 			gbc_tablePane.fill = GridBagConstraints.BOTH;
-			gbc_tablePane.gridx = 0;
+			gbc_tablePane.gridx = 1;
 			gbc_tablePane.gridy = 1;
 			panel.add(tablePane, gbc_tablePane);
 			
@@ -130,8 +130,8 @@ public class KorisnikPretraga extends JPanel {
 			
 			btnPronaiKorisnika = new JButton("Prona\u0111i korisnika");
 			GridBagConstraints gbc_btnPronaiKorisnika = new GridBagConstraints();
-			gbc_btnPronaiKorisnika.insets = new Insets(0, 0, 5, 0);
-			gbc_btnPronaiKorisnika.gridx = 3;
+			gbc_btnPronaiKorisnika.insets = new Insets(0, 0, 5, 5);
+			gbc_btnPronaiKorisnika.gridx = 5;
 			gbc_btnPronaiKorisnika.gridy = 0;
 			panel.add(btnPronaiKorisnika, gbc_btnPronaiKorisnika);
 			

@@ -24,9 +24,9 @@ public class GOModifikacijaDatum extends JPanel {
 		
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{201};
-		gridBagLayout.rowHeights = new int[]{0, 243, -22};
+		gridBagLayout.rowHeights = new int[]{243};
 		gridBagLayout.columnWeights = new double[]{1.0};
-		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 1.0};
+		gridBagLayout.rowWeights = new double[]{1.0};
 		setLayout(gridBagLayout);
 	}
 	
@@ -36,9 +36,9 @@ public class GOModifikacijaDatum extends JPanel {
 		
 		GridBagConstraints gbc_registrationDate = new GridBagConstraints();
 		gbc_registrationDate.fill = GridBagConstraints.BOTH;
-		gbc_registrationDate.insets = new Insets(5, 5, 5, 0);
+		gbc_registrationDate.insets = new Insets(5, 5, 0, 0);
 		gbc_registrationDate.gridx = 0;
-		gbc_registrationDate.gridy = 1;
+		gbc_registrationDate.gridy = 0;
 		add(registrationDate, gbc_registrationDate);
 		
 		

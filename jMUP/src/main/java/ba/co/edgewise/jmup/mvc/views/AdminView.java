@@ -76,8 +76,9 @@ public class AdminView extends JFrame {
 	public void initialize(){
 		setTitle("jMUP - Administrator");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setBounds(100, 100, 977, 590);
 		setMinimumSize(new Dimension(800, 600));
-		setBounds(100, 100, 747, 593);
+		//setBounds(100, 100, 747, 593);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(contentPane);

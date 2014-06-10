@@ -31,9 +31,9 @@ public class GodisnjaOvjeraPretraga extends JPanel {
 	public void layoutSet(){
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{25, 186, 0, 0};
-		gridBagLayout.rowHeights = new int[]{24, 39, 39};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0};
+		gridBagLayout.rowHeights = new int[]{0, 24, 39, 39, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0};
 		setLayout(gridBagLayout);
 	} 
 	
@@ -42,7 +42,7 @@ public class GodisnjaOvjeraPretraga extends JPanel {
 		GridBagConstraints gbc_lblId = new GridBagConstraints();
 		gbc_lblId.insets = new Insets(0, 0, 5, 5);
 		gbc_lblId.gridx = 1;
-		gbc_lblId.gridy = 0;
+		gbc_lblId.gridy = 1;
 		add(lblId, gbc_lblId);
 	}
 	
@@ -52,16 +52,16 @@ public class GodisnjaOvjeraPretraga extends JPanel {
 		gbc_txtId.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtId.insets = new Insets(0, 0, 5, 5);
 		gbc_txtId.gridx = 1;
-		gbc_txtId.gridy = 1;
+		gbc_txtId.gridy = 2;
 		add(txtId, gbc_txtId);
 		txtId.setColumns(10);
 		
 		btnModify = new BtAzuriranje();
 		GridBagConstraints gbc_btg = new GridBagConstraints();
 		gbc_btg.anchor = GridBagConstraints.NORTH;
-		gbc_btg.insets = new Insets(5, 5, 0, 5);
+		gbc_btg.insets = new Insets(5, 5, 5, 5);
 		gbc_btg.gridx = 1;
-		gbc_btg.gridy = 2;
+		gbc_btg.gridy = 3;
 		add(btnModify, gbc_btg);
 	}
 	

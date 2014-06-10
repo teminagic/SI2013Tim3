@@ -45,9 +45,9 @@ public class Izvjestaji extends JPanel {
 	public void layoutSet() {
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 639, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 85, 339, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowHeights = new int[]{0, 85, 0, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 	}
 
@@ -55,37 +55,38 @@ public class Izvjestaji extends JPanel {
 		label_1 = new JLabel("Kreiranje izvje\u0161taja o broju i tipu izdatih dozvola:");
 		GridBagConstraints gbc_label_1 = new GridBagConstraints();
 		gbc_label_1.anchor = GridBagConstraints.EAST;
-		gbc_label_1.insets = new Insets(0, 0, 0, 5);
-		gbc_label_1.gridx = 0;
-		gbc_label_1.gridy = 1;
+		gbc_label_1.insets = new Insets(0, 0, 5, 5);
+		gbc_label_1.gridx = 1;
+		gbc_label_1.gridy = 2;
 		panel_1.add(label_1, gbc_label_1);
 
 		label = new JLabel("Kreiranje izvje\u0161taja o isteklim registracijama:");
 		GridBagConstraints gbc_label = new GridBagConstraints();
 		gbc_label.anchor = GridBagConstraints.EAST;
 		gbc_label.insets = new Insets(0, 0, 5, 5);
-		gbc_label.gridx = 0;
-		gbc_label.gridy = 0;
+		gbc_label.gridx = 1;
+		gbc_label.gridy = 1;
 		panel_1.add(label, gbc_label);	
 	}
 
 	public void buttonSet() {
 
-		btnKreiranjeIzvjestaja1 = new JButton("Kreiraj Izvje\u0161taj");
+		btnKreiranjeIzvjestaja1 = new JButton("Kreiraj izvještaj");
 		GridBagConstraints gbc_button = new GridBagConstraints();
 		gbc_button.anchor = GridBagConstraints.NORTH;
 		gbc_button.fill = GridBagConstraints.HORIZONTAL;
-		gbc_button.insets = new Insets(0, 0, 5, 0);
-		gbc_button.gridx = 2;
-		gbc_button.gridy = 0;
+		gbc_button.insets = new Insets(0, 0, 5, 5);
+		gbc_button.gridx = 3;
+		gbc_button.gridy = 1;
 		panel_1.add(btnKreiranjeIzvjestaja1, gbc_button);
 
-		btnKreiranjeIzvjestaja2 = new JButton("Kreiraj Izvje\u0161taj");
+		btnKreiranjeIzvjestaja2 = new JButton("Kreiraj izvještaj");
 		GridBagConstraints gbc_button_1 = new GridBagConstraints();
+		gbc_button_1.insets = new Insets(0, 0, 5, 5);
 		gbc_button_1.anchor = GridBagConstraints.NORTH;
 		gbc_button_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_button_1.gridx = 2;
-		gbc_button_1.gridy = 1;
+		gbc_button_1.gridx = 3;
+		gbc_button_1.gridy = 2;
 		panel_1.add(btnKreiranjeIzvjestaja2, gbc_button_1);
 
 		//action listeners
@@ -120,7 +121,7 @@ public class Izvjestaji extends JPanel {
 	public void panelSet() {
 
 		panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Izrada Izvje\u0161taja", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Izrada izvje\u0161taja", TitledBorder.LEADING, TitledBorder.TOP, null, Color.DARK_GRAY));
 
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
@@ -130,10 +131,10 @@ public class Izvjestaji extends JPanel {
 		add(panel_1, gbc_panel_1);
 
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{244, 42, 161, 0};
-		gbl_panel_1.rowHeights = new int[]{23, 23, 0};
-		gbl_panel_1.columnWeights = new double[]{1.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.columnWidths = new int[]{56, 252, 42, 161, 0, 0};
+		gbl_panel_1.rowHeights = new int[]{0, 23, 23, 0, 0};
+		gbl_panel_1.columnWeights = new double[]{1.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 
 	}

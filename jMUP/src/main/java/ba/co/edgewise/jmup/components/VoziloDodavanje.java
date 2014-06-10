@@ -110,9 +110,9 @@ public class VoziloDodavanje extends JPanel {
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 10, 0, 10, 0 };
 		gridBagLayout.rowHeights = new int[] { 10, 0, 10, 0 };
-		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, 1.0,
+		gridBagLayout.columnWeights = new double[] { 1.0, 1.0, 1.0,
 				Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 1.0, 0.0, 1.0,
+		gridBagLayout.rowWeights = new double[] { 1.0, 1.0, 1.0,
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 	}
@@ -129,11 +129,11 @@ public class VoziloDodavanje extends JPanel {
 		add(okvirPanel, gbc_okvirPanel);
 
 		GridBagLayout gbl_okvirPanel = new GridBagLayout();
-		gbl_okvirPanel.columnWidths = new int[] { 300, 300, 0 };
-		gbl_okvirPanel.rowHeights = new int[] { 164, 144, -18, 0 };
-		gbl_okvirPanel.columnWeights = new double[] { 0.0, 0.0,
+		gbl_okvirPanel.columnWidths = new int[] { 0, 300, 0, 300, 0, 0 };
+		gbl_okvirPanel.rowHeights = new int[] { 0, 164, 0, 144, -18, 0, 0 };
+		gbl_okvirPanel.columnWeights = new double[] { 1.0, 1.0, 1.0, 1.0, 1.0,
 				Double.MIN_VALUE };
-		gbl_okvirPanel.rowWeights = new double[] { 1.0, 1.0, 0.0,
+		gbl_okvirPanel.rowWeights = new double[] { 1.0, 1.0, 1.0, 1.0, 0.0, 1.0,
 				Double.MIN_VALUE };
 		okvirPanel.setLayout(gbl_okvirPanel);
 	}
@@ -143,11 +143,10 @@ public class VoziloDodavanje extends JPanel {
 		osnovniPodaci.setBorder(new TitledBorder(null, "Osnovni podaci",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_osnovniPodaci = new GridBagConstraints();
-		gbc_osnovniPodaci.fill = GridBagConstraints.HORIZONTAL;
-		gbc_osnovniPodaci.anchor = GridBagConstraints.NORTH;
+		gbc_osnovniPodaci.fill = GridBagConstraints.BOTH;
 		gbc_osnovniPodaci.insets = new Insets(0, 0, 5, 5);
-		gbc_osnovniPodaci.gridx = 0;
-		gbc_osnovniPodaci.gridy = 0;
+		gbc_osnovniPodaci.gridx = 1;
+		gbc_osnovniPodaci.gridy = 1;
 		okvirPanel.add(osnovniPodaci, gbc_osnovniPodaci);
 
 		GridBagLayout gbl_osnovniPodaci = new GridBagLayout();
@@ -164,14 +163,14 @@ public class VoziloDodavanje extends JPanel {
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_motorPodaci = new GridBagConstraints();
 		gbc_motorPodaci.fill = GridBagConstraints.BOTH;
-		gbc_motorPodaci.insets = new Insets(0, 0, 5, 0);
-		gbc_motorPodaci.gridx = 1;
-		gbc_motorPodaci.gridy = 0;
+		gbc_motorPodaci.insets = new Insets(0, 0, 5, 5);
+		gbc_motorPodaci.gridx = 3;
+		gbc_motorPodaci.gridy = 1;
 		okvirPanel.add(motorPodaci, gbc_motorPodaci);
 		GridBagLayout gbl_motorPodaci = new GridBagLayout();
 		gbl_motorPodaci.columnWidths = new int[] { 120, 73, 0, 28, 0, 0 };
 		gbl_motorPodaci.rowHeights = new int[] { 0, 0, 0, 0, 0, -7, 0 };
-		gbl_motorPodaci.columnWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 0.0,
+		gbl_motorPodaci.columnWeights = new double[] { 0.0, 1.0, 1.0, 1.0, 0.0,
 				Double.MIN_VALUE };
 		gbl_motorPodaci.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, Double.MIN_VALUE };
@@ -184,14 +183,14 @@ public class VoziloDodavanje extends JPanel {
 		GridBagConstraints gbc_detaljniPodaci = new GridBagConstraints();
 		gbc_detaljniPodaci.fill = GridBagConstraints.BOTH;
 		gbc_detaljniPodaci.gridheight = 2;
-		gbc_detaljniPodaci.insets = new Insets(0, 0, 0, 5);
-		gbc_detaljniPodaci.gridx = 0;
-		gbc_detaljniPodaci.gridy = 1;
+		gbc_detaljniPodaci.insets = new Insets(0, 0, 5, 5);
+		gbc_detaljniPodaci.gridx = 1;
+		gbc_detaljniPodaci.gridy = 3;
 		okvirPanel.add(detaljniPodaci, gbc_detaljniPodaci);
 		GridBagLayout gbl_detaljniPodaci = new GridBagLayout();
-		gbl_detaljniPodaci.columnWidths = new int[] { 120, 81, 0, 0 };
+		gbl_detaljniPodaci.columnWidths = new int[] { 120, 88, 0, 0 };
 		gbl_detaljniPodaci.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		gbl_detaljniPodaci.columnWeights = new double[] { 0.0, 0.0, 1.0,
+		gbl_detaljniPodaci.columnWeights = new double[] { 0.0, 1.0, 1.0,
 				Double.MIN_VALUE };
 		gbl_detaljniPodaci.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, Double.MIN_VALUE };
@@ -203,9 +202,9 @@ public class VoziloDodavanje extends JPanel {
 				TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_bojaMasaVozila = new GridBagConstraints();
 		gbc_bojaMasaVozila.fill = GridBagConstraints.BOTH;
-		gbc_bojaMasaVozila.insets = new Insets(0, 0, 5, 0);
-		gbc_bojaMasaVozila.gridx = 1;
-		gbc_bojaMasaVozila.gridy = 1;
+		gbc_bojaMasaVozila.insets = new Insets(0, 0, 5, 5);
+		gbc_bojaMasaVozila.gridx = 3;
+		gbc_bojaMasaVozila.gridy = 3;
 		okvirPanel.add(bojaMasaVozila, gbc_bojaMasaVozila);
 		GridBagLayout gbl_bojaMasaVozila = new GridBagLayout();
 		gbl_bojaMasaVozila.columnWidths = new int[] { 120, 0, 0 };
@@ -218,10 +217,11 @@ public class VoziloDodavanje extends JPanel {
 
 		buttonPanel = new JPanel();
 		GridBagConstraints gbc_buttonPanel = new GridBagConstraints();
+		gbc_buttonPanel.insets = new Insets(0, 0, 5, 5);
 		gbc_buttonPanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_buttonPanel.anchor = GridBagConstraints.SOUTH;
-		gbc_buttonPanel.gridx = 1;
-		gbc_buttonPanel.gridy = 2;
+		gbc_buttonPanel.gridx = 3;
+		gbc_buttonPanel.gridy = 4;
 		okvirPanel.add(buttonPanel, gbc_buttonPanel);
 		GridBagLayout gbl_buttonPanel = new GridBagLayout();
 		gbl_buttonPanel.columnWidths = new int[] { 0, 0, 0, 0, 69, 0, 0 };
