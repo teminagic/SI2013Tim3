@@ -79,7 +79,7 @@ public class DatumVazenja extends JPanel {
 	public void layoutSet(){
 		
 		gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] {0, 50, 339, 94};
+		gridBagLayout.columnWidths = new int[] {73, 50, 339, 94};
 		gridBagLayout.rowHeights = new int[] {42, 29, 0, 35, 17, 33, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0};
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
