@@ -279,7 +279,23 @@ public class AdminController {
 			tmp.setIme(sadrzaj.getTfIme().getText());
 			tmp.setPrezime(sadrzaj.getTfPrezime().getText());
 			tmp.setKorisnickoIme(sadrzaj.getTfKorisnickoIme().getText());
-			tmp.setPassword(new String(sadrzaj.getPwdSifra().getPassword()));
+			String tempPass = new String(sadrzaj.getPwdSifra().getPassword());
+			if (tempPass.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$"))
+			{
+				tmp.setPassword(tempPass);
+			} else
+			{
+				JOptionPane.showOptionDialog(view,
+						"<html>Korisnička šifra nije u pravom formatu!<br>"
+						+ "Format korisničke šifre:<br>"
+						+ " - Korisnička šifra mora biti između 4 i 16 karaktera <br>"
+						+ " - Korisnička šifra se moze sastojati samo od slova i brojeva, bez afrikata <br>"
+						+ " - Korisnička šifra mora u sebi sadržati najmanje po jedno veliko i malo slovo, te jedan broj</html>",
+						"Kreiranje korisnika", JOptionPane.OK_OPTION,
+						JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+						"default");
+				return;
+			}
 			tmp.setStatus((Status) sadrzaj.getCbStatusKorisnickogRacuna()
 					.getSelectedItem());
 			tmp.setTip((TipUposlenika) sadrzaj.getCbTipKorisnickogRacuna()
@@ -319,7 +335,23 @@ public class AdminController {
 	private void spasiModifikacije(){
 		try {
 			view.getStrana4().postaviKorisnika();
-			model.setUposlenik(view.getStrana4().getUposlenik());
+			String tempPass = view.getStrana4().getUposlenik().getPassword();
+			if (tempPass.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$"))
+			{
+				model.setUposlenik(view.getStrana4().getUposlenik());
+			} else
+			{
+				JOptionPane.showOptionDialog(view,
+						"<html>Korisnička šifra nije u pravom formatu!<br>"
+						+ "Format korisničke šifre:<br>"
+						+ " - Korisnička šifra mora biti između 4 i 16 karaktera <br>"
+						+ " - Korisnička šifra se moze sastojati samo od slova i brojeva, bez afrikata <br>"
+						+ " - Korisnička šifra mora u sebi sadržati najmanje po jedno veliko i malo slovo, te jedan broj</html>",
+						"Kreiranje korisnika", JOptionPane.OK_OPTION,
+						JOptionPane.ERROR_MESSAGE, null, new String[] { "Uredu" },
+						"default");
+				return;
+			}
 		} catch (IllegalArgumentException e){
 			JOptionPane.showOptionDialog(view,
 					e.getMessage(),

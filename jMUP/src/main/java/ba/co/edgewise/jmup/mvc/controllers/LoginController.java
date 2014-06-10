@@ -10,10 +10,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
-import javax.swing.*;
-
-import java.awt.event.*;
-
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -27,8 +23,6 @@ public class LoginController {
 	private WindowAdapter windowControler;
 	private Login view;
 	private LoginModel model;
-	private final LoginController controler = this;
-	
 	public LoginController(Login view, LoginModel model) {
 		super();
 		this.view = view;
@@ -48,10 +42,6 @@ public class LoginController {
         catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-    }
- 
-    public static void main(String[] args) throws NoSuchAlgorithmException {
-        System.out.println(getMD5("Javarmi.com"));
     }
 
 	public void control(){
@@ -87,8 +77,8 @@ public class LoginController {
 	private Boolean provjeriCredentials(){
 		String username = this.view.getUnos().getTfKorisnickoIme().getText();
 		char[] password = this.view.getUnos().getPwfSifra().getPassword();
-		return model.provjeriPodatke(username, new String(password));
-		//return model.provjeriPodatke(username, getMD5(new String(password)));
+		//return model.provjeriPodatke(username, new String(password));
+		return model.provjeriPodatke(username, getMD5(new String(password)));
 	}
 	
 	private void getNext()

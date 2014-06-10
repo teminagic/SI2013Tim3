@@ -14,17 +14,14 @@ public class KorisnikKreiranje extends JPanel {
 	private JPanel panel;
 	private JLabel label;
 	private JLabel label_1;
-	private JLabel label_2;
 	private JLabel lblKorisnikoIme;
 	private JLabel lblifra;
 	private JLabel lblStatus;
 	private JLabel lblTip;
 	private JTextField tfIme;
 	private JTextField tfKorisnickoIme;
-	private JTextField tfSlika;
 	private JTextField tfPrezime;
 	private JPasswordField pwdSifra;
-	private JButton btnPronadji;
 	private JButton btnSpasiKorisnika;
 	@SuppressWarnings("rawtypes")
 	private JComboBox cbStatusKorisnickogRacuna;
@@ -49,11 +46,11 @@ public class KorisnikKreiranje extends JPanel {
 	public void layoutSet() {
 		
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[] { 0, 370, 0, 0 };
-		gbl_panel.rowHeights = new int[] { 0, 0, 37, 0, 0 };
-		gbl_panel.columnWeights = new double[] { 1.0, 1.0, 1.0,
+		gbl_panel.columnWidths = new int[] { 10, 370, 10, 0 };
+		gbl_panel.rowHeights = new int[] { 10, 0, 37, 0, 0 };
+		gbl_panel.columnWeights = new double[] { 0.0, 1.0, 0.0,
 				Double.MIN_VALUE };
-		gbl_panel.rowWeights = new double[] { 1.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
 		this.setLayout(gbl_panel);
 	}
 	
@@ -68,10 +65,10 @@ public class KorisnikKreiranje extends JPanel {
 		gbc_panel.gridy = 1;
 		add(panel, gbc_panel);
 		GridBagLayout gbl_panel1 = new GridBagLayout();
-		gbl_panel1.columnWidths = new int[]{0, 100, 130, 0, 0, 0};
-		gbl_panel1.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel1.columnWeights = new double[]{1.0, 0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_panel1.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel1.columnWidths = new int[]{10, 100, 130, 0, 10, 0};
+		gbl_panel1.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel1.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel1.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel1);
 	}
 	
@@ -93,20 +90,12 @@ public class KorisnikKreiranje extends JPanel {
 		gbc_label_1.gridy = 2;
 		panel.add(label_1, gbc_label_1);
 		
-		label_2 = new JLabel("Slika:");
-		GridBagConstraints gbc_label_2 = new GridBagConstraints();
-		gbc_label_2.anchor = GridBagConstraints.EAST;
-		gbc_label_2.insets = new Insets(0, 0, 5, 5);
-		gbc_label_2.gridx = 1;
-		gbc_label_2.gridy = 3;
-		panel.add(label_2, gbc_label_2);
-		
 		lblKorisnikoIme = new JLabel("Korisni\u010Dko ime:");
 		GridBagConstraints gbc_lblKorisnikoIme = new GridBagConstraints();
 		gbc_lblKorisnikoIme.anchor = GridBagConstraints.EAST;
 		gbc_lblKorisnikoIme.insets = new Insets(0, 0, 5, 5);
 		gbc_lblKorisnikoIme.gridx = 1;
-		gbc_lblKorisnikoIme.gridy = 4;
+		gbc_lblKorisnikoIme.gridy = 3;
 		panel.add(lblKorisnikoIme, gbc_lblKorisnikoIme);
 		
 		lblifra = new JLabel("\u0160ifra:");
@@ -114,7 +103,7 @@ public class KorisnikKreiranje extends JPanel {
 		gbc_lblifra.anchor = GridBagConstraints.EAST;
 		gbc_lblifra.insets = new Insets(0, 0, 5, 5);
 		gbc_lblifra.gridx = 1;
-		gbc_lblifra.gridy = 5;
+		gbc_lblifra.gridy = 4;
 		panel.add(lblifra, gbc_lblifra);
 		
 		lblStatus = new JLabel("Status:");
@@ -122,7 +111,7 @@ public class KorisnikKreiranje extends JPanel {
 		gbc_lblStatus.anchor = GridBagConstraints.EAST;
 		gbc_lblStatus.insets = new Insets(0, 0, 5, 5);
 		gbc_lblStatus.gridx = 1;
-		gbc_lblStatus.gridy = 7;
+		gbc_lblStatus.gridy = 6;
 		panel.add(lblStatus, gbc_lblStatus);
 		
 		lblTip = new JLabel("Tip:");
@@ -130,7 +119,7 @@ public class KorisnikKreiranje extends JPanel {
 		gbc_lblTip.anchor = GridBagConstraints.EAST;
 		gbc_lblTip.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTip.gridx = 1;
-		gbc_lblTip.gridy = 6;
+		gbc_lblTip.gridy = 5;
 		panel.add(lblTip, gbc_lblTip);	
 	}
 	
@@ -156,16 +145,6 @@ public class KorisnikKreiranje extends JPanel {
 		gbc_tfPrezime.gridy = 2;
 		panel.add(tfPrezime, gbc_tfPrezime);
 		
-		tfSlika = new JTextField();
-		tfSlika.setEditable(false);
-		tfSlika.setColumns(10);
-		GridBagConstraints gbc_tfSlika = new GridBagConstraints();
-		gbc_tfSlika.insets = new Insets(0, 0, 5, 5);
-		gbc_tfSlika.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tfSlika.gridx = 2;
-		gbc_tfSlika.gridy = 3;
-		panel.add(tfSlika, gbc_tfSlika);
-		
 		tfKorisnickoIme = new JTextField();
 		tfKorisnickoIme.setColumns(10);
 		GridBagConstraints gbc_tfKorisnickoIme = new GridBagConstraints();
@@ -173,7 +152,7 @@ public class KorisnikKreiranje extends JPanel {
 		gbc_tfKorisnickoIme.insets = new Insets(0, 0, 5, 5);
 		gbc_tfKorisnickoIme.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfKorisnickoIme.gridx = 2;
-		gbc_tfKorisnickoIme.gridy = 4;
+		gbc_tfKorisnickoIme.gridy = 3;
 		panel.add(tfKorisnickoIme, gbc_tfKorisnickoIme);
 		
 		pwdSifra = new JPasswordField();
@@ -183,7 +162,7 @@ public class KorisnikKreiranje extends JPanel {
 		gbc_pwdSifra.insets = new Insets(0, 0, 5, 5);
 		gbc_pwdSifra.fill = GridBagConstraints.HORIZONTAL;
 		gbc_pwdSifra.gridx = 2;
-		gbc_pwdSifra.gridy = 5;
+		gbc_pwdSifra.gridy = 4;
 		panel.add(pwdSifra, gbc_pwdSifra);
 		
 	}
@@ -197,7 +176,7 @@ public class KorisnikKreiranje extends JPanel {
 		gbc_cbTipKorisnickogRacuna.insets = new Insets(0, 0, 5, 5);
 		gbc_cbTipKorisnickogRacuna.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbTipKorisnickogRacuna.gridx = 2;
-		gbc_cbTipKorisnickogRacuna.gridy = 6;
+		gbc_cbTipKorisnickogRacuna.gridy = 5;
 		panel.add(cbTipKorisnickogRacuna, gbc_cbTipKorisnickogRacuna);
 		
 		cbStatusKorisnickogRacuna = new JComboBox(Status.values());
@@ -206,19 +185,11 @@ public class KorisnikKreiranje extends JPanel {
 		gbc_cbStatusKorisnickogRacuna.gridwidth = 2;
 		gbc_cbStatusKorisnickogRacuna.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbStatusKorisnickogRacuna.gridx = 2;
-		gbc_cbStatusKorisnickogRacuna.gridy = 7;
+		gbc_cbStatusKorisnickogRacuna.gridy = 6;
 		panel.add(cbStatusKorisnickogRacuna, gbc_cbStatusKorisnickogRacuna);
 	}
 	
 	public void buttonSet() {
-		
-		btnPronadji = new JButton("Prona\u0111i");
-		GridBagConstraints gbc_btnPronadji = new GridBagConstraints();
-		gbc_btnPronadji.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnPronadji.insets = new Insets(0, 0, 5, 5);
-		gbc_btnPronadji.gridx = 3;
-		gbc_btnPronadji.gridy = 3;
-		panel.add(btnPronadji, gbc_btnPronadji);
 		
 		btnSpasiKorisnika = new JButton("Kreiraj korisnika");
 		GridBagConstraints gbc_btnSpasiKorisnika = new GridBagConstraints();
@@ -230,9 +201,6 @@ public class KorisnikKreiranje extends JPanel {
 	}
 	
 	//getters & setters
-	public JButton getBtPronadji() {
-		return btnPronadji;
-	}
 
 	public JButton getBtSpasiKorisnika() {
 		return btnSpasiKorisnika;
@@ -244,10 +212,6 @@ public class KorisnikKreiranje extends JPanel {
 
 	public JTextField getTfPrezime() {
 		return tfPrezime;
-	}
-
-	public JTextField getTfSlika() {
-		return tfSlika;
 	}
 
 	public JTextField getTfKorisnickoIme() {
