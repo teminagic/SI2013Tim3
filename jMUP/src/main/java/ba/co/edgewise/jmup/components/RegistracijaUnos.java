@@ -25,7 +25,7 @@ public class RegistracijaUnos extends JPanel {
 	public void setLayout(){
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 219, 132, 108, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 285, 29, 68, 0};
+		gridBagLayout.rowHeights = new int[]{40, 440, 29, 68, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
@@ -43,10 +43,11 @@ public class RegistracijaUnos extends JPanel {
 	public void setComponents(){
 		podaci = new PodaciRegistracija();
 		GridBagLayout gridBagLayout_2 = (GridBagLayout) podaci.getDatumVazenja().getLayout();
-		gridBagLayout_2.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0};
+		gridBagLayout_2.columnWeights = new double[]{0.0, 0.0, 1.0};
 		GridBagLayout gridBagLayout_1 = (GridBagLayout) podaci.getLayout();
+		gridBagLayout_1.columnWidths = new int[]{0, 0, 267, 0, 0};
 		gridBagLayout_1.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0};
-		gridBagLayout_1.rowHeights = new int[]{0, 0, 0, 0, 16};
+		gridBagLayout_1.rowHeights = new int[]{0, 0, 0, 0, 226};
 		gridBagLayout_1.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0};
 		GridBagConstraints gbc_podaci = new GridBagConstraints();
 		gbc_podaci.gridwidth = 3;

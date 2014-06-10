@@ -933,11 +933,14 @@ public class SalterskiRadnikController {
 	}
 
 	public void pocistiPoljaRegistracija() {
-		view.getRegistracija().getPodaci().getTxtRegistrationString()
-				.setText("");
-		view.getRegistracija().getPodaci().getTxtId().setText("");
+		// view.getRegistracija().getPodaci().getTxtRegistrationString()
+			//	.setText("");
+		// view.getRegistracija().getPodaci().getTxtId().setText("");
 		view.getRegistracija().getPodaci().getTxtConfirmationNumber()
 				.setText("");
+		view.getRegistracija().getPodaci().getDatumVazenja().getDatePickerOdKad().getModel().setValue(null);
+		view.getRegistracija().getPodaci().getDatumVazenja().getDatePickerDoKad().getModel().setValue(null);
+
 	}
 
 	public Boolean ovjeriRegistraciju(String brojDozvole) {
@@ -1136,7 +1139,7 @@ public class SalterskiRadnikController {
 	public boolean provjeriPopunjenostUnosVozila() {
 		String ip = "^[A-z]+$";
 		String no = "^\\d+$";
-		String ipn= "^[A-zÈÆŠÐŽèæšðž]+$";
+		String ipn= "^[A-zï¿½ÆŠÐŽï¿½ï¿½ï¿½]+$";
 
 		if (!view.getVoziloDodavanje().getTf_tipVozila().getText().matches(ipn)) {
 			JOptionPane.showOptionDialog(view,
@@ -1145,7 +1148,7 @@ public class SalterskiRadnikController {
 					null, new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTf_modelVozila().getText()
-				.matches("^[a-zA-Z0-9ÈÆŠÐŽèæšðž]+$")) {
+				.matches("^[a-zA-Z0-9ï¿½ÆŠÐŽï¿½ï¿½ï¿½]+$")) {
 			JOptionPane.showOptionDialog(view,
 					"Pogre\u0161no ste unijeli model vozila.", "Unos vozila",
 					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -1207,7 +1210,7 @@ public class SalterskiRadnikController {
 					new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTf_brojSasije().getText()
-				.matches("^[a-zA-Z0-9ÈÆŠÐŽèæšðž]+$")) {
+				.matches("^[a-zA-Z0-9ï¿½ÆŠÐŽï¿½ï¿½ï¿½]+$")) {
 			JOptionPane.showOptionDialog(view,
 					"Pogre\u0161no ste unijeli broj  \u0161asije vozila.",
 					"Unos vozila", JOptionPane.OK_OPTION,
@@ -1408,7 +1411,7 @@ public class SalterskiRadnikController {
 
 	public boolean provjeriPopunjenostVozaca() {
 		String ip = "^[A-z]+$";
-		String ipn="^[A-zÈÆŠÐŽèæšðž]+$";
+		String ipn="^[A-zï¿½ÆŠÐŽï¿½ï¿½ï¿½]+$";
 		if (!view.getStrana2().getTfIme().getText().matches(ipn)) {
 			JOptionPane.showOptionDialog(view,
 					"Ime se mora sastojati samo od slova.", "Unos voza\u010Da",
@@ -1441,7 +1444,7 @@ public class SalterskiRadnikController {
 			return false;
 		}
 		if (!view.getStrana2().getTfAdresa().getText()
-				.matches("^[a-zA-Z0-9ÈÆŠÐŽèæšðž]+\\s?[a-zA-Z0-9ÈÆŠÐŽèæšðž]+$")) {
+				.matches("^[a-zA-Z0-9ï¿½ÆŠÐŽï¿½ï¿½ï¿½]+\\s?[a-zA-Z0-9ï¿½ÆŠÐŽï¿½ï¿½ï¿½]+$")) {
 			JOptionPane.showOptionDialog(view,
 					"Neispravna adresa. Primjer unosa: \"Adresa 54\".",
 					"Unos voza\u010Da", JOptionPane.OK_OPTION,
@@ -1997,12 +2000,7 @@ public class SalterskiRadnikController {
 		view.getVoziloDodavanje().getTf_karoserija()
 				.setText(String.valueOf(v.getOblikKaroserije()));
 		view.getVoziloDodavanje().getTb_bojaVozila().setText("Zelena");
-		view.getVoziloDodavanje()
-				.getDatePickerDatumPregleda()
-				.getModel()
-				.setDate(v.getDatumPregleda().getYear(),
-						v.getDatumPregleda().getMonth(),
-						v.getDatumPregleda().getDay());
+		view.getVoziloDodavanje().getDatePickerDatumPregleda().getModel().setDate(v.getDatumPregleda().getYear(),v.getDatumPregleda().getMonth(),v.getDatumPregleda().getDay());
 		view.getVoziloDodavanje().getTf_brojSasije().setText(v.getBrojSasije());
 		view.getVoziloDodavanje().getTb_maxMasa()
 				.setText(String.valueOf(v.getMaxTehnickaDozvoljenaMasa()));
@@ -2050,6 +2048,7 @@ public class SalterskiRadnikController {
 		view.getVoziloDodavanje().getCb_gorivo().setSelectedItem("");
 		view.getVoziloDodavanje().getTf_brojMotora().setText("");
 		view.getVoziloDodavanje().getCb_vrstaMotora().setSelectedItem("");
+		view.getVoziloDodavanje().getDatePickerDatumPregleda().getModel().setValue(null);
 	}
 
 	public boolean dodajVozilo() throws ParseException {

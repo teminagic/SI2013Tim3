@@ -59,7 +59,7 @@ public class DatumVazenja extends JPanel {
 		gbc_lblDateOd.anchor = GridBagConstraints.SOUTH;
 		gbc_lblDateOd.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblDateOd.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDateOd.gridx = 3;
+		gbc_lblDateOd.gridx = 2;
 		gbc_lblDateOd.gridy = 1;
 		add(datePickerOdKad, gbc_lblDateOd);
 		
@@ -72,17 +72,17 @@ public class DatumVazenja extends JPanel {
 		gbc_lblDateDo.anchor = GridBagConstraints.SOUTH;
 		gbc_lblDateDo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblDateDo.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDateDo.gridx = 3;
+		gbc_lblDateDo.gridx = 2;
 		gbc_lblDateDo.gridy = 3;
 		add(datePickerDoKad, gbc_lblDateDo);
 	}
 	public void layoutSet(){
 		
 		gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] {0, 50, 0, 75, 72, 0};
-		gridBagLayout.rowHeights = new int[] {0, 29, 0, 35, 17, 33, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 1.0, 0.0, 1.0};
-		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] {0, 50, 339, 94};
+		gridBagLayout.rowHeights = new int[] {42, 29, 0, 35, 17, 33, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0};
+		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 	}
@@ -91,7 +91,7 @@ public class DatumVazenja extends JPanel {
 		
 		lblFrom = new JLabel("Od:");
 		GridBagConstraints gbc_lblFrom = new GridBagConstraints();
-		gbc_lblFrom.anchor = GridBagConstraints.SOUTHEAST;
+		gbc_lblFrom.anchor = GridBagConstraints.SOUTH;
 		gbc_lblFrom.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFrom.gridx = 1;
 		gbc_lblFrom.gridy = 1;
@@ -101,7 +101,7 @@ public class DatumVazenja extends JPanel {
 		
 		lblTo = new JLabel("Do:");
 		GridBagConstraints gbc_lblTo = new GridBagConstraints();
-		gbc_lblTo.anchor = GridBagConstraints.SOUTHEAST;
+		gbc_lblTo.anchor = GridBagConstraints.SOUTH;
 		gbc_lblTo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTo.gridx = 1;
 		gbc_lblTo.gridy = 3;
@@ -118,9 +118,9 @@ public class DatumVazenja extends JPanel {
 		gridBagLayout_1.columnWeights = new double[]{1.0, 1.0, 1.0};
 		gridBagLayout_1.columnWidths = new int[]{0, 129, 0};
 		GridBagConstraints gbc_btAzuriranje = new GridBagConstraints();
-		gbc_btAzuriranje.insets = new Insets(0, 0, 0, 5);
-		gbc_btAzuriranje.gridwidth = 4;
-		gbc_btAzuriranje.fill = GridBagConstraints.BOTH;
+		gbc_btAzuriranje.insets = new Insets(0, 0, 5, 5);
+		gbc_btAzuriranje.gridwidth = 2;
+		gbc_btAzuriranje.fill = GridBagConstraints.VERTICAL;
 		gbc_btAzuriranje.gridx = 1;
 		gbc_btAzuriranje.gridy = 5;
 		add(btAzuriranje, gbc_btAzuriranje);
