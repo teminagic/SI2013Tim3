@@ -61,7 +61,7 @@ public class Uposlenik {
 	}
 
 	public void setIme(String ime) {
-		if (!ime.matches("[A-Z][a-zA-Z\\s\\-ČčĆćŠšĐđŽž]+"))
+		if (!ime.matches("[A-ZČĆŠŽĐ][a-zA-Z\\s\\-ČčĆćŠšĐđŽž]+"))
 			throw new IllegalArgumentException("<html>Ime nije u pravom formatu!<br>"
 					+ "Format imena:<br>"
 					+ " - Prvo slovo mora biti veliko <br>"
@@ -74,7 +74,7 @@ public class Uposlenik {
 	}
 
 	public void setPrezime(String prezime) {
-		if (!prezime.matches("[A-Z][a-zA-Z\\s\\-ČčĆćŠšĐđŽž]+"))
+		if (!prezime.matches("[A-ZČĆŠŽĐ][a-zA-Z\\s\\-ČčĆćŠšĐđŽž]+"))
 			throw new IllegalArgumentException("<html>Prezime nije u pravom formatu!<br>"
 					+ "Format prezimena:<br>"
 					+ " - Prvo slovo mora biti veliko <br>"
