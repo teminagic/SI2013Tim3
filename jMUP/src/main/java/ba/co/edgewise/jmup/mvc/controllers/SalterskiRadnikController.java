@@ -2001,7 +2001,12 @@ public class SalterskiRadnikController {
 		view.getVoziloDodavanje().getTf_karoserija()
 				.setText(String.valueOf(v.getOblikKaroserije()));
 		view.getVoziloDodavanje().getTb_bojaVozila().setText("Zelena");
-		view.getVoziloDodavanje().getDatePickerDatumPregleda().getModel().setDate(v.getDatumPregleda().getYear(),v.getDatumPregleda().getMonth(),v.getDatumPregleda().getDay());
+		
+		//Ovako se postavlja datum na dtPicker
+		view.getVoziloDodavanje().getModelDatumPregleda().setValue(v.getDatumPregleda());
+		view.getVoziloDodavanje().getModelDatumPregleda().setSelected(true);
+				
+		
 		view.getVoziloDodavanje().getTf_brojSasije().setText(v.getBrojSasije());
 		view.getVoziloDodavanje().getTb_maxMasa()
 				.setText(String.valueOf(v.getMaxTehnickaDozvoljenaMasa()));
