@@ -315,8 +315,8 @@ public class ModifikacijaVlasnicke{
 					JOptionPane.INFORMATION_MESSAGE, null,
 					new String[] { "Uredu" }, "default");
 			return false;
-		} else if (!Integer.toString(vlasnicka.getVozilo().getMotor().getZapreminaMotora())
-				.matches(no)) {
+		} else if (!Double.toString(vlasnicka.getVozilo().getMotor().getZapreminaMotora())
+				.matches("^[0-9]+\\.?[0-9]*$")) {
 			JOptionPane.showOptionDialog(view,
 					"Pogre \u0161no ste unijeli zapreminu motora.",
 					"Unos vozila", JOptionPane.OK_OPTION,

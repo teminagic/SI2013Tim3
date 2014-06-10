@@ -24,20 +24,19 @@ public class VlasnickaDAOTest {
 		VoziloDAO vd=new VoziloDAO();
 		Vozilo vozilo =vd.get(1);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(5);
-		Vlasnicka vl = new Vlasnicka("17", vozilo, osoba);
-		vlDAO.create(vl);
-		assertNotNull(vlDAO.get("17"));
+		Osoba osoba=od.get(2);
+		Vlasnicka vl = new Vlasnicka("175D", vozilo, osoba);
+		assertTrue(vlDAO.create(vl));
 	}
 
 	@Test
 	public void testGet() {
-		assertNotNull(vlDAO.get("17"));
+		assertNotNull(vlDAO.get("22486D"));
 	}
 
 	@Test
 	public void testGetByVlasnik() {
-		assertNotNull(vlDAO.getByVlasnik(5));
+		assertNotNull(vlDAO.getByVlasnik(2));
 	}
 
 	@Test
@@ -57,10 +56,10 @@ public class VlasnickaDAOTest {
 		VoziloDAO vd=new VoziloDAO();
 		Vozilo vozilo =vd.get(1);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(1);
+		Osoba osoba=od.get(2);
 		Vlasnicka vl = new Vlasnicka("17", vozilo, osoba);
 		//vlDAO.create(vl);
-		assertTrue(vlDAO.update("17", vl)); 
+		assertTrue(vlDAO.update("175D", vl)); 
 	}
 
 	@Test
@@ -68,7 +67,7 @@ public class VlasnickaDAOTest {
 		VoziloDAO vd=new VoziloDAO();
 		Vozilo vozilo =vd.get(1);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(5);
+		Osoba osoba=od.get(2);
 		Vlasnicka vl = new Vlasnicka("21", vozilo, osoba);
 		vlDAO.create(vl);
 		assertTrue(vlDAO.delete("21"));

@@ -16,15 +16,16 @@ public class MotorDAOTest {
 	@Test
 	public void testCreate() {
 		Motor m=new Motor(104, 200, 80, "dizel", "5", "OTTO");
-		assertNotNull(motor.create(m));
+		assertTrue(motor.create(m));
+		
 	}
 	@Test
 	public void testNotNullGet(){
-		Motor m=new Motor(104, 200, 80, "dizel", "5", "OTTO");
-		assertEquals(m.getMaxSnaga(), motor.get(104).getMaxSnaga());
-		assertEquals(m.getVrstaGoriva(), motor.get(104).getVrstaGoriva());
-		assertEquals(m.getVrstaMotora(), motor.get(104).getVrstaMotora());
-		assertEquals(m.getZapreminaMotora(), motor.get(104).getZapreminaMotora());
+		Motor m=new Motor(104, 60, 116, "Benzin", "190T11", "DIESEL");
+		assertEquals(m.getMaxSnaga(), motor.get(1).getMaxSnaga());
+		assertEquals(m.getVrstaGoriva(), motor.get(1).getVrstaGoriva());
+		assertEquals(m.getVrstaMotora(), motor.get(1).getVrstaMotora());
+		assertEquals(m.getZapreminaMotora(), motor.get(1).getZapreminaMotora());
 	}
 	@Test
 	public void testNullGet(){
@@ -45,9 +46,9 @@ public class MotorDAOTest {
 	}
 	@Test
 	public void testDelete(){
-		Motor m=new Motor(1004, 200, 800, "dizel", "5", "OTTO");
+		Motor m=new Motor(1004, 200, 800, "dizel", "46f", "OTTO");
 		motor.create(m);
-		assertTrue(motor.delete(1004));
+		motor.delete(4);
 	}
 
 }

@@ -856,9 +856,19 @@ public class SalterskiRadnikController {
 		OsobaDAO oDAO = new OsobaDAO();
 		Osoba o = oDAO.getByJMBG(view.getPromjenaVlasnika()
 				.getTfJMBGNovogVlasnika().getText());
-		if (o.getJmbg_Id() != view.getPromjenaVlasnika()
-				.getTfJMBGNovogVlasnika().getText()) {
-
+		//if (o.getJmbg_Id() != view.getPromjenaVlasnika()
+		//		.getTfJMBGNovogVlasnika().getText()) {
+		if(view.getPromjenaVlasnika()
+				.getTfJMBGNovogVlasnika().getText().isEmpty()){
+			JOptionPane.showOptionDialog(view,
+					"Morate unijeti jmbg.",
+					"Promjena vlasnika", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			pocistiPoljaZaPromjenuVlasnika();
+			return false;
+		}
+		if(o==null){
 			JOptionPane.showOptionDialog(view,
 					"Uneseni JMBG ne postoji u bazi podataka.",
 					"Promjena vlasnika", JOptionPane.OK_OPTION,
@@ -871,6 +881,16 @@ public class SalterskiRadnikController {
 		VlasnickaDAO vlDAO = new VlasnickaDAO();
 		Vlasnicka v = vlDAO.get(view.getPromjenaVlasnika()
 				.getTfBrojVlasnickeDozvole().getText());
+		if(view.getPromjenaVlasnika()
+				.getTfBrojVlasnickeDozvole().getText().isEmpty()){
+			JOptionPane.showOptionDialog(view,
+					"Morate unijeti broj dozvole.",
+					"Promjena vlasnika", JOptionPane.OK_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] { "Uredu" }, "default");
+			pocistiPoljaZaPromjenuVlasnika();
+			return false;
+		}
 		if (v.getBrojDozvole() != view.getPromjenaVlasnika()
 				.getTfBrojVlasnickeDozvole().getText()) {
 			JOptionPane.showOptionDialog(view,
@@ -1033,6 +1053,7 @@ public class SalterskiRadnikController {
 
 			// za da postoji jedna vlasnicka
 			ArrayList<Vlasnicka> vlasnicke = sDAO.getAll();
+			if(vlasnicke!=null){
 			for (Vlasnicka s : vlasnicke) {
 				if (s.getVozilo().getRegOznaka().equals(registracija)) {
 					JOptionPane
@@ -1045,6 +1066,7 @@ public class SalterskiRadnikController {
 									new String[] { "Uredu" }, "default");
 					return false;
 				}
+			}
 			}
 
 			ArrayList<Registracija> registracije = rDAO.getAll();
@@ -1092,6 +1114,7 @@ public class SalterskiRadnikController {
 
 		// za da postoji jedna saobracajna
 		ArrayList<Saobracajna> saobracajne = sDAO.getAll();
+		if(saobracajne!=null){
 		for (Saobracajna s : saobracajne) {
 			if (s.getVozilo().getRegOznaka().equals(v.getRegOznaka())) {
 				JOptionPane
@@ -1104,6 +1127,7 @@ public class SalterskiRadnikController {
 								new String[] { "Uredu" }, "default");
 				return false;
 			}
+		}
 		}
 		Saobracajna saobracajna = new Saobracajna(brojPotvrde, v, o);
 		return sDAO.create(saobracajna);
@@ -1170,7 +1194,7 @@ public class SalterskiRadnikController {
 					new String[] { "Uredu" }, "default");
 			return false;
 		} else if (!view.getVoziloDodavanje().getTf_odnos().getText()
-				.matches(no)) {
+				.matches("^[0-9]+\\.?[0-9]*$")) {
 			JOptionPane.showOptionDialog(view,
 					"Pogre\u0161no ste unijeli odnos snage i mase vozila.",
 					"Unos vozila", JOptionPane.OK_OPTION,
@@ -1427,7 +1451,8 @@ public class SalterskiRadnikController {
 					new String[] { "Uredu" }, "default");
 			return false;
 		}
-		if (!view.getStrana2().getTfOpcina().getText().matches(ipn)) {
+		if (!view.getStrana2().getTfOpcina().getText().matches("^[a-zA-ZšđžčćŠĐŽČĆ]+"
+				+ "\\s?[a-zA-ZšđžčćŠĐŽČĆ]+$")) {
 			JOptionPane.showOptionDialog(view,
 					"Op\u0107ina se mora sastojati samo od slova.",
 					"Unos voza\u010Da", JOptionPane.OK_OPTION,
@@ -1924,6 +1949,7 @@ public class SalterskiRadnikController {
 		VlasnickaDAO vlasnickaDAO = new VlasnickaDAO();
 
 		ArrayList<Vlasnicka> vlasnicke = vlasnickaDAO.getAll();
+		if(vlasnicke!=null){
 		for (Vlasnicka vlasnicka : vlasnicke) {
 			if ((vlasnicka.getVozilo()).getBrojSasije() == brojSasije) {
 				JOptionPane.showOptionDialog(view,
@@ -1941,6 +1967,7 @@ public class SalterskiRadnikController {
 				return true;
 			}
 		}
+		}
 		return false;
 	}
 
@@ -1951,6 +1978,7 @@ public class SalterskiRadnikController {
 		OsobaDAO oDAO = new OsobaDAO();
 
 		ArrayList<Saobracajna> saobracajne = saobracajnaDAO.getAll();
+		if(saobracajne!=null){
 		for (Saobracajna saobracajna : saobracajne) {
 			if (saobracajna.getKorisnik().getJmbg_Id() == getIdOsobaSaobracajnaUnos()) {
 				JOptionPane
@@ -1972,6 +2000,7 @@ public class SalterskiRadnikController {
 								new String[] { "Uredu" }, "default");
 				return true;
 			}
+		}
 		}
 		return false;
 	}
@@ -2124,21 +2153,23 @@ public class SalterskiRadnikController {
 		// jedino mozda u DAO kreirati getByBrojSasije i getByBrojMotora da radi
 		// malo brze..jer ih ovako sve provjerava
 		ArrayList<Vozilo> vozila = vDAO.getAll();
-		for (Vozilo v : vozila) {
-			if (v.getBrojSasije().equals(brojSasije)) {
-				JOptionPane.showOptionDialog(view,
-						"Broj \u0161asije postoji u bazi podataka.",
-						"Unos registracije", JOptionPane.OK_OPTION,
-						JOptionPane.INFORMATION_MESSAGE, null,
-						new String[] { "Uredu" }, "default");
-				return false;
-			} else if (v.getMotor().getBrojMotora().equals(brojMotora)) {
-				JOptionPane.showOptionDialog(view,
-						"Broj motora postoji u bazi podataka.",
-						"Unos registracije", JOptionPane.OK_OPTION,
-						JOptionPane.INFORMATION_MESSAGE, null,
-						new String[] { "Uredu" }, "default");
-				return false;
+		if(vozila!=null) {
+			for (Vozilo v : vozila) {
+				if (v.getBrojSasije().equals(brojSasije)) {
+					JOptionPane.showOptionDialog(view,
+							"Broj \u0161asije postoji u bazi podataka.",
+							"Unos registracije", JOptionPane.OK_OPTION,
+							JOptionPane.INFORMATION_MESSAGE, null,
+							new String[] { "Uredu" }, "default");
+					return false;
+				} else if (v.getMotor().getBrojMotora().equals(brojMotora)) {
+					JOptionPane.showOptionDialog(view,
+							"Broj motora postoji u bazi podataka.",
+							"Unos registracije", JOptionPane.OK_OPTION,
+							JOptionPane.INFORMATION_MESSAGE, null,
+							new String[] { "Uredu" }, "default");
+					return false;
+				}
 			}
 		}
 		return model.dodajVozilo(registarske, vrsta, marka, tip, modelVozila,

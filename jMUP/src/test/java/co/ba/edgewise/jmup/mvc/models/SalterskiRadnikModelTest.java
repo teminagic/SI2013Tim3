@@ -38,9 +38,9 @@ public class SalterskiRadnikModelTest {
 	@Test
 	public void testDodavanjeVlasnicke(){
 		VoziloDAO vd=new VoziloDAO();
-		Vozilo vozilo =vd.get(106);
+		Vozilo vozilo =vd.get(1);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(1508);
+		Osoba osoba=od.get(2);
 		assertTrue(srm.DodajVlasnicku("123a321", vozilo.getRegOznaka(), osoba.getJmbg_Id()));
 	}
 	/*@Test

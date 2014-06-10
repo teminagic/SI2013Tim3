@@ -2,6 +2,7 @@ package co.ba.edgewise.jmup.daldao;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,17 +21,16 @@ public class RegistracijaDAOTest {
 	@Test
 	public void testCreate() {
 		VoziloDAO vd=new VoziloDAO();
-		Vozilo vozilo =vd.get(1);
+		Vozilo vozilo =vd.get(2);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(5);
-		Registracija r=new Registracija(100, "123a456", new Date(), new Date(), vozilo, osoba);
+		Osoba osoba=od.get(1);
+		Registracija r=new Registracija(100, "123-K-456", new Date(), new Date(), vozilo, osoba);
 		
-		reg.create(r);
-		assertNotNull(reg.get(100));
+		assertTrue(reg.create(r));
 	}
 	@Test
 	public void testGet(){
-		assertNotNull(reg.get(100).getId());
+		assertNotNull(reg.get(1));
 	}
 	@Test
 	public void testGetAll(){
@@ -41,23 +41,31 @@ public class RegistracijaDAOTest {
 	@Test
 	public void testUpdate(){
 		VoziloDAO vd=new VoziloDAO();
-		Vozilo vozilo =vd.get(1);
+		Vozilo vozilo =vd.get(65);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(5);
-		Registracija r=new Registracija(100, "123b456", new Date(), new Date(), vozilo, osoba);
+		Osoba osoba=od.get(1464);
+		Registracija r=new Registracija(100, "123-B-456", new Date(), new Date(), vozilo, osoba);
 		
-		assertTrue(reg.update(100, r));
+		ArrayList<Registracija> registracije=reg.getAll();
+		for(Registracija regist: registracije){
+			if(regist.getRegistarskaOznaka().equals("A23-M-459"))
+				assertTrue(reg.update(regist.getId(), r));
+		}
 	}
 	@Test
 	public void testDelete(){
 		VoziloDAO vd=new VoziloDAO();
-		Vozilo vozilo =vd.get(1);
+		Vozilo vozilo =vd.get(2);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(5);
-		Registracija r=new Registracija(1050, "123b456", new Date(), new Date(), vozilo, osoba);
+		Osoba osoba=od.get(1);
+		Registracija r=new Registracija(100, "A23-M-459", new Date(), new Date(), vozilo, osoba);
 		reg.create(r);
 		
-		assertTrue(reg.delete(1050));
+		ArrayList<Registracija> registracije=reg.getAll();
+		for(Registracija regist: registracije){
+			if(regist.getRegistarskaOznaka().equals("A23-M-459"))
+				assertTrue(reg.delete(regist.getId()));
+		}
 	}
 	
 }
