@@ -34,7 +34,7 @@ public class BojeVozilaDAOTest extends TestCase{
 	@Test
 	public void testCreate() {
 		VoziloDAO vdao = new VoziloDAO();
-		Vozilo vozilo1=vdao.get(65);
+		Vozilo vozilo1=vdao.get(1);
 		BojaVozila boja1=new BojaVozila(178,Boja.CRVENA, vozilo1, NijansaBoje.STANDARDNA, VrstaBoje.OBICNA, "tip" );
 		bojeVozila=new BojeVozilaDAO();
 		bojeVozila.create(boja1);
@@ -46,7 +46,7 @@ public class BojeVozilaDAOTest extends TestCase{
 		bojeVozila=new BojeVozilaDAO();
 		
 		VoziloDAO vdao = new VoziloDAO();
-		Vozilo vozilo1=vdao.get(65);
+		Vozilo vozilo1=vdao.get(2);
 		BojaVozila boja1=new BojaVozila(178,Boja.CRVENA, vozilo1, NijansaBoje.STANDARDNA, VrstaBoje.OBICNA, "tip" );
 		bojeVozila.create(boja1);
 		
@@ -78,7 +78,7 @@ public class BojeVozilaDAOTest extends TestCase{
 		bojeVozila=new BojeVozilaDAO();
 		
 		VoziloDAO vdao = new VoziloDAO();
-		Vozilo vozilo1=vdao.get(65);
+		Vozilo vozilo1=vdao.get(1);
 		BojaVozila boja1=new BojaVozila(178,Boja.CRVENA, vozilo1, NijansaBoje.STANDARDNA, VrstaBoje.OBICNA, "tip" );
 		BojaVozila boja2=new BojaVozila(178,Boja.CRNA, vozilo1, NijansaBoje.STANDARDNA, VrstaBoje.OBICNA, "tip" );
 		bojeVozila.create(boja1);
@@ -90,7 +90,7 @@ public class BojeVozilaDAOTest extends TestCase{
 		bojeVozila=new BojeVozilaDAO();
 		
 		VoziloDAO vdao = new VoziloDAO();
-		Vozilo vozilo1=vdao.get(65);
+		Vozilo vozilo1=vdao.get(1);
 		BojaVozila boja1=new BojaVozila(178,Boja.CRVENA, vozilo1, NijansaBoje.STANDARDNA, VrstaBoje.OBICNA, "tip" );
 		bojeVozila.create(boja1);
 		

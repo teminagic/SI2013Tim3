@@ -22,15 +22,14 @@ public class SaobracajnaDAOTest {
 		VoziloDAO vd=new VoziloDAO();
 		Vozilo vozilo =vd.get(1);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(5);
-		Saobracajna sa = new Saobracajna("17", vozilo, osoba);
-		saDAO.create(sa);
-		assertNotNull(saDAO.get("17"));
+		Osoba osoba=od.get(2);
+		Saobracajna sa = new Saobracajna("188", vozilo, osoba);
+		assertTrue(saDAO.create(sa));
 	}
 
 	@Test
 	public void testGet() {
-		assertNotNull(saDAO.get("17"));
+		assertNotNull(saDAO.get("188"));
 	}
 
 	@Test
@@ -42,12 +41,12 @@ public class SaobracajnaDAOTest {
 
 	@Test
 	public void testGetByPotvrda() {
-		assertNotNull(saDAO.getByPotvrda("17"));
+		assertNotNull(saDAO.getByPotvrda("188"));
 	}
 
 	@Test
 	public void testGetByName() {
-		assertNotNull(saDAO.getByName(5));
+		assertNotNull(saDAO.getByName(1));
 	}
 
 	@Test
@@ -60,18 +59,18 @@ public class SaobracajnaDAOTest {
 		VoziloDAO vd=new VoziloDAO();
 		Vozilo vozilo =vd.get(1);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(5);
-		Saobracajna sa = new Saobracajna("17", vozilo, osoba);
+		Osoba osoba=od.get(1);
+		Saobracajna sa = new Saobracajna("174343", vozilo, osoba);
 		//vlDAO.create(vl);
-		assertTrue(saDAO.update("17", sa));
+		assertTrue(saDAO.update("188", sa));
 	}
 
 	@Test
 	public void testDelete() {
 		VoziloDAO vd=new VoziloDAO();
-		Vozilo vozilo =vd.get(1);
+		Vozilo vozilo =vd.get(2);
 		OsobaDAO od=new OsobaDAO();
-		Osoba osoba=od.get(5);
+		Osoba osoba=od.get(1);
 		Saobracajna vl = new Saobracajna("21", vozilo, osoba);
 		saDAO.create(vl);
 		assertTrue(saDAO.delete("21"));

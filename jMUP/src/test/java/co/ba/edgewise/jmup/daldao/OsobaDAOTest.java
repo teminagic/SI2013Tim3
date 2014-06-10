@@ -15,18 +15,16 @@ public class OsobaDAOTest {
 	
 	@Test
 	public void testCreate() {
-		Osoba o = new Osoba(1324, "1345991198221", "Prezime", "Ime", "Prebivaliste", true); 
-		osoba.create(o);
-		assertNotNull(osoba.get(1324));
+		Osoba o = new Osoba(1324, "134599", "Asotić", "Amar", "Ilirska Ilidža Ilidža", true); 
+		assertTrue(osoba.create(o));
 	}
 	@Test
 	public void testNotNullGet() { 
-		assertNotNull(osoba.get(1324).getJmbg_Id());
+		assertNotNull(osoba.getByJMBG("134599"));
 	}
 	@Test
 	public void testNullGet() { 
-		
-		assertNull(osoba.get(13235).getJmbg_Id());
+		assertNull(osoba.getByJMBG("134599545345"));
 	}
 	@Test
 	public void testGetAll() { 
@@ -36,33 +34,33 @@ public class OsobaDAOTest {
 	}
 	@Test
 	public void testGetByIme() { 
-		List<Osoba> osobe=osoba.getByIme("Ime");
+		List<Osoba> osobe=osoba.getByIme("Amra");
 		assertEquals(osobe.size(), 0, 10000);
 	}
 	@Test
 	public void testGetByPrezime() { 
-		List<Osoba> osobe=osoba.getByPrezime("Prezime");
+		List<Osoba> osobe=osoba.getByPrezime("Dervić");
 		assertEquals(osobe.size(), 0, 10000);
 	}
 	@Test
 	public void testGetByImeiPrezime() { 
-		List<Osoba> osobe=osoba.getByImeiPrezime("Ime", "Prezime");
+		List<Osoba> osobe=osoba.getByImeiPrezime("Amra", "Dervić");
 		assertEquals(osobe.size(), 0, 10000);
 	}
 	@Test
 	public void testGetByJmbg() { 
-		assertNotNull(osoba.getByJMBG("1345991198322"));
+		assertNotNull(osoba.getByJMBG("167"));
 	}
 	@Test
 	public void testUpdate() { 
-		Osoba o = new Osoba(1324, "1345991198322", "Dervic", "Amra", "Prebivaliste", true); 
+		Osoba o = new Osoba(1324, "1345991198322", "Dervic", "Amra", "Kalinska Travnik Travnik", true); 
 		assertTrue(osoba.update(1324, o));
 	}
 	@Test
 	public void testDelete() { 
-		Osoba o = new Osoba(1323, "1345991198333", "Dervic", "Amra", "Prebivaliste", true); 
+		Osoba o = new Osoba(1323, "1345991198333", "Prezimenko", "Imenko", "Prebivaliste", true); 
 		osoba.create(o);
-		assertTrue(osoba.delete(1323));
+		assertTrue(osoba.delete(osoba.getByJMBG("1345991198333").getId()));
 	}
 	
 
