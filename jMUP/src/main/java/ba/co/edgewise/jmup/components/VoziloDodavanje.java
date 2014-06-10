@@ -593,7 +593,7 @@ public class VoziloDodavanje extends JPanel {
 	//	tf_datumPregleda = new JTextField();
 	//	tf_datumPregleda.setColumns(10);
 		modelDatumPregleda = new UtilDateModel();
-		datePanelDatumPregleda = new JDatePanelImpl(modelDatumPregleda);
+		datePanelDatumPregleda = new JDatePanelImpl(getModelDatumPregleda());
 		datePickerDatumPregleda = new JDatePickerImpl(datePanelDatumPregleda);
 		GridBagConstraints gbc_tf_datumPregleda = new GridBagConstraints();
 		gbc_tf_datumPregleda.gridwidth = 2;
@@ -832,5 +832,9 @@ public class VoziloDodavanje extends JPanel {
 
 	public JButton getBtnProvjeriPostojanje() {
 		return btnProvjeriPostojanje;
+	}
+
+	public UtilDateModel getModelDatumPregleda() {
+		return modelDatumPregleda;
 	}
 }
