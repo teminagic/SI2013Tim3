@@ -394,7 +394,7 @@ public class ModifikacijaVlasnicke{
 			return false;
 		}
 		*/
-		if(vlasnicka.getVozilo().getDatumPregleda().before(d)){
+		if(vlasnicka.getVozilo().getDatumPregleda().after(d)){
 			JOptionPane.showOptionDialog(view,
 					"Morate unijeti validan datum pregleda.",
 					"Unos voza\u010Da", JOptionPane.OK_OPTION,
