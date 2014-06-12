@@ -6,8 +6,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
+import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -442,10 +445,25 @@ public class AdminController {
         		filepath += ".sql";
         }
         
-        String dbHost = "localhost";
-        String dbName = "sql339553";
-        String dbUser = "root";
-        String dbPass = "root";
+        Properties prop = new Properties();
+    	InputStream input = null;
+        
+        try {
+			input = new FileInputStream("./db.properties");
+			prop.load(input);
+		} catch (IOException e) {
+			input = this.getClass().getClassLoader().getResourceAsStream("db.properties");
+			try {
+				prop.load(input);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+        
+        String dbHost = prop.getProperty("dbHost");
+        String dbName = prop.getProperty("dbName");
+        String dbUser = prop.getProperty("USERNAME");
+        String dbPass = prop.getProperty("PASSWORD");
         
         String executeCmd = "mysqldump --single-transaction --host=" + dbHost + " --user=" + dbUser
         		+ " --password=" + dbPass + " " + dbName + " --ignore-table="+ dbName + ".logovi"+ " > " + filepath;
@@ -497,10 +515,25 @@ public class AdminController {
         		filepath += ".sql";
         }
                 
-        String dbHost = "localhost";
-        String dbName = "sql339553";
-        String dbUser = "root";
-        String dbPass = "root";
+        Properties prop = new Properties();
+    	InputStream input = null;
+        
+        try {
+			input = new FileInputStream("./db.properties");
+			prop.load(input);
+		} catch (IOException e) {
+			input = this.getClass().getClassLoader().getResourceAsStream("db.properties");
+			try {
+				prop.load(input);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+        
+        String dbHost = prop.getProperty("dbHost");
+        String dbName = prop.getProperty("dbName");
+        String dbUser = prop.getProperty("USERNAME");
+        String dbPass = prop.getProperty("PASSWORD");
         
         String executeCmd = "mysql --host=" + dbHost + " --user=" + dbUser
         		+ " --password=" + dbPass + " " + dbName + " < " + filepath;
