@@ -1,9 +1,13 @@
 package ba.co.edgewise.jmup.daldao;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 import org.apache.commons.dbcp.ConnectionFactory;
 import org.apache.commons.dbcp.DriverManagerConnectionFactory;
@@ -13,18 +17,39 @@ import org.apache.commons.pool.ObjectPool;
 import org.apache.commons.pool.impl.GenericObjectPool;;
 
 public class ConnectionManager {
-	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://localhost:3306/sql339553?useUnicode=true&characterEncoding=utf-8";
-	private static final String USERNAME = "root";
-	private static final String PASSWORD = "";
+	Properties prop = new Properties();
+	InputStream input = null;
+	
+	private static String DRIVER;
+	private static String URL;
+	private static String USERNAME;
+	private static String PASSWORD;
 
 	private PoolingDataSource dataSource = null;
 	
 	public ConnectionManager()
 	{
 		try {
+			try {
+				input = new FileInputStream("./db.properties");
+				prop.load(input);
+			} catch (IOException e) {
+				input = this.getClass().getClassLoader().getResourceAsStream("db.properties");
+				try {
+					prop.load(input);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+			
+			
+			DRIVER = prop.getProperty("DRIVER");
+			URL = prop.getProperty("URL");
+			USERNAME = prop.getProperty("USERNAME");
+			PASSWORD = prop.getProperty("PASSWORD");
+			
 			Class.forName(DRIVER);
-		} catch (ClassNotFoundException e)
+		} catch (ClassNotFoundException e )
 		{
 			e.printStackTrace();
 		}
